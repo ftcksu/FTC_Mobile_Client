@@ -1,57 +1,33 @@
-import React from 'react';
-import { StyleSheet, FlatList, View, Image } from 'react-native';
-import { FTCStyledText } from './components/FTCStyledText'
-import { InfoCard } from './components/InfoCard'
-const cardTypesIcon={
-  "announcement":require('./assets/images/microphone.png'),
-    "attend":require('./assets/images/microphone.png'),
-  "organize":require('./assets/images/microphone.png')
-}
-const content = {
-    'title'  : 'أحدث المشااريع',
-    'data': [
-      {
-        'title':"هاكاثون المستقبل النسخة الثانية",
-        'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
-        'type': "announcement",
-        'key':1
-      },
-      {
-        'title':"هاكاثون المستقبل النسخة الثانية",
-        'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
-        'type': "announcement",
-        'key':2
-      },
-      {
-        'title':"هاكاثون المستقبل النسخة الثانية",
-        'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
-        'type': "announcement",
-        'key':3
-      }
-    ]
-  };
-    
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { Font } from 'expo'
 
 export default class App extends React.Component {
-  
+  state = {
+    fontLoaded: false,
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'Cairo-Bold': require('./assets/fonts/Cairo-Bold.ttf'),
+      'Cairo-SemiBold': require('./assets/fonts/Cairo-SemiBold.ttf'),
+      'Cairo-Light': require('./assets/fonts/Cairo-Light.ttf'),
+      'Cairo-Regular': require('./assets/fonts/Cairo-Regular.ttf'),
+      'Cairo-Black': require('./assets/fonts/Cairo-Black.ttf'),
+      'Cairo-ExtraLight': require('./assets/fonts/Cairo-ExtraLight.ttf'),
+    });
+
+    this.setState({ fontLoaded: true });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <FTCStyledText style={styles.listTitle} >
-          {content.title}
-        </FTCStyledText>
-        <FlatList
-        style={styles.flatView}
-        data={content.data}
-        contentContainerStyle={{ flexGrow: 0 }}
-        renderItem={({ item }) => (
-          <InfoCard
-            title={item.title}
-            subtitle={item.subTitle}
-            cardTypesIcon={item.type}
-          />
-        )}/> 
-        <View style={styles.lineBreak}  />
+      {
+        this.state.fontLoaded ?
+          <Text style={{ fontFamily: 'Cairo-Bold' }}>FTC your uncle</Text>
+        : null
+      }
       </View>
     );
   }
