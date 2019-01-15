@@ -54,15 +54,16 @@ const styles = StyleSheet.create({
     flex: 1, justifyContent: 'flex-start', flexDirection: 'column', margin:10
   },
   title:{
+    fontFamily:'Cairo-Bold',
     marginBottom:5,
     textAlign:'right',
-    fontWeight: 'bold',
-    fontSize:15
+    fontSize:11
   },
   subTitle:{
+    fontFamily:'Cairo-Regular',
     marginBottom: 5,
     textAlign:'right',
     fontWeight: 'normal',
-    fontSize:15 
+    fontSize:11 
   }
 });

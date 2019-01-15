@@ -36,9 +36,9 @@ const styles = StyleSheet.create({
     flexDirection:'column',
   },
   listTitle:{
+    fontFamily:'Cairo-Bold',
     textAlign:"center",
-    fontSize: 30,
-    fontWeight:'bold'
+    fontSize: 23,
   },
   lineBreak:{
     alignSelf:"center",

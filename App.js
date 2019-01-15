@@ -1,11 +1,35 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Font } from 'expo'
-
+import InfoCardList from './components/InfoCardList'
+const content = {
+  'title'  : 'أحدث المشاريع',
+  'data': [
+    {
+      'title':"هاكاثون المستقبل النسخة الثانية",
+      'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
+      'type': "announcement",
+      'key':1
+    },
+    {
+      'title':"هاكاثون المستقبل النسخة الثانية",
+      'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
+      'type': "announcement",
+      'key':2
+    },
+    {
+      'title':"هاكاثون المستقبل النسخة الثانية",
+      'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
+      'type': "announcement",
+      'key':3
+    }
+  ]
+};
 export default class App extends React.Component {
   state = {
     fontLoaded: false,
   }
+  
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -22,15 +46,18 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      
+        this.state.fontLoaded ? <View style={styles.container}>
         <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator={true} />
-      </View>
+      </View>:null
+      
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    marginTop:30,
     justifyContent: 'center',
     flexDirection:'column',
   }
