@@ -36,8 +36,23 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    flexDirection:'column',
+    margin: 20
   },
+  listTitle:{
+    textAlign:"center",
+    fontSize: 30,
+    fontWeight:'bold'
+  },
+  lineBreak:{
+    width:"100%" ,
+    height:5,
+    backgroundColor:"#eeeeee",
+    marginRight:20,
+
+  },
+  flatView:{
+    flexGrow:0
+  }
 });
