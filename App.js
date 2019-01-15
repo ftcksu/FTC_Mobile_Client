@@ -2,6 +2,10 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Font } from 'expo'
 import InfoCardList from './components/InfoCardList'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { reducers } from './src/reducers'
+
 const content = {
   'title'  : 'أحدث المشاريع',
   'data': [
