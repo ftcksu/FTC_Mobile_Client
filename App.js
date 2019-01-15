@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Font } from 'expo'
-import InfoCardList from './components/InfoCardList'
 const content = {
   'title'  : 'أحدث المشاريع',
   'data': [
@@ -48,7 +47,8 @@ export default class App extends React.Component {
     return (
       
         this.state.fontLoaded ? <View style={styles.container}>
-        <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator={true} />
+        {/* <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator={true} /> */}
+
       </View>:null
       
     );
