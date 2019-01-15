@@ -1,11 +1,35 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Font } from 'expo'
-
+import InfoCardList from './components/InfoCardList'
+const content = {
+  'title'  : 'أحدث المشاريع',
+  'data': [
+    {
+      'title':"هاكاثون المستقبل النسخة الثانية",
+      'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
+      'type': "announcement",
+      'key':1
+    },
+    {
+      'title':"هاكاثون المستقبل النسخة الثانية",
+      'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
+      'type': "announcement",
+      'key':2
+    },
+    {
+      'title':"هاكاثون المستقبل النسخة الثانية",
+      'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
+      'type': "announcement",
+      'key':3
+    }
+  ]
+};
 export default class App extends React.Component {
   state = {
     fontLoaded: false,
   }
+  
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -22,37 +46,19 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-      {
-        this.state.fontLoaded ?
-          <Text style={{ fontFamily: 'Cairo-Bold' }}>FTC your uncle</Text>
-        : null
-      }
-      </View>
+      
+        this.state.fontLoaded ? <View style={styles.container}>
+        <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator={true} />
+      </View>:null
+      
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginTop:30,
     justifyContent: 'center',
     flexDirection:'column',
-    margin: 20
-  },
-  listTitle:{
-    textAlign:"center",
-    fontSize: 30,
-    fontWeight:'bold'
-  },
-  lineBreak:{
-    width:"100%" ,
-    height:5,
-    backgroundColor:"#eeeeee",
-    marginRight:20,
-
-  },
-  flatView:{
-    flexGrow:0
   }
 });
