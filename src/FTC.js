@@ -1,24 +1,32 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Font } from 'expo';
 import InfoCardList from './components/InfoCardList';
-import fontLoaded from './actions';
+import { fontLoaded } from './actions';
 import content from './dummy_data/InfoCardData.json';
 
 class FTC extends React.Component {
-  async componentDidMount() {
-    await Font.loadAsync({
-      'Cairo-Bold': require('../assets/fonts/Cairo-Bold.ttf'),
-      'Cairo-SemiBold': require('../assets/fonts/Cairo-SemiBold.ttf'),
-      'Cairo-Light': require('../assets/fonts/Cairo-Light.ttf'),
-      'Cairo-Regular': require('../assets/fonts/Cairo-Regular.ttf'),
-      'Cairo-Black': require('../assets/fonts/Cairo-Black.ttf'),
-      'Cairo-ExtraLight': require('../assets/fonts/Cairo-ExtraLight.ttf'),
-    });
+    componentDidMount() {
+    // await Font.loadAsync({
+    //   'Cairo-Bold': require('../assets/fonts/Cairo-Bold.ttf'),
+    //   'Cairo-SemiBold': require('../assets/fonts/Cairo-SemiBold.ttf'),
+    //   'Cairo-Light': require('../assets/fonts/Cairo-Light.ttf'),
+    //   'Cairo-Regular': require('../assets/fonts/Cairo-Regular.ttf'),
+    //   'Cairo-Black': require('../assets/fonts/Cairo-Black.ttf'),
+    //   'Cairo-ExtraLight': require('../assets/fonts/Cairo-ExtraLight.ttf'),
+    // });
 
     this.props.fontLoaded();
+    console.log('###############')
     console.log(this.props.fontHasLoaded);
+  }
+
+  renderText() {
+    if(this.props.fontHasLoaded === true) {
+      return <Text>THIS IS TRUE</Text>;
+    }
+    return <Text>THIS IS FALSE!!!!</Text>;
   }
 
   render() {
@@ -26,10 +34,11 @@ class FTC extends React.Component {
     // wrap with view tag if there's more than one.
 
     return (
-        <View>
-          this.state.fontLoaded ? <View style={styles.container}>
+        <View style={styles.container}>
+          {/* this.props.fontHasLoaded ? <View style={styles.container}>
             <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator />
-          </View>:null
+          </View>:null */}
+          {this.renderText()}
         </View>
     );
   }
@@ -43,11 +52,9 @@ const styles = StyleSheet.create({
   }
 });
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     const { fontHasLoaded } = state.appReducer;
     return { fontHasLoaded };
   };
 
-export default connect(mapStateToProps, fontLoaded)(FTC);
-  
+export default connect(mapStateToProps, { fontLoaded })(FTC);

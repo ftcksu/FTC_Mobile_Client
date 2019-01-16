@@ -4,7 +4,7 @@ import { Provider, connect } from 'react-redux';
 import appReducer from './src/reducers';
 import FTC from './src/FTC';
 
-class App extends React.Component {
+export default class App extends React.Component {
 
   render() {
     // note that Provider tag can only take one child component.

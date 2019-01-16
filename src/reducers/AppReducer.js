@@ -2,13 +2,16 @@ import { FONT_LOADED } from '../actions/types';
 
 const INITIAL_STATE = { fontHasLoaded: false };
 
-export default (state = INITIAL_STATE, action) => {
+export default function (state = INITIAL_STATE, action) {
+    console.log(action.type)
+    console.log(FONT_LOADED===action.type)
+    // console.log(action.type)
     switch (action.type) {
         case FONT_LOADED:
-            return Object.assign({}, state, {
+            return {
                 fontHasLoaded: action.payload,
-            });
+            };
         default:
-            return state;
+            return { fontHasLoaded: '11' };
     }
 };
