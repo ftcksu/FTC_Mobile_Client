@@ -1,11 +1,11 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Font } from 'expo'
-import InfoCardList from './components/InfoCardList'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import { AppReducer } from './src/reducers'
-import reducers from './src/actions/types';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import { Font } from 'expo';
+import InfoCardList from './components/InfoCardList';
+import appReducer from './src/reducers';
+import fontLoaded from './src/actions';
 
 const content = {
   'title': 'أحدث المشاريع',
@@ -31,12 +31,10 @@ const content = {
   ]
 };
 
-export default class App extends React.Component {
+class App extends React.Component {
   // state = {
   //   fontLoaded: false,
   // }
-
-  
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -48,18 +46,21 @@ export default class App extends React.Component {
       'Cairo-ExtraLight': require('./assets/fonts/Cairo-ExtraLight.ttf'),
     });
 
-    // this.setState({ fontLoaded: true });
+    this.props.fontLoaded();
+    console.log(this.props.fontHasLoaded);
   }
 
   render() {
-    console.log(store.getState())
     // note that Provider tag can only take one child component.
     // wrap with view tag if there's more than one.
+
     return (
-      <Provider store={createStore(reducers)}>
-        this.state.fontLoaded ? <View style={styles.container}>
-          <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator={true} />
-        </View>:null
+      <Provider store={createStore(appReducer)}>
+        <View>
+          this.state.fontLoaded ? <View style={styles.container}>
+            <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator />
+          </View>:null
+        </View>
       </Provider>
     );
   }
@@ -72,3 +73,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   }
 });
+
+const mapStateToProps = (state) => {
+  const { fontHasLoaded } = state.appReducer;
+  return { fontHasLoaded };
+};
+
+export default connect(mapStateToProps, fontLoaded)(App);
