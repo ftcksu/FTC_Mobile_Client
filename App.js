@@ -4,35 +4,38 @@ import { Font } from 'expo'
 import InfoCardList from './components/InfoCardList'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { reducers } from './src/reducers'
+import { AppReducer } from './src/reducers'
+import reducers from './src/actions/types';
 
 const content = {
-  'title'  : 'أحدث المشاريع',
+  'title': 'أحدث المشاريع',
   'data': [
     {
-      'title':"هاكاثون المستقبل النسخة الثانية",
+      'title': "هاكاثون المستقبل النسخة الثانية",
       'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
       'type': "announcement",
-      'key':1
+      'key': 1
     },
     {
-      'title':"هاكاثون المستقبل النسخة الثانية",
+      'title': "هاكاثون المستقبل النسخة الثانية",
       'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
       'type': "announcement",
-      'key':2
+      'key': 2
     },
     {
-      'title':"هاكاثون المستقبل النسخة الثانية",
+      'title': "هاكاثون المستقبل النسخة الثانية",
       'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
       'type': "announcement",
-      'key':3
+      'key': 3
     }
   ]
 };
+
 export default class App extends React.Component {
-  state = {
-    fontLoaded: false,
-  }
+  // state = {
+  //   fontLoaded: false,
+  // }
+
   
 
   async componentDidMount() {
@@ -45,24 +48,27 @@ export default class App extends React.Component {
       'Cairo-ExtraLight': require('./assets/fonts/Cairo-ExtraLight.ttf'),
     });
 
-    this.setState({ fontLoaded: true });
+    // this.setState({ fontLoaded: true });
   }
 
   render() {
+    console.log(store.getState())
+    // note that Provider tag can only take one child component.
+    // wrap with view tag if there's more than one.
     return (
-      
+      <Provider store={createStore(reducers)}>
         this.state.fontLoaded ? <View style={styles.container}>
-        <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator={true} />
-      </View>:null
-      
+          <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator={true} />
+        </View>:null
+      </Provider>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:30,
+    marginTop: 30,
     justifyContent: 'center',
-    flexDirection:'column',
+    flexDirection: 'column',
   }
 });
