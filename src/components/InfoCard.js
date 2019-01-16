@@ -12,7 +12,6 @@ const cardTypesIcon=[
   title, type=STRING (top text, title of the info card)
   subtitle, type=STRING (bottom text, details and subtitle of the component)
   cardTypesIcon, type=STRING either announcment, attend or organize
-
 */
 export class InfoCard extends React.Component {
 
@@ -24,7 +23,7 @@ export class InfoCard extends React.Component {
           {this.props.title}
         </FTCStyledText>
         <FTCStyledText style={styles.subTitle}>
-          {this.props.subTitle}
+          {this.props.subtitle}
         </FTCStyledText>
         </View>
           <Image source={
@@ -38,7 +37,11 @@ export class InfoCard extends React.Component {
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor: '#eeeeee' , flexDirection: 'row', alignContent: 'flex-end', margin:20, borderRadius:15,
+    backgroundColor: '#eeeeee',
+    flexDirection: 'row',
+    alignContent: 'flex-end',
+    margin:20,
+    borderRadius:15,
     elevation:2.5,
     shadowRadius: 5,
     shadowOpacity: 1.0 
@@ -51,12 +54,13 @@ const styles = StyleSheet.create({
     flex: 1, justifyContent: 'flex-start', flexDirection: 'column', margin:10
   },
   title:{
+    fontFamily:'Cairo-Bold',
     marginBottom:5,
     textAlign:'right',
-    fontWeight: 'bold',
-    fontSize:15
+    fontSize:11
   },
   subTitle:{
+    fontFamily:'Cairo-Regular',
     marginBottom: 5,
     textAlign:'right',
     fontWeight: 'normal',
