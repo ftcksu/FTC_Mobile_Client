@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { Font } from 'expo';
-import InfoCardList from './components/InfoCardList';
+import InfoCardList from './src/components/InfoCardList';
 import appReducer from './src/reducers';
 import fontLoaded from './src/actions';
 

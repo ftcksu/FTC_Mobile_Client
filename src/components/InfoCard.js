@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native'
-import {FTCStyledText} from './FTCStyledText'
+import { View, Image, StyleSheet } from 'react-native';
+import { FTCStyledText } from './FTCStyledText';
 
 const cardTypesIcon=[
-    require('../assets/images/microphone.png'),
-    require('../assets/images/microphone.png'),
-    require('../assets/images/microphone.png')
+    require('../../assets/images/microphone.png'),
+    require('../../assets/images/microphone.png'),
+    require('../../assets/images/microphone.png')
 ]
 /*
   values required:
