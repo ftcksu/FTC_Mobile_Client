@@ -8,15 +8,9 @@ import content from './dummy_data/InfoCardData.json';
 
 class FTC extends React.Component {
   componentDidMount() {
-    // await Font.loadAsync({
-    //   'Cairo-Bold': require('../assets/fonts/Cairo-Bold.ttf'),
-    //   'Cairo-SemiBold': require('../assets/fonts/Cairo-SemiBold.ttf'),
-    //   'Cairo-Light': require('../assets/fonts/Cairo-Light.ttf'),
-    //   'Cairo-Regular': require('../assets/fonts/Cairo-Regular.ttf'),
-    //   'Cairo-Black': require('../assets/fonts/Cairo-Black.ttf'),
-    //   'Cairo-ExtraLight': require('../assets/fonts/Cairo-ExtraLight.ttf'),
-    // });
     this.props.fontLoaded();
+    console.log('this.props.fontHasLoaded_1: ');
+    console.log(this.props.fontHasLoaded);
   }
 
   renderText() {
