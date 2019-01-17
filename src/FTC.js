@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Font } from 'expo';
+// import { Font } from 'expo';
 import InfoCardList from './components/InfoCardList';
 import { fontLoaded } from './actions';
 import content from './dummy_data/InfoCardData.json';

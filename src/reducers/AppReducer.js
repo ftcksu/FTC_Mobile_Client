@@ -1,5 +1,5 @@
 import { FONT_LOADED } from '../actions/types';
-import { Font } from 'expo';
+// import { Font } from 'expo';
 
 const INITIAL_STATE = { fontHasLoaded: false };
 
