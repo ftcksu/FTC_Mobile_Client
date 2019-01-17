@@ -10,7 +10,7 @@ export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case FONT_LOADED:
             return {
-                fontHasLoaded: action.type,
+                fontHasLoaded: action.payload,
             };
         default:
             return { state };

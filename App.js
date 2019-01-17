@@ -1,6 +1,7 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 import reducers from './src/reducers';
 import FTC from './src/FTC';
 
@@ -11,7 +12,7 @@ export default class App extends React.Component {
     // wrap with view tag if there's more than one.
 
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
         <FTC />
       </Provider>
     );
