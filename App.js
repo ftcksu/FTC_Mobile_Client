@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
-import appReducer from './src/reducers';
+import reducers from './src/reducers';
 import FTC from './src/FTC';
 
 export default class App extends React.Component {
@@ -11,7 +11,7 @@ export default class App extends React.Component {
     // wrap with view tag if there's more than one.
 
     return (
-      <Provider store={createStore(appReducer)}>
+      <Provider store={createStore(reducers)}>
         <FTC />
       </Provider>
     );

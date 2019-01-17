@@ -7,7 +7,7 @@ import { fontLoaded } from './actions';
 import content from './dummy_data/InfoCardData.json';
 
 class FTC extends React.Component {
-    componentDidMount() {
+  componentDidMount() {
     // await Font.loadAsync({
     //   'Cairo-Bold': require('../assets/fonts/Cairo-Bold.ttf'),
     //   'Cairo-SemiBold': require('../assets/fonts/Cairo-SemiBold.ttf'),
@@ -16,16 +16,21 @@ class FTC extends React.Component {
     //   'Cairo-Black': require('../assets/fonts/Cairo-Black.ttf'),
     //   'Cairo-ExtraLight': require('../assets/fonts/Cairo-ExtraLight.ttf'),
     // });
-
     this.props.fontLoaded();
-    console.log('###############')
-    console.log(this.props.fontHasLoaded);
   }
 
   renderText() {
-    if(this.props.fontHasLoaded === true) {
-      return <Text>THIS IS TRUE</Text>;
+    if (this.props.fontHasLoaded === true) {
+      console.log('this.props.fontHasLoaded: ');
+      console.log(this.props.fontHasLoaded);
+      return (
+        <View style={styles.container}>
+          <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator />
+        </View>
+      );
     }
+    console.log('this.props.fontHasLoaded_2: ');
+    console.log(this.props.fontHasLoaded);
     return <Text>THIS IS FALSE!!!!</Text>;
   }
 
@@ -34,12 +39,9 @@ class FTC extends React.Component {
     // wrap with view tag if there's more than one.
 
     return (
-        <View style={styles.container}>
-          {/* this.props.fontHasLoaded ? <View style={styles.container}>
-            <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator />
-          </View>:null */}
-          {this.renderText()}
-        </View>
+      <View style={styles.container}>
+        {this.renderText()}
+      </View>
     );
   }
 }
@@ -53,8 +55,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    const { fontHasLoaded } = state.appReducer;
-    return { fontHasLoaded };
-  };
+  const { fontHasLoaded } = state.appReducer;
+  return { fontHasLoaded };
+};
 
 export default connect(mapStateToProps, { fontLoaded })(FTC);
