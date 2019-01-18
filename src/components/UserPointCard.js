@@ -10,6 +10,14 @@ const data={
 }
 
 //TODO: Add the crown vector on selected users
+
+/*
+                            Props:
+                  points, name, bio, imageURL
+
+
+*/
+
 export class UserPointCard extends React.Component {
   render() {
     return( 
@@ -22,6 +30,7 @@ export class UserPointCard extends React.Component {
           <FTCStyledText style={styles.name}>
             {this.props.name}
           </FTCStyledText>
+      
           <FTCStyledText style={styles.bio}>
             {this.props.bio}
           </FTCStyledText>
@@ -29,9 +38,10 @@ export class UserPointCard extends React.Component {
 
         <Image style={styles.circleImage} source={{uri:this.props.imageURL }} />
 
-        <FTCStyledText style={styles.postion} >
-          {this.props.postion}
+        <FTCStyledText style={styles.position} >
+          {this.props.position}
         </FTCStyledText>
+      
       </View>
     );
   }
