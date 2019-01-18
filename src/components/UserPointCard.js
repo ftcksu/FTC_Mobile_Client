@@ -17,6 +17,7 @@ const data={
 
 
 */
+
 export class UserPointCard extends React.Component {
   render() {
     return( 
@@ -29,6 +30,7 @@ export class UserPointCard extends React.Component {
           <FTCStyledText style={styles.name}>
             {this.props.name}
           </FTCStyledText>
+      
           <FTCStyledText style={styles.bio}>
             {this.props.bio}
           </FTCStyledText>
@@ -39,6 +41,7 @@ export class UserPointCard extends React.Component {
         <FTCStyledText style={styles.position} >
           {this.props.position}
         </FTCStyledText>
+      
       </View>
     );
   }
