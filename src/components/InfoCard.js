@@ -1,30 +1,34 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native'
-import {FTCStyledText} from './FTCStyledText'
+import { View, Image, StyleSheet } from 'react-native';
+import { FTCStyledText } from './FTCStyledText';
 
 const cardTypesIcon=[
-    require('../assets/images/microphone.png'),
-    require('../assets/images/microphone.png'),
-    require('../assets/images/microphone.png')
+    require('../../assets/images/microphone.png'),
+    require('../../assets/images/microphone.png'),
+    require('../../assets/images/microphone.png')
 ]
+
 /*
   values required:
   title, type=STRING (top text, title of the info card)
   subtitle, type=STRING (bottom text, details and subtitle of the component)
   cardTypesIcon, type=STRING either announcment, attend or organize
 */
-export class InfoCard extends React.Component {
 
+export class InfoCard extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.textContainer}>
+      
         <FTCStyledText style={styles.title} >
           {this.props.title}
         </FTCStyledText>
+      
         <FTCStyledText style={styles.subTitle}>
           {this.props.subtitle}
         </FTCStyledText>
+      
         </View>
           <Image source={
               this.props.cardTypesIcon == "attend"?cardTypesIcon[0]:cardTypesIcon[1]
