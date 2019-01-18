@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-// import { Font } from 'expo';
 import InfoCardList from './components/InfoCardList';
 import { fontLoaded } from './actions';
 import content from './dummy_data/InfoCardData.json';
@@ -9,29 +8,20 @@ import content from './dummy_data/InfoCardData.json';
 class FTC extends React.Component {
   componentDidMount() {
     this.props.fontLoaded();
-    console.log('this.props.fontHasLoaded_1: ');
-    console.log(this.props.fontHasLoaded);
   }
 
   renderText() {
     if (this.props.fontHasLoaded === true) {
-      console.log('this.props.fontHasLoaded: ');
-      console.log(this.props.fontHasLoaded);
       return (
         <View style={styles.container}>
           <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator />
         </View>
       );
     }
-    console.log('this.props.fontHasLoaded_2: ');
-    console.log(this.props.fontHasLoaded);
-    return <Text>THIS IS FALSE!!!!</Text>;
+    return null;
   }
 
   render() {
-    // note that Provider tag can only take one child component.
-    // wrap with view tag if there's more than one.
-
     return (
       <View style={styles.container}>
         {this.renderText()}

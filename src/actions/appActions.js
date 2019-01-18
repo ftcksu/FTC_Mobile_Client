@@ -16,6 +16,3 @@ export function fontLoaded() {
     })
   }
 }
-// export function loadFonts({ location }) {
-//   return { type: LOAD_FONT, payload: location };
-// }
