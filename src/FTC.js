@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, } from 'react-native';
 import { connect } from 'react-redux';
 import InfoCardList from './components/InfoCardList';
 import { fontLoaded } from './actions';
 import content from './dummy_data/InfoCardData.json';
+import { data } from './dummy_data/UserPointCardData';
+import { UserPointCard } from './components/UserPointCard';
 
 class FTC extends React.Component {
   componentDidMount() {
@@ -21,10 +23,21 @@ class FTC extends React.Component {
     return null;
   }
 
+  renderUserPointCard() {
+    return (
+        <UserPointCard
+        points={data.points}
+        name={data.name}
+        bio={data.bio}
+        imageURL={data.image}
+        />
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        {this.renderText()}
+      {this.renderUserPointCard()}
       </View>
     );
   }
