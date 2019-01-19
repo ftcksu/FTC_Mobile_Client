@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, FlatList, View, Image } from 'react-native';
+import { StyleSheet, FlatList, View } from 'react-native';
 import { FTCStyledText } from './FTCStyledText';
 import { InfoCard } from './InfoCard';
 
@@ -38,14 +38,14 @@ const styles = StyleSheet.create({
   },
   listTitle: {
     fontFamily: 'Cairo-Bold',
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 23,
   },
   lineBreak: {
-    alignSelf: "center",
-    width: "80%",
+    alignSelf: 'center',
+    width: '80%',
     height: 5,
-    backgroundColor: "#eeeeee",
+    backgroundColor: '#eeeeee',
   },
   flatView: {
     flexGrow: 0

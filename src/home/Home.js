@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 import InfoCardList from '../components/InfoCardList';
 import content from '../dummy_data/InfoCardData.json';
 
@@ -9,7 +9,7 @@ export class Home extends Component {
         return (
             <InfoCardList
             title={'أحدث المشاريع'}
-            listOfData={content}
+            listOfData={content.data}
             hasLineSeperator
             />
         );
@@ -19,7 +19,7 @@ export class Home extends Component {
         return (
             <InfoCardList
             title={'إعلانات هامة'}
-            listOfData={content}
+            listOfData={content.data}
             hasLineSeperator
             />
         );
@@ -29,7 +29,7 @@ export class Home extends Component {
         return (
             <InfoCardList
             title={'إعلانات غير هامة'}
-            listOfData={content}
+            listOfData={content.data}
             hasLineSeperator={false}
             />
         );
@@ -37,11 +37,11 @@ export class Home extends Component {
 
     render() {
         return (
-            <View>
+            <ScrollView>
                 {this.renderLatestProjects()}
                 {this.renderImportantNews()}
                 {this.renderNotImportantNews()}
-            </View>
+            </ScrollView>
         );
     }
 }
