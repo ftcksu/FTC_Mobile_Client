@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native'
-import {FTCStyledText} from '../components/FTCStyledText'
+import { View, Image, StyleSheet, ImageBackground } from 'react-native'
+import FTCStyledText from '../components/FTCStyledText'
 const data={
   "image":"https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
   "postion": 1,
@@ -9,87 +9,117 @@ const data={
   "points":420
 }
 
-//TODO: Add the crown vector on selected users
 
 /*
                             Props:
-                  points, name, bio, imageURL
+                  points, name, bio, imageURL, position
 
 
 */
-export class UserPointCard extends React.Component {
+export default class UserPointCard extends React.Component {
   render() {
     return( 
-        <View style={styles.container}>
+      <View>
+        <View style={styles.ChildContainer}>
+
         <FTCStyledText style={styles.points} >
         {this.props.points }
         </FTCStyledText>
 
         <View style={styles.nameAndBioContainer}>
+
           <FTCStyledText style={styles.name}>
             {this.props.name}
           </FTCStyledText>
+
           <FTCStyledText style={styles.bio}>
             {this.props.bio}
           </FTCStyledText>
+
         </View>
 
-        <Image style={styles.circleImage} source={{uri:this.props.imageURL }} />
+        <ImageBackground style={styles.imagesContainer} imageStyle={styles.imagesContainer} source={{uri:this.props.imageURL }} >
+          <Image style={styles.circleImage} source={require('../../assets/images/crowns.png')} />
+        </ImageBackground>
 
         <FTCStyledText style={styles.position} >
           {this.props.position}
         </FTCStyledText>
+
+        </View>
+
+        <View style={styles.lineBreak} />
+
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-    container:{
-      marginTop:10,
+  container:{
+
+  },
+    ChildContainer:{
+      margin:10,
       justifyContent: 'flex-end',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      alignItems:"center"
       
     },
-    postion: { //font should be Cairo Bold
+    position: {
       color:"#c7c7c7",
       textAlign:'center',
       fontWeight: 'bold',
       fontSize:35,
-      margin:10
+      margin:10,
+      fontFamily:"Cairo-Bold",
+      textAlign:"center"
   },
+    imagesContainer:{
+      width: 60,
+      height: 60,
+      borderRadius: 60/2,
+      justifyContent:"flex-end"
+      },
     circleImage: {
-      width: 75,
-      height: 75,
-      borderRadius: 75/2
+      alignSelf:"baseline",
+      width: 23,
+      height: 23,
+      borderRadius: 23/2,
   },
     nameAndBioContainer:{
       justifyContent: 'flex-start',
       flexDirection: 'column',
       margin:10,
       marginRight:20,
-      flex:0.9
+      flex:1
     },
     name:{ //font should be Cairo Bold
       color:"#333333",
       marginBottom:5,
       textAlign:'right',
-      fontWeight: 'bold',
-      fontSize:19
+      fontFamily:"Cairo-Bold",
+      fontSize: 17
     },
     bio:{ //font should be Cairo Regular
       color:"#9e9e9e",
       marginBottom: 5,
       textAlign:'right',
-      fontWeight: 'normal',
-      fontSize:14 
+      fontFamily:"Cairo-Regular",
+      fontSize:12 
     },
     points:{
-      paddingTop:7,
       color:"#4a67d2",
-      textAlignVertical: "top",
+      textAlign: "center",
       fontWeight: 'bold',
-      fontSize:27,
-      marginTop:10
-    }
+      fontSize:21,
+      marginTop:10,
+      marginLeft: 10
+    },
+    lineBreak:{
+      alignSelf:"center",
+      width:"80%" ,
+      height:2,
+      backgroundColor:"#eeeeee",
+    },
   });

@@ -13,7 +13,7 @@ const cardTypesIcon=[
   subtitle, type=STRING (bottom text, details and subtitle of the component)
   cardTypesIcon, type=STRING either announcment, attend or organize
 */
-export class InfoCard extends React.Component {
+export default class InfoCard extends React.Component {
 
   render() {
     return (
@@ -36,6 +36,7 @@ export class InfoCard extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  
   container:{
     backgroundColor: '#eeeeee',
     flexDirection: 'row',

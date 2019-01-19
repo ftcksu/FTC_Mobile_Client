@@ -1,8 +1,20 @@
 import React from 'react';
 import { StyleSheet, FlatList, View, Image } from 'react-native';
-import { FTCStyledText } from './FTCStyledText'
-import { InfoCard } from './InfoCard'
-
+import  FTCStyledText  from './FTCStyledText'
+import  InfoCard  from './InfoCard'
+/*
+const content = {
+  'title'  : 'أحدث المشاريع',
+  'data': [
+    {
+      'title':"هاكاثون المستقبل النسخة الثانية",
+      'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
+      'type': "announcement",
+      'key':1
+    }
+  ]
+};
+*/
 export default class InfoCardList extends React.Component {
   
   render() {

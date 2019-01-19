@@ -1,29 +1,248 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, FlatList, View } from 'react-native'
 import { Font } from 'expo'
-const content = {
-  'title'  : 'أحدث المشاريع',
-  'data': [
+import PointList from './src/components/PointList'
+
+
+const content = [
     {
-      'title':"هاكاثون المستقبل النسخة الثانية",
-      'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
-      'type': "announcement",
-      'key':1
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':9999,
+      'position':1
     },
     {
-      'title':"هاكاثون المستقبل النسخة الثانية",
-      'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
-      'type': "announcement",
-      'key':2
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':990,
+      'position':2
     },
     {
-      'title':"هاكاثون المستقبل النسخة الثانية",
-      'subTitle': "حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة التدريس",
-      'type': "announcement",
-      'key':3
-    }
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },{
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':980,
+      'position':3
+    },
+    {
+      'name':"باسل العبدلي",
+      'bio': "Socks are just portable carpets",
+      'imageURL': "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+      'points':970,
+      'position':4
+    },
   ]
-};
+
 export default class App extends React.Component {
   state = {
     fontLoaded: false,
@@ -47,8 +266,9 @@ export default class App extends React.Component {
     return (
       
         this.state.fontLoaded ? <View style={styles.container}>
-        {/* <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator={true} /> */}
 
+        <PointList data={content} />
+        
       </View>:null
       
     );
@@ -57,8 +277,11 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:30,
+    marginTop:20,
     justifyContent: 'center',
     flexDirection:'column',
+  },
+  flatView:{
+    flexGrow:0
   }
 });
