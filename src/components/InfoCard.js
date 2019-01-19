@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 15,
     elevation: 2.5,
-    shadowRadius: 5,
-    shadowOpacity: 1.0 
+    shadowRadius: 10,
+    shadowOpacity: 0.18
     
   },
   cardImage: {
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 11
   },
   subTitle: {
+    color: '#727272',
     fontFamily: 'Cairo-Regular',
     marginBottom: 5,
     textAlign: 'right',
