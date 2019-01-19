@@ -19,11 +19,11 @@ export default class InfoCardList extends React.Component {
   
   render() {
     return (
-
       <View style={styles.container}>
         <FTCStyledText style={styles.listTitle} >
           {this.props.title}
         </FTCStyledText>
+
         <FlatList
             style={styles.flatView}
             data={this.props.listOfData}
@@ -35,8 +35,8 @@ export default class InfoCardList extends React.Component {
                 cardTypesIcon={item.type}/>
             )}
         /> 
+
         {this.props.hasLineSeparator? <View style={styles.lineBreak} />:null}
-        
       </View>
     );
   }
