@@ -7,13 +7,14 @@ import content from './dummy_data/InfoCardData.json';
 import { data } from './dummy_data/UserPointCardData';
 import { UserPointCard } from './components/UserPointCard';
 import { Home } from './home';
+import  PointsListScreen from './PointsList/PointsListScreen';
 
 class FTC extends React.Component {
   componentDidMount() {
     this.props.fontLoaded();
   }
 
-  rednerInfoCard() {
+  renderInfoCard() {
     if (this.props.fontHasLoaded === true) {
       return (
         <View style={styles.container}>
@@ -41,11 +42,17 @@ class FTC extends React.Component {
     }
     return null;
   }
+  renderPointListPage() {
+    if (this.props.fontHasLoaded === true) {
+      return <PointsListScreen/>;
+    }
+    return null;
+  }
 
   render() {
     return (
       <View style={styles.container}>
-      {this.renderHomePage()}
+      {this.renderPointListPage()}
       </View>
     );
   }
