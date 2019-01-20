@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, StyleSheet, ImageBackground } from 'react-native'
 import FTCStyledText from './FTCStyledText'
+
 /*
                             Props:
                   points, name, bio, imageURL, position
