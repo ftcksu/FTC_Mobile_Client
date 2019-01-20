@@ -1,43 +1,21 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Font } from 'expo'
+import React from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+import reducers from './src/reducers';
+import FTC from './src/FTC';
+
 
 export default class App extends React.Component {
-  state = {
-    fontLoaded: false,
-  }
-
-  async componentDidMount() {
-    await Font.loadAsync({
-      'Cairo-Bold': require('./assets/fonts/Cairo-Bold.ttf'),
-      'Cairo-SemiBold': require('./assets/fonts/Cairo-SemiBold.ttf'),
-      'Cairo-Light': require('./assets/fonts/Cairo-Light.ttf'),
-      'Cairo-Regular': require('./assets/fonts/Cairo-Regular.ttf'),
-      'Cairo-Black': require('./assets/fonts/Cairo-Black.ttf'),
-      'Cairo-ExtraLight': require('./assets/fonts/Cairo-ExtraLight.ttf'),
-    });
-
-    this.setState({ fontLoaded: true });
-  }
 
   render() {
+    // note that Provider tag can only take one child component.
+    // wrap with view tag if there's more than one.
+
     return (
-      <View style={styles.container}>
-      {
-        this.state.fontLoaded ?
-          <Text style={{ fontFamily: 'Cairo-Bold' }}>FTC your uncle</Text>
-        : null
-      }
-      </View>
+      <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
+        <FTC />
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
