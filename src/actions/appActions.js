@@ -1,5 +1,5 @@
-import { FONT_LOADED } from './types';
 import { Font } from 'expo';
+import { FONT_LOADED } from './types';
 
 export function fontLoaded() {
   return (dispatch) => {
@@ -13,6 +13,6 @@ export function fontLoaded() {
     })
     .then(() => {
       dispatch({ type: FONT_LOADED, payload: true });
-    })
-  }
+    });
+  };
 }

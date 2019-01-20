@@ -6,13 +6,14 @@ import { fontLoaded } from './actions';
 import content from './dummy_data/InfoCardData.json';
 import { data } from './dummy_data/UserPointCardData';
 import { UserPointCard } from './components/UserPointCard';
+import { Home } from './home';
 
 class FTC extends React.Component {
   componentDidMount() {
     this.props.fontLoaded();
   }
 
-  renderText() {
+  rednerInfoCard() {
     if (this.props.fontHasLoaded === true) {
       return (
         <View style={styles.container}>
@@ -34,10 +35,17 @@ class FTC extends React.Component {
     );
   }
 
+  renderHomePage() {
+    if (this.props.fontHasLoaded === true) {
+      return <Home />;
+    }
+    return null;
+  }
+
   render() {
     return (
       <View style={styles.container}>
-      {this.renderUserPointCard()}
+      {this.renderHomePage()}
       </View>
     );
   }
