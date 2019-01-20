@@ -2,13 +2,12 @@ import React from 'react'
 import { StyleSheet, FlatList, View } from 'react-native'
 import UserPointCard from './UserPointCard'
 
+
 /*
             props: array named data, has 5 attribute per index(bio,name,imageURL,position,points)
 */
 
 export default class App extends React.Component {
-
-
   render() {
     return (
         <View style={styles.container}>
@@ -42,3 +41,4 @@ const styles = StyleSheet.create({
     flexGrow:0
   }
 });
+

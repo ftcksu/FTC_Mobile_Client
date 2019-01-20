@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { Font } from 'expo';
 
 export default class FTCStyledText extends React.Component {
   
