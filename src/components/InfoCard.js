@@ -46,15 +46,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#eeeeee',
     flexDirection: 'row',
     alignContent: 'flex-end',
-    margin: 20,
+    margin: 15,
     borderRadius: 15,
     elevation: 2.5,
-    shadowRadius: 10,
-    shadowOpacity: 0.18
-    
+    shadowRadius: 1.5,
+    shadowOpacity: 0.2,
+    shadowOffset: { height: 0, width: 0 }
   },
   cardImage: {
-    width: 75, height: 75, alignSelf: 'center', margin: 10, marginStart: 20 
+    width: 60, height: 60, alignSelf: 'center', margin: 10, marginStart: 20 
   },
   textContainer: {
     flex: 1, justifyContent: 'flex-start', flexDirection: 'column', margin: 10
