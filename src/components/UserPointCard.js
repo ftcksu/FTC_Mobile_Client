@@ -1,17 +1,14 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
-import { FTCStyledText } from '../components/FTCStyledText';
-import data from '../dummy_data/UserPointCardData'; // instead of having data in the same file
+import { View, Image, StyleSheet, ImageBackground } from 'react-native'
+import FTCStyledText from '../components/FTCStyledText'
+const data={
+  "image":"https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+  "postion": 1,
+  "name":"يوسف العبدلي",
+  "bio":"ماسويت شيء غلط",
+  "points":420
+}
 
-// const data={
-//   'image':'https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg',
-//   'postion': 1,
-//   'name':'يوسف العبدلي',
-//   'bio':'ماسويت شيء غلط',
-//   'points':420
-// }
-
-//TODO: Add the crown vector on selected users
 
 /*
                             Props:
@@ -29,6 +26,7 @@ export class UserPointCard extends React.Component {
         </FTCStyledText>
 
         <View style={styles.nameAndBioContainer}>
+
           <FTCStyledText style={styles.name}>
             {this.props.name}
           </FTCStyledText>
@@ -36,6 +34,7 @@ export class UserPointCard extends React.Component {
           <FTCStyledText style={styles.bio}>
             {this.props.bio}
           </FTCStyledText>
+
         </View>
 
         <Image style={styles.circleImage} source={{ uri: this.props.imageURL }} />
@@ -53,7 +52,8 @@ const styles = StyleSheet.create({
     container: {
       marginTop: 10,
       justifyContent: 'flex-end',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      alignItems:"center"
       
     },
     postion: { //font should be Cairo Bold
@@ -63,6 +63,12 @@ const styles = StyleSheet.create({
       fontSize: 35,
       margin: 10
   },
+    imagesContainer:{
+      width: 60,
+      height: 60,
+      borderRadius: 60/2,
+      justifyContent:"flex-end"
+      },
     circleImage: {
       width: 75,
       height: 75,
