@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { FTCStyledText } from './FTCStyledText';
+import  FTCStyledText  from './FTCStyledText';
 
 const cardTypesIcon = [
     require('../../assets/images/microphone.png'),
@@ -15,7 +15,7 @@ const cardTypesIcon = [
   cardTypesIcon, type=STRING either announcment, attend or organize
 */
 
-export class InfoCard extends React.Component {
+export default class InfoCard extends React.Component {
   render() {
     return (
       <View style={styles.container}>

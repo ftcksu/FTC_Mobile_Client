@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, FlatList, View } from 'react-native';
-import { FTCStyledText } from './FTCStyledText';
-import { InfoCard } from './InfoCard';
+import FTCStyledText from './FTCStyledText';
+import InfoCard  from './InfoCard';
 
 export default class InfoCardList extends React.Component {
 
