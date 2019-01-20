@@ -10,7 +10,7 @@ export class Home extends Component {
             <InfoCardList
             title={'أحدث المشاريع'}
             listOfData={content.data}
-            hasLineSeparator
+            hasLineSeparator={true}
             />
         );
     }
@@ -20,7 +20,7 @@ export class Home extends Component {
             <InfoCardList
             title={'إعلانات هامة'}
             listOfData={content.data}
-            hasLineSeparator
+            hasLineSeparator={true}
             />
         );
     }

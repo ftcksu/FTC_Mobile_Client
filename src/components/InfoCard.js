@@ -42,7 +42,8 @@ export class InfoCard extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  
+  container:{
     backgroundColor: '#eeeeee',
     flexDirection: 'row',
     alignContent: 'flex-end',
