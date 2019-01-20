@@ -3,7 +3,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './src/reducers';
-import FTC from './src/FTC';
+import FTC from './src/Screens/FTC';
 
 
 export default class App extends React.Component {

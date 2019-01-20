@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     flexDirection: 'column',
+    paddingTop:10,
   },
   listTitle: {
     fontFamily: 'Cairo-Bold',

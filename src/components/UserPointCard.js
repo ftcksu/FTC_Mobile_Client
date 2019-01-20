@@ -32,9 +32,11 @@ export default class UserPointCard extends React.Component {
           <Image style={styles.circleImage} source={require('../../assets/images/crowns.png')} />
         </ImageBackground>
 
-        <FTCStyledText style={styles.position} >
-          {this.props.position}
-        </FTCStyledText>
+        <View style={styles.positionContainer} >
+          <FTCStyledText style={styles.position} >
+            {this.props.position}
+          </FTCStyledText>
+        </View>
 
         </View>
 
@@ -61,9 +63,12 @@ const styles = StyleSheet.create({
       textAlign:'center',
       fontWeight: 'bold',
       fontSize:35,
-      margin:10,
       fontFamily:"Cairo-Bold",
       textAlign:"center"
+  },
+  positionContainer:{
+    width:"18%",
+
   },
     imagesContainer:{
       width: 60,
