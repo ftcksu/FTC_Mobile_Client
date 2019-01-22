@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
       width: 60,
       height: 60,
       borderRadius: 60/2,
-      justifyContent:"flex-end"
+      justifyContent:"flex-end",
+      marginRight: -8,
       },
     circleImage: {
       alignSelf:"baseline",
@@ -85,8 +86,9 @@ const styles = StyleSheet.create({
     nameAndBioContainer:{
       justifyContent: 'flex-start',
       flexDirection: 'column',
-      margin:10,
+      margin:0,
       marginRight:20,
+      marginLeft: 5,
       flex:1
     },
     name:{ //font should be Cairo Bold
