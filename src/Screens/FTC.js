@@ -5,6 +5,7 @@ import { fontLoaded } from '../actions';
 import { Home } from './home';
 import  PointsListScreen from './PointsList/PointsListScreen';
 import  EventsScreen from './Events/EventsScreen';
+import  MyProfile from './MyProfile/myProfile';
 
 class FTC extends React.Component {
   componentDidMount() {
@@ -30,10 +31,18 @@ class FTC extends React.Component {
     }
     return null;
   }
+
+  renderMyProfileScreen() {
+    if (this.props.fontHasLoaded === true) {
+      return <MyProfile/>
+    }
+    return null;
+  }
+  
   render() {
     return (
       <View style={styles.container}>
-      {this.renderPointListScreen()}
+      {this.renderMyProfileScreen()}
       </View>
     );
   }
@@ -41,7 +50,7 @@ class FTC extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    // marginTop: 30,
     justifyContent: 'center',
     flexDirection: 'column',
   }
