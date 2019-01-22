@@ -1,51 +1,40 @@
 import React from 'react';
 import { StyleSheet, View, } from 'react-native';
 import { connect } from 'react-redux';
-import InfoCardList from './components/InfoCardList';
-import { fontLoaded } from './actions';
-import content from './dummy_data/InfoCardData.json';
-import { data } from './dummy_data/UserPointCardData';
-import { UserPointCard } from './components/UserPointCard';
+import { fontLoaded } from '../actions';
 import { Home } from './home';
+import  PointsListScreen from './PointsList/PointsListScreen';
+import  EventsScreen from './Events/EventsScreen';
+
 
 class FTC extends React.Component {
   componentDidMount() {
     this.props.fontLoaded();
   }
 
-  rednerInfoCard() {
-    if (this.props.fontHasLoaded === true) {
-      return (
-        <View style={styles.container}>
-          <InfoCardList title={content.title} listOfData={content.data} hasLineSeparator />
-        </View>
-      );
-    }
-    return null;
-  }
-
-  renderUserPointCard() {
-    return (
-        <UserPointCard
-        points={data.points}
-        name={data.name}
-        bio={data.bio}
-        imageURL={data.image}
-        />
-    );
-  }
-
-  renderHomePage() {
+  renderHomeScreen() {
     if (this.props.fontHasLoaded === true) {
       return <Home />;
     }
     return null;
   }
 
+  renderPointListScreen() {
+    if (this.props.fontHasLoaded === true) {
+      return <PointsListScreen/>;
+    }
+    return null;
+  }
+  renderEventsScreen() {
+    if (this.props.fontHasLoaded === true) {
+      return <EventsScreen/>;
+    }
+    return null;
+  }
   render() {
     return (
       <View style={styles.container}>
-      {this.renderHomePage()}
+      {this.renderPointListScreen()}
       </View>
     );
   }
