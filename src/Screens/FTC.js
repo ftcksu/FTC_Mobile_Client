@@ -6,7 +6,6 @@ import { Home } from './home';
 import  PointsListScreen from './PointsList/PointsListScreen';
 import  EventsScreen from './Events/EventsScreen';
 
-
 class FTC extends React.Component {
   componentDidMount() {
     this.props.fontLoaded();
@@ -14,20 +13,20 @@ class FTC extends React.Component {
 
   renderHomeScreen() {
     if (this.props.fontHasLoaded === true) {
-      return <Home />;
+      return <Home/>
     }
     return null;
   }
 
   renderPointListScreen() {
     if (this.props.fontHasLoaded === true) {
-      return <PointsListScreen/>;
+      return <PointsListScreen/>
     }
     return null;
   }
   renderEventsScreen() {
     if (this.props.fontHasLoaded === true) {
-      return <EventsScreen/>;
+      return <EventsScreen/>
     }
     return null;
   }
