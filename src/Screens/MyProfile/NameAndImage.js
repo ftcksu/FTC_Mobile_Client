@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end"
         },
     text:{
+        color:'white',
         marginTop:15,
         fontFamily: 'Cairo-Bold',
         fontSize: 15
