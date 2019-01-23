@@ -41,7 +41,7 @@ class FTC extends React.Component {
   
   render() {
     return (
-      <View style={styles.container}>
+      <View >
       {this.renderMyProfileScreen()}
       </View>
     );
@@ -51,7 +51,7 @@ class FTC extends React.Component {
 const styles = StyleSheet.create({
   container: {
     // marginTop: 30,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     flexDirection: 'column',
   }
 });
