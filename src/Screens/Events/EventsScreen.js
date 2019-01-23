@@ -5,7 +5,7 @@ import content from '../../dummy_data/InfoCardData.json';
 import { Icon } from 'react-native-elements'
 
 
-export default class PointsListScreen extends Component {
+export class EventsScreen extends Component {
     renderAvailableProjects() {
         return (
             <InfoCardList

@@ -2,9 +2,10 @@ import React from 'react';
 import { StyleSheet, View, } from 'react-native';
 import { connect } from 'react-redux';
 import { fontLoaded } from '../actions';
-import { Home } from './home';
-import  PointsListScreen from './PointsList/PointsListScreen';
-import  EventsScreen from './Events/EventsScreen';
+import { Home } from './index';
+import PointsListScreen from './PointsList/PointsListScreen';
+import EventsScreen from './Events/EventsScreen';
+import Navigator from '../Navigator'
 
 
 class FTC extends React.Component {
@@ -12,29 +13,12 @@ class FTC extends React.Component {
     this.props.fontLoaded();
   }
 
-  renderHomeScreen() {
-    if (this.props.fontHasLoaded === true) {
-      return <Home />;
-    }
-    return null;
-  }
-
-  renderPointListScreen() {
-    if (this.props.fontHasLoaded === true) {
-      return <PointsListScreen/>;
-    }
-    return null;
-  }
-  renderEventsScreen() {
-    if (this.props.fontHasLoaded === true) {
-      return <EventsScreen/>;
-    }
-    return null;
-  }
   render() {
     return (
       <View style={styles.container}>
-      {this.renderPointListScreen()}
+        {
+          this.props.fontHasLoaded ? <Navigator /> : null
+        }
       </View>
     );
   }
@@ -45,12 +29,13 @@ const styles = StyleSheet.create({
     marginTop: 30,
     justifyContent: 'center',
     flexDirection: 'column',
+    flex: 1
   }
 });
 
 const mapStateToProps = state => {
-  const { fontHasLoaded } = state.appReducer;
-  return { fontHasLoaded };
-};
+  const { fontHasLoaded } = state.appReducer
+  return { fontHasLoaded }
+}
 
 export default connect(mapStateToProps, { fontLoaded })(FTC);
