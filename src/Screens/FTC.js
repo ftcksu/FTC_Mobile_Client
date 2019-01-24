@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, } from 'react-native';
 import { connect } from 'react-redux';
 import { fontLoaded } from '../actions';
+
 import { Home } from './index';
 import PointsListScreen from './PointsList/PointsListScreen';
 import EventsScreen from './Events/EventsScreen';
@@ -26,8 +27,6 @@ class FTC extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
-    justifyContent: 'center',
     flexDirection: 'column',
     flex: 1
   }
