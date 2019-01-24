@@ -23,9 +23,9 @@ export default class PointRecordCard extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
+        width:"100%",
        alignItems:'center',
-       justifyContent:"space-between",
+       justifyContent:"space-evenly",
        flexDirection:'row',
     },
     text:{
@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
         fontFamily:'Cairo-Bold',
         fontSize:18,
         color:'white',
-        width:'50%'
+        // width:'50%'
 
     },
     icon:{
-        width:'50%'
+        // width:'50%'
     }
   });

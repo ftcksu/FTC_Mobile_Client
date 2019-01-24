@@ -14,8 +14,7 @@ export default class componentName extends Component {
             contentContainerStyle={{ flexGrow: 0 }}
             renderItem={({ item }) => (
             <PointRecordCard style={styles.pointHistoryCard}  />
-            )}
-        />
+            )}/>
 
         <View style={styles.dateAndLineContainer} >
             <FTCStyledText style={styles.date} >
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
        alignItems:'flex-end',
        justifyContent:"flex-end",
        flexDirection:'row',
-       margin:30
+        marginLeft:30
     },
     flatView:{
         marginTop:30
@@ -44,6 +43,7 @@ const styles = StyleSheet.create({
        justifyContent:"center",
        flexDirection:'column',
        width:'30%',
+       
     },
     whiteLine:{
         width:5,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff'
     },
     pointHistoryCard:{
-        marginLeft:20
+        width:"70%"
     },
     date:{
         fontFamily:'Cairo-Bold',

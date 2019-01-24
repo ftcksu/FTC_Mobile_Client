@@ -58,8 +58,6 @@ class FTC extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: 30,
-    // justifyContent: 'center',
     flexDirection: 'column',
   }
 });
