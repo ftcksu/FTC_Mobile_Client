@@ -37,7 +37,7 @@ export default class ScreenBackground extends Component {
         position: 'absolute',
         backgroundColor:'black',
         resizeMode:'cover',
-        transform: [{rotate: spin}]
+        // transform: [{rotate: spin}]
          }}
         source={require('../../../assets/images/ScreenBackground.png')}
         />

@@ -6,6 +6,8 @@ import { Home } from './home';
 import  PointsListScreen from './PointsList/PointsListScreen';
 import  EventsScreen from './Events/EventsScreen';
 import  MyProfile from './MyProfile/myProfile';
+import  History from './MyProfile/HistoryScreen/History';
+
 
 class FTC extends React.Component {
   componentDidMount() {
@@ -38,11 +40,17 @@ class FTC extends React.Component {
     }
     return null;
   }
+  renderHistoryScreen() {
+    if (this.props.fontHasLoaded === true) {
+      return <History/>
+    }
+    return null;
+  }
   
   render() {
     return (
       <View >
-      {this.renderMyProfileScreen()}
+      {this.renderHistoryScreen()}
       </View>
     );
   }
@@ -50,8 +58,6 @@ class FTC extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: 30,
-    // justifyContent: 'center',
     flexDirection: 'column',
   }
 });
