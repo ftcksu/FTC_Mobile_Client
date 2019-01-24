@@ -15,12 +15,12 @@
     "react-native-elements": "^0.19.1",
     "react-native-pulse": "^1.0.7",
     "react-native-responsive-linechart": "^1.5.0",
+    "react-navigation": "^3.0.9",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0",
-    "eslint-config-rallycoding": "^3.2.0"
+    "babel-preset-expo": "^5.0.0"
   }
 }
