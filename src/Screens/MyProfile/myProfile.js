@@ -1,23 +1,32 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Animated, Image, Easing } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Image, Easing } from 'react-native'
 import ScreenBackground from './ScreenBackground'
 import NameAndImage from './NameAndImage'
 import TotalPoints from './TotalPoints'
 import DoubleLineChart from './DoubleLineChart'
 
-export default class myProfile extends Component {
+export class MyProfile extends Component {
   
+  // onPress=()=>{
+  //   this.props.navigation.navigate("")
+  // }
   
   render() {
     return (
       <View>
-        <ScreenBackground style={{ position: 'absolute', top:0 }} />
+        <ScreenBackground style={{ position: 'absolute', top:0, bottom:0 }} />
         <View style={styles.container}  >
+
           <NameAndImage/>
           <TotalPoints/>
+
           <View style={styles.chart} >
-            <DoubleLineChart/>  
+
+            {/* <TouchableOpacity > */}
+              <DoubleLineChart/>  
+            {/* </TouchableOpacity> */}
           </View>
+
         </View>
 
       </View>      
@@ -35,6 +44,6 @@ const styles = StyleSheet.create({
     },
     chart: {
       height:'30%',
-      width:'90%',
+      width:'100%',
     }
   });
