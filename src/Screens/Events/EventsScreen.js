@@ -3,7 +3,7 @@ import { ScrollView, View, StyleSheet } from 'react-native';
 import InfoCardList from '../../components/InfoCardList';
 import content from '../../dummy_data/InfoCardData.json';
 import { Icon } from 'react-native-elements'
-import { Participants } from './AddEvent/Participants'
+import { AddEvent } from './AddEvent/AddEvent'
 
 export class EventsScreen extends Component {
     renderAvailableProjects() {
@@ -66,7 +66,7 @@ export class EventsScreen extends Component {
           //   {this.renderEventList()}
           // </ScrollView>
           <View style={styles.container}>
-            <Participants />
+            <AddEvent />
           </View>
         );
     }
