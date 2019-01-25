@@ -5,7 +5,6 @@ import content from '../../dummy_data/InfoCardData.json';
 import { Icon } from 'react-native-elements'
 import { Participants } from './AddEvent/Participants'
 
-
 export class EventsScreen extends Component {
     renderAvailableProjects() {
         return (
