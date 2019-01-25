@@ -3,6 +3,7 @@ import { ScrollView, View, StyleSheet } from 'react-native';
 import InfoCardList from '../../components/InfoCardList';
 import content from '../../dummy_data/InfoCardData.json';
 import { Icon } from 'react-native-elements'
+import { Participants } from './AddEvent/Participants'
 
 
 export class EventsScreen extends Component {
@@ -61,11 +62,13 @@ export class EventsScreen extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.container} >
-            {this.renderAddEventButton()}
-            {this.renderEventList()}
-            </ScrollView>
-            
+          // <ScrollView style={styles.container} >
+          //   {this.renderAddEventButton()}
+          //   {this.renderEventList()}
+          // </ScrollView>
+          <View style={styles.container}>
+            <Participants />
+          </View>
         );
     }
 }
@@ -79,5 +82,11 @@ const styles = StyleSheet.create({
     },
     addButton:{
         height:40,
+    },
+    container: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'stretch',
     }
   });
