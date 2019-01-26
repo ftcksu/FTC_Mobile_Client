@@ -1,52 +1,45 @@
 import React, { Component } from 'react'
-import { Text, View, Image, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import Autocomplete from 'react-native-autocomplete-input';
-const names=[
-    {
-        first_name:"نواف",
-        last_name:"القعيد"
-    },
-    {
-        first_name:"اسامة",
-        last_name:"العقيلي"
-    },
-    {
-        first_name:"عبدالإله",
-        last_name:"النمي"
-    },
-];
-
 
 export default class AutocompleteEventParticipants extends Component {
-    state = {
-        members: names,
-        query: ''
-      };
-
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       members:props.members,
+       query:''
+    }
+  }
+  
     render() {
         const { query } = this.state;
-        const names = this.renderNames(query);
+        const filteredMembers = this.renderNames(query);
         return (
             <Autocomplete style={styles.container}
-            autoCorrect={false}
-            placeholder={'اكتب هنا المشاركين مبدئياً'}
-            data={names}
-            defaultValue={query}
-            onChangeText={text => this.setState({ query: text })}
-            renderItem={data => (
-            <TouchableOpacity style={styles.autocompleteRow} onPress={this.onNamePress.bind(this, data)} >
-              <View style={styles.rowImageAndTextContainer} >
-                <Text style={styles.textRow}>{data}</Text>
-                <Image style={styles.imageRow} source={require('../../../assets/images/profileIcon.png')} />
-              </View>
-              <View style={styles.lineBreak} />
-              </TouchableOpacity>
-              
-            )}
-            inputContainerStyle={{ borderRadius: 10, alignItems: Platform.OS === 'ios' ? 'flex-end' : 'stretch', paddingRight: 10 }}
-
+              autoCorrect={false}
+              placeholder={'اكتب هنا المشاركين مبدئياً'}
+              data={filteredMembers}
+              defaultValue={query}
+              onChangeText={text => this.setState({ query: text })}
+              renderItem={(item) => (
+                this.renderRow(item)
+              )}
           />
          )
+        }
+
+        renderRow(item){
+          return(
+            <TouchableOpacity style={styles.autocompleteRow} onPress={this.onNamePress.bind(this, item)} >
+              <View style={styles.rowImageAndTextContainer} >
+                <Text style={styles.textRow}>{item.first_name} { item.last_name}</Text>
+                <Image style={styles.imageRow} source={{uri :item.image}} />
+              </View>
+              <View style={styles.lineBreak} />
+          </TouchableOpacity>
+          )
+          
         }
 
       renderNames(query) {
@@ -56,8 +49,10 @@ export default class AutocompleteEventParticipants extends Component {
     
         const { members } = this.state;
         const tmp = members.filter((member) => (member.first_name + ' ' + member.last_name).includes(query));
-        return tmp.map((member, i) =>
-          <Text key={member.id} style={{ textAlign: 'right' }}>{member.first_name + ' ' + member.last_name}</Text>);
+        if(tmp.length > 4){ // just to make sure that only a max of 4 items will be rendered.
+          return tmp.slice(0,4)
+        }
+        return tmp;
       }
       onNamePress(){
         this.setState({ query: '' });
@@ -68,31 +63,31 @@ const styles = StyleSheet.create({
     container: {
         marginTop: 100,
         padding:15,
-        fontSize: 19,
-        fontFamily:'Cairo-Light',
-        backgroundColor:"#eeeeee"
+        fontSize: 16,
+        fontFamily:'Cairo-Bold',
+        backgroundColor:"#eeeeee",
+        width:"100%",
       },
       autocompleteRow: {
-        flexDirection:"column", alignItems:"flex-end", justifyContent:"flex-end", marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10
+        flexDirection:"column", alignItems:"flex-end", justifyContent:"flex-end", 
       },
       rowImageAndTextContainer:{
-        flexDirection:"row"
+        flexDirection:"row",margin:10
       },
       textRow: {
-        fontSize: 18,
-        fontFamily:'Cairo-Light',
+        fontSize: 14,
+        fontFamily:'Cairo-Bold',
         margin:10,
         color:"#9e9e9e"
       },
       imageRow: {
-        width: 23,
-        height: 23,
-        borderRadius: 23/2,
-        margin:10
+        width: 50,
+        height: 50,
+        borderRadius: 50/2,
     },
     lineBreak:{
       alignSelf:"center",
-      width:"80%" ,
+      width:"100%" ,
       height:2,
       backgroundColor:"#eeeeee"
     }
