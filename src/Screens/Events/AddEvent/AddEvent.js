@@ -3,6 +3,7 @@ import { View, Text } from 'react-native'
 import FTCSyteledText from '../../../components/FTCStyledText'
 import { MaxParticipants } from './MaxParticipants'
 import { InputFields } from './InputFields'
+import { AttendToggle } from './AttendToggle'
 
 /* Need some work on the naming. */
 
@@ -25,11 +26,18 @@ export class AddEvent extends Component {
     )
   }
 
+  renderAttendToggle() {
+    return (
+      <AttendToggle />
+    )
+  }
+
   render() {
     return (
       <View style={styles.container} >
         {this.rednerHeader()}
         {this.renderInputSection()}
+        {this.renderAttendToggle()}
       </View>
     )
   }
