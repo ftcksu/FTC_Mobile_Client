@@ -31,16 +31,18 @@ export default class ScreenBackground extends Component {
 
     return (
       <Animated.Image
-        style={{
+        style={[{
         width: "100%",
         height: "100%",
         position: 'absolute',
         backgroundColor:'black',
         resizeMode:'cover',
         // transform: [{rotate: spin}]
-         }}
+         },
+         this.props.style]}
         source={require('../../../assets/images/ScreenBackground.png')}
-        />
+        >
+        </Animated.Image>
     )
   }
 }
