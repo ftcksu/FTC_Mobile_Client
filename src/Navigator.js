@@ -28,7 +28,7 @@ const TabBarComponent = (props) => {
 let Navigator = createBottomTabNavigator(
     /* Screens */ 
     {
-      Members: PointsListScreen,
+      Members: EventsScreen, //PointsListScreen
       Events: EventsScreen,
       Home: MyProfile
       /* Profile: ???? */
