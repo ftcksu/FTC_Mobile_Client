@@ -15,10 +15,9 @@ const styles = StyleSheet.create({
   inputContainer1:{
     width: 0,
     height: 0,
-    backgroundColor: 'transparent',
     borderStyle: 'solid',
-    borderRightWidth: 900,
-    borderTopWidth: 100,
+    borderRightWidth: 600,
+    borderTopWidth: 70,
     borderRightColor: 'transparent',
     borderTopColor: 'white',
     marginBottom:-0.1, // react native in a nutshell
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
     ]
   },
   inputContainer2:{
-    height:'40%',
+    height:'100%',
     width:'100%',
     backgroundColor:'white'
   }

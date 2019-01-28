@@ -10,7 +10,7 @@ export default class Login extends Component {
       <View style={styles.container} >
         <Background style={{height:"100%", width:"100%", position:'absolute',top:0,right:0}} />
         <Logo style={styles.imageCont} />
-        <InputContainer/>
+        <InputContainer style={{height:'40%'}} />
       </View>
     )
   }

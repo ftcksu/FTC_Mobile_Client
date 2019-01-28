@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     height:'50%',
     flexDirection:'column',
     resizeMode:'contain',
+    marginBottom:10
   },
   title:{
     fontFamily:'Cairo-Bold',
