@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Input } from 'react-native-elements'
+import { inputFieldStyle } from "../../../styles/inputFieldStyle";
 
 export class InputFields extends Component {
   render() {
     const {
       inputContainerStyle, containerStyle, inputStyle
-    } = styles
+    } = inputFieldStyle
     return (
       <View>
         <Input
