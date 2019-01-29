@@ -4,6 +4,7 @@ import FTCSyteledText from '../../../components/FTCStyledText'
 import { MaxParticipants } from './MaxParticipants'
 import { InputFields } from './InputFields'
 import { AttendToggle } from './AttendToggle'
+import { CurrentParticipants } from './CurrentParticipants';
 
 /* Need some work on the naming. */
 
@@ -22,6 +23,7 @@ export class AddEvent extends Component {
       <View style={container}>
         <InputFields />
         <MaxParticipants />
+        <CurrentParticipants />
       </View>
     )
   }

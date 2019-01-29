@@ -15,6 +15,7 @@
     "react-native-autocomplete-input": "^3.6.0",
     "react-native-elements": "^1.0.0-beta7",
     "react-native-modal-dropdown": "^0.6.2",
+    "react-native-super-grid": "^3.0.0",
     "react-navigation": "^3.0.9",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
