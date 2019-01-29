@@ -2,9 +2,6 @@ import React from 'react';
 import { StyleSheet, View, } from 'react-native';
 import { connect } from 'react-redux';
 import { fontLoaded } from '../actions';
-import { Home } from './index';
-import PointsListScreen from './PointsList/PointsListScreen';
-import EventsScreen from './Events/EventsScreen';
 import Navigator from '../Navigator'
 
 
@@ -17,7 +14,7 @@ class FTC extends React.Component {
     return (
       <View style={styles.container}>
         {
-          this.props.fontHasLoaded ? <Navigator /> : null
+          this.props.fontHasLoaded ?  <Navigator /> : null
         }
       </View>
     );
@@ -26,10 +23,9 @@ class FTC extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
-    justifyContent: 'center',
     flexDirection: 'column',
-    flex: 1
+    flex: 1,
+    // marginTop:30
   }
 });
 

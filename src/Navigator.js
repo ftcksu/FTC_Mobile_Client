@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { createBottomTabNavigator, createAppContainer, BottomTabBar } from 'react-navigation';
-import { Home, PointsListScreen, EventsScreen } from './Screens'
+import { Home, PointsListScreen, EventsScreen,MyProfile } from './Screens'
 import { TabIcon } from './components/TabIcon'
 import Images from '../assets/images'
 
@@ -16,7 +16,7 @@ const TabBarComponent = (props) => {
           backgroundColor: '#eee',
           alignSelf: 'center',
           marginTop: 10,
-          marginBottom: 10
+          // marginBottom: 10
         }}
       />
       <BottomTabBar {...props} />
@@ -30,7 +30,7 @@ let Navigator = createBottomTabNavigator(
     {
       Members: EventsScreen, //PointsListScreen
       Events: EventsScreen,
-      Home: Home
+      Home: MyProfile
       /* Profile: ???? */
     },
 
@@ -73,7 +73,7 @@ let Navigator = createBottomTabNavigator(
         style: { 
           height: 70,
           borderTopWidth: 0,
-          paddingBottom: 15
+          // paddingBottom: 15
         }
       }
     }
