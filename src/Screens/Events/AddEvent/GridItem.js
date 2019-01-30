@@ -16,20 +16,17 @@ export class GridItem extends Component {
     } = styles
     return (
       <View style={container} >
-        
-          <TouchableOpacity
-            onPress={() => console.log('remove')}
-          >
-          <View style={closeIconContainer} >
-          
+        <View style={{styles.backgroundCover}} />
+        <TouchableOpacity style={closeIconContainer}
+            onPress={() => console.log('remove')}>          
             <Icon name="md-close-circle-outline" style={closeIcon} />
-            </View>
-
           </TouchableOpacity>
-        
         <Text style={textStyle} >
           {this.props.name}
         </Text>
+
+          
+
       </View>
     )
   }
@@ -38,8 +35,8 @@ export class GridItem extends Component {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    // margin: 10,
+    // backgroundColor: 'white',
+    marginRight: 10,
     shadowRadius: 3,
     shadowOpacity: 0.1,
     shadowOffset: { height: 0, width: 0 },
@@ -52,21 +49,33 @@ const styles = {
     color: '#4173B0',
     fontSize: 11,
     margin: 5,
+    // backgroundColor: 'white',
+    height:"100%",
+    zIndex:1
   },
   closeIcon: {
     color: 'red',
-    alignSelf: 'center',
+    position: 'absolute',
+    top:0,
+    right:0,
   },
   // still not satisfying!
   closeIconContainer: {
     position: 'absolute',
-    right: -5,
-    top: -5,
+    right:0,
+    top: 0,
     backgroundColor: 'white',
     width: 15, 
     height: 15, 
     borderRadius: 15/2, 
     borderWidth: 2, 
-    borderColor: 'white'
+    borderColor: 'white',
+    paddingBottom:10
   },
+  backgroundCover:{
+    backgroundColor:'white',
+    position:'absolute', 
+    height:'100%',
+    width:'95%'
+  }
 }
