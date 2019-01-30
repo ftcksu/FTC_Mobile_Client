@@ -1,17 +1,29 @@
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
-
+import { View } from 'react-native'
+import { Input } from 'react-native-elements'
+import { inputFieldStyle } from "../../styles/inputFieldStyle"
+    const {
+      inputContainerStyle, containerStyle, inputStyle
+    } = inputFieldStyle;
 export default class InputContainer extends Component {
   render() {
     return (
       <View style={this.props.style} >
+      <View style={{position:'absolute',height:'100%'}} >
         <View style={styles.inputContainer1}/>
         <View style={styles.inputContainer2} />
+      </View>
+      <Input
+          placeholder={'اسم المشروع'}
+          inputContainerStyle={inputContainerStyle}
+          containerStyle={[containerStyle,{marginTop:150}]}
+          inputStyle={inputStyle}
+        />
       </View>
     )
   }
 }
-const styles = StyleSheet.create({
+const styles = {
   inputContainer1:{
     width: 0,
     height: 0,
@@ -30,4 +42,4 @@ const styles = StyleSheet.create({
     width:'100%',
     backgroundColor:'white'
   }
-});
+};
