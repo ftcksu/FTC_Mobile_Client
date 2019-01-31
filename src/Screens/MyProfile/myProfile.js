@@ -21,10 +21,7 @@ export class MyProfile extends Component {
           <TotalPoints/>
 
           <View style={styles.chart} >
-
-            {/* <TouchableOpacity > */}
               <DoubleLineChart/>  
-            {/* </TouchableOpacity> */}
           </View>
 
         </View>
