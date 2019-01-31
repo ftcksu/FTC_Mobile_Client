@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, FlatList, ScrollView } from 'react-native'
 import PointPerDayCard from './PointPerDayCard'
-import ScreenBackground from '../ScreenBackground'
+import ScreenBackground from '../screenBackground'
 import FTCStyledText from '../../../components/FTCStyledText'
 import { Icon } from 'react-native-elements';
 

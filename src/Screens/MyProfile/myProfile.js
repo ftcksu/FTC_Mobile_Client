@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, TouchableOpacity, Image, Easing } from 'react-native'
-import ScreenBackground from './ScreenBackground'
+import ScreenBackground from './screenBackground'
 import NameAndImage from './NameAndImage'
 import TotalPoints from './TotalPoints'
 import DoubleLineChart from './DoubleLineChart'
