@@ -12,11 +12,12 @@ export class GridItem extends Component {
   render() {
     const {
       container, textStyle,
-      closeIcon, closeIconContainer
+      closeIcon, closeIconContainer,
+      backgroundCover
     } = styles
     return (
       <View style={container} >
-        <View style={{styles.backgroundCover}} />
+        <View style={backgroundCover} />
         <TouchableOpacity style={closeIconContainer}
             onPress={() => console.log('remove')}>          
             <Icon name="md-close-circle-outline" style={closeIcon} />
