@@ -25,9 +25,6 @@ export class GridItem extends Component {
         <Text style={textStyle} >
           {this.props.name}
         </Text>
-
-          
-
       </View>
     )
   }

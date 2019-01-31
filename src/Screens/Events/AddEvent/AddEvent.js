@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import FTCSyteledText from '../../../components/FTCStyledText'
 import { MaxParticipants } from './MaxParticipants'
 import { InputFields } from './InputFields'
 import { AttendToggle } from './AttendToggle'
 import { CurrentParticipants } from './CurrentParticipants';
+import { NotifiCheck } from './NotifiCheck'
+import { SubmitButton } from './SubmitButton'
 
 /* Need some work on the naming. */
 
@@ -34,13 +36,27 @@ export class AddEvent extends Component {
     )
   }
 
+  renderNotifiCheck() {
+    return (
+      <NotifiCheck />
+    )
+  }
+
+  renderSubmitButton() {
+    return (
+      <SubmitButton />
+    )
+  }
+
   render() {
     return (
-      <View style={styles.container} >
+      <ScrollView style={styles.container} >
         {this.rednerHeader()}
         {this.renderInputSection()}
         {this.renderAttendToggle()}
-      </View>
+        {this.renderNotifiCheck()}
+        {this.renderSubmitButton()}
+      </ScrollView>
     )
   }
 }
