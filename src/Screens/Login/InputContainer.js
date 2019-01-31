@@ -14,9 +14,15 @@ export default class InputContainer extends Component {
         <View style={styles.inputContainer2} />
       </View>
       <Input
-          placeholder={'اسم المشروع'}
+          placeholder={'الرقم الجامعي'}
           inputContainerStyle={inputContainerStyle}
           containerStyle={[containerStyle,{marginTop:150}]}
+          inputStyle={inputStyle}
+        />
+        <Input
+          placeholder={'كلمة المرور'}
+          inputContainerStyle={inputContainerStyle}
+          containerStyle={[containerStyle,{marginTop:20}]}
           inputStyle={inputStyle}
         />
       </View>
