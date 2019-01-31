@@ -18,28 +18,42 @@ const icon = () => {
 }
 
 export const SubmitButton = () => {
-  const { containerStyle } = styles
+  const { containerStyle, textStyle, buttonStyle } = styles
   return (
     <Button
       type={'outline'}
-      title={'أضف المشروع'}
-      icon={icon()}
-      iconRight
-      titleStyle={{ fontFamily: 'Cairo-Bold', textAlign: 'center', fontSize: 16 }}
+      title={'أظف المشروع'}
+      titleStyle={textStyle}
       onPress={() => console.log('connect me to redux')}
-      containerStyle={{}}
-      style={containerStyle}
+      buttonStyle={buttonStyle}
+      // containerStyle={containerStyle}
     />
   )
 }
 
 const styles = {
   containerStyle: {
-    alignSelf: 'center',
-    width: '90%',
-    borderRadius: 22,
+    // alignSelf: 'center',
+    // width: '90%',
+    justifyContent: 'center',
   },
   iconStyle: {
 
   },
+  textStyle: {
+    fontFamily: 'Cairo-Bold',
+    textAlign: 'center',
+    fontSize: 12, // button shrinks with fontSize
+    color: 'black'
+  },
+  buttonStyle: {
+    alignSelf: 'center',
+    borderRadius: 22,
+    width: '87%',
+    // height: '40%',
+    backgroundColor: 'transparent',
+    borderColor: 'blue',
+    borderWidth: 2,
+
+  }
 }
