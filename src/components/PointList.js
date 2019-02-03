@@ -20,7 +20,7 @@ export default class App extends React.Component {
 
             <UserPointCard
                 bio={item.bio}
-                name={item.name}
+                name={item.first_name+" "+item.last_name}
                 imageURL={item.imageURL}
                 position={item.position}
                 points={item.points}/>

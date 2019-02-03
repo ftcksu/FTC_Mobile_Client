@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fontLoaded } from '../actions';
 import Navigator from '../Navigator'
 import Login from './Login/LoginScreen'
+import { PointsListScreen } from "./index";
 
 
 class FTC extends React.Component {
@@ -15,7 +16,7 @@ class FTC extends React.Component {
     return (
       <View style={styles.container}>
         {
-          this.props.fontHasLoaded ?  <Login /> : null
+          this.props.fontHasLoaded ?  <PointsListScreen /> : null
         }
       </View>
     );
