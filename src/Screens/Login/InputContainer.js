@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, KeyboardAvoidingView } from 'react-native'
 import { Input } from 'react-native-elements'
 import { inputFieldStyle } from "../../styles/inputFieldStyle"
     const {
@@ -9,22 +9,23 @@ export default class InputContainer extends Component {
   render() {
     return (
       <View style={this.props.style} >
-      <View style={{position:'absolute',height:'100%'}} >
         <View style={styles.inputContainer1}/>
-        <View style={styles.inputContainer2} />
-      </View>
-      <Input
-          placeholder={'الرقم الجامعي'}
-          inputContainerStyle={inputContainerStyle}
-          containerStyle={[containerStyle,{marginTop:150}]}
-          inputStyle={inputStyle}
-        />
-        <Input
-          placeholder={'كلمة المرور'}
-          inputContainerStyle={inputContainerStyle}
-          containerStyle={[containerStyle,{marginTop:20}]}
-          inputStyle={inputStyle}
-        />
+        <View style={styles.inputContainer2}>
+          <Input
+            placeholder={'الرقم الجامعي'}
+            inputContainerStyle={inputContainerStyle}
+            containerStyle={[containerStyle]}
+            inputStyle={inputStyle}
+          />
+          <Input
+            placeholder={'كلمة المرور'}
+            secureTextEntry={true}
+            inputContainerStyle={inputContainerStyle}
+            containerStyle={[containerStyle]}
+            inputStyle={inputStyle}
+          />
+          {this.props.children}
+        </View>
       </View>
     )
   }
@@ -44,8 +45,11 @@ const styles = {
     ]
   },
   inputContainer2:{
-    height:'100%',
+    paddingTop:30,
+    flex:1,
     width:'100%',
-    backgroundColor:'white'
+    backgroundColor:'white',
+    alignItems:'center',
+    justifyContent:'space-evenly'
   }
 };

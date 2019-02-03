@@ -18,7 +18,6 @@ export default class GradientButton extends Component {
 
 const styles={
     outer: {
-        marginBottom:30,
         alignItems:'center',
         justifyContent: 'center',
         // paddingTop:10,
