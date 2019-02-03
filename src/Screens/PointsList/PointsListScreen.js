@@ -3,20 +3,19 @@ import PointList from '../../components/PointList';
 import { ScrollView } from "react-native";
 import PointListTotal from '../../dummy_data/userDataPointTotal.json'
 import PointListWeekly from '../../dummy_data/userDataPointWeekly.json'
-
 import { SearchBar } from 'react-native-elements';
 import  {AttendToggle}  from "../Events/AddEvent/AttendToggle";
+import FTCStyledText from '../../components/FTCStyledText';
 
 
 export class PointsListScreen extends Component {
 
     switchList = (type) =>{
-        type ==0 ? this.setState({'members':PointListWeekly }) : this.setState({'members':PointListTotal }) 
+        type == 0 ? this.setState({'members':PointListWeekly }) : this.setState({'members':PointListTotal }) 
     }
 
     state = {
         search: '',
-        pointListType: 'total',
         members:PointListTotal
       };
 
@@ -35,10 +34,11 @@ export class PointsListScreen extends Component {
         return tmp;
       }
     render() {
-        const { search,members } = this.state
+        const { search } = this.state
         filteredList = this.renderList(search)
         return (
             <ScrollView style={styles.container} >
+                <FTCStyledText style={styles.header} > قائمة النقاط </FTCStyledText>
                 <SearchBar
                     lightTheme={true}
                     round={true}
@@ -58,6 +58,11 @@ export class PointsListScreen extends Component {
 const styles = {
     container: {
         marginTop:30
+    },
+    header:{
+        fontFamily:'Cairo-Bold',
+        fontSize:23,
+        textAlign:'center'
     },
     SearchBarContainerStyle: {
         backgroundColor:'transparent',
