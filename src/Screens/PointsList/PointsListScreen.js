@@ -6,6 +6,11 @@ import PointListWeekly from '../../dummy_data/userDataPointWeekly.json'
 import { SearchBar } from 'react-native-elements';
 import  {AttendToggle}  from "../Events/AddEvent/AttendToggle";
 import FTCStyledText from '../../components/FTCStyledText';
+import { TextStyles } from "../../styles/TextStyles"
+
+    const {
+      header
+    } = TextStyles;
 
 
 export class PointsListScreen extends Component {
@@ -38,7 +43,7 @@ export class PointsListScreen extends Component {
         filteredList = this.renderList(search)
         return (
             <ScrollView style={styles.container} >
-                <FTCStyledText style={styles.header} > قائمة النقاط </FTCStyledText>
+                <FTCStyledText style={header} > قائمة النقاط </FTCStyledText>
                 <SearchBar
                     lightTheme={true}
                     round={true}
@@ -50,7 +55,7 @@ export class PointsListScreen extends Component {
                     value={search}
                 />
                 <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} handelPress={this.switchList} style={{width:'80%', alignSelf:'center'}} />
-                <PointList data={filteredList} />
+                <PointList style={styles.pointList} data={filteredList} />
             </ScrollView>
         );
     }
@@ -59,11 +64,6 @@ const styles = {
     container: {
         marginTop:30
     },
-    header:{
-        fontFamily:'Cairo-Bold',
-        fontSize:23,
-        textAlign:'center'
-    },
     SearchBarContainerStyle: {
         backgroundColor:'transparent',
         width:'90%',
@@ -71,5 +71,8 @@ const styles = {
     },
     SearchInputContainerStyle: {
         backgroundColor:'#eeeeee'
+    },
+    pointList:{
+        marginTop:15
     }
 }

@@ -13,7 +13,7 @@ export default class App extends React.Component {
         <View style={styles.container}>
 
         <FlatList
-            style={styles.flatView}
+            style={[styles.flatView,this.props.style]}
             data={this.props.data}
             contentContainerStyle={{ flexGrow: 0 }}
             renderItem={({ item }) => (
