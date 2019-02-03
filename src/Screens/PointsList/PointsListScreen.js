@@ -38,13 +38,13 @@ export class PointsListScreen extends Component {
         const { search,members } = this.state
         filteredList = this.renderList(search)
         return (
-            <ScrollView style={{marginTop:30}} >
+            <ScrollView style={styles.container} >
                 <SearchBar
                     lightTheme={true}
                     round={true}
                     platform={'ios'}
-                    containerStyle={{backgroundColor:'transparent', width:'90%', alignSelf:'center'}}
-                    inputContainerStyle={{backgroundColor:'#eeeeee'}}
+                    containerStyle={styles.SearchBarContainerStyle}
+                    inputContainerStyle={styles.SearchInputContainerStyle}
                     placeholder="بحث عن الأعضاء"
                     onChangeText={text => this.setState({'search' : text})}
                     value={search}
@@ -53,5 +53,18 @@ export class PointsListScreen extends Component {
                 <PointList data={filteredList} />
             </ScrollView>
         );
+    }
+}
+const styles = {
+    container: {
+        marginTop:30
+    },
+    SearchBarContainerStyle: {
+        backgroundColor:'transparent',
+        width:'90%',
+        alignSelf:'center'
+    },
+    SearchInputContainerStyle: {
+        backgroundColor:'#eeeeee'
     }
 }
