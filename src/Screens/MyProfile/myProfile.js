@@ -14,7 +14,7 @@ export class MyProfile extends Component {
   render() {
     return (
       <View>
-        <ScreenBackground style={{ position: 'absolute', top:0, bottom:0 }} />
+        <ScreenBackground style={{height:"100%", width:"100%", position:'absolute',top:0,right:0}} />
         <View style={styles.container}  >
 
           <NameAndImage/>

@@ -10,7 +10,7 @@ export class History extends Component {
   render() {
     return (
       <ScrollView>
-        <ScreenBackground style={styles.screenBackground} />
+        <ScreenBackground/>
         <View style={styles.container} >
           <View style={styles.topContainer} >
           <View style={styles.emptyLeftView} />
@@ -47,9 +47,6 @@ const styles = StyleSheet.create({
     width:"100%",
     flex:0,
     marginTop:15
-  },
-  screenBackground:{
-
   },
   topContainer:{
     marginTop:30, flexDirection: 'row', width: '100%', justifyContent: 'space-between' 
