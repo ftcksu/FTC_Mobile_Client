@@ -1,0 +1,74 @@
+[
+    {
+    "first_name":"نواف",
+    "last_name":"القعيد",
+    "bio": "Socks are just portable carpets",
+    "imageURL": "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+    "points":9,
+    "position":1
+  },
+  {
+    "first_name":"باسل",
+    "last_name":"القعيد",
+    "bio": "Socks are just portable carpets",
+    "imageURL": "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+    "points":99,
+    "position":1
+  },{
+    "first_name":"نواف",
+    "last_name":"العبدلي",
+    "bio": "Socks are just portable carpets",
+    "imageURL": "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+    "points":999,
+    "position":1
+  },{
+    "first_name":"باسل",
+    "last_name":"العبدلي",
+    "bio": "Socks are just portable carpets",
+    "imageURL": "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+    "points":9999,
+    "position":1
+  },{
+    "first_name":"اسامه",
+    "last_name":"العقيلي",
+    "bio": "Socks are just portable carpets",
+    "imageURL": "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+    "points":9999,
+    "position":1
+  },{
+    "first_name":"عبدالاله",
+    "last_name":"النمي",
+    "bio": "Socks are just portable carpets",
+    "imageURL": "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+    "points":9999,
+    "position":1
+  },{
+    "first_name":"نواف",
+    "last_name":"القعيد",
+    "bio": "Socks are just portable carpets",
+    "imageURL": "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+    "points":9999,
+    "position":1
+  },{
+    "first_name":"نواف",
+    "last_name":"القعيد",
+    "bio": "Socks are just portable carpets",
+    "imageURL": "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+    "points":9999,
+    "position":1
+  },{
+    "first_name":"نواف",
+    "last_name":"القعيد",
+    "bio": "Socks are just portable carpets",
+    "imageURL": "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+    "points":9999,
+    "position":1
+  },{
+    "first_name":"نواف",
+    "last_name":"القعيد",
+    "bio": "Socks are just portable carpets",
+    "imageURL": "https://cdn.britannica.com/s:300x300/58/129958-004-C9B8B89D.jpg",
+    "points":9999,
+    "position":1
+  }
+  ]

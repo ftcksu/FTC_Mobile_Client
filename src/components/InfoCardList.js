@@ -25,7 +25,8 @@ export default class InfoCardList extends React.Component {
             />
           )}
         />
-
+        {console.log('this.props.hasLineSeparator')}
+        {console.log(this.props.hasLineSeparator)}
         {this.props.hasLineSeparator ? <View style={styles.lineBreak} /> : null}
       </View>
     );
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     flexDirection: 'column',
+    paddingTop:10,
   },
   listTitle: {
     fontFamily: 'Cairo-Bold',
