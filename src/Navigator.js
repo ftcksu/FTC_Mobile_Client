@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
-import { createBottomTabNavigator, createAppContainer, BottomTabBar } from 'react-navigation';
-import { Home, PointsListScreen, EventsScreen,MyProfile } from './Screens'
+import { createBottomTabNavigator,createStackNavigator ,createAppContainer, BottomTabBar } from 'react-navigation';
+import { Home, PointsListScreen, EventsScreen,MyProfile, History } from './Screens'
 import { TabIcon } from './components/TabIcon'
 import Images from '../assets/images'
 
@@ -27,13 +27,32 @@ const TabBarComponent = (props) => {
   )
 }
 
+const homeStack = createStackNavigator(
+  {
+    Home: MyProfile,
+    History: History,
+  },
+  {
+    headerMode:'none'
+  }
+)
+const eventtack = createStackNavigator(
+  {
+    Events: EventsScreen,
+    History: History,
+  },
+  {
+    headerMode:'none'
+  }
+)
+
 /* Main Tab Navigator */
 let Navigator = createBottomTabNavigator(
     /* Screens */ 
     {
-      Members: EventsScreen, //PointsListScreen
+      Home: homeStack,
+      Members: PointsListScreen, //PointsListScreen
       Events: EventsScreen,
-      Home: MyProfile
       /* Profile: ???? */
     },
 
