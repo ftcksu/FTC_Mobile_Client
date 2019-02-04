@@ -30,15 +30,15 @@ export default class ScreenBackground extends Component {
     });
 
     return (
-      <View style={{width: "250%",
-      height: "300%", position: 'absolute'}} >
-              <Image source={require('../../../assets/images/ScreenBackground.png')} />
+      <View style={{width: "100%",
+      height: "100%", position: 'absolute', top:0}} >
+      <Image source={require('../../../assets/images/ScreenBackground.png')} style={{height:'100%',width:'100%'}} />
         <Animated.Image
         style={[{
-        width: "100%",
-        height: "100%",
+        width: "200%",
+        height: "300%",
         position: 'absolute',
-        resizeMode:'cover',
+        resizeMode:'contain',
         transform: [{rotate: spin}]
          },
          this.props.style]}
