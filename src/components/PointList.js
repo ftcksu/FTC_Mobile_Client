@@ -13,14 +13,14 @@ export default class App extends React.Component {
         <View style={styles.container}>
 
         <FlatList
-            style={styles.flatView}
+            style={[styles.flatView,this.props.style]}
             data={this.props.data}
             contentContainerStyle={{ flexGrow: 0 }}
             renderItem={({ item }) => (
 
             <UserPointCard
                 bio={item.bio}
-                name={item.name}
+                name={item.first_name+" "+item.last_name}
                 imageURL={item.imageURL}
                 position={item.position}
                 points={item.points}/>
