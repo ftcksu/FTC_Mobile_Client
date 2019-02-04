@@ -61,13 +61,13 @@ export class EventsScreen extends Component {
 
     render() {
         return (
-          // <ScrollView style={styles.container} >
-          //   {this.renderAddEventButton()}
-          //   {this.renderEventList()}
-          // </ScrollView>
-          <View style={styles.container}>
-            <AddEvent />
-          </View>
+          <ScrollView  >
+            {this.renderAddEventButton()}
+            {this.renderEventList()}
+          </ScrollView>
+        //   <View style={styles.container}>
+        //     <AddEvent />
+        //   </View>
         );
     }
 }

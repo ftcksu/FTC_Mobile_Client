@@ -1,4 +1,5 @@
 export * from './Events/EventsScreen'
+export * from './Events/AddEvent/AddEvent'
 export * from './home/Home'
 export * from './PointsList/PointsListScreen'
 export * from './MyProfile/myProfile'
