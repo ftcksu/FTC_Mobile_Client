@@ -32,9 +32,11 @@ export default class UserPointCard extends React.Component {
           <Image style={styles.circleImage} source={require('../../assets/images/crowns.png')} />
         </ImageBackground>
 
-        <FTCStyledText style={styles.position} >
-          {this.props.position}
-        </FTCStyledText>
+        <View style={styles.positionContainer} >
+          <FTCStyledText style={styles.position} >
+            {this.props.position}
+          </FTCStyledText>
+        </View>
 
         </View>
 
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
 
   },
     ChildContainer:{
-      margin:10,
+      margin:7,
       justifyContent: 'flex-end',
       flexDirection: 'row',
       alignItems:"center"
@@ -60,16 +62,20 @@ const styles = StyleSheet.create({
       color:"#c7c7c7",
       textAlign:'center',
       fontWeight: 'bold',
-      fontSize:35,
-      margin:10,
+      fontSize:25,
       fontFamily:"Cairo-Bold",
       textAlign:"center"
+  },
+  positionContainer:{
+    width:"13%",
+
   },
     imagesContainer:{
       width: 60,
       height: 60,
       borderRadius: 60/2,
-      justifyContent:"flex-end"
+      justifyContent:"flex-end",
+      marginRight: -8,
       },
     circleImage: {
       alignSelf:"baseline",
@@ -80,8 +86,9 @@ const styles = StyleSheet.create({
     nameAndBioContainer:{
       justifyContent: 'flex-start',
       flexDirection: 'column',
-      margin:10,
+      margin:0,
       marginRight:20,
+      marginLeft: 5,
       flex:1
     },
     name:{ //font should be Cairo Bold

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
-import InfoCardList from '../components/InfoCardList';
-import content from '../dummy_data/InfoCardData.json';
+import InfoCardList from '../../components/InfoCardList';
+import content from '../../dummy_data/InfoCardData.json';
 
 export class Home extends Component {
 
@@ -45,3 +45,4 @@ export class Home extends Component {
         );
     }
 }
+
