@@ -8,6 +8,7 @@ import { data } from './dummy_data/UserPointCardData';
 import { UserPointCard } from './components/UserPointCard';
 import { Home } from './home';
 import  PointsListScreen from './PointsList/PointsListScreen';
+import ProfilePage from '../components/ProfilePage'
 
 class FTC extends React.Component {
   componentDidMount() {
@@ -49,10 +50,17 @@ class FTC extends React.Component {
     return null;
   }
 
+  renderProfilePage() {
+    if (this.props.fontHasLoaded === true) {
+      return <ProfilePage/>;
+    }
+    return null;
+  }
+
   render() {
     return (
       <View style={styles.container}>
-      {this.renderPointListPage()}
+      {this.renderProfilePage()}
       </View>
     );
   }

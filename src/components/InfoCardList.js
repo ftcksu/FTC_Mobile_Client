@@ -22,6 +22,7 @@ export default class InfoCardList extends React.Component {
               title={item.title}
               subtitle={item.subTitle}
               cardTypesIcon={item.type}
+              isBoss={item.isBoss}
             />
           )}
         />
