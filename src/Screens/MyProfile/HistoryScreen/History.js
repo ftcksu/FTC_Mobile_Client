@@ -15,11 +15,7 @@ export class History extends Component {
           <View style={styles.topContainer} >
           <View style={styles.emptyLeftView} />
           <FTCStyledText style={styles.title} > تاريخ نقاطك </FTCStyledText>
-          <Icon
-            iconStyle={styles.icon}
-            name='ios-information-circle'
-            type='ionicon'
-            color='#fff'/>
+          
         </View>
 
         <View style={styles.flatView} >
