@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { Animated, Image, Easing, View } from 'react-native'
+import { Animated, Image, Easing, View, Dimensions } from 'react-native'
 
 export default class ScreenBackground extends Component {
 
   constructor () {
     super()
     this.spinValue = new Animated.Value(0)
+    this.state = {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height
+    };
   }
   componentDidMount () {
     this.spin()
@@ -24,6 +28,8 @@ export default class ScreenBackground extends Component {
 
   render() {
 
+ 
+
     const spin = this.spinValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '360deg']
@@ -34,14 +40,15 @@ export default class ScreenBackground extends Component {
       height: "100%", position: 'absolute', top:0}} >
       <Image source={require('../../../assets/images/ScreenBackground.png')} style={{height:'100%',width:'100%'}} />
         <Animated.Image
-        style={[{
-        width: "200%",
-        height: "300%",
+        style={[{ 
+        width: this.state.width + 2000,
+        height: this.state.height + 1000,
         position: 'absolute',
-        resizeMode:'contain',
+        alignSelf: 'center',
+        resizeMode: 'cover',
         transform: [{rotate: spin}]
-         },
-         this.props.style]}
+         }
+        ]}
         source={require('../../../assets/images/motion_background.png')}
         >
         </Animated.Image>

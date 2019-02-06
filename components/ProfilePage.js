@@ -6,7 +6,7 @@
       import ImageView from 'react-native-image-view';
 
 
-      const images = 
+      const images = [
         {
             source: {
                 uri: 'https://github.com/antonKalinin/react-native-image-view/blob/master/example/assets/spb.jpg?raw=true',
@@ -14,8 +14,8 @@
             title: 'Paris',
             width: 806,
             height: 720,
-        };
-
+        },
+    ];
 
 
       export default class ProfilePage extends Component {
@@ -52,12 +52,13 @@
 
           
 
-        <ImageView
-                          glideAlways
-                          animationType="fade"
-                          image={images}
-                          isVisible={isImageViewVisible}
-                      />
+          <ImageView
+            glideAlways
+            animationType={'slide'}
+            images={images}
+            imageIndex={0}
+            isVisible={this.state.isImageViewVisible}
+            />
 
               </View>
 

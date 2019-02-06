@@ -8,7 +8,7 @@ const cardTypesIcon = [
     require('../../assets/images/microphone.png')
 ];
 
-const bossIcon = require('../../assets/images/user.png');
+const bossIcon = require('../../assets/images/EventManegerIcon.png');
 
 /*
   values required:
@@ -85,9 +85,9 @@ const styles = StyleSheet.create({
   },
   bossIcon: {
     marginTop: 70,
-    marginLeft: 7,
+    marginLeft: 15,
     marginBottom: 7,
-    width: 20,
-    height: 20,
+    width: 15,
+    height: 22,
   }
 });

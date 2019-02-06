@@ -5,6 +5,7 @@ import { fontLoaded } from '../actions';
 import Navigator from '../Navigator'
 import Login from './Login/LoginScreen'
 import { PointsListScreen } from "./index";
+import ProfilePage from './../../components/ProfilePage'
 
 
 class FTC extends React.Component {
@@ -16,7 +17,7 @@ class FTC extends React.Component {
     return (
       <View style={styles.container}>
         {
-          this.props.fontHasLoaded ?  <PointsListScreen /> : null
+          this.props.fontHasLoaded ?  <Login /> : null
         }
       </View>
     );
