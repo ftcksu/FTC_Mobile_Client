@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import Autocomplete from 'react-native-autocomplete-input';
 
-export default class AutocompleteEventParticipants extends Component {
+export class AutocompleteEventParticipants extends Component {
   constructor(props) {
     super(props)
   
@@ -17,10 +17,12 @@ export default class AutocompleteEventParticipants extends Component {
         const filteredMembers = this.renderNames(query);
         return (
             <Autocomplete style={styles.container}
+            containerStyle={{ marginTop: 15 }}
               autoCorrect={false}
               placeholder={'اكتب هنا المشاركين مبدئياً'}
               data={filteredMembers}
               defaultValue={query}
+              inputContainerStyle={{ borderWidth: 0 }}
               onChangeText={text => this.setState({ query: text })}
               renderItem={(item) => (
                 this.renderRow(item)
@@ -61,9 +63,11 @@ export default class AutocompleteEventParticipants extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 100,
-        padding:15,
-        fontSize: 16,
+        // padding:15,
+        textAlign: 'right',
+        paddingRight: 15,
+        height: 40,
+        fontSize: 14,
         fontFamily:'Cairo-Bold',
         backgroundColor:"#eeeeee",
         width:"100%",
@@ -72,7 +76,8 @@ const styles = StyleSheet.create({
         flexDirection:"column", alignItems:"flex-end", justifyContent:"flex-end", 
       },
       rowImageAndTextContainer:{
-        flexDirection:"row",margin:10
+        flexDirection:"row",
+        margin: 10,
       },
       textRow: {
         fontSize: 14,

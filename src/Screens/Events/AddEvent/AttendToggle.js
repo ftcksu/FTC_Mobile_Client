@@ -34,7 +34,9 @@ const styles = {
     fontSize: 12,
   },
   buttonContainerStyle: {
+    alignSelf: 'center',
+    width: '100%',
     borderRadius: 0,
-    backgroundColor: '#eeeeee'
+    backgroundColor: '#eeeeee',
   }
 }

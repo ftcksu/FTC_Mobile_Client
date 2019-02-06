@@ -22,7 +22,8 @@ export class CurrentParticipants extends Component {
 const styles = {
   container: {
     alignSelf: 'center',
-    margin: 18,
+    marginTop: 15,
+    marginBottom: 15,
     backgroundColor: '#eeeeee',
   },
 }
