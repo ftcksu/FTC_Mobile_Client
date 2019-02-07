@@ -30,6 +30,7 @@ import GradientButton from "../../Login/GradientButton";
           iconRight={true}
           buttonStyle={styles.whatsappButton}
           title="قروب المشروع"
+          titleStyle={styles.whatsappButtonTitle}
           />
       )
     }
@@ -89,6 +90,7 @@ const styles ={
     backgroundColor:'#2ecc71',
     height:75,
     marginTop:15,
+
   },
   whatsappButtonTitle:{
     fontFamily:'Cairo-Bold'

@@ -9,7 +9,11 @@ import ParticipantsDetails from "./ParticipantsDetails";
 export default class Participants extends Component {
     state = {
         isModalVisible: false,
-        modalData:''
+        modalData:{
+            first_name:"عبدالإله",
+            last_name:"النمي",
+            image:"https://www.ftcksu.com/v1/users/getUserImage/4"
+        }
       };
       _toggleModal = () =>
       this.setState({ isModalVisible: !this.state.isModalVisible });
@@ -27,7 +31,7 @@ export default class Participants extends Component {
         return(
         <View>
         <Modal isVisible={this.state.isModalVisible}   >
-            <ParticipantsDetails/>
+            <ParticipantsDetails callback={this._toggleModal} personDetails={this.state.modalData} />
         </Modal>
       </View>
         )
