@@ -1,18 +1,42 @@
 import React, { Component } from 'react'
-import { Image, View } from 'react-native'
+import { Image, View, ScrollView } from 'react-native'
 import ScreenBackground from "../../MyProfile/ScreenBackground";
 import FTCStyledText from "../../../components/FTCStyledText";
 import { TextStyles } from "../../../styles/TextStyles"
 import Images from "../../../../assets/images";
-import { Icon } from 'react-native-elements';
+import EventLeaderDetails from "./EventLeaderDetails";
+import Participants from "./Participants";
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import GradientButton from "../../Login/GradientButton";
 
     const {
       header2, subtitle
     } = TextStyles;
+
+    
   export class EventDetailsScreen extends Component {
+    renderWhatsappButton(){
+      return (
+        <Button
+          icon={
+            <Icon
+              style={styles.buttonIcon}
+              name="whatsapp"
+              size={40}
+              color="white"
+            />
+          }
+          iconRight={true}
+          buttonStyle={styles.whatsappButton}
+          title="قروب المشروع"
+          />
+      )
+    }
   render() {
+    
     return (
-      <View style={{height:'100%'}} >
+      <ScrollView style={{height:'100%'}} >
         <ScreenBackground style={{height:'100%',width:'100%'}} />
         <View style={styles.headerContainer} >
         <Image source={Images.cancel} style={styles.cancelIcon} />
@@ -21,17 +45,22 @@ import { Icon } from 'react-native-elements';
           <Image source={Images.calenderIcon} style={styles.eventIcon} />
         </View>
         <View style={styles.content} >
-          
-
+          <EventLeaderDetails style={{margin:15}} leaderName={'عبدالمحسن العنزي'} image ='https://pbs.twimg.com/media/COuih_uWwAAs8ZE.png' />
+          <Participants/>
+          {this.renderWhatsappButton()}
+          <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" />
         </View>
-      </View>
+      </ScrollView>
     )
   }
 }
 const styles ={
   headerContainer:{
     margin:20,
-    marginTop:30, alignItems:'center', height:'30%'
+    marginTop:30,
+    alignItems:'center',
+    flex:1,
+    justifyContent:'space-evenly'
   },
   eventIcon:{
     alignSelf:'flex-start',
@@ -44,8 +73,25 @@ const styles ={
     width:35
   },
   content: {
-    background:'white',
-    height:'70%',
-    width:'100%'
+    backgroundColor:'white',
+    flex:4,
+    padding:10
+  },
+  grid:{
+    // alignItems:'center',
+    backgroundColor:'#eee'
+  },
+  buttonIcon:{
+    position:'absolute',
+    right:10
+  },
+  whatsappButton:{
+    backgroundColor:'#2ecc71',
+    height:75,
+    marginTop:15,
+  },
+  whatsappButtonTitle:{
+    fontFamily:'Cairo-Bold'
   }
+  
 }
