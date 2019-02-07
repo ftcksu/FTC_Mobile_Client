@@ -21,6 +21,7 @@ export class AddEvent extends Component {
       </FTCSyteledText>
     )
   }
+
   renderInputSection() {
     return (
       <View style={styles.inputSection}>

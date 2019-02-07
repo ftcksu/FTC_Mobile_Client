@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Input } from 'react-native-elements'
 import { inputFieldStyle } from "../../../styles/inputFieldStyle";
+import { DatePicker } from './DatePicker'
 
 export class InputFields extends Component {
   render() {
@@ -23,17 +24,12 @@ export class InputFields extends Component {
           inputStyle={inputStyle}
         />
         <Input
-          placeholder={'تاريخ المشروع'}
-          inputContainerStyle={inputContainerStyle}
-          containerStyle={styles.containerStyle}
-          inputStyle={inputStyle}
-        />
-        <Input
           placeholder={'رابط قروب الواتس اب'}
           inputContainerStyle={inputContainerStyle}
           containerStyle={styles.containerStyle}
           inputStyle={inputStyle}
         />
+        <DatePicker />
       </View>
     )
   }
@@ -48,7 +44,7 @@ const styles = {
   containerStyle: {
     ...inputFieldStyle.containerStyle,
     alignSelf: 'center',
-    width: '100%',
+    width: '110%', // why is this working?
   },
   // text input field style.
   inputContainerStyle: {

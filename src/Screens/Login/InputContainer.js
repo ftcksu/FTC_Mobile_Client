@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { Input } from 'react-native-elements'
+import Input from 'react-native-elements'
 import { inputFieldStyle } from "../../styles/inputFieldStyle"
     const {
       inputContainerStyle, containerStyle, inputStyle
