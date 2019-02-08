@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { ScrollView, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import InfoCardList from '../../components/InfoCardList';
 import content from '../../dummy_data/InfoCardData.json';
-import { Icon } from 'react-native-elements'
+import Images from '../../../assets/images'
 import { AddEvent } from './AddEvent/AddEvent'
 
 export class EventsScreen extends Component {
@@ -47,40 +47,45 @@ export class EventsScreen extends Component {
 
     renderAddEventButton(){
         return(
-            <View style={styles.buttonContainer} >
-                <Icon
-                size={40}
-                style={styles.addButton}
-                name='ios-add-circle-outline'
-                onPress={() => console.log('add icon is pressed')} //TODO
-                type='ionicon' />
-            </View>
+            <TouchableOpacity style={styles.buttonContainer} >
+                <Image resizeMode={'center'} style={styles.floatingActionButtonContent} source={Images.addIcon} />
+            </TouchableOpacity>
             
         );
     }
 
     render() {
         return (
-          // <ScrollView style={styles.container} >
-          //   {this.renderAddEventButton()}
-          //   {this.renderEventList()}
-          // </ScrollView>
-          <View style={styles.container}>
-            <AddEvent />
-          </View>
+            <View>
+                <ScrollView >
+                    {this.renderEventList()}
+                </ScrollView> 
+                {this.renderAddEventButton()}
+            </View>
+          
+        //   <View style={styles.container}>
+        //     <AddEvent />
+        //   </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
     buttonContainer:{
-        flex:1,
-        alignItems:"flex-end",
-        marginRight:20
-
+        width: 60,  
+        height: 60,   
+        borderRadius: 60/2,            
+        backgroundColor: '#3986e0',                                    
+        position: 'absolute',                                          
+        bottom: 0,                                                    
+        right: 0,
+        marginRight:20,
+        marginBottom:20
     },
-    addButton:{
-        height:40,
+    floatingActionButtonContent:{
+        // height:'40%',
+        // width:'40%'
+        // backgroundColor:'black'
     },
     container: {
       flex: 1,

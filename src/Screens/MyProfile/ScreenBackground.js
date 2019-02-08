@@ -30,8 +30,8 @@ export default class ScreenBackground extends Component {
     });
 
     return (
-      <View style={{width: "100%",
-      height: "100%", position: 'absolute', top:0}} >
+      <View style={[{width: "100%",
+      height: "100%", position: 'absolute', top:0,bottom:0},this.props.style]} >
       <Image source={require('../../../assets/images/ScreenBackground.png')} style={{height:'100%',width:'100%'}} />
         <Animated.Image
         style={[{
@@ -40,8 +40,7 @@ export default class ScreenBackground extends Component {
         position: 'absolute',
         resizeMode:'contain',
         transform: [{rotate: spin}]
-         },
-         this.props.style]}
+         }]}
         source={require('../../../assets/images/motion_background.png')}
         >
         </Animated.Image>
