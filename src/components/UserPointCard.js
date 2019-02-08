@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
   },
     ChildContainer:{
-      margin:10,
+      margin:7,
       justifyContent: 'flex-end',
       flexDirection: 'row',
       alignItems:"center"
@@ -62,12 +62,12 @@ const styles = StyleSheet.create({
       color:"#c7c7c7",
       textAlign:'center',
       fontWeight: 'bold',
-      fontSize:35,
+      fontSize:25,
       fontFamily:"Cairo-Bold",
       textAlign:"center"
   },
   positionContainer:{
-    width:"18%",
+    width:"13%",
 
   },
     imagesContainer:{

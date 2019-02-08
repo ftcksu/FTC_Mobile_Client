@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, KeyboardAvoidingView } from 'react-native'
 import InputContainer from './InputContainer'
 import Logo from './Logo'
 import Background from '../MyProfile/ScreenBackground'
+import LoginButton from './GradientButton'
 
 export default class Login extends Component {
   render() {
@@ -10,7 +11,11 @@ export default class Login extends Component {
       <View style={styles.container} >
         <Background style={{height:"100%", width:"100%", position:'absolute',top:0,right:0}} />
         <Logo style={styles.imageCont} />
-        <InputContainer style={{height:'40%'}} />
+        <KeyboardAvoidingView behavior="position" enabled style={{height:'50%',width:'100%'}}>
+          <InputContainer style={{height:'100%',width:'100%'}}>
+          <LoginButton/>
+          </InputContainer>
+        </KeyboardAvoidingView>
       </View>
     )
   }
@@ -19,7 +24,8 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     flexDirection:'column',
-    height:"100%", width:"100%"
+    height:"100%", width:"100%",
+    alignItems:'center'
   },
   logo:{
     height:'50%',

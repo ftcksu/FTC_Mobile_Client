@@ -6,7 +6,7 @@ import FTCStyledText from '../../../components/FTCStyledText'
 import { Icon } from 'react-native-elements';
 
 
-export default class History extends Component {
+export class History extends Component {
   render() {
     return (
       <ScrollView>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     marginTop:15
   },
   screenBackground:{
-    position: 'absolute', top:0, height:"100%" 
+
   },
   topContainer:{
     marginTop:30, flexDirection: 'row', width: '100%', justifyContent: 'space-between' 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Animated, Image, Easing } from 'react-native'
+import { Animated, Image, Easing, View } from 'react-native'
 
 export default class ScreenBackground extends Component {
 
@@ -16,7 +16,7 @@ export default class ScreenBackground extends Component {
       this.spinValue,
       {
         toValue: 1,
-        duration: 14000,
+        duration: 30000,
         easing: Easing.linear
       }
     ).start(() => this.spin())
@@ -30,19 +30,23 @@ export default class ScreenBackground extends Component {
     });
 
     return (
-      <Animated.Image
+      <View style={{width: "100%",
+      height: "100%", position: 'absolute', top:0}} >
+      <Image source={require('../../../assets/images/ScreenBackground.png')} style={{height:'100%',width:'100%'}} />
+        <Animated.Image
         style={[{
-        width: "100%",
-        height: "100%",
+        width: "200%",
+        height: "300%",
         position: 'absolute',
-        backgroundColor:'black',
-        resizeMode:'cover',
-        // transform: [{rotate: spin}]
+        resizeMode:'contain',
+        transform: [{rotate: spin}]
          },
          this.props.style]}
-        source={require('../../../assets/images/ScreenBackground.png')}
+        source={require('../../../assets/images/motion_background.png')}
         >
         </Animated.Image>
+
+      </View>
     )
   }
 }

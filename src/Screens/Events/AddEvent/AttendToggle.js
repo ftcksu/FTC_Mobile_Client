@@ -10,19 +10,20 @@ export class AttendToggle extends Component {
   updateIndex(selectedIndex) {
     console.log(selectedIndex)
     this.setState({ selectedIndex })
+    this.props.handelPress(selectedIndex)
   }
 
   render() {
     const buttons = [
-      <Text style={styles.buttonText}>{'نحتاج منظمين'}</Text>,
-      <Text style={styles.buttonText}>{'التسجيل للحضور فقط'}</Text>
+      <Text style={styles.buttonText}>{this.props.secondButton}</Text>,
+      <Text style={styles.buttonText}>{this.props.firstButton}</Text>
     ]
     return (
       <ButtonGroup
-        onPress={(index) => this.updateIndex(index)}
+        onPress={(index) => this.updateIndex(index) }
         selectedIndex={this.state.selectedIndex}
         buttons={buttons}
-        containerStyle={styles.buttonContainerStyle}
+        containerStyle={[styles.buttonContainerStyle, this.props.style]}
       />
     )
   }
