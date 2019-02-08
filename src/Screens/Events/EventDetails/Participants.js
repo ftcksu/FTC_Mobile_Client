@@ -36,11 +36,7 @@ export default class Participants extends Component {
         <View>
         <Modal
             isVisible={this.state.isModalVisible}
-            backdropOpacity={0}
-            animationIn={'zoomInDown'}
-            animationOut={'zoomOutUp'}
-            animationInTiming={1000}
-            animationOutTiming={1000}
+            useNativeDriver={true}
            >
             <ParticipantsDetails callback={this._toggleModal} personDetails={this.state.modalData} />
         </Modal>

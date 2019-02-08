@@ -13,7 +13,7 @@ export default class Login extends Component {
         <Logo style={styles.imageCont} />
         <KeyboardAvoidingView behavior="position" enabled style={{height:'50%',width:'100%'}}>
           <InputContainer style={{height:'100%',width:'100%'}}>
-          <LoginButton/>
+          <LoginButton title={"تسجيل دخول"} />
           </InputContainer>
         </KeyboardAvoidingView>
       </View>

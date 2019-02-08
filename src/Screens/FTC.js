@@ -16,7 +16,7 @@ class FTC extends React.Component {
     return (
       <View style={styles.container}>
         {
-          this.props.fontHasLoaded ?  <EventDetailsScreen /> : null
+          this.props.fontHasLoaded ?  <Navigator /> : null
         }
       </View>
     );

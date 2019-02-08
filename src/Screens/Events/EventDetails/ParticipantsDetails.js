@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Image, TouchableOpacity } from 'react-native'
+import { Text, View, Image, TouchableWithoutFeedback } from 'react-native'
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -44,11 +44,13 @@ export default class ParticipantsDetails extends Component {
     
       console.log(this.props);
     return (
-      <TouchableOpacity onPress={this.props.callback} style={styles.container} >
+      <TouchableWithoutFeedback onPress={this.props.callback}>
+        <View style={styles.container}>
         <Image style={styles.image} source={{uri:this.props.personDetails.image}} />
         <Text style={styles.name} > {this.props.personDetails.first_name +" "+this.props.personDetails.last_name } </Text>
         {this.renderWhatsappButton()}
-      </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
