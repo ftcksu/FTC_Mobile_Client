@@ -9,6 +9,7 @@ import Participants from "./Participants";
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import GradientButton from "../../Login/GradientButton";
+import data from "../../../dummy_data/autocompleteData.json";
 
     const {
       header2, subtitle
@@ -47,8 +48,8 @@ import GradientButton from "../../Login/GradientButton";
           <Image source={Images.calenderIcon} style={styles.eventIcon} />
         </View>
         <View style={styles.content} >
-          <EventLeaderDetails style={{margin:15}} leaderName={'عبدالمحسن العنزي'} image ='https://pbs.twimg.com/media/COuih_uWwAAs8ZE.png' />
-          <Participants/>
+          <EventLeaderDetails style={{margin:15}} eventLeader={data[0]} />
+          <Participants participants={data} />
           {this.renderWhatsappButton()}
           <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" />
         </View>

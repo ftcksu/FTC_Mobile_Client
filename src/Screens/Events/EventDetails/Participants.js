@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { Image, View, TouchableOpacity } from 'react-native'
 import { FlatGrid } from 'react-native-super-grid'
-import data from '../../../dummy_data/autocompleteData.json'
 import FTCStyledText from '../../../components/FTCStyledText.js';
 import Modal from "react-native-modal";
 import ParticipantsDetails from "./ParticipantsDetails";
 
 export default class Participants extends Component {
+  componentDidMount(){
+    this.setState({participants:this.props.participants})
+  }
     state = {
         isModalVisible: false,
-        modalData:data[0]
+        participants:[],
+        modalData:null
       };
       
       _toggleModal = () =>{
@@ -38,8 +41,6 @@ export default class Participants extends Component {
             animationOut={'zoomOutUp'}
             animationInTiming={1000}
             animationOutTiming={1000}
-
-
            >
             <ParticipantsDetails callback={this._toggleModal} personDetails={this.state.modalData} />
         </Modal>
@@ -52,7 +53,7 @@ export default class Participants extends Component {
       <FTCStyledText style={styles.title} > الأعضاء المشاركين </FTCStyledText>
         <FlatGrid
           itemDimension={75}
-          items={data}
+          items={this.state.participants}
           renderItem={({ item }) => ( this.renderItem(item) )}
         />
         {this.renderModal()}
