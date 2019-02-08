@@ -38,7 +38,10 @@ export class AddEvent extends Component {
 
   renderAttendToggle() {
     return (
-        <AttendToggle />
+      <AttendToggle
+        firstButton={'التسجيل للحضور فقط'}
+        secondButton={'نحتاج منظمين'}
+      />
     )
   }
 

@@ -10,7 +10,7 @@ export class AttendToggle extends Component {
   updateIndex(selectedIndex) {
     console.log(selectedIndex)
     this.setState({ selectedIndex })
-    this.props.handelPress(selectedIndex)
+    // this.props.handelPress(selectedIndex) // this should be in redux
   }
 
   render() {
