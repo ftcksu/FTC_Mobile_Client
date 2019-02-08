@@ -16,6 +16,7 @@ import GradientButton from "../../Login/GradientButton";
 
     
   export class EventDetailsScreen extends Component {
+    
     renderWhatsappButton(){
       return (
         <Button
@@ -37,7 +38,7 @@ import GradientButton from "../../Login/GradientButton";
   render() {
     
     return (
-      <ScrollView style={{height:'100%'}} >
+      <ScrollView  >
         <ScreenBackground style={{height:'100%',width:'100%'}} />
         <View style={styles.headerContainer} >
         <Image source={Images.cancel} style={styles.cancelIcon} />

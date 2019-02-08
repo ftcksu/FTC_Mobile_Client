@@ -9,19 +9,20 @@ import ParticipantsDetails from "./ParticipantsDetails";
 export default class Participants extends Component {
     state = {
         isModalVisible: false,
-        modalData:{
-            first_name:"عبدالإله",
-            last_name:"النمي",
-            image:"https://www.ftcksu.com/v1/users/getUserImage/4"
-        }
+        modalData:data[0]
       };
-      _toggleModal = () =>
-      this.setState({ isModalVisible: !this.state.isModalVisible });
+      
+      _toggleModal = () =>{
+        this.setState({ isModalVisible: !this.state.isModalVisible });
+      }
     
     renderItem(item){
         return (
             <View>
-                <TouchableOpacity onPress={this._toggleModal} >
+                <TouchableOpacity onPress={() =>{
+                    this._toggleModal()
+                    this.setState({ modalData: item });
+                  }} >
                     <Image style={styles.circleImage} source={{uri:item.image}} />
                 </TouchableOpacity>
             </View>
@@ -30,14 +31,22 @@ export default class Participants extends Component {
     renderModal(){
         return(
         <View>
-        <Modal isVisible={this.state.isModalVisible}   >
+        <Modal
+            isVisible={this.state.isModalVisible}
+            backdropOpacity={0}
+            animationIn={'zoomInDown'}
+            animationOut={'zoomOutUp'}
+            animationInTiming={1000}
+            animationOutTiming={1000}
+
+
+           >
             <ParticipantsDetails callback={this._toggleModal} personDetails={this.state.modalData} />
         </Modal>
       </View>
         )
     }
   render() {
-      
     return (
       <View style={styles.gridContainer}>
       <FTCStyledText style={styles.title} > الأعضاء المشاركين </FTCStyledText>

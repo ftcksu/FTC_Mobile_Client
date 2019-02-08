@@ -56,7 +56,7 @@ let Navigator = createBottomTabNavigator(
       /* Profile: ???? */
     },
 
-    /* Configuration */
+        /* Configuration */
     /* Warning: DO NOT PANIC */
     {
       defaultNavigationOptions: ({ navigation }) => ({
