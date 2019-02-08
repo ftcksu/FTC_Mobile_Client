@@ -8,7 +8,7 @@ const images = {
     calenderIcon: require('./calender.png'),
     cancel: require('./cancel.png'),
     handShake: require('./hand-shake.png'),
-
+    roundAdd: require('./round-add-button.png'),
 }
 
 export default images
