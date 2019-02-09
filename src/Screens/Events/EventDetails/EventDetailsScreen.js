@@ -10,6 +10,7 @@ import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import GradientButton from "../../Login/GradientButton";
 import data from "../../../dummy_data/autocompleteData.json";
+import { goToWhatsapp } from "../../../actions/appActions";
 
     const {
       header2, subtitle
@@ -17,10 +18,11 @@ import data from "../../../dummy_data/autocompleteData.json";
 
     
   export class EventDetailsScreen extends Component {
-    
+
     renderWhatsappButton(){
       return (
         <Button
+        onPress={() => goToWhatsapp('966568484248')} //TODO: fix the hard coded number  
           icon={
             <Icon
               style={styles.buttonIcon}

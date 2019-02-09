@@ -1,5 +1,8 @@
 import { Font } from 'expo';
 import { FONT_LOADED } from './types';
+import { Linking } from 'react-native';
+
+const whatsappApiURL = "https://wa.me/"
 
 export function fontLoaded() {
   return (dispatch) => {
@@ -16,3 +19,7 @@ export function fontLoaded() {
     });
   };
 }
+
+export function goToWhatsapp(phoneNumber) {
+    Linking.openURL(whatsappApiURL+phoneNumber);
+  }
