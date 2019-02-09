@@ -67,7 +67,7 @@ export class EventsScreen extends Component {
     render() {
         return (
             <View>
-                <ScrollView >
+                <ScrollView style={{marginTop:30}} >
                     {this.renderEventList()}
                 </ScrollView> 
                 {this.renderAddEventButton()}

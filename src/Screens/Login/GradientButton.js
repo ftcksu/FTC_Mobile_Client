@@ -9,12 +9,16 @@ export default class GradientButton extends Component {
     return (
       <LinearGradient colors={['#3986e0', '#6535bc']} start={[0.0, 0.5]} end={[1.0, 0.5]} style={[styles.outer, this.props.style]}  >
 
-      <TouchableOpacity style={styles.inner} onPress={this.props.onPress}>
-          <View style={styles.inner}>
-            <FTCStyledText style={styles.title} >{this.props.title}</FTCStyledText>
-            <Image style={styles.icon} source={this.props.icon} />
-          </View>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.inner} onPress={this.props.onPress}>
+
+            <View style={styles.inner}>
+
+              <FTCStyledText style={styles.title} >{this.props.title}</FTCStyledText>
+              <Image style={styles.icon} source={this.props.icon} />
+              
+            </View>
+
+        </TouchableOpacity>
             
       </LinearGradient>
     )

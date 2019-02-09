@@ -57,7 +57,7 @@ import { goToWhatsapp } from "../../../actions/appActions";
     
     return (
       <ScrollView  >
-        <ScreenBackground style={{height:'100%',width:'100%'}} />
+        <ScreenBackground />
         {this.renderHeader()}
         <View style={styles.content} >
           <EventLeaderDetails style={{margin:15}} eventLeader={data[0]} />
