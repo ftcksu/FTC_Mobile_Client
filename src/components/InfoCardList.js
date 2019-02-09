@@ -27,8 +27,6 @@ export default class InfoCardList extends React.Component {
             </TouchableOpacity>
           )}
         />
-        {console.log('this.props.hasLineSeparator')}
-        {console.log(this.props.hasLineSeparator)}
         {this.props.hasLineSeparator ? <View style={styles.lineBreak} /> : null}
       </View>
     );
