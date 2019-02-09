@@ -5,7 +5,7 @@ import InfoCardList from './../../components/InfoCardList';
 import content from './../../dummy_data/InfoCardData.json';
 import ImageView from 'react-native-image-view';
 import UserData from './../../dummy_data/UserProfile.json';
-import * from '../../components/ActionCard'
+// import ActionCard from '../../components/ActionCard'
 
 
 export class ProfilePage extends Component {
