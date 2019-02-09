@@ -2,18 +2,18 @@ import React, { Component } from 'react'
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native'
 import InputContainer from './InputContainer'
 import Logo from './Logo'
-import Background from '../MyProfile/ScreenBackground'
+import ScreenBackground from '../MyProfile/ScreenBackground'
 import LoginButton from './GradientButton'
 
 export default class Login extends Component {
   render() {
     return (
       <View style={styles.container} >
-        <Background style={{height:"100%", width:"100%", position:'absolute',top:0,right:0}} />
+        <ScreenBackground  />
         <Logo style={styles.imageCont} />
         <KeyboardAvoidingView behavior="position" enabled style={{height:'50%',width:'100%'}}>
           <InputContainer style={{height:'100%',width:'100%'}}>
-          <LoginButton/>
+          <LoginButton title={"تسجيل دخول"} />
           </InputContainer>
         </KeyboardAvoidingView>
       </View>

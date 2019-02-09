@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Button } from 'react-native'
+import { Image, View, Button } from 'react-native'
 import { LinearGradient } from 'expo';
 import FTCStyledText from '../../components/FTCStyledText';
 
@@ -7,9 +7,10 @@ import FTCStyledText from '../../components/FTCStyledText';
 export default class GradientButton extends Component {
   render() {
     return (
-      <LinearGradient colors={['#3986e0', '#6535bc']} start={[0.0, 0.5]} end={[1.0, 0.5]} style={[styles.outer]}  >
+      <LinearGradient colors={['#3986e0', '#6535bc']} start={[0.0, 0.5]} end={[1.0, 0.5]} style={[styles.outer, this.props.style]}  >
             <View style={styles.inner}>
-            <FTCStyledText style={styles.title} > تسجيل الدخول</FTCStyledText>
+              <FTCStyledText style={styles.title} >{this.props.title}</FTCStyledText>
+              <Image style={styles.icon} source={this.props.icon} />
             </View>
       </LinearGradient>
     )
@@ -41,6 +42,14 @@ const styles={
       title:{
           color:"#333333",
           fontFamily:'Cairo-Bold'
+      },
+      icon:{
+        height: 30,
+        width: 30,
+        resizeMode:'center',
+    
+        position:'absolute',
+        right:10
       }
 }
 
