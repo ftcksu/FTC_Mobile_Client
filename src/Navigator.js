@@ -47,13 +47,22 @@ const eventStack = createStackNavigator(
   }
 )
 
+const pointsStack = createStackNavigator(
+  {
+    PointList: PointsListScreen,
+  },
+  {
+    headerMode:'none'
+  }
+)
+
 /* Main Tab Navigator */
 let Navigator = createBottomTabNavigator(
     /* Screens */ 
     {
-      Home: homeStack,
-      Members: PointsListScreen, //PointsListScreen
       Events: eventStack,
+      PointList: pointsStack, //PointsListScreen
+      Home: homeStack,
       /* Profile: ???? */
     },
 
@@ -75,7 +84,7 @@ let Navigator = createBottomTabNavigator(
                 case 'Profile': 
                   icon = Images.profileIcon
                   break;
-                case 'Members': 
+                case 'PointList': 
                   icon = Images.membersIcon
                   break;
                 case 'Profile': 

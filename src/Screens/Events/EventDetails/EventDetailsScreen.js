@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, View, ScrollView } from 'react-native'
+import { Image, View, ScrollView, TouchableOpacity } from 'react-native'
 import ScreenBackground from "../../MyProfile/ScreenBackground";
 import FTCStyledText from "../../../components/FTCStyledText";
 import { TextStyles } from "../../../styles/TextStyles"
@@ -36,17 +36,27 @@ import data from "../../../dummy_data/autocompleteData.json";
           />
       )
     }
+    handelBackButtonPress = () =>{
+      this.props.navigation.pop();
+    }
+    renderHeader(){
+      return(
+        <View style={styles.headerContainer} >
+          <TouchableOpacity style={styles.cancelIcon} onPress={this.handelBackButtonPress}>
+            <Image source={Images.cancel} style={styles.cancelIcon} />
+          </TouchableOpacity>
+          <FTCStyledText style={header2} > هاكاثون المستقبل النسخة الثانية</FTCStyledText>
+          <FTCStyledText style={[subtitle,{marginTop:15, width:'60%'}]} > تطوير حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة تدريس </FTCStyledText>
+          <Image source={Images.calenderIcon} style={styles.eventIcon} />
+        </View>
+      )
+    }
   render() {
     
     return (
       <ScrollView  >
         <ScreenBackground style={{height:'100%',width:'100%'}} />
-        <View style={styles.headerContainer} >
-        <Image source={Images.cancel} style={styles.cancelIcon} />
-          <FTCStyledText style={header2} > هاكاثون المستقبل النسخة الثانية</FTCStyledText>
-          <FTCStyledText style={[subtitle,{marginTop:15, width:'60%'}]} > تطوير حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة تدريس </FTCStyledText>
-          <Image source={Images.calenderIcon} style={styles.eventIcon} />
-        </View>
+        {this.renderHeader()}
         <View style={styles.content} >
           <EventLeaderDetails style={{margin:15}} eventLeader={data[0]} />
           <Participants participants={data} />
