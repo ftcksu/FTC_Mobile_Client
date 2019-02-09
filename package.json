@@ -9,12 +9,14 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "eslint": "^5.12.0",
     "expo": "^31.0.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-autocomplete-input": "^3.6.0",
     "react-native-elements": "^1.0.0-beta7",
     "react-native-modal": "^7.0.2",
+    "react-native-image-view": "^2.1.2",
     "react-native-modal-dropdown": "^0.6.2",
     "react-native-pulse": "^1.0.7",
     "react-native-responsive-linechart": "^1.5.0",

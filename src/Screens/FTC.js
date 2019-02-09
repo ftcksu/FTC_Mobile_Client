@@ -7,6 +7,7 @@ import Login from './Login/LoginScreen'
 import { PointsListScreen,EventDetailsScreen } from "./index";
 
 
+
 class FTC extends React.Component {
   componentDidMount() {
     this.props.fontLoaded();
@@ -17,6 +18,7 @@ class FTC extends React.Component {
       <View style={styles.container}>
         {
           this.props.fontHasLoaded ?  <Navigator /> : null
+
         }
       </View>
     );

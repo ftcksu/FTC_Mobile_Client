@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableOpacity, Image, Easing } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import ScreenBackground from './ScreenBackground'
 import NameAndImage from './NameAndImage'
 import TotalPoints from './TotalPoints'
@@ -14,7 +14,7 @@ export class MyProfile extends Component {
   render() {
     return (
       <View>
-        <ScreenBackground style={{height:"100%", width:"100%", position:'absolute',top:0,right:0}} />
+        <ScreenBackground />
         <View style={styles.container}  >
 
           <NameAndImage/>

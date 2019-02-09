@@ -27,6 +27,7 @@ export class History extends Component {
     return (
       <ScrollView>
         <ScreenBackground/>
+
         <View style={styles.container} >
 
         {this.renderHeader()}
