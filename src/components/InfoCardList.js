@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, FlatList, View } from 'react-native';
+import { StyleSheet, FlatList, View, TouchableOpacity } from 'react-native';
 import FTCStyledText from './FTCStyledText';
 import InfoCard  from './InfoCard';
 
@@ -18,11 +18,13 @@ export default class InfoCardList extends React.Component {
           data={this.props.listOfData}
           contentContainerStyle={{ flexGrow: 0 }}
           renderItem={({ item }) => (
-            <InfoCard
+            <TouchableOpacity onPress={this.props.onPress}>
+              <InfoCard
               title={item.title}
               subtitle={item.subTitle}
               cardTypesIcon={item.type}
-            />
+              />
+            </TouchableOpacity>
           )}
         />
         {console.log('this.props.hasLineSeparator')}
