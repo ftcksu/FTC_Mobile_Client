@@ -19,6 +19,10 @@ export class PointsListScreen extends Component {
         type == 0 ? this.setState({'members':PointListWeekly }) : this.setState({'members':PointListTotal }) 
     }
 
+    handelCardPress = () =>{
+        this.props.navigation.navigate();
+    }
+
     state = {
         search: '',
         members:PointListTotal

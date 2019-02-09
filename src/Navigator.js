@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
-import { createBottomTabNavigator, createAppContainer, BottomTabBar } from 'react-navigation';
-import { Home, PointsListScreen, EventsScreen,MyProfile } from './Screens'
+import { createBottomTabNavigator,createStackNavigator ,createAppContainer, BottomTabBar } from 'react-navigation';
+import { AddEvent, PointsListScreen, EventsScreen,MyProfile, History, EventDetailsScreen } from './Screens'
 import { TabIcon } from './components/TabIcon'
 import Images from '../assets/images'
 
@@ -27,17 +27,46 @@ const TabBarComponent = (props) => {
   )
 }
 
+const homeStack = createStackNavigator(
+  {
+    Home: MyProfile,
+    History: History,
+  },
+  {
+    headerMode:'none'
+  }
+)
+const eventStack = createStackNavigator(
+  {
+    Events: EventsScreen,
+    AddEvent: AddEvent,
+    EventDetails:EventDetailsScreen
+  },
+  {
+    headerMode:'none'
+  }
+)
+
+const pointsStack = createStackNavigator(
+  {
+    PointList: PointsListScreen,
+  },
+  {
+    headerMode:'none'
+  }
+)
+
 /* Main Tab Navigator */
 let Navigator = createBottomTabNavigator(
     /* Screens */ 
     {
-      Members: EventsScreen, //PointsListScreen
-      Events: EventsScreen,
-      Home: MyProfile
+      Events: eventStack,
+      PointList: pointsStack, //PointsListScreen
+      Home: homeStack,
       /* Profile: ???? */
     },
 
-    /* Configuration */
+        /* Configuration */
     /* Warning: DO NOT PANIC */
     {
       defaultNavigationOptions: ({ navigation }) => ({
@@ -55,7 +84,7 @@ let Navigator = createBottomTabNavigator(
                 case 'Profile': 
                   icon = Images.profileIcon
                   break;
-                case 'Members': 
+                case 'PointList': 
                   icon = Images.membersIcon
                   break;
                 case 'Profile': 

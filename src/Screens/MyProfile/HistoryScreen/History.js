@@ -1,29 +1,38 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, ScrollView } from 'react-native'
+import { View, StyleSheet, FlatList, ScrollView, Image, TouchableOpacity } from 'react-native'
 import PointPerDayCard from './PointPerDayCard'
 import ScreenBackground from '../ScreenBackground'
 import FTCStyledText from '../../../components/FTCStyledText'
-import { Icon } from 'react-native-elements';
+import Images from "../../../../assets/images";
 
 
 export class History extends Component {
+  onCancelPress=()=>{
+    this.props.navigation.pop()
+  }
+
+  renderHeader(){
+    return (
+      <View style={styles.topContainer} >
+          <View style={styles.emptyLeftView} />
+          <FTCStyledText style={styles.title} > تاريخ نقاطك </FTCStyledText>
+          <TouchableOpacity onPress={this.onCancelPress}>
+            <Image source={Images.cancel} style={styles.icon} />
+          </TouchableOpacity>
+      </View>
+    )
+  }
+
   render() {
     return (
       <ScrollView>
-        <ScreenBackground />
+        <ScreenBackground/>
+
         <View style={styles.container} >
-          <View style={styles.topContainer} >
-          <View style={styles.emptyLeftView} />
-          <FTCStyledText style={styles.title} > تاريخ نقاطك </FTCStyledText>
-          <Icon
-            iconStyle={styles.icon}
-            name='ios-information-circle'
-            type='ionicon'
-            color='#fff'/>
-        </View>
+
+        {this.renderHeader()}
 
         <View style={styles.flatView} >
-        
         <View style={styles.dateHighlighter} />
         <FlatList
             data={["this.props.data","this.props.data","this.props.data","this.props.data","this.props.data","this.props.data"]}
@@ -76,7 +85,9 @@ const styles = StyleSheet.create({
     marginTop:-10,
   },
   icon: {
-    marginRight:10
+    marginRight:10,
+    height:35,
+    width:35
   },
   flatListContentContainer:{ 
     flexGrow: 0,paddingBottom:25

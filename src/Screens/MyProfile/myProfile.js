@@ -7,9 +7,9 @@ import DoubleLineChart from './DoubleLineChart'
 
 export class MyProfile extends Component {
   
-  // onPress=()=>{
-  //   this.props.navigation.navigate("")
-  // }
+  onPress=()=>{
+    this.props.navigation.navigate("History")
+  }
   
   render() {
     return (
@@ -18,7 +18,10 @@ export class MyProfile extends Component {
         <View style={styles.container}  >
 
           <NameAndImage/>
-          <TotalPoints/>
+
+          <TouchableOpacity onPress={this.onPress} >
+            <TotalPoints/>
+          </TouchableOpacity>
 
           <View style={styles.chart} >
               <DoubleLineChart/>  
