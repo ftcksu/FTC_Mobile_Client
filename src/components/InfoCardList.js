@@ -25,6 +25,8 @@ export default class InfoCardList extends React.Component {
               cardTypesIcon={item.type}
               />
             </TouchableOpacity>
+              isBoss={item.isBoss}
+            />
           )}
         />
         {this.props.hasLineSeparator ? <View style={styles.lineBreak} /> : null}
