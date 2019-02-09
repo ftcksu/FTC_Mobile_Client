@@ -2,42 +2,50 @@
     {
         "first_name":"نواف",
         "last_name":"القعيد",
-        "image":"https://www.ftcksu.com/v1/users/getUserImage/1"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/1",
+        "isLeader": 1
     },
     {
         "first_name":"عبدالإله",
         "last_name":"النمي",
-        "image":"https://www.ftcksu.com/v1/users/getUserImage/2"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/2",
+        "isLeader": 0
     },
     {
         "first_name":"نواف",
         "last_name":"القعيد",
-        "image":"https://www.ftcksu.com/v1/users/getUserImage/3"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/3",
+        "isLeader": 0
     },
     {
         "first_name":"عبدالإله",
         "last_name":"النمي",
-        "image":"https://www.ftcksu.com/v1/users/getUserImage/4"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/4",
+        "isLeader": 0
     },
     {
         "first_name":"نواف",
         "last_name":"القعيد",
-        "image":"https://www.ftcksu.com/v1/users/getUserImage/5"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/5",
+        "isLeader": 0
     },
     {
         "first_name":"عبدالإله",
         "last_name":"النمي",
-        "image":"https://www.ftcksu.com/v1/users/getUserImage/6"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/6",
+        "isLeader": 0
     },
     {
         "first_name":"نواف",
         "last_name":"القعيد",
-        "image":"https://www.ftcksu.com/v1/users/getUserImage/7"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/7",
+        "isLeader": 0
     },
     {
         "first_name":"عبدالإله",
         "last_name":"النمي",
-        "image":"https://www.ftcksu.com/v1/users/getUserImage/8"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/8",
+        "isLeader": 0
     }
     
   ]

@@ -8,6 +8,10 @@ const images = {
     calenderIcon: require('./calender.png'),
     cancel: require('./cancel.png'),
     handShake: require('./hand-shake.png'),
+    settings: require('./settings.png'),
+    sendNotification: require('./sendNotification.png'),
+    recordPoints: require('./recordPoints.png'),
+    logout: require('./logout.png'),
 
 }
 

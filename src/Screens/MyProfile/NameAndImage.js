@@ -1,13 +1,47 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import FTCStyledText from '../../components/FTCStyledText'
+import ImageView from 'react-native-image-view';
 
 export default class NameAndImage extends Component {
+
+  constructor(){
+    super();
+
+    // Images has to be an array, because ImageView only takes arrays.
+    this.state = {
+      isImageViewVisible: false,
+      images: [
+        {
+          source: {
+            uri: 'https://pbs.twimg.com/media/COuih_uWwAAs8ZE.png'
+          }
+        }
+      ]
+  };
+
+  }
   render() {
     return (
       <View style={styles.container} >
-        <Image style={styles.image} source={ {uri:"https://pbs.twimg.com/media/COuih_uWwAAs8ZE.png" }}/>
+        <TouchableWithoutFeedback
+            onPress={() => {
+              this.setState({
+                isImageViewVisible: true,
+              });
+            }}
+          >
+          <Image style={styles.image} source={ this.state.images[0].source}/>
+        </TouchableWithoutFeedback>
+
         <FTCStyledText style={styles.text} > عبدالمحسن العنزي </FTCStyledText>
+        <ImageView
+            glideAlways
+            animationType={'slide'}
+            images={this.state.images}
+            imageIndex={0}
+            isVisible={this.state.isImageViewVisible}
+            />
       </View>
     )
   }

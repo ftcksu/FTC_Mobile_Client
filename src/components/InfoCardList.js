@@ -8,7 +8,7 @@ export default class InfoCardList extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, this.props.style]}>
         <FTCStyledText style={styles.listTitle} >
           {this.props.title}
         </FTCStyledText>
@@ -24,6 +24,7 @@ export default class InfoCardList extends React.Component {
               subtitle={item.subTitle}
               cardTypesIcon={item.type}
               isBoss={item.isBoss}
+
               />
             </TouchableOpacity>
               

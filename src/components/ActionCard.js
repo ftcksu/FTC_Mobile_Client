@@ -1,12 +1,9 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import  FTCStyledText  from './FTCStyledText';
+import Images from './../../assets/images'
 
-const cardTypesIcon = [
-    require('../../assets/images/microphone.png'),
-    require('../../assets/images/microphone.png'),
-    require('../../assets/images/microphone.png')
-];
+
 
 
 /*
@@ -30,7 +27,7 @@ export default class ActionsCard extends React.Component {
         </View>
         <Image
           source={
-            this.props.cardTypesIcon == 'attend' ? cardTypesIcon[0] : cardTypesIcon[1]
+            this.props.cardTypesIcon == 'recordPoints' ? Images.recordPoints : Images.sendNotification
           }
           style={styles.cardImage}
         />
@@ -45,34 +42,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#eeeeee',
     flexDirection: 'row',
     alignContent: 'flex-end',
-    margin: 15,
+    marginTop: 15,
+    marginBottom: 15,
     elevation: 2.5,
   },
   cardImage: {
-    width: 60, height: 60, alignSelf: 'center', margin: 10, marginStart: 20 
+    width: 35, height: 35, alignSelf: 'center', margin: 10, marginRight: 30
   },
   textContainer: {
-    flex: 1, justifyContent: 'flex-start', flexDirection: 'column', margin: 10
+    flex: 1, justifyContent: 'center', flexDirection: 'column', margin: 10
   },
   title: {
     fontFamily: 'Cairo-Bold',
-    marginBottom: 5,
     textAlign: 'right',
-    fontSize: 11
+    fontSize: 15,
+    justifyContent: 'center',
   },
-  subTitle: {
-    color: '#727272',
-    fontFamily: 'Cairo-Regular',
-    marginBottom: 5,
-    textAlign: 'right',
-    fontWeight: 'normal',
-    fontSize: 11 
-  },
-  bossIcon: {
-    marginTop: 70,
-    marginLeft: 15,
-    marginBottom: 7,
-    width: 15,
-    height: 22,
-  }
 });

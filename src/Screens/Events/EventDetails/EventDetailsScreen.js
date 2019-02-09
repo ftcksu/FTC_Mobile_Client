@@ -51,6 +51,25 @@ import data from "../../../dummy_data/autocompleteData.json";
         </View>
       )
     }
+
+    renderLeader(){
+      leader = data.filter((item) => {
+        return item.isLeader === 1
+      })
+      return(
+        <EventLeaderDetails style={{margin:15}} eventLeader={data[0]} />
+      );
+    }
+
+    renderParticipants(){
+      participants = data.filter((item) => {
+        return item.isLeader === 0
+      })
+      return(
+        <Participants participants={participants} />
+      );
+    }
+
   render() {
     
     return (
@@ -58,8 +77,8 @@ import data from "../../../dummy_data/autocompleteData.json";
         <ScreenBackground style={{height:'100%',width:'100%'}} />
         {this.renderHeader()}
         <View style={styles.content} >
-          <EventLeaderDetails style={{margin:15}} eventLeader={data[0]} />
-          <Participants participants={data} />
+          {this.renderLeader()}
+          {this.renderParticipants()}
           {this.renderWhatsappButton()}
           <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" />
         </View>

@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
-import {View, Image, TouchableWithoutFeedback, StyleSheet, ScrollView} from 'react-native'
+import {View, Image, TouchableOpacity, StyleSheet, ScrollView, TouchableWithoutFeedback} from 'react-native'
 import FTCStyledText from './../../components/FTCStyledText';
 import InfoCardList from './../../components/InfoCardList';
 import content from './../../dummy_data/InfoCardData.json';
 import ImageView from 'react-native-image-view';
 import UserData from './../../dummy_data/UserProfile.json';
-// import ActionCard from '../../components/ActionCard'
+import ActionCardList from '../../components/ActionCardList';
+import Images from './../../../assets/images'
+
+
+
+
+const actionList = [
+  {
+    'title': 'رصد النقاط',
+    'type': 'recordPoints'
+  },
+  {
+    'title': 'إرسال التنبيهات',
+    'type': 'sendNotification'
+  },
+]
 
 
 export class ProfilePage extends Component {
@@ -39,7 +54,7 @@ export class ProfilePage extends Component {
           >
             <Image
               style={styles.profileImage} 
-              source={{ uri: 'https://github.com/antonKalinin/react-native-image-view/blob/master/example/assets/spb.jpg?raw=true'}} 
+              source={{ uri: this.state.user.image}} 
             />
           </TouchableWithoutFeedback>
     
@@ -61,29 +76,52 @@ export class ProfilePage extends Component {
   renderAdminActions(){
     return (
       <View>
-        
+        <ActionCardList
+            listOfData={actionList}
+            hasLineSeparator={true}
+        />
       </View>
     );
   }
+
+  navigateToEventDetails = () =>{
+    this.props.navigation.navigate("EventDetails")
+}
 
   renderProfileEvents() {
    return (
     <View>
       {this.state.user.isAdmin ? this.renderAdminActions() : null}
       <InfoCardList
-      listOfData={content.data}
-      hasLineSeparator={false}
+        listOfData={content.data}
+        onPress={this.navigateToEventDetails}
+        hasLineSeparator={false}
+        style={styles.InfoCardList}
       />
     </View>
     );
   }
 
+  renderSettingsIcon() {
+    return (
+      <TouchableOpacity>
+        <Image
+          source={
+            Images.settings
+          }
+          style={styles.settingsIcon}
+        />
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     return (
-      <View>
+      <ScrollView>
+        {this.renderSettingsIcon()}
         {this.renderProfileInformation()}
         {this.renderProfileEvents()}
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -117,5 +155,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     color: '#9e9e9e'
+  },
+  InfoCardList: {
+    paddingTop: 0,
+    marginTop: -15,
+  },
+  settingsIcon: {
+    position: 'absolute',
+    top: 30,
+    right: 20,
+    width: 25,
+    height: 25,
   }
 });
