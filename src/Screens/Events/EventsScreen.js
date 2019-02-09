@@ -6,9 +6,14 @@ import Images from '../../../assets/images'
 import { AddEvent } from './AddEvent/AddEvent'
 
 export class EventsScreen extends Component {
+
+    navigateToEventDetails = () =>{
+        this.props.navigation.navigate("EventDetails")
+    }
     renderAvailableProjects() {
         return (
             <InfoCardList
+            onPress={this.navigateToEventDetails}
             title={'مشاريع متاحة'}
             listOfData={content.data}
             hasLineSeparator={true}
@@ -19,6 +24,7 @@ export class EventsScreen extends Component {
     renderRegisteredProjects() {
         return (
             <InfoCardList
+            onPress={this.navigateToEventDetails}
             title={'تم تسجيلك بها'}
             listOfData={content.data}
             hasLineSeparator={true}
@@ -29,6 +35,7 @@ export class EventsScreen extends Component {
     renderClosedProjects() {
         return (
             <InfoCardList
+            onPress={this.navigateToEventDetails}
             title={'مشاريع مغلقة'}
             listOfData={content.data}
             hasLineSeparator={false}
