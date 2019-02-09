@@ -52,9 +52,12 @@ export class EventsScreen extends Component {
         )
     }
 
+    handerAddEventPress = () =>{
+        this.props.navigation.navigate("AddEvent");
+    }
     renderAddEventButton(){
         return(
-            <TouchableOpacity style={styles.buttonContainer} >
+            <TouchableOpacity onPress={this.handerAddEventPress} style={styles.buttonContainer} >
                 <Image resizeMode={'center'} style={styles.floatingActionButtonContent} source={Images.addIcon} />
             </TouchableOpacity>
             
