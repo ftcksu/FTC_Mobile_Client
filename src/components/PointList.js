@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, FlatList, View } from 'react-native'
+import { StyleSheet, FlatList, View, TouchableOpacity } from 'react-native'
 import UserPointCard from './UserPointCard'
 
 
@@ -8,6 +8,7 @@ import UserPointCard from './UserPointCard'
 */
 
 export default class App extends React.Component {
+
   render() {
     return (
         <View style={styles.container}>
@@ -17,13 +18,17 @@ export default class App extends React.Component {
             data={this.props.data}
             contentContainerStyle={{ flexGrow: 0 }}
             renderItem={({ item }) => (
+              <TouchableOpacity onPress={this.props.handelOnCardPress} >
 
-            <UserPointCard
-                bio={item.bio}
-                name={item.first_name+" "+item.last_name}
-                imageURL={item.imageURL}
-                position={item.position}
-                points={item.points}/>
+                <UserPointCard
+                  bio={item.bio}
+                  name={item.first_name+" "+item.last_name}
+                  imageURL={item.imageURL}
+                  position={item.position}
+                  points={item.points}/>
+
+              </TouchableOpacity>
+              
 
             )}
         />

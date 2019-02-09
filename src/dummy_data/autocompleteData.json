@@ -2,42 +2,50 @@
     {
         "first_name":"نواف",
         "last_name":"القعيد",
-        "image":"https://www.historyonthenet.com/wp-content/uploads/2014/11/PROD-Adolf-Hitler-whrend-einer-Rede.jpg"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/1",
+        "isLeader": 1
     },
     {
         "first_name":"عبدالإله",
         "last_name":"النمي",
-        "image":"https://www.telegraph.co.uk/content/dam/news/2016/07/12/hitler_1881083c_trans_NvBQzQNjv4Bq6f7LZ7seCW96zliyTYX6ViIMpBIiS72GQ3QPBtusw-s.jpg?imwidth=450"  
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/2",
+        "isLeader": 0
     },
     {
         "first_name":"نواف",
         "last_name":"القعيد",
-        "image":"https://www.historyonthenet.com/wp-content/uploads/2014/11/PROD-Adolf-Hitler-whrend-einer-Rede.jpg"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/3",
+        "isLeader": 0
     },
     {
         "first_name":"عبدالإله",
         "last_name":"النمي",
-        "image":"https://www.telegraph.co.uk/content/dam/news/2016/07/12/hitler_1881083c_trans_NvBQzQNjv4Bq6f7LZ7seCW96zliyTYX6ViIMpBIiS72GQ3QPBtusw-s.jpg?imwidth=450"  
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/4",
+        "isLeader": 0
     },
     {
         "first_name":"نواف",
         "last_name":"القعيد",
-        "image":"https://www.historyonthenet.com/wp-content/uploads/2014/11/PROD-Adolf-Hitler-whrend-einer-Rede.jpg"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/5",
+        "isLeader": 0
     },
     {
         "first_name":"عبدالإله",
         "last_name":"النمي",
-        "image":"https://www.telegraph.co.uk/content/dam/news/2016/07/12/hitler_1881083c_trans_NvBQzQNjv4Bq6f7LZ7seCW96zliyTYX6ViIMpBIiS72GQ3QPBtusw-s.jpg?imwidth=450"  
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/6",
+        "isLeader": 0
     },
     {
         "first_name":"نواف",
         "last_name":"القعيد",
-        "image":"https://www.historyonthenet.com/wp-content/uploads/2014/11/PROD-Adolf-Hitler-whrend-einer-Rede.jpg"
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/7",
+        "isLeader": 0
     },
     {
         "first_name":"عبدالإله",
         "last_name":"النمي",
-        "image":"https://www.telegraph.co.uk/content/dam/news/2016/07/12/hitler_1881083c_trans_NvBQzQNjv4Bq6f7LZ7seCW96zliyTYX6ViIMpBIiS72GQ3QPBtusw-s.jpg?imwidth=450"  
+        "image":"https://www.ftcksu.com/v1/users/getUserImage/8",
+        "isLeader": 0
     }
     
   ]

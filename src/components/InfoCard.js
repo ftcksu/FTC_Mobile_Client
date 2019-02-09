@@ -8,6 +8,8 @@ const cardTypesIcon = [
     require('../../assets/images/microphone.png')
 ];
 
+const bossIcon = require('../../assets/images/EventManegerIcon.png');
+
 /*
   values required:
   title, type=STRING (top text, title of the info card)
@@ -18,7 +20,14 @@ const cardTypesIcon = [
 export default class InfoCard extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container,this.props.style]}>
+
+        {this.props.isBoss? <Image 
+              source={bossIcon}
+              style={styles.bossIcon}
+          /> : null
+        }
+
         <View style={styles.textContainer}>
       
         <FTCStyledText style={styles.title} >
@@ -73,5 +82,12 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     fontWeight: 'normal',
     fontSize: 11 
+  },
+  bossIcon: {
+    marginTop: 70,
+    marginLeft: 15,
+    marginBottom: 7,
+    width: 15,
+    height: 22,
   }
 });

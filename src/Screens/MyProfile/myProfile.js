@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableOpacity, Image, Easing } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import ScreenBackground from './ScreenBackground'
 import NameAndImage from './NameAndImage'
 import TotalPoints from './TotalPoints'
@@ -7,18 +7,21 @@ import DoubleLineChart from './DoubleLineChart'
 
 export class MyProfile extends Component {
   
-  // onPress=()=>{
-  //   this.props.navigation.navigate("")
-  // }
+  onPress=()=>{
+    this.props.navigation.navigate("History")
+  }
   
   render() {
     return (
       <View>
-        <ScreenBackground style={{ position: 'absolute', top:0, bottom:0 }} />
+        <ScreenBackground />
         <View style={styles.container}  >
 
           <NameAndImage/>
-          <TotalPoints/>
+
+          <TouchableOpacity onPress={this.onPress} >
+            <TotalPoints/>
+          </TouchableOpacity>
 
           <View style={styles.chart} >
               <DoubleLineChart/>  

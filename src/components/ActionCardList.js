@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, FlatList, View, TouchableOpacity } from 'react-native';
 import FTCStyledText from './FTCStyledText';
-import InfoCard  from './InfoCard';
+import ActionCard  from './ActionCard';
 
 
-export default class InfoCardList extends React.Component {
+export default class ActionCardList extends React.Component {
 
   render() {
     return (
-      <View style={[styles.container, this.props.style]}>
+      <View style={styles.container}>
         <FTCStyledText style={styles.listTitle} >
           {this.props.title}
         </FTCStyledText>
@@ -19,12 +19,9 @@ export default class InfoCardList extends React.Component {
           contentContainerStyle={{ flexGrow: 0 }}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={this.props.onPress}>
-              <InfoCard
+              <ActionCard
               title={item.title}
-              subtitle={item.subTitle}
               cardTypesIcon={item.type}
-              isBoss={item.isBoss}
-
               />
             </TouchableOpacity>
               
@@ -41,7 +38,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     flexDirection: 'column',
-    paddingTop:10,
   },
   listTitle: {
     fontFamily: 'Cairo-Bold',

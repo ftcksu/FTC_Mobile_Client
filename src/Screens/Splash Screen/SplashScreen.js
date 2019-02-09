@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image, View, StyleSheet } from 'react-native'
-import Background from '../MyProfile/ScreenBackground'
+import ScreenBackground from '../MyProfile/ScreenBackground'
 import FTCStyledText from '../../components/FTCStyledText'
 import images from '../../../assets/images';
 
@@ -8,7 +8,7 @@ export default class SplashScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-      <Background style={{height:"100%", width:"100%", position:'absolute'}} />
+      <ScreenBackground />
       <Image style={styles.logo} source={images.logo} />
       <FTCStyledText style={styles.title} > Future Technology Club </FTCStyledText>
       <FTCStyledText style={styles.title} > نادي تقنية المستقبل </FTCStyledText>
