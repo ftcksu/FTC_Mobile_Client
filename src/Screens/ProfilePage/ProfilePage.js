@@ -5,21 +5,10 @@ import InfoCardList from './../../components/InfoCardList';
 import content from './../../dummy_data/InfoCardData.json';
 import ImageView from 'react-native-image-view';
 import UserData from './../../dummy_data/UserProfile.json';
+// import ActionCard from '../../components/ActionCard'
 
 
-// const images = [
-//   {
-//       source: {
-//           uri: UserData.image,
-//       },
-//       title: 'Paris',
-//       width: 806,
-//       height: 720,
-//   },
-// ];
-
-
-export default class ProfilePage extends Component {
+export class ProfilePage extends Component {
   
 
   constructor() {
@@ -29,53 +18,62 @@ export default class ProfilePage extends Component {
         user: UserData,
     };
   }
-
-  renderUserProfile() {
+  
+  renderProfileInformation() {
     const images = [
-  {
-      source: {
-          uri: UserData.image,
-      }
-    },
-  ];
+      {
+          source: {
+              uri: UserData.image,
+          }
+        },
+      ];
     return(
-      <View>
-    <View style={styles.container}>
-      <TouchableWithoutFeedback
-      onPress={() => {
-        this.setState({
-          isImageViewVisible: true,
-        });
-    }}
-      style={styles.imageContainer}
-      >
-    <Image
-      style={styles.profileImage} 
-      source={{ uri: 'https://github.com/antonKalinin/react-native-image-view/blob/master/example/assets/spb.jpg?raw=true'}} />
-  </TouchableWithoutFeedback>
-
-  <FTCStyledText style={styles.name}>{this.state.user.first_name} {this.state.user.last_name}</FTCStyledText>
-    <FTCStyledText style={styles.description}>{this.state.user.description}</FTCStyledText>
-
+        <View style={styles.container}>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              this.setState({
+                isImageViewVisible: true,
+              });
+            }}
+            style={styles.imageContainer}
+          >
+            <Image
+              style={styles.profileImage} 
+              source={{ uri: 'https://github.com/antonKalinin/react-native-image-view/blob/master/example/assets/spb.jpg?raw=true'}} 
+            />
+          </TouchableWithoutFeedback>
     
+          <FTCStyledText style={styles.name}>{this.state.user.first_name} {this.state.user.last_name}</FTCStyledText>
+          <FTCStyledText style={styles.description}>{this.state.user.description}</FTCStyledText>
+    
+          <ImageView
+            glideAlways
+            animationType={'slide'}
+            images={images}
+            imageIndex={0}
+            isVisible={this.state.isImageViewVisible}
+            />
+    
+          </View>
+    );
+  }
 
-    <ImageView
-      glideAlways
-      animationType={'slide'}
-      images={images}
-      imageIndex={0}
-      isVisible={this.state.isImageViewVisible}
-      />
+  renderAdminActions(){
+    return (
+      <View>
+        
+      </View>
+    );
+  }
 
-        </View>
-
-        <View>
-    <InfoCardList
+  renderProfileEvents() {
+   return (
+    <View>
+      {this.state.user.isAdmin ? this.renderAdminActions() : null}
+      <InfoCardList
       listOfData={content.data}
       hasLineSeparator={false}
       />
-    </View>
-    
     </View>
     );
   }
@@ -83,7 +81,8 @@ export default class ProfilePage extends Component {
   render() {
     return (
       <View>
-        {this.renderUserProfile()}
+        {this.renderProfileInformation()}
+        {this.renderProfileEvents()}
       </View>
     );
   }
