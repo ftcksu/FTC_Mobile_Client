@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { View, TouchableOpacity, ScrollView } from 'react-native'
 import FTCSyteledText from '../../../components/FTCStyledText'
 import { MaxParticipants } from './MaxParticipants'
 import { InputFields } from './InputFields'
@@ -53,8 +53,9 @@ export class AddEvent extends Component {
 
   renderSubmitButton() {
     return (
-        <Touchable'lasgh;alsdrhg;oasuhdg;kljshdFLKjhawefhqw;agrvavoasvgovgasbhosvagvaegwhiopvewahobvweaobhi
+      <TouchableOpacity onPress={() => console.log('submit')}>
         <SubmitButton />
+      </TouchableOpacity>
     )
   }
 
