@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { View, TouchableOpacity, ScrollView } from 'react-native'
 import FTCSyteledText from '../../../components/FTCStyledText'
 import { MaxParticipants } from './MaxParticipants'
 import { InputFields } from './InputFields'
@@ -7,6 +7,8 @@ import { AttendToggle } from './AttendToggle'
 import { CurrentParticipants } from './CurrentParticipants';
 import { NotifiCheck } from './NotifiCheck'
 import { SubmitButton } from './SubmitButton'
+import { AutocompleteEventParticipants } from './AutocompleteEventParticipants'
+import data from '../../../dummy_data/autocompleteData.json'
 
 /* Need some work on the naming. */
 
@@ -19,32 +21,41 @@ export class AddEvent extends Component {
       </FTCSyteledText>
     )
   }
+
   renderInputSection() {
-    const { container } = styles
     return (
-      <View style={container}>
+      <View style={styles.inputSection}>
         <InputFields />
         <MaxParticipants />
+        <AutocompleteEventParticipants members={data} />
         <CurrentParticipants />
+        {this.renderAttendToggle()}
+        {this.renderNotifiCheck()}
+        {this.renderSubmitButton()}
       </View>
     )
   }
 
   renderAttendToggle() {
     return (
-      <AttendToggle />
+      <AttendToggle
+        firstButton={'التسجيل للحضور فقط'}
+        secondButton={'نحتاج منظمين'}
+      />
     )
   }
 
   renderNotifiCheck() {
     return (
-      <NotifiCheck />
+        <NotifiCheck />
     )
   }
 
   renderSubmitButton() {
     return (
-      <SubmitButton />
+      <TouchableOpacity onPress={() => console.log('submit')}>
+        <SubmitButton />
+      </TouchableOpacity>
     )
   }
 
@@ -53,9 +64,7 @@ export class AddEvent extends Component {
       <ScrollView style={styles.container} >
         {this.rednerHeader()}
         {this.renderInputSection()}
-        {this.renderAttendToggle()}
-        {this.renderNotifiCheck()}
-        {this.renderSubmitButton()}
+        {/* Sorry for the bad component! */}
       </ScrollView>
     )
   }
@@ -63,13 +72,26 @@ export class AddEvent extends Component {
 
 const styles = {
   container: {
-    flex: 1,
-    flexDirection: 'column',
+    width: '90%',
+    alignSelf: 'center',
   },
   headerText: {
     fontSize: 28,
     alignSelf: 'center',
-    margin: 10,
+    marginTop: 30,
+    marginBottom: 10,
     fontFamily: "Cairo-Bold",
+  },
+  inputSection: {
+    flex: 2,
+  },
+  attendToggle: {
+    flex: 1,
+  },
+  submitButton: {
+    flex:1,
+  },
+  notifiCheck: {
+    flex: 1,
   },
 }

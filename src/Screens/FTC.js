@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fontLoaded } from '../actions';
 import Navigator from '../Navigator'
 import Login from './Login/LoginScreen'
-import { PointsListScreen,EventDetailsScreen } from "./index";
+import { AddEvent } from './Events/AddEvent/AddEvent';
 
 
 

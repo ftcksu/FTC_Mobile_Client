@@ -10,7 +10,7 @@ export class AttendToggle extends Component {
   updateIndex(selectedIndex) {
     console.log(selectedIndex)
     this.setState({ selectedIndex })
-    this.props.handelPress(selectedIndex)
+    // this.props.handelPress(selectedIndex) // this should be in redux
   }
 
   render() {
@@ -35,7 +35,9 @@ const styles = {
     fontSize: 12,
   },
   buttonContainerStyle: {
+    alignSelf: 'center',
+    width: '100%',
     borderRadius: 0,
-    backgroundColor: '#eeeeee'
+    backgroundColor: '#eeeeee',
   }
 }

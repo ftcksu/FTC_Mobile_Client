@@ -36,8 +36,8 @@ export class MaxParticipants extends Component {
 
 const styles = {
   buttonStyle: {
-    marginLeft: 18,
-    marginRight: 18,
+    // marginLeft: 18,
+    // marginRight: 18,
     backgroundColor: '#eeeeee',
     height: 40,
     justifyContent: 'center'

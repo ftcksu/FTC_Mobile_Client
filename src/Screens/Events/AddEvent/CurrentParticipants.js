@@ -9,7 +9,7 @@ export class CurrentParticipants extends Component {
       <View>
         <FlatGrid
           itemDimension={130}
-          items={['عبدالمحسن العنزي','عبدالمحسن العنزي','عبدالمحسن العنزي',
+          items={['باسل العبدلي','عبدالمحسن العنزي','عبدالمحسن العنزي',
           'عبدالمحسن العنزي','عبدالمحسن العنزي','عبدالمحسن العنزي']}
           renderItem={({ item }) => (<GridItem name={item} />)}
           style={styles.container}
@@ -22,7 +22,8 @@ export class CurrentParticipants extends Component {
 const styles = {
   container: {
     alignSelf: 'center',
-    margin: 18,
+    marginTop: 15,
+    marginBottom: 15,
     backgroundColor: '#eeeeee',
   },
 }

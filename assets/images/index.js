@@ -13,6 +13,7 @@ const images = {
     recordPoints: require('./recordPoints.png'),
     logout: require('./logout.png'),
 
+    roundAdd: require('./round-add-button.png'),
 }
 
 export default images
