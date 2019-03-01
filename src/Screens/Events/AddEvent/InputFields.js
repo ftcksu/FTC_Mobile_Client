@@ -5,6 +5,10 @@ import { inputFieldStyle } from "../../../styles/inputFieldStyle";
 import { DatePicker } from './DatePicker'
 
 export class InputFields extends Component {
+  // states:
+    // eventName
+    // eventDsc
+    // whatsAppLink
   render() {
     const {
       inputContainerStyle, inputStyle
@@ -16,20 +20,28 @@ export class InputFields extends Component {
           inputContainerStyle={inputContainerStyle}
           containerStyle={styles.containerStyle}
           inputStyle={inputStyle}
+          onChangeText={t => this.props.updateState({ eventName: t })}
         />
         <Input
           placeholder={'وصف المشروع'}
+          multiline={true}
           inputContainerStyle={inputContainerStyle}
           containerStyle={styles.containerStyle}
           inputStyle={inputStyle}
+          onChangeText={t => this.props.updateState({ eventDsc: t })}
         />
         <Input
           placeholder={'رابط قروب الواتس اب'}
           inputContainerStyle={inputContainerStyle}
           containerStyle={styles.containerStyle}
           inputStyle={inputStyle}
+          onChangeText={t => this.props.updateState({ whatsAppLink: t })}
+          textContentType={'URL'}
         />
-        <DatePicker />
+        <DatePicker 
+          date={this.props.date}
+          updateState={() => this.props.updateState()} // I don't want to think I'm tired!
+        />
       </View>
     )
   }

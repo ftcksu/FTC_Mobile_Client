@@ -1,4 +1,5 @@
 import React from 'react'
+import { TouchableOpacity } from 'react-native'
 import GradientButton from '../../Login/GradientButton'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Images from '../../../../assets/images'
@@ -7,6 +8,7 @@ import Images from '../../../../assets/images'
     I think this should be
     a functional component
 */
+
 const icon = () => {
   return (
     <Icon
@@ -18,14 +20,16 @@ const icon = () => {
   )
 }
 
-export const SubmitButton = () => {
+export const SubmitButton = (props) => {
   const { containerStyle, textStyle, buttonStyle } = styles
   return (
-    <GradientButton
-      title={'أظف المشروع'}
-      style={{ width:'100%', height: 50 }}
-      icon={Images.roundAdd}
-    />
+    <TouchableOpacity onPress={() => props.submit()}>
+      <GradientButton
+        title={'أظف المشروع'}
+        style={{ width: '100%', height: 50 }}
+        icon={Images.roundAdd}
+      />
+    </TouchableOpacity>
   )
 }
 

@@ -3,15 +3,6 @@ import { Text } from 'react-native'
 import { ButtonGroup } from 'react-native-elements'
 
 export class AttendToggle extends Component {
-  state = {
-    selectedIndex: 1
-  }
-
-  updateIndex(selectedIndex) {
-    console.log(selectedIndex)
-    this.setState({ selectedIndex })
-    // this.props.handelPress(selectedIndex) // this should be in redux
-  }
 
   render() {
     const buttons = [
@@ -20,8 +11,8 @@ export class AttendToggle extends Component {
     ]
     return (
       <ButtonGroup
-        onPress={(index) => this.updateIndex(index) }
-        selectedIndex={this.state.selectedIndex}
+        onPress={(index) => this.props.updateState(index)}
+        selectedIndex={this.props.selectedIndex}
         buttons={buttons}
         containerStyle={[styles.buttonContainerStyle, this.props.style]}
       />

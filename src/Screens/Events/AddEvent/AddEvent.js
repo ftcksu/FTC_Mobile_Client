@@ -12,7 +12,47 @@ import data from '../../../dummy_data/autocompleteData.json'
 
 /* Need some work on the naming. */
 
+const items = [
+  { id: 1, name: 'باسل العبدلي' },
+  { id: 2, name: 'عبدالمحسن العنزي' },
+  { id: 3, name: 'نواف الكعيد' },
+  { id: 4, name: 'عبدالاله النمي' }
+]
+
 export class AddEvent extends Component {
+
+  state = {
+    eventName: '',
+    eventDsc: '',
+    whatsAppLink: '',
+    eventDate: 'تاريخ المشروع', // what type?
+    maxPart: 0,
+    members: [],
+    participants: [],
+    attendToggle: 1,
+    sendNotification: false,
+    submit: 0, // or can pass a callback function, invoked by pressing "submit"
+  }
+
+  componentDidMount() {
+    this._getInfo()
+  }
+
+  _getInfo = () => {
+    this.setState({
+      participants: items, // connect to endpoint
+      members: data, // also connect to endpoint
+    })
+  }
+
+  updateState = (new_state) => {
+    this.setState(new_state)
+  }
+
+  _submitEvent = () => {
+    console.log(this.state)
+  }
+
 
   rednerHeader() {
     return (
@@ -23,12 +63,28 @@ export class AddEvent extends Component {
   }
 
   renderInputSection() {
+    // because <InputFields> is a bit different,
+    // it'll pass the new piece of state directly.
+    // I know, I know... hardcoding is bad, but
+    // I'm a CS graduate, what do I know.
     return (
       <View style={styles.inputSection}>
-        <InputFields />
-        <MaxParticipants />
-        <AutocompleteEventParticipants members={data} />
-        <CurrentParticipants />
+        <InputFields
+          updateState={(state) => this.updateState(state)}
+          date={this.state.eventDate}
+        />
+        <MaxParticipants
+          maxPart={this.state.maxPart}
+          updateState={(state) => this.updateState({ maxPart: state })}
+        />
+        <AutocompleteEventParticipants
+          members={this.state.members}
+          updateState={(state) => this.updateState({ CurrentParticipants: state })}
+        />
+        <CurrentParticipants
+          items={this.state.participants}
+          updateState={(state) => this.updateState({ participants: state })}
+        />
         {this.renderAttendToggle()}
         {this.renderNotifiCheck()}
         {this.renderSubmitButton()}
@@ -41,21 +97,24 @@ export class AddEvent extends Component {
       <AttendToggle
         firstButton={'التسجيل للحضور فقط'}
         secondButton={'نحتاج منظمين'}
+        selectedIndex={this.state.attendToggle}
+        updateState={(state) => this.updateState({ attendToggle: state })}
       />
     )
   }
 
   renderNotifiCheck() {
     return (
-        <NotifiCheck />
+      <NotifiCheck
+        sendNotification={this.state.sendNotification}
+        updateState={(state) => this.updateState({ sendNotification: state })}
+      />
     )
   }
 
   renderSubmitButton() {
     return (
-      <TouchableOpacity onPress={() => console.log('submit')}>
-        <SubmitButton />
-      </TouchableOpacity>
+      <SubmitButton submit={() => this._submitEvent()} />
     )
   }
 
@@ -89,7 +148,7 @@ const styles = {
     flex: 1,
   },
   submitButton: {
-    flex:1,
+    flex: 1,
   },
   notifiCheck: {
     flex: 1,
