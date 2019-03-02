@@ -29,7 +29,7 @@ export class AddEvent extends Component {
     maxPart: 0,
     members: [],
     participants: [],
-    attendToggle: 1,
+    attendOnly: 1,
     sendNotification: false,
     submit: 0, // or can pass a callback function, invoked by pressing "submit"
   }
@@ -97,7 +97,7 @@ export class AddEvent extends Component {
       <AttendToggle
         firstButton={'التسجيل للحضور فقط'}
         secondButton={'نحتاج منظمين'}
-        selectedIndex={this.state.attendToggle}
+        selectedIndex={this.state.attendOnly}
         updateState={(state) => this.updateState({ attendToggle: state })}
       />
     )

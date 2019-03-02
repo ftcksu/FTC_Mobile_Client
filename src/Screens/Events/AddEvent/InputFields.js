@@ -40,7 +40,7 @@ export class InputFields extends Component {
         />
         <DatePicker 
           date={this.props.date}
-          updateState={() => this.props.updateState()} // I don't want to think I'm tired!
+          updateState={d => this.props.updateState({ eventDate: d })} // I don't want to think I'm tired!
         />
       </View>
     )
