@@ -5,8 +5,8 @@ import ImageView from 'react-native-image-view';
 
 export default class NameAndImage extends Component {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     // Images has to be an array, because ImageView only takes arrays.
     this.state = {
@@ -14,7 +14,7 @@ export default class NameAndImage extends Component {
       images: [
         {
           source: {
-            uri: 'https://pbs.twimg.com/media/COuih_uWwAAs8ZE.png'
+            uri: this.props.src // https://i.imgur.com/I4bcBnY.jpg
           }
         }
       ]
@@ -31,10 +31,10 @@ export default class NameAndImage extends Component {
               });
             }}
           >
-          <Image style={styles.image} source={ this.state.images[0].source}/>
+          <Image style={[styles.image, this.props.style]} source={ this.state.images[0].source}/>
         </TouchableWithoutFeedback>
 
-        <FTCStyledText style={styles.text} > عبدالمحسن العنزي </FTCStyledText>
+        <FTCStyledText style={styles.text} > {this.props.name} </FTCStyledText>
         <ImageView
             glideAlways
             animationType={'slide'}
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     image:{
         width: 120,
         height: 120,
-        borderRadius: 120/2,
+        borderRadius: 60,
         justifyContent: "flex-end"
         },
     text:{

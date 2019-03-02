@@ -17,7 +17,7 @@ export class MyProfile extends Component {
         <ScreenBackground />
         <View style={styles.container}  >
 
-          <NameAndImage/>
+          <NameAndImage src='https://i.imgur.com/I4bcBnY.jpg' name='ابو حاتم'/>
 
           <TouchableOpacity onPress={this.onPress} >
             <TotalPoints/>
