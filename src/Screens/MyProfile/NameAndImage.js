@@ -23,7 +23,7 @@ export default class NameAndImage extends Component {
   }
   render() {
     return (
-      <View style={styles.container} >
+      <View style={[styles.container, this.props.style]} >
         <TouchableWithoutFeedback
             onPress={() => {
               this.setState({
@@ -31,10 +31,11 @@ export default class NameAndImage extends Component {
               });
             }}
           >
-          <Image style={[styles.image, this.props.style]} source={ this.state.images[0].source}/>
+          <Image style={styles.image} source={ this.state.images[0].source}/>
         </TouchableWithoutFeedback>
 
-        <FTCStyledText style={styles.text} > {this.props.name} </FTCStyledText>
+        <FTCStyledText style={styles.name} >{this.props.name}</FTCStyledText>
+        <FTCStyledText style={styles.description}>{this.props.description}</FTCStyledText>
         <ImageView
             glideAlways
             animationType={'slide'}
@@ -59,11 +60,16 @@ const styles = StyleSheet.create({
         borderRadius: 60,
         justifyContent: "flex-end"
         },
-    text:{
-        color:'white',
+    name:{
+        color:'#9e9e9e',
         marginTop:15,
         fontFamily: 'Cairo-Bold',
         fontSize: 15
-    }
+    }, description: {
+      fontFamily:"Cairo-Regular",
+      fontSize: 12,
+      textAlign: 'center',
+      color: '#9e9e9e'
+    },
   });
 
