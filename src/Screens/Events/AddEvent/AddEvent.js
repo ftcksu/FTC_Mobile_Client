@@ -13,10 +13,10 @@ import data from '../../../dummy_data/autocompleteData.json'
 /* Need some work on the naming. */
 
 const items = [
-  { id: 1, name: 'باسل العبدلي' },
-  { id: 2, name: 'عبدالمحسن العنزي' },
-  { id: 3, name: 'نواف الكعيد' },
-  { id: 4, name: 'عبدالاله النمي' }
+  { id: 1, first_name:'عبدالمحسن', last_name:'العنزي' },
+  { id: 2, first_name:'باسل', last_name:'العبدلي' },
+  { id: 3, first_name:'نواف', last_name:'الكعيد' },
+  { id: 4, first_name:'عبدالاله', last_name:'النمي' }
 ]
 
 export class AddEvent extends Component {
@@ -35,7 +35,23 @@ export class AddEvent extends Component {
   }
 
   componentDidMount() {
+    console.log('componentDidMount')
     this._getInfo()
+  }
+
+  _handleAddingParticipant = (parts) => {
+    console.log('_handleAddingParticipant')
+    // if length(participants) > maxPart then maxPart = length(participants)
+    if (parts.length > this.state.maxPart) {
+      console.log(`parts.length: ${parts.length}`)
+      console.log(`state.maxPart: ${this.state.maxPart}`)
+      this.setState({
+        participants: parts,
+        maxPart: parts.length
+      })
+    } else {
+      this.setState({ participants: parts })
+    }
   }
 
   _getInfo = () => {
@@ -46,11 +62,18 @@ export class AddEvent extends Component {
   }
 
   updateState = (new_state) => {
+    console.log('updateState')
+    console.log(new_state)
     this.setState(new_state)
   }
 
-  _submitEvent = () => {
-    console.log(this.state)
+  submitEvent = () => {
+    // post data to backend here.
+    const { 
+      eventName, eventDsv, whatsAppLink,
+      eventDate, maxPart, participants,
+      attendOnly, sendNotification
+    } = this.state
   }
 
 
@@ -66,7 +89,7 @@ export class AddEvent extends Component {
     // because <InputFields> is a bit different,
     // it'll pass the new piece of state directly.
     // I know, I know... hardcoding is bad, but
-    // I'm a CS graduate, what do I know.
+    // I'm a CS student, what do I know.
     return (
       <View style={styles.inputSection}>
         <InputFields
@@ -79,7 +102,8 @@ export class AddEvent extends Component {
         />
         <AutocompleteEventParticipants
           members={this.state.members}
-          updateState={(state) => this.updateState({ CurrentParticipants: state })}
+          // add participant
+          updateState={(state) => this._handleAddingParticipant([...this.state.participants, state])}
         />
         <CurrentParticipants
           items={this.state.participants}
@@ -98,7 +122,7 @@ export class AddEvent extends Component {
         firstButton={'التسجيل للحضور فقط'}
         secondButton={'نحتاج منظمين'}
         selectedIndex={this.state.attendOnly}
-        updateState={(state) => this.updateState({ attendToggle: state })}
+        updateState={(state) => this.updateState({ attendOnly: state })}
       />
     )
   }
@@ -114,7 +138,7 @@ export class AddEvent extends Component {
 
   renderSubmitButton() {
     return (
-      <SubmitButton submit={() => this._submitEvent()} />
+      <SubmitButton submit={() => this.submitEvent()} />
     )
   }
 

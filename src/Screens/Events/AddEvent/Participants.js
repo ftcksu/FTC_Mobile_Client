@@ -46,7 +46,7 @@ export class Participants extends Component {
           containerStyle={styles.autocompleteContainer}
           onChangeText={text => this.setState({ query: text })}
           renderItem={data => (
-            <TouchableOpacity onPress={console.log(data.name)}>
+            <TouchableOpacity >
               <Text style={{ textAlign: 'right', marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10 }}>{data.name}</Text>
             </TouchableOpacity>
           )}

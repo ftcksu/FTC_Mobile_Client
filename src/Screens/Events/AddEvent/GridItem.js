@@ -23,7 +23,7 @@ export class GridItem extends Component {
             <Icon name="md-close-circle-outline" style={closeIcon} />
           </TouchableOpacity>
         <Text style={textStyle} >
-          {this.props.item.name}
+          {`${this.props.item.first_name} ${this.props.item.last_name}`}
         </Text>
       </View>
     )

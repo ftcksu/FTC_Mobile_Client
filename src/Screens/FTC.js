@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, } from 'react-native';
 import { Font } from 'expo';
 import Navigator from '../Navigator'
+import { AddEvent } from './Events/AddEvent/AddEvent'
 
 export default class FTC extends React.Component {
 
@@ -31,7 +32,7 @@ export default class FTC extends React.Component {
     return (
       <View style={styles.container}>
         {
-          this.state.fontHasLoaded ? <Navigator /> : null
+          this.state.fontHasLoaded ? <AddEvent /> : null
         }
       </View>
     );
