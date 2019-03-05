@@ -31,11 +31,11 @@ export default class NameAndImage extends Component {
               });
             }}
           >
-          <Image style={styles.image} source={ this.state.images[0].source}/>
+          <Image style={[styles.image, this.props.imageStyle]} source={ this.state.images[0].source}/>
         </TouchableWithoutFeedback>
 
-        <FTCStyledText style={styles.name} >{this.props.name}</FTCStyledText>
-        <FTCStyledText style={styles.description}>{this.props.description}</FTCStyledText>
+        <FTCStyledText style={[styles.name, this.props.textStyle]} >{this.props.name}</FTCStyledText>
+        <FTCStyledText style={[styles.description, this.props.textStyle]}>{this.props.description}</FTCStyledText>
         <ImageView
             glideAlways
             animationType={'slide'}
