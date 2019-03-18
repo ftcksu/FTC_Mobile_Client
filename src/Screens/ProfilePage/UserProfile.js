@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, ScrollView } from 'react-native'
+import { View, StyleSheet, FlatList, ScrollView, Image } from 'react-native'
 import PointPerDayCard from "./../MyProfile/HistoryScreen/PointPerDayCard";
 import ScreenBackground from "./..//MyProfile/ScreenBackground";
-import Pulse from 'react-native-pulse';
 import NameAndImage from '../MyProfile/NameAndImage';
 import ActionButton from 'react-native-circular-action-menu';
 import { FontAwesome } from '@expo/vector-icons';
 
+
+
+const SOCIALMEDIACIRCLESIZE = 45;
+const SOCIALMEDIAICONSIZE = 35
 
 
 export default class UserProfile extends Component {
@@ -17,39 +20,41 @@ export default class UserProfile extends Component {
                 buttonColor="rgba(231,76,60,1)"
                 position='center'
             >
-                <ActionButton.Item buttonColor='#FFFC00' title="Snapchat">
-                    <FontAwesome name="snapchat-ghost" size={35} color="white" />
+                <ActionButton.Item buttonColor='#FFFC00' title="Snapchat" size={SOCIALMEDIACIRCLESIZE}>
+                    {/* <Image source={snapchat} style={{ height: 35, width: 35 }} tintColor={'white'} /> */}
+                    <FontAwesome name="snapchat-ghost" size={SOCIALMEDIAICONSIZE} color="white" />
                 </ActionButton.Item>
-                <ActionButton.Item buttonColor='#0077B5' title="LinkedIn">
-                    <FontAwesome name="linkedin" size={35} color="white" />
+                <ActionButton.Item buttonColor='#0077B5' title="LinkedIn" size={SOCIALMEDIACIRCLESIZE}>
+                    <FontAwesome name="linkedin" size={SOCIALMEDIAICONSIZE} color="white" />
                 </ActionButton.Item>
-                <ActionButton.Item buttonColor='#1DA1F2' title="Twitter">
-                    <FontAwesome name="twitter" size={35} color="#F5F8FA" />
+                <ActionButton.Item buttonColor='#1DA1F2' title="Twitter" size={SOCIALMEDIACIRCLESIZE}>
+                    <FontAwesome name="twitter" size={SOCIALMEDIAICONSIZE} color="#F5F8FA" />
                 </ActionButton.Item>
-                <ActionButton.Item buttonColor='#000000' title="Steam">
-                    <FontAwesome name="steam" size={35} color="white" />
+                <ActionButton.Item buttonColor='#000000' title="Steam" size={SOCIALMEDIACIRCLESIZE}>
+                    <FontAwesome name="steam" size={SOCIALMEDIAICONSIZE} color="white" />
                 </ActionButton.Item>
-                <ActionButton.Item buttonColor='#25D366' title="Whatsapp">
-                    <FontAwesome name="whatsapp" size={35} color="white" />
+                <ActionButton.Item buttonColor='#25D366' title="Whatsapp" size={SOCIALMEDIACIRCLESIZE}>
+                    <FontAwesome name="whatsapp" size={SOCIALMEDIAICONSIZE} color="white" />
                 </ActionButton.Item>
             </ActionButton>
         )
     }
   render() {
     return (
-      <View>
-                          <ScreenBackground />
+    <View>
+        <ScreenBackground />
 
-          <ScrollView>
-          <View style={styles.container}>
-          <View style={{flex: 1, height: 170}} />
-            <Pulse color='#ababab' numPulses={3} diameter={300} speed={20} duration={2000} pulseStyle={styles.pulse}/>
-            <NameAndImage src='https://i.imgur.com/I4bcBnY.jpg' name='على زق' description='يا نواف' style={styles.NameAndImage} imageStyle={styles.image} textStyle={styles.textStyle}/>
-            <View style={styles.actionButton}>
-                {this.renderSocialMedia()}
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={{flex: 0.4}} />
+                <View style={styles.userInfoContainer}>
+                    <NameAndImage src='https://i.imgur.com/I4bcBnY.jpg' name='على زق' description='يا نواف' style={styles.NameAndImage} imageStyle={styles.image} textStyle={styles.textStyle} showPulse={true}/>
+                </View>
+                <View style={styles.actionButton}>
+                    {this.renderSocialMedia()}
+                </View>
             </View>
-          </View>
-            <View>
+            <View pointerEvents={'none'}>
                 <FlatList
                     data={["this.props.data","this.props.data","this.props.data","this.props.data","this.props.data","this.props.data"]}
                     contentContainerStyle={styles.flatListContentContainer}
@@ -59,9 +64,9 @@ export default class UserProfile extends Component {
                 />
             </View>
             
-            </ScrollView>
+        </ScrollView>
         
-      </View>
+    </View>
     )
   }
 }
@@ -71,12 +76,10 @@ const styles = StyleSheet.create({
     container:{
         flex: 1, 
         alignItems: 'center',
-        justifyContent: 'center',
     },
     NameAndImage: {
         flex: 1,
-        // marginTop: -100,
-        marginBottom: 30
+        paddingBottom: 0,
     },
     image: {
         width: 175,
@@ -86,19 +89,20 @@ const styles = StyleSheet.create({
     textStyle: {
         color: 'white'
     },
-    pulse: {
-        flex: 1,
-        marginTop: 20,
+    icon: {
+        borderColor: 'black',
+        borderWidth: 2
     },
     actionButton: {
         flex: 1, 
         alignItems: 'center',
-        marginTop: 50,
         marginRight: 20,
+        marginTop: 50,
     },
     flatListContentContainer:{ 
       flexGrow: 0,
       paddingBottom:25,
+      marginTop: 100,
     }
     
   });

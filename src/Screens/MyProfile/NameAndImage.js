@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import FTCStyledText from '../../components/FTCStyledText'
 import ImageView from 'react-native-image-view';
+import Pulse from 'react-native-pulse';
+
 
 export default class NameAndImage extends Component {
 
@@ -20,19 +22,33 @@ export default class NameAndImage extends Component {
       ]
   };
 
-  }
-  render() {
-    return (
-      <View style={[styles.container, this.props.style]} >
-        <TouchableWithoutFeedback
+  renderImage = () => {
+    return(
+      <TouchableWithoutFeedback
             onPress={() => {
               this.setState({
                 isImageViewVisible: true,
               });
             }}
           >
-          <Image style={[styles.image, this.props.imageStyle]} source={ this.state.images[0].source}/>
+          <View>
+            {this.props.showPulse? <Pulse color='#ababab' numPulses={3} diameter={300} speed={20} duration={2000}/> : null}
+            <Image style={[styles.image, this.props.imageStyle]} source={ this.state.images[0].source}/>
+          </View>
         </TouchableWithoutFeedback>
+    )
+
+  }
+  
+
+  }
+  render() {
+    return (
+      <View style={[styles.container, this.props.style]} >
+        {
+          renderImage()
+        }
+
 
         <FTCStyledText style={[styles.name, this.props.textStyle]} >{this.props.name}</FTCStyledText>
         <FTCStyledText style={[styles.description, this.props.textStyle]}>{this.props.description}</FTCStyledText>
@@ -58,7 +74,6 @@ const styles = StyleSheet.create({
         width: 120,
         height: 120,
         borderRadius: 60,
-        justifyContent: "flex-end"
         },
     name:{
         color:'#9e9e9e',
