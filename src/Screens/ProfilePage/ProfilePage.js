@@ -7,6 +7,7 @@ import ImageView from 'react-native-image-view';
 import UserData from './../../dummy_data/UserProfile.json';
 import ActionCardList from '../../components/ActionCardList';
 import Images from './../../../assets/images'
+import NameAndImage from '../MyProfile/NameAndImage';
 
 
 
@@ -35,41 +36,8 @@ export class ProfilePage extends Component {
   }
   
   renderProfileInformation() {
-    const images = [
-      {
-          source: {
-              uri: UserData.image,
-          }
-        },
-      ];
     return(
-        <View style={styles.container}>
-          <TouchableWithoutFeedback
-            onPress={() => {
-              this.setState({
-                isImageViewVisible: true,
-              });
-            }}
-            style={styles.imageContainer}
-          >
-            <Image
-              style={styles.profileImage} 
-              source={{ uri: this.state.user.image}} 
-            />
-          </TouchableWithoutFeedback>
-    
-          <FTCStyledText style={styles.name}>{this.state.user.first_name} {this.state.user.last_name}</FTCStyledText>
-          <FTCStyledText style={styles.description}>{this.state.user.description}</FTCStyledText>
-    
-          <ImageView
-            glideAlways
-            animationType={'slide'}
-            images={images}
-            imageIndex={0}
-            isVisible={this.state.isImageViewVisible}
-            />
-    
-          </View>
+        <NameAndImage src='https://i.imgur.com/I4bcBnY.jpg' name='فك ديس' description='ديس از ستووووبيد' style={{marginTop: 30}}/>
     );
   }
 
