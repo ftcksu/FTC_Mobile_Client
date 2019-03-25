@@ -26,23 +26,7 @@ const config1 = {
       backgroundColor: "transparent",
   
     },
-    // tooltip:{
-    //     visible: true,
-    //     textFormatter: v => v.toFixed(0),
-    //     lineColor: "#777",
-    //     lineWidth: 1,
-    //     circleColor: "#fff",
-    //     circleBorderColor: "#fff",
-    //     circleBorderWidth: 1,
-    //     boxColor: "transparent",
-    //     boxBorderWidth: 1,
-    //     boxBorderColor: "#777",
-    //     boxBorderRadius: 5,
-    //     boxPaddingY: 0,
-    //     boxPaddingX: 0,
-    //     textColor: "white",
-    //     textFontSize: 10
-    // },
+
     interpolation: "none",
     backgroundColor: "transparent",
   };
