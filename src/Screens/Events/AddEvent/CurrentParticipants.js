@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text } from 'react-native'
 import { FlatGrid } from 'react-native-super-grid'
 import { GridItem } from './GridItem'
 
@@ -15,17 +15,17 @@ export class CurrentParticipants extends Component {
     row: 1
   }
 
-  _removeItem = (id) => {
-    let filteredArray = this.props.items.filter(item => item.id !== id)
-    this.props.updateState(filteredArray);
+  _removeItem = (item) => {
+    // remove from currecntParticipants[] and add to memebers[]
+    // let filteredArray = this.props.items.filter(i => i.id !== item.id)
+    this.props.updateState(item);
   }
 
   _renderItem = ({ item, rowIndex }) => {
-    console.log(`rowIndex: ${rowIndex}`)
     return (
       <GridItem
         item={item}
-        removeItem={(id) => this._removeItem(id)}
+        removeItem={(item) => this._removeItem(item)}
       />
     )
   }

@@ -52,10 +52,11 @@ export class AutocompleteEventParticipants extends Component {
     }
     return tmp
   }
+
   onNamePress = (item) => {
-    this.setState({ query: '' });
+    this.setState({ query: '' })
+    // updatestate(item) => add item to CurrentParticipants[], remove item from members[]
     this.props.updateState(item)
-    // this.props.updateState({})
   }
 }
 

@@ -19,7 +19,7 @@ export class GridItem extends Component {
       <View style={container} >
         <View style={backgroundCover} />
         <TouchableOpacity style={closeIconContainer}
-            onPress={() => this.props.removeItem(this.props.item.id)}>          
+            onPress={() => this.props.removeItem(this.props.item)}>          
             <Icon name="md-close-circle-outline" style={closeIcon} />
           </TouchableOpacity>
         <Text style={textStyle} >

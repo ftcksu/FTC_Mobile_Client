@@ -35,24 +35,37 @@ export class AddEvent extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
     this._getInfo()
   }
 
-  _handleAddingParticipant = (parts) => {
-    console.log('_handleAddingParticipant')
-    // if length(participants) > maxPart then maxPart = length(participants)
-    if (parts.length > this.state.maxPart) {
-      console.log(`parts.length: ${parts.length}`)
-      console.log(`state.maxPart: ${this.state.maxPart}`)
-      // not working as intended.
-      this.setState({
-        participants: parts,
-        maxPart: parts.length
-      })
-    } else {
-      this.setState({ participants: parts })
+  // add item to CurrentParticipants[], remove item from members[]
+  // and adjust number of max participants as participants are added
+  _handleAddingParticipant = (item) => {
+    const { maxPart, participants } = this.state
+    // if participants.length > maxPart => maxPart = length(participants)
+    max = maxPart
+
+    if (participants.length >= max) {
+      max = participants.length + 1
     }
+
+    let filteredArray = this.state.members.filter(i => i.id !== item.id)
+
+    this.setState({
+      participants: [...participants, item],
+      maxPart: max,
+      members: filteredArray,
+    })
+  }
+
+  // remove from currecntParticipants[] and add to memebers[]
+  _handleRemovingParticipant = (item) => {
+    let filteredArray = this.state.participants.filter(i => i.id !== item.id)
+    filteredArray.forEach(j => console.log(j)) 
+    this.setState({ 
+      participants: filteredArray,
+      members: [...this.state.members, item],
+    })
   }
 
   _getInfo = () => {
@@ -104,11 +117,11 @@ export class AddEvent extends Component {
         <AutocompleteEventParticipants
           members={this.state.members}
           // add participant
-          updateState={(state) => this._handleAddingParticipant([...this.state.participants, state])}
+          updateState={(item) => this._handleAddingParticipant(item)}
         />
         <CurrentParticipants
           items={this.state.participants}
-          updateState={(state) => this.updateState({ participants: state })}
+          updateState={(item) => this._handleRemovingParticipant(item)}
         />
         {this.renderAttendToggle()}
         {this.renderNotifiCheck()}
