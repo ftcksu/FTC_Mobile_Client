@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
-import {View, Image, TouchableWithoutFeedback, StyleSheet, ScrollView} from 'react-native'
+import {View, Image, TouchableOpacity, StyleSheet, ScrollView, TouchableWithoutFeedback} from 'react-native'
 import FTCStyledText from './../../components/FTCStyledText';
 import InfoCardList from './../../components/InfoCardList';
 import content from './../../dummy_data/InfoCardData.json';
 import ImageView from 'react-native-image-view';
 import UserData from './../../dummy_data/UserProfile.json';
+import ActionCardList from '../../components/ActionCardList';
+import Images from './../../../assets/images'
+import NameAndImage from '../MyProfile/NameAndImage';
 
 
-// const images = [
-//   {
-//       source: {
-//           uri: UserData.image,
-//       },
-//       title: 'Paris',
-//       width: 806,
-//       height: 720,
-//   },
-// ];
 
 
-export default class ProfilePage extends Component {
+const actionList = [
+  {
+    'title': 'رصد النقاط',
+    'type': 'recordPoints'
+  },
+  {
+    'title': 'إرسال التنبيهات',
+    'type': 'sendNotification'
+  },
+]
+
+
+export class ProfilePage extends Component {
   
 
   constructor() {
@@ -29,62 +34,62 @@ export default class ProfilePage extends Component {
         user: UserData,
     };
   }
-
-  renderUserProfile() {
-    const images = [
-  {
-      source: {
-          uri: UserData.image,
-      }
-    },
-  ];
+  
+  renderProfileInformation() {
     return(
+        <NameAndImage src='https://i.imgur.com/I4bcBnY.jpg' name='فك ديس' description='ديس از ستووووبيد' style={{marginTop: 30}}/>
+    );
+  }
+
+  renderAdminActions(){
+    return (
       <View>
-    <View style={styles.container}>
-      <TouchableWithoutFeedback
-      onPress={() => {
-        this.setState({
-          isImageViewVisible: true,
-        });
-    }}
-      style={styles.imageContainer}
-      >
-    <Image
-      style={styles.profileImage} 
-      source={{ uri: 'https://github.com/antonKalinin/react-native-image-view/blob/master/example/assets/spb.jpg?raw=true'}} />
-  </TouchableWithoutFeedback>
+        <ActionCardList
+            listOfData={actionList}
+            hasLineSeparator={true}
+        />
+      </View>
+    );
+  }
 
-  <FTCStyledText style={styles.name}>{this.state.user.first_name} {this.state.user.last_name}</FTCStyledText>
-    <FTCStyledText style={styles.description}>{this.state.user.description}</FTCStyledText>
+  navigateToEventDetails = () =>{
+    this.props.navigation.navigate("EventDetails")
+}
 
-    
-
-    <ImageView
-      glideAlways
-      animationType={'slide'}
-      images={images}
-      imageIndex={0}
-      isVisible={this.state.isImageViewVisible}
-      />
-
-        </View>
-
-        <View>
-    <InfoCardList
-      listOfData={content.data}
-      hasLineSeparator={false}
+  renderProfileEvents() {
+   return (
+    <View>
+      {this.state.user.isAdmin ? this.renderAdminActions() : null}
+      <InfoCardList
+        listOfData={content.data}
+        onPress={this.navigateToEventDetails}
+        hasLineSeparator={false}
+        style={styles.InfoCardList}
       />
     </View>
-    
-    </View>
+    );
+  }
+
+  renderSettingsIcon() {
+    return (
+      <TouchableOpacity>
+        <Image
+          source={
+            Images.settings
+          }
+          style={styles.settingsIcon}
+        />
+      </TouchableOpacity>
     );
   }
 
   render() {
     return (
-      <View>
-        {this.renderUserProfile()}
-      </View>
+      <ScrollView>
+        {this.renderSettingsIcon()}
+        {this.renderProfileInformation()}
+        {this.renderProfileEvents()}
+      </ScrollView>
     );
   }
 }
@@ -118,5 +123,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     color: '#9e9e9e'
+  },
+  InfoCardList: {
+    paddingTop: 0,
+    marginTop: -15,
+  },
+  settingsIcon: {
+    position: 'absolute',
+    top: 30,
+    right: 20,
+    width: 25,
+    height: 25,
   }
 });

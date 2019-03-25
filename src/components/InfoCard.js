@@ -20,7 +20,7 @@ const bossIcon = require('../../assets/images/EventManegerIcon.png');
 export default class InfoCard extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container,this.props.style]}>
 
         {this.props.isBoss? <Image 
               source={bossIcon}

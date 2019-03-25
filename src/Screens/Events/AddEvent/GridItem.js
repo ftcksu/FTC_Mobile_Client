@@ -10,6 +10,8 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 export class GridItem extends Component {
   render() {
+    console.log('PRRRROOOOOOOPS')
+    console.log(this.props)
     const {
       container, textStyle,
       closeIcon, closeIconContainer,
@@ -19,11 +21,11 @@ export class GridItem extends Component {
       <View style={container} >
         <View style={backgroundCover} />
         <TouchableOpacity style={closeIconContainer}
-            onPress={() => console.log('remove')}>          
+            onPress={() => this.props.removeItem(this.props.item.id)}>          
             <Icon name="md-close-circle-outline" style={closeIcon} />
           </TouchableOpacity>
         <Text style={textStyle} >
-          {this.props.name}
+          {this.props.item.name}
         </Text>
       </View>
     )

@@ -1,13 +1,64 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import FTCStyledText from '../../components/FTCStyledText'
+import ImageView from 'react-native-image-view';
+import Pulse from 'react-native-pulse';
+
 
 export default class NameAndImage extends Component {
+
+  constructor(props){
+    super(props);
+
+    // Images has to be an array, because ImageView only takes arrays.
+    this.state = {
+      isImageViewVisible: false,
+      images: [
+        {
+          source: {
+            uri: this.props.src // https://i.imgur.com/I4bcBnY.jpg
+          }
+        }
+      ]
+  };
+
+  renderImage = () => {
+    return(
+      <TouchableWithoutFeedback
+            onPress={() => {
+              this.setState({
+                isImageViewVisible: true,
+              });
+            }}
+          >
+          <View>
+            {this.props.showPulse? <Pulse color='#ababab' numPulses={3} diameter={300} speed={20} duration={2000}/> : null}
+            <Image style={[styles.image, this.props.imageStyle]} source={ this.state.images[0].source}/>
+          </View>
+        </TouchableWithoutFeedback>
+    )
+
+  }
+  
+
+  }
   render() {
     return (
-      <View style={styles.container} >
-        <Image style={styles.image} source={ {uri:"https://pbs.twimg.com/media/COuih_uWwAAs8ZE.png" }}/>
-        <FTCStyledText style={styles.text} > عبدالمحسن العنزي </FTCStyledText>
+      <View style={[styles.container, this.props.style]} >
+        {
+          renderImage()
+        }
+
+
+        <FTCStyledText style={[styles.name, this.props.textStyle]} >{this.props.name}</FTCStyledText>
+        <FTCStyledText style={[styles.description, this.props.textStyle]}>{this.props.description}</FTCStyledText>
+        <ImageView
+            glideAlways
+            animationType={'slide'}
+            images={this.state.images}
+            imageIndex={0}
+            isVisible={this.state.isImageViewVisible}
+            />
       </View>
     )
   }
@@ -22,14 +73,18 @@ const styles = StyleSheet.create({
     image:{
         width: 120,
         height: 120,
-        borderRadius: 120/2,
-        justifyContent: "flex-end"
+        borderRadius: 60,
         },
-    text:{
-        color:'white',
+    name:{
+        color:'#9e9e9e',
         marginTop:15,
         fontFamily: 'Cairo-Bold',
         fontSize: 15
-    }
+    }, description: {
+      fontFamily:"Cairo-Regular",
+      fontSize: 12,
+      textAlign: 'center',
+      color: '#9e9e9e'
+    },
   });
 

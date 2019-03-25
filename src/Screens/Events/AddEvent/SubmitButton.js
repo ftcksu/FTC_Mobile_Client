@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/Ionicons';
+import GradientButton from '../../Login/GradientButton'
+import Icon from 'react-native-vector-icons/Ionicons'
+import Images from '../../../../assets/images'
 
 /*
     I think this should be
@@ -20,13 +21,10 @@ const icon = () => {
 export const SubmitButton = () => {
   const { containerStyle, textStyle, buttonStyle } = styles
   return (
-    <Button
-      type={'outline'}
+    <GradientButton
       title={'أظف المشروع'}
-      titleStyle={textStyle}
-      onPress={() => console.log('connect me to redux')}
-      buttonStyle={buttonStyle}
-      // containerStyle={containerStyle}
+      style={{ width:'100%', height: 50 }}
+      icon={Images.roundAdd}
     />
   )
 }

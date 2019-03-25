@@ -1,24 +1,41 @@
 import React from 'react';
 import { StyleSheet, View, } from 'react-native';
-import { connect } from 'react-redux';
-import { fontLoaded } from '../actions';
+import { Font } from 'expo';
 import Navigator from '../Navigator'
 import Login from './Login/LoginScreen'
-import { PointsListScreen,EventDetailsScreen } from "./index";
+import { AddEvent } from './Events/AddEvent/AddEvent';
+import UserProfile from "./ProfilePage/UserProfile";
 
 
+export default class FTC extends React.Component {
 
-class FTC extends React.Component {
-  componentDidMount() {
-    this.props.fontLoaded();
+  state = {
+    fontHasLoaded: false,
+  }
+
+  componentWillMount() {
+    this._loadFont()
+  }
+
+  _loadFont = () => {
+    Font.loadAsync({
+      'Cairo-Bold': require('../../assets/fonts/Cairo-Bold.ttf'),
+      'Cairo-SemiBold': require('../../assets/fonts/Cairo-SemiBold.ttf'),
+      'Cairo-Light': require('../../assets/fonts/Cairo-Light.ttf'),
+      'Cairo-Regular': require('../../assets/fonts/Cairo-Regular.ttf'),
+      'Cairo-Black': require('../../assets/fonts/Cairo-Black.ttf'),
+      'Cairo-ExtraLight': require('../../assets/fonts/Cairo-ExtraLight.ttf'),
+    })
+      .then(() => {
+        this.setState({ fontHasLoaded: true })
+      })
   }
 
   render() {
     return (
       <View style={styles.container}>
         {
-          this.props.fontHasLoaded ?  <Navigator /> : null
-
+          this.state.fontHasLoaded ? <Navigator /> : null
         }
       </View>
     );
@@ -32,10 +49,3 @@ const styles = StyleSheet.create({
     // marginTop:30
   }
 });
-
-const mapStateToProps = state => {
-  const { fontHasLoaded } = state.appReducer
-  return { fontHasLoaded }
-}
-
-export default connect(mapStateToProps, { fontLoaded })(FTC);

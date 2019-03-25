@@ -2,38 +2,34 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Input } from 'react-native-elements'
 import { inputFieldStyle } from "../../../styles/inputFieldStyle";
+import { DatePicker } from './DatePicker'
 
 export class InputFields extends Component {
   render() {
     const {
-      inputContainerStyle, containerStyle, inputStyle
+      inputContainerStyle, inputStyle
     } = inputFieldStyle
     return (
       <View>
         <Input
           placeholder={'اسم المشروع'}
           inputContainerStyle={inputContainerStyle}
-          containerStyle={containerStyle}
+          containerStyle={styles.containerStyle}
           inputStyle={inputStyle}
         />
         <Input
           placeholder={'وصف المشروع'}
           inputContainerStyle={inputContainerStyle}
-          containerStyle={containerStyle}
-          inputStyle={inputStyle}
-        />
-        <Input
-          placeholder={'تاريخ المشروع'}
-          inputContainerStyle={inputContainerStyle}
-          containerStyle={containerStyle}
+          containerStyle={styles.containerStyle}
           inputStyle={inputStyle}
         />
         <Input
           placeholder={'رابط قروب الواتس اب'}
           inputContainerStyle={inputContainerStyle}
-          containerStyle={containerStyle}
+          containerStyle={styles.containerStyle}
           inputStyle={inputStyle}
         />
+        <DatePicker />
       </View>
     )
   }
@@ -46,9 +42,9 @@ const styles = {
   https://react-native-training.github.io/react-native-elements/img/input_with_explanation.png
   */
   containerStyle: {
+    ...inputFieldStyle.containerStyle,
     alignSelf: 'center',
-    marginLeft: 10,
-    marginRight: 10,
+    width: '110%', // why is this working?
   },
   // text input field style.
   inputContainerStyle: {
