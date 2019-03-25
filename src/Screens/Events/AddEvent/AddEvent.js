@@ -45,6 +45,7 @@ export class AddEvent extends Component {
     if (parts.length > this.state.maxPart) {
       console.log(`parts.length: ${parts.length}`)
       console.log(`state.maxPart: ${this.state.maxPart}`)
+      // not working as intended.
       this.setState({
         participants: parts,
         maxPart: parts.length

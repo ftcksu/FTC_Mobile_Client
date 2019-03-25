@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { FlatGrid, SectionGrid } from 'react-native-super-grid'
+import { View, Text, FlatList } from 'react-native'
+import { FlatGrid } from 'react-native-super-grid'
 import { GridItem } from './GridItem'
 
 /*
@@ -11,33 +11,40 @@ is added, max participant is then incrementd to 4.
 
 export class CurrentParticipants extends Component {
 
+  state = {
+    row: 1
+  }
+
   _removeItem = (id) => {
     let filteredArray = this.props.items.filter(item => item.id !== id)
     this.props.updateState(filteredArray);
   }
 
+  _renderItem = ({ item, rowIndex }) => {
+    console.log(`rowIndex: ${rowIndex}`)
+    return (
+      <GridItem
+        item={item}
+        removeItem={(id) => this._removeItem(id)}
+      />
+    )
+  }
+
   render() {
     return (
-      <View>
-        <FlatGrid
-          itemDimension={130}
-          items={this.props.items}
-          renderItem={({ item }) => (
-            <GridItem
-              item={item}
-              removeItem={(id) => this._removeItem(id)}
-            />)}
-          style={styles.container}
-
-        />
-      </View>
+      <FlatGrid
+        fixed={true}
+        items={this.props.items}
+        renderItem={(item, rowIndex) => this._renderItem(item, rowIndex)}
+        style={styles.container}
+      />
     )
   }
 }
 
 const styles = {
   container: {
-    alignSelf: 'center',
+    // flexDirection: 'row-reverse', // (?) applied to only first row
     marginTop: 15,
     marginBottom: 15,
     backgroundColor: '#eeeeee',
