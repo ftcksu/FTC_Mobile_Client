@@ -14,7 +14,7 @@ export class MyProfile extends Component {
   render() {
     return (
       <View>
-        <ScreenBackground />
+        <ScreenBackground/>
         <View style={styles.container}  >
 
           <NameAndImage src='https://i.imgur.com/I4bcBnY.jpg' name='ابو حاتم'/>

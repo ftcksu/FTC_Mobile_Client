@@ -2,29 +2,14 @@ import React, { Component } from 'react'
 import { Text, View, Image, TouchableWithoutFeedback } from 'react-native'
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { goToWhatsapp } from "../../../actions/appActions";
+
 
 export default class ParticipantsDetails extends Component {
   renderWhatsappButton(){
     return (
       <Button
-        icon={
-          <Icon
-            style={styles.buttonIcon}
-            name="whatsapp"
-            size={40}
-            color="white"
-          />
-        }
-        iconRight={true}
-        buttonStyle={styles.whatsappButton}
-        title="كلمه واتساب"
-        titleStyle={styles.whatsappButtonTitle}
-        />
-    )
-  }
-  renderWhatsappButton(){
-    return (
-      <Button
+        onPress={() => goToWhatsapp('966568484248')} //TODO: fix the hard coded number  
         icon={
           <Icon
             style={styles.buttonIcon}
