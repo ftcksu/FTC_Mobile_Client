@@ -32,7 +32,7 @@ export default class FTC extends React.Component {
     return (
       <View style={styles.container}>
         {
-          this.state.fontHasLoaded ? <AddEvent /> : null
+          this.state.fontHasLoaded ? <Navigator /> : null
         }
       </View>
     );
