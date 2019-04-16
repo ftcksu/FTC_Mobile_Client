@@ -6,3 +6,5 @@ export * from './PointsList/PointsListScreen'
 export * from './MyProfile/myProfile'
 export * from './MyProfile/HistoryScreen/History'
 export * from './ProfilePage/ProfilePage'
+export * from './ProfilePage/SendNotification'
+
