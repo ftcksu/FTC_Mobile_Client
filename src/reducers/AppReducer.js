@@ -1,4 +1,4 @@
-import { FONT_LOADED } from '../actions/types';
+import { FONT_LOADED } from '../global/actions/types';
 
 const INITIAL_STATE = { fontHasLoaded: false };
 

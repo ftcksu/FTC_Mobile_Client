@@ -1,0 +1,43 @@
+import React, { Component } from 'react'
+import { Text } from 'react-native'
+import { ButtonGroup } from 'react-native-elements/src/index'
+
+export class AttendToggle extends Component {
+  state = {
+    selectedIndex: 1
+  }
+
+  updateIndex(selectedIndex) {
+    console.log(selectedIndex)
+    this.setState({ selectedIndex })
+    // this.props.handelPress(selectedIndex) // this should be in redux
+  }
+
+  render() {
+    const buttons = [
+      <Text style={styles.buttonText}>{this.props.secondButton}</Text>,
+      <Text style={styles.buttonText}>{this.props.firstButton}</Text>
+    ]
+    return (
+      <ButtonGroup
+        onPress={(index) => this.updateIndex(index) }
+        selectedIndex={this.state.selectedIndex}
+        buttons={buttons}
+        containerStyle={[styles.buttonContainerStyle, this.props.style]}
+      />
+    )
+  }
+}
+
+const styles = {
+  buttonText: {
+    fontFamily: 'Cairo-Bold',
+    fontSize: 12,
+  },
+  buttonContainerStyle: {
+    alignSelf: 'center',
+    width: '100%',
+    borderRadius: 0,
+    backgroundColor: '#eeeeee',
+  }
+}

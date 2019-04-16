@@ -1,1 +1,1 @@
-export * from './FTCStyledText'
+export * from './shared_components/FTCStyledText'
