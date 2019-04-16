@@ -1,4 +1,4 @@
-import { CHANGE_TEXT } from '../actions/types';
+import { CHANGE_TEXT } from '../global/actions/types';
 
 const INITIAL_STATE = { 
     query: '',
