@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet, ImageBackground } from 'react-native'
-import FTCStyledText from './FTCStyledText'
+import FTCStyledText from './shared_components/FTCStyledText'
 
 /*
                             Props:
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     },
     position: {
       color:"#c7c7c7",
-      textAlign:'center',
       fontWeight: 'bold',
       fontSize:25,
       fontFamily:"Cairo-Bold",

@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, View, } from 'react-native';
 import { Font } from 'expo';
 import Navigator from '../Navigator'
-import Login from './Login/LoginScreen'
-import { AddEvent } from './Events/AddEvent/AddEvent';
-import UserProfile from "./ProfilePage/UserProfile";
+import Login from './LoginScreen'
+import { AddEvent } from './AddEvent';
+import {UserProfile, SendNotification} from "./";
 
 
 export default class FTC extends React.Component {

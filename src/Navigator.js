@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { createBottomTabNavigator,createStackNavigator ,createAppContainer, BottomTabBar } from 'react-navigation';
 import { AddEvent, PointsListScreen, EventsScreen,MyProfile, History, EventDetailsScreen, ProfilePage } from './Screens'
-import { TabIcon } from './components/TabIcon'
+import { TabIcon } from './components/local_components/Navigator/TabIcon'
 import Images from '../assets/images'
 
 

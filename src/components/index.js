@@ -1,0 +1,1 @@
+export * from './shared_components/FTCStyledText'
