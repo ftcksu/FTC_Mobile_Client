@@ -10,8 +10,6 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 export class GridItem extends Component {
   render() {
-    console.log('PRRRROOOOOOOPS')
-    console.log(this.props)
     const {
       container, textStyle,
       closeIcon, closeIconContainer,
@@ -20,13 +18,13 @@ export class GridItem extends Component {
     return (
       <View style={container} >
         <View style={backgroundCover} />
-        <TouchableOpacity style={closeIconContainer}
-            onPress={() => this.props.removeItem(this.props.item.id)}>          
-            <Icon name="md-close-circle-outline" style={closeIcon} />
-          </TouchableOpacity>
-        <Text style={textStyle} >
-          {this.props.item.name}
-        </Text>
+        <TouchableOpacity
+          onPress={() => this.props.removeItem(this.props.item)}>
+          <Icon name="md-close-circle-outline" style={closeIcon} />
+          <Text style={textStyle} >
+            {`${this.props.item.first_name} ${this.props.item.last_name}`}
+          </Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -50,32 +48,32 @@ const styles = {
     fontSize: 11,
     margin: 5,
     // backgroundColor: 'white',
-    height:"100%",
-    zIndex:1
+    height: "100%",
+    zIndex: 1
   },
   closeIcon: {
     color: 'red',
     position: 'absolute',
-    top:0,
-    right:0,
+    top: 0,
+    right: 0,
   },
   // still not satisfying!
   closeIconContainer: {
     position: 'absolute',
-    right:0,
+    right: 0,
     top: 0,
     backgroundColor: 'white',
-    width: 15, 
-    height: 15, 
-    borderRadius: 15/2, 
-    borderWidth: 2, 
+    width: 15,
+    height: 15,
+    borderRadius: 15 / 2,
+    borderWidth: 2,
     borderColor: 'white',
-    paddingBottom:10
+    paddingBottom: 10
   },
-  backgroundCover:{
-    backgroundColor:'white',
-    position:'absolute', 
-    height:'100%',
-    width:'95%'
+  backgroundCover: {
+    backgroundColor: 'white',
+    position: 'absolute',
+    height: '100%',
+    width: '95%'
   }
 }

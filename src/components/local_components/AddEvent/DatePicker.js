@@ -18,13 +18,11 @@ export class DatePicker extends Component {
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
+    this.props.updateState(`${day}/${month + 1}/${year}`)
     this.setState({ 
-      date: `${day}/${month + 1}/${year}`,
       dateChosen: true,
      });
-    console.log('A date has been picked: ', `${day} / ${month + 1} / ${year}`);
     this._hideDateTimePicker();
-    console.log('This should be connected to redux!')
   };
 
   render() {
@@ -32,7 +30,7 @@ export class DatePicker extends Component {
     return (
       <View>
         <TouchableOpacity style={styles.buttonStyle} onPress={() => this._showDateTimePicker()}>
-          <Text style={dateChosen ? [styles.buttonText, {color: 'black'}]: styles.buttonText}>{this.state.date}</Text>
+          <Text style={dateChosen ? [styles.buttonText, {color: 'black'}]: styles.buttonText}>{this.props.date}</Text>
         </TouchableOpacity>
         <DateTimePicker
           isVisible={this.state.isDateTimePickerVisible}

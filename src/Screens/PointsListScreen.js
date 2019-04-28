@@ -38,7 +38,6 @@ export class PointsListScreen extends Component {
           return members;
         }
         const tmp = members.filter((member) => (member.first_name + ' ' + member.last_name).includes(search));
-        console.log(tmp);
         
         return tmp;
       }

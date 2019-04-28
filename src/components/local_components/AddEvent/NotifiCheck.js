@@ -3,10 +3,7 @@ import { View, Text } from 'react-native'
 import { CheckBox } from 'react-native-elements/src/index'
 
 export class NotifiCheck extends Component {
-  state = {
-    checked: false,
-  }
-
+  // sendNotification
   render() {
     const { containerStyle, textStyle } = styles
     return (
@@ -17,9 +14,9 @@ export class NotifiCheck extends Component {
         iconType='font-awesome'
         checkedIcon='check-square'
         uncheckedIcon='square' //check-box-outline-blank
-        onIconPress={() => this.setState({ checked: !this.state.checked })}
+        onIconPress={() => this.props.updateState(!this.props.sendNotification)}
         checkedColor='#868686'
-        checked={this.state.checked}
+        checked={this.props.sendNotification}
         fontFamily={'Cairo-Bold'}
         containerStyle={containerStyle}
       />
