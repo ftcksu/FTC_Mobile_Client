@@ -75,7 +75,7 @@ import { goToWhatsapp } from "../global/actions/appActions";
   render() {
     
     return (
-      <ScrollView  >
+      <ScrollView bounces={false}>
         <ScreenBackground />
         {this.renderHeader()}
         <View style={styles.content} >
