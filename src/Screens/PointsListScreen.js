@@ -58,6 +58,7 @@ export class PointsListScreen extends Component {
                     placeholder="بحث عن الأعضاء"
                     onChangeText={text => this.setState({'search' : text})}
                     value={search}
+                    inputStyle={{ textAlign: 'right' }}
                 />
                 <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} handelPress={this.switchList} style={{width:'80%', alignSelf:'center'}} />
                 <PointList style={styles.pointList} data={filteredList} />
@@ -74,10 +75,10 @@ const styles = {
     SearchBarContainerStyle: {
         backgroundColor:'transparent',
         width:'90%',
-        alignSelf:'center'
+        alignSelf:'center',
     },
     SearchInputContainerStyle: {
-        backgroundColor:'#eeeeee'
+        backgroundColor:'#eeeeee',
     },
     pointList:{
         marginTop:15
