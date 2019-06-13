@@ -58,7 +58,11 @@ export class EventsScreen extends Component {
     renderAddEventButton(){
         return(
             <TouchableOpacity onPress={this.handelAddEventPress} style={styles.buttonContainer} >
-                <Image resizeMode={'center'} style={styles.floatingActionButtonContent} source={Images.addIcon} />
+                <Image
+                resizeMode={'center'}
+                source={Images.addIcon}
+                style={styles.floatingActionButtonContent}
+                />
             </TouchableOpacity>
             
         );
@@ -96,6 +100,7 @@ const styles = StyleSheet.create({
         // height:'40%',
         // width:'40%'
         // backgroundColor:'black'
+        alignSelf: 'center'
     },
     container: {
       flex: 1,
