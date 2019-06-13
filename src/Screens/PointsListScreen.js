@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PointList from '../components/local_components/PointList/PointList';
-import { ScrollView } from "react-native";
+import { ScrollView, SafeAreaView } from "react-native";
 import PointListTotal from '../dummy_data/userDataPointTotal.json'
 import PointListWeekly from '../dummy_data/userDataPointWeekly.json'
 import { SearchBar } from 'react-native-elements/src/index';
@@ -45,7 +45,9 @@ export class PointsListScreen extends Component {
         const { search } = this.state
         filteredList = this.renderList(search)
         return (
-            <ScrollView style={styles.container} >
+            <SafeAreaView style={{ flex: 1 }}>
+
+<ScrollView style={styles.container} >
                 <FTCStyledText style={header} > قائمة النقاط </FTCStyledText>
                 <SearchBar
                     lightTheme={true}
@@ -60,12 +62,14 @@ export class PointsListScreen extends Component {
                 <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} handelPress={this.switchList} style={{width:'80%', alignSelf:'center'}} />
                 <PointList style={styles.pointList} data={filteredList} />
             </ScrollView>
+            </SafeAreaView>
+
         );
     }
 }
 const styles = {
     container: {
-        marginTop:30
+
     },
     SearchBarContainerStyle: {
         backgroundColor:'transparent',

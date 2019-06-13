@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { ScrollView, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { 
+    ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Image, View
+ } from 'react-native';
 import InfoCardList from '../components/shared_components/InfoCardList';
 import content from '../dummy_data/InfoCardData.json';
 import Images from '../../assets/images'
@@ -70,12 +72,12 @@ export class EventsScreen extends Component {
 
     render() {
         return (
-            <View>
-                <ScrollView style={{marginTop:30}} >
+            <SafeAreaView style={{ flex: 1 }}>
+                <ScrollView>
                     {this.renderEventList()}
                 </ScrollView> 
                 {this.renderAddEventButton()}
-            </View>
+            </SafeAreaView>
           
         //   <View style={styles.container}>
         //     <AddEvent />
