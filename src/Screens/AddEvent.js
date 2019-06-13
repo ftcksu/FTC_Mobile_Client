@@ -71,7 +71,7 @@ export class AddEvent extends Component {
   _getInfo = () => {
     this.setState({
       participants: items, // connect to endpoint
-      members: data, // also connect to endpoint
+      members: data,       // also connect to endpoint
     })
   }
 
@@ -83,11 +83,24 @@ export class AddEvent extends Component {
 
   submitEvent = () => {
     // post data to backend here.
+    // if success, navigate to events screen
+    // if failure, show alert, do not reset fields
     const { 
-      eventName, eventDsv, whatsAppLink,
+      eventName, eventDsc, whatsAppLink,
       eventDate, maxPart, participants,
       attendOnly, sendNotification
     } = this.state
+
+    console.log({
+      'event name': eventName,
+      'event description': eventDsc, 
+      'whatsapp link': whatsAppLink,
+      'date': eventDate, 
+      'maximum number of participants': maxPart, 
+      'participating membbers': participants,
+      'attend only?': attendOnly, 
+      'send notification?': sendNotification
+    })
   }
 
 

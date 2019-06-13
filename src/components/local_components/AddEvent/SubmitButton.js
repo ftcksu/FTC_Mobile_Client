@@ -23,13 +23,12 @@ const icon = () => {
 export const SubmitButton = (props) => {
   const { containerStyle, textStyle, buttonStyle } = styles
   return (
-    <TouchableOpacity onPress={() => props.submit()}>
-      <GradientButton
-        title={'أظف المشروع'}
-        style={{ width: '100%', height: 50 }}
-        icon={Images.roundAdd}
-      />
-    </TouchableOpacity>
+    <GradientButton
+      title={'أظف المشروع'}
+      style={{ width: '100%', height: 50 }}
+      icon={Images.roundAdd}
+      onPress={() => props.submit()}
+    />
   )
 }
 
