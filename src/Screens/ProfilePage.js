@@ -85,7 +85,7 @@ export class ProfilePage extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{ marginTop: 30}}>
         {this.renderSettingsIcon()}
         {this.renderProfileInformation()}
         {this.renderProfileEvents()}

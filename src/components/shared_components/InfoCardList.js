@@ -24,14 +24,13 @@ export default class InfoCardList extends React.Component {
               subtitle={item.subTitle}
               cardTypesIcon={item.type}
               isBoss={item.isBoss}
-
               />
             </TouchableOpacity>
-              
-          
           )}
         />
+
         {this.props.hasLineSeparator ? <View style={styles.lineBreak} /> : null}
+        
       </View>
     );
   }
