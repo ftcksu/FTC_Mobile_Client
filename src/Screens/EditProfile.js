@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import { View, SafeAreaView, TouchableOpacity, Text, Image } from 'react-native'
 import { ImagePicker, Constants, Permissions } from 'expo'
+import { connectActionSheet, ActionSheetProvider } from '@expo/react-native-action-sheet';
 import FTCStyledText from '../components/shared_components/FTCStyledText';
 import { TextStyles } from '../global/styles/TextStyles'
 
 const { header } = TextStyles;
 
+@connectActionSheet
 export class EditProfile extends Component {
-
-  componentDidMount() {
-    // this.getPermissionAsync()
-  }
 
   state = {
     image: null
@@ -22,21 +20,49 @@ export class EditProfile extends Component {
     )
   }
 
-  getPermissionAsync = async () => {
-    if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
+  getPermissionAsync = async (choice) => {
+    if (choice === 1) {
+      if (Constants.platform.ios) {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        if (status !== 'granted') {
+          alert('Sorry, we need camera permissions to make this work!');
+        }
+      }
+    } else {
+      if (Constants.platform.ios) {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
       }
     }
   }
 
-  _pickImage = async () => {
-    await this.getPermissionAsync()
+  _takeImage = async () => {
+    await this.getPermissionAsync(1)
 
     options = {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
+      // here you can set quality compression if you want
+    }
+
+    let result = await ImagePicker.launchCameraAsync(options)
+    
+    console.log(result)
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri })
+    }
+  }
+
+  _pickImage = async () => {
+    await this.getPermissionAsync(2)
+
+    options = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      // here you can set quality compression if you want
     }
 
     let result = await ImagePicker.launchImageLibraryAsync(options)
@@ -46,11 +72,26 @@ export class EditProfile extends Component {
     }
   }
 
+  cameraOrAlbumChoice = () => {
+    const options = ['Take Photo...', 'Choose From Library...', 'Cancel'];
+    const cancelButtonIndex = 2;
+    this.props.showActionSheetWithOptions({
+      options,
+      cancelButtonIndex,
+    }, (buttonIndex) => {
+      if (buttonIndex === 0) {
+        this._takeImage();
+      } else if (buttonIndex === 1) {
+        this._pickImage();
+      }
+    });
+  }
+
   renderProfileImageChange = () => {
     return (
       <TouchableOpacity
         style={styles.button}
-        onPress={this._pickImage}
+        onPress={this.cameraOrAlbumChoice}
       >
         <Text style={{ fontSize: 14 }}>Change Image</Text>
       </TouchableOpacity>
