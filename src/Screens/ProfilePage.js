@@ -9,6 +9,7 @@ import ActionCardList from '../components/local_components/ProfilePage/ActionCar
 import Images from '../../assets/images'
 import NameAndImage from '../components/shared_components/NameAndImage';
 
+
 const actionList = [
   {
     'title': 'رصد النقاط',
@@ -70,9 +71,14 @@ export class ProfilePage extends Component {
     );
   }
 
-  renderSettingsIcon() {
+  handleSettingsPress = () => {
+    console.log('this is handler')
+    this.props.navigation.navigate("EditProfilePage")
+  }
+
+  renderSettingsIcon = () => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={this.handleSettingsPress} style={styles.settingsButton}>
         <Image
           source={Images.settings}
           style={styles.settingsIcon}
@@ -89,6 +95,7 @@ export class ProfilePage extends Component {
           {this.renderProfileInformation()}
           {this.renderProfileEvents()}
         </ScrollView>
+        {this.renderSettingsIcon()}
       </SafeAreaView>
     );
   }
@@ -136,5 +143,8 @@ const styles = StyleSheet.create({
     right: 20,
     width: 25,
     height: 25,
+  },
+  settingsButton: {
+    zIndex: 1, // to make it clickable
   }
 });
