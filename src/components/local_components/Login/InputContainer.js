@@ -6,16 +6,22 @@ import { inputFieldStyle } from "../../../global/styles/inputFieldStyle"
       inputContainerStyle, containerStyle, inputStyle
     } = inputFieldStyle;
 export default class InputContainer extends Component {
+  state = {
+    universityID: '',
+    password: ''
+  }
   render() {
     return (
       <View style={this.props.style} >
         <View style={styles.inputContainer1}/>
-        <View style={styles.inputContainer2}>
+        <View style={styles.inputContainer2} >
           <Input
             placeholder={'الرقم الجامعي'}
             inputContainerStyle={inputContainerStyle}
             containerStyle={[containerStyle]}
             inputStyle={inputStyle}
+            onChangeText={(text) => this.setState({universityID: text})}
+
           />
           <Input
             placeholder={'كلمة المرور'}
@@ -23,6 +29,8 @@ export default class InputContainer extends Component {
             inputContainerStyle={inputContainerStyle}
             containerStyle={[containerStyle]}
             inputStyle={inputStyle}
+            onChangeText={(text) => this.setState({password: text})}
+
           />
           {this.props.children}
         </View>
