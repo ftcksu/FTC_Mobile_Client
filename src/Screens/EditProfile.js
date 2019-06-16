@@ -8,7 +8,7 @@ import GradientButton from '../components/shared_components/GradientButton'
 import Images from '../../assets/images/'
 
 
-const { header, header2 } = TextStyles
+const { header, header3 } = TextStyles
 const { checkIcon } = Images
 
 const avatarPlaceholder = 'https://charlestonpourhouse.com/wp-content/uploads/2016/09/P_FUNK.jpg'
@@ -49,6 +49,55 @@ export class EditProfile extends Component {
     }
   }
 
+  renderImage = () => {
+    if (this.state.image != null) {
+      return (
+        <Image
+          style={styles.imageStyle}
+          source={{ uri: this.state.image }}
+        />
+      )
+    }
+    else {
+      return (
+        <Image
+          style={styles.imageStyle}
+          source={{ uri: avatarPlaceholder }}
+        />
+      )
+    }
+  }
+
+  renderProfileImageChange = () => {
+    return (
+      <View style={{ width: '100%', alignItems: 'center' }} >
+        <FTCStyledText style={header3}>
+          {'تغيير صورة العرظ'}
+        </FTCStyledText>
+        <TouchableOpacity
+          onPress={this.cameraOrAlbumChoice}
+        >
+          {this.renderImage()}
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  cameraOrAlbumChoice = () => {
+    const options = ['Take Photo...', 'Choose From Library...', 'Cancel'];
+    const cancelButtonIndex = 2;
+    this.props.showActionSheetWithOptions({
+      options,
+      cancelButtonIndex,
+    }, (buttonIndex) => {
+      if (buttonIndex === 0) {
+        this._takeImage();
+      } else if (buttonIndex === 1) {
+        this._pickImage();
+      }
+    });
+  }
+
   // take photo with camera
   _takeImage = async () => {
     await this.getPermissionAsync(1)
@@ -85,65 +134,10 @@ export class EditProfile extends Component {
     }
   }
 
-  cameraOrAlbumChoice = () => {
-    const options = ['Take Photo...', 'Choose From Library...', 'Cancel'];
-    const cancelButtonIndex = 2;
-    this.props.showActionSheetWithOptions({
-      options,
-      cancelButtonIndex,
-    }, (buttonIndex) => {
-      if (buttonIndex === 0) {
-        this._takeImage();
-      } else if (buttonIndex === 1) {
-        this._pickImage();
-      }
-    });
-  }
-
-  renderProfileImageChange = () => {
-    return (
-      <TouchableOpacity
-        onPress={this.cameraOrAlbumChoice}
-      >
-        {this.renderImage()}
-      </TouchableOpacity>
-    )
-  }
-
-  renderImage = () => {
-    if (this.state.image != null) {
-      return (
-        <Image
-          style={styles.imageStyle}
-          source={{ uri: this.state.image }}
-        />
-      )
-    }
-    else {
-      return (
-        <Image
-          style={styles.imageStyle}
-          source={{ uri: avatarPlaceholder }}
-        />
-      )
-    }
-  }
-
-  renderSubmitButton = () => {
-    return (
-      <GradientButton
-        style={styles.submitButton}
-        title={'submit changes'}
-        onPress={() => this.submit()}
-        icon={checkIcon}
-      />
-    )
-  }
-
   renderChangePasswordInput = () => {
     return (
       <View style={{ width: '100%', marginTop: 15 }}>
-        <FTCStyledText style={header}>
+        <FTCStyledText style={header3}>
           {'تغيير كلمة السر'}
         </FTCStyledText>
         <TextInput
@@ -156,12 +150,31 @@ export class EditProfile extends Component {
           style={styles.passwordInput}
           placeholder={'كلمة السر الجديدة'}
         />
-                <TextInput
+        <TextInput
           secureTextEntry={true}
           style={styles.passwordInput}
           placeholder={'كلمة السر الجديدة مرة ثانية'}
         />
       </View>
+    )
+  }
+
+  renderSocialNetworksFields = () => {
+    return (
+      <View>
+
+      </View>
+    )
+  }
+
+  renderSubmitButton = () => {
+    return (
+      <GradientButton
+        style={styles.submitButton}
+        title={'submit changes'}
+        onPress={() => this.submit()}
+        icon={checkIcon}
+      />
     )
   }
 
@@ -199,7 +212,7 @@ const styles = {
   imageStyle: {
     height: 150,
     width: 150,
-    borderRadius: 150/2,
+    borderRadius: 150 / 2,
     marginTop: 15,
   },
   submitButton: {
@@ -210,7 +223,7 @@ const styles = {
   passwordInput: {
     paddingRight: 10,
     paddingLeft: 10,
-    height: 30,
+    height: 35,
     marginTop: 5,
     backgroundColor: '#dcdcdc',
     textAlign: 'right'
