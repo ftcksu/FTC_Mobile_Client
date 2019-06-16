@@ -3,6 +3,12 @@ import { Image, View, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo';
 import FTCStyledText from './FTCStyledText';
 
+// ==========
+// props: 
+//    title
+//    icon
+//    onPress
+// ==========
 
 export default class GradientButton extends Component {
   render() {

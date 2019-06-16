@@ -4,14 +4,24 @@ import { ImagePicker, Constants, Permissions } from 'expo'
 import { connectActionSheet, ActionSheetProvider } from '@expo/react-native-action-sheet';
 import FTCStyledText from '../components/shared_components/FTCStyledText';
 import { TextStyles } from '../global/styles/TextStyles'
+import GradientButton from '../components/shared_components/GradientButton'
+import Images from '../../assets/images/'
 
-const { header } = TextStyles;
+
+const { header } = TextStyles
+const { checkIcon } = Images
+
+const avatarPlaceholder = 'https://charlestonpourhouse.com/wp-content/uploads/2016/09/P_FUNK.jpg'
 
 @connectActionSheet
 export class EditProfile extends Component {
 
   state = {
-    image: null
+    image: null // 'https://i.imgur.com/YKIZP3C.jpg'
+  }
+
+  componentDidMount() {
+    this.setState({ image: avatarPlaceholder })
   }
 
   renderHeader = () => {
@@ -20,6 +30,7 @@ export class EditProfile extends Component {
     )
   }
 
+  // permission requested on choice click, 1: camera, 2: album
   getPermissionAsync = async (choice) => {
     if (choice === 1) {
       if (Constants.platform.ios) {
@@ -38,6 +49,7 @@ export class EditProfile extends Component {
     }
   }
 
+  // take photo with camera
   _takeImage = async () => {
     await this.getPermissionAsync(1)
 
@@ -48,7 +60,7 @@ export class EditProfile extends Component {
     }
 
     let result = await ImagePicker.launchCameraAsync(options)
-    
+
     console.log(result)
 
     if (!result.cancelled) {
@@ -56,6 +68,7 @@ export class EditProfile extends Component {
     }
   }
 
+  // pick image from photo album
   _pickImage = async () => {
     await this.getPermissionAsync(2)
 
@@ -90,21 +103,45 @@ export class EditProfile extends Component {
   renderProfileImageChange = () => {
     return (
       <TouchableOpacity
-        style={styles.button}
         onPress={this.cameraOrAlbumChoice}
       >
-        <Text style={{ fontSize: 14 }}>Change Image</Text>
+        {this.renderImage()}
       </TouchableOpacity>
     )
   }
 
-  renderChosenImage = () => {
+  renderImage = () => {
+    if (this.state.image != null) {
+      return (
+        <Image
+          style={styles.imageStyle}
+          source={{ uri: this.state.image }}
+        />
+      )
+    }
+    else {
+      return (
+        <Image
+          style={styles.imageStyle}
+          source={{ uri: avatarPlaceholder }}
+        />
+      )
+    }
+  }
+
+  renderSubmitButton = () => {
     return (
-      <Image
-        style={{ height: 50, width: 50 }}
-        source={{ uri: this.state.image }}
+      <GradientButton
+        style={styles.submitButton}
+        title={'submit changes'}
+        onPress={() => this.submit()}
+        icon={checkIcon}
       />
     )
+  }
+
+  submit = () => {
+    console.log(this.state)
   }
 
   render() {
@@ -113,7 +150,7 @@ export class EditProfile extends Component {
         <View style={styles.container}>
           {this.renderHeader()}
           {this.renderProfileImageChange()}
-          {this.state.image === null ? null : this.renderChosenImage()}
+          {this.renderSubmitButton()}
         </View>
       </SafeAreaView>
     )
@@ -131,6 +168,17 @@ const styles = {
     backgroundColor: '#333333',
     marginTop: 30,
     alignSelf: 'center',
+  },
+  imageStyle: {
+    height: 150,
+    width: 150,
+    borderRadius: 150/2,
+    marginTop: 15,
+  },
+  submitButton: {
+    width: '95%',
+    height: 50,
+    marginTop: 30,
   }
 }
 
