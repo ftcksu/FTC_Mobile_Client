@@ -1,6 +1,5 @@
-const baseURL = "http://127.0.0.1:8000/api"
+const baseURL = "http://192.168.100.126:8080/api"
 export function loginAttempt(universityID, password) {
-  console.log(baseURL + "/auth/login");
     return fetch(baseURL + "/auth/login", {
   method: 'POST',
   headers: {
