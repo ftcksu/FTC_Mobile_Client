@@ -17,7 +17,11 @@ const avatarPlaceholder = 'https://charlestonpourhouse.com/wp-content/uploads/20
 export class EditProfile extends Component {
 
   state = {
-    image: null // 'https://i.imgur.com/YKIZP3C.jpg'
+    image: null, // 'https://i.imgur.com/YKIZP3C.jpg'
+    snap: '',
+    twitter: '',
+    steam: '',
+    whatsapp: '',
   }
 
   componentDidMount() {
@@ -134,25 +138,25 @@ export class EditProfile extends Component {
     }
   }
 
-  renderChangePasswordInput = () => {
+  renderChangetextInputStyle = () => {
     return (
       <View style={{ width: '100%', marginTop: 15 }}>
         <FTCStyledText style={header3}>
           {'تغيير كلمة السر'}
         </FTCStyledText>
         <TextInput
-          style={styles.passwordInput}
+          style={styles.textInputStyle}
           secureTextEntry={true}
           placeholder={'كلمة السر القديمة'}
         />
         <TextInput
           secureTextEntry={true}
-          style={styles.passwordInput}
+          style={styles.textInputStyle}
           placeholder={'كلمة السر الجديدة'}
         />
         <TextInput
           secureTextEntry={true}
-          style={styles.passwordInput}
+          style={styles.textInputStyle}
           placeholder={'كلمة السر الجديدة مرة ثانية'}
         />
       </View>
@@ -161,8 +165,30 @@ export class EditProfile extends Component {
 
   renderSocialNetworksFields = () => {
     return (
-      <View>
-
+      <View style={{ width: '100%', marginTop: 15 }}>
+        <FTCStyledText style={header3}>
+          {'سوشل ميديا'}
+        </FTCStyledText>
+        <TextInput
+          style={styles.textInputStyle}
+          placeholder={'ستيم'}
+          onChangeText={(text) => this.setState({ steam: `https://steam.com/${text}`})}
+        />
+        <TextInput
+          style={styles.textInputStyle}
+          placeholder={'سناب'}
+          onChangeText={(text) => this.setState({ snap: `https://snap.com/add/${text}`})}
+        />
+        <TextInput
+          style={styles.textInputStyle}
+          placeholder={'تويتر'}
+          onChangeText={(text) => this.setState({ twitter: `https://twitter.com/${text}`})}
+        />
+        <TextInput
+          style={styles.textInputStyle}
+          placeholder={'واتس اب'}
+          onChangeText={(text) => this.setState({ whatsapp: text })}
+        />
       </View>
     )
   }
@@ -189,7 +215,8 @@ export class EditProfile extends Component {
         <View style={styles.container}>
           {this.renderHeader()}
           {this.renderProfileImageChange()}
-          {this.renderChangePasswordInput()}
+          {this.renderChangetextInputStyle()}
+          {this.renderSocialNetworksFields()}
           {this.renderSubmitButton()}
         </View>
       </SafeAreaView>
@@ -220,7 +247,7 @@ const styles = {
     height: 50,
     marginTop: 30,
   },
-  passwordInput: {
+  textInputStyle: {
     paddingRight: 10,
     paddingLeft: 10,
     height: 35,
