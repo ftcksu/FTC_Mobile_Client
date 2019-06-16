@@ -1,19 +1,31 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, View, KeyboardAvoidingView, Alert } from 'react-native'
 import InputContainer from '../components/local_components/Login/InputContainer'
 import Logo from '../components/local_components/Login/Logo'
 import ScreenBackground from '../components/shared_components/ScreenBackground'
 import LoginButton from '../components/shared_components/GradientButton'
+import {loginAttempt} from '../global/actions/ApiCalls' ;
 
 export default class Login extends Component {
-  render() {
+  handelLoginRequest = () => {
+    let universityID = this.refs.loginFormRef.state.universityID;
+    let password = this.refs.loginFormRef.state.password;
+    loginAttempt(universityID, password)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.error(error);
+      })
+    }
+    render() {
     return (
       <View style={styles.container} >
         <ScreenBackground  />
         <Logo style={styles.imageCont} />
         <KeyboardAvoidingView behavior="position" enabled style={{height:'50%',width:'100%'}}>
-          <InputContainer style={{height:'100%',width:'100%'}}>
-          <LoginButton title={"تسجيل دخول"} />
+          <InputContainer ref="loginFormRef" style={{height:'100%',width:'100%'}}>
+          <LoginButton title={"تسجيل دخول"} onPress={this.handelLoginRequest} />
           </InputContainer>
         </KeyboardAvoidingView>
       </View>
