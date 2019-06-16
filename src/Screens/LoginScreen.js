@@ -12,10 +12,18 @@ export default class Login extends Component {
     let password = this.refs.loginFormRef.state.password;
     loginAttempt(universityID, password)
       .then(response => {
-        console.log(response);
+        if(response.ok){
+          response.json().then(data => {
+            //save token 
+
+          });
+        }else{
+          Alert.alert('تستهبل؟', 'يا رقمك السري او الجامعي غلط، شيك عليهم', [{text: 'يصير خير'}]);
+          
+        }
       })
       .catch(error => {
-        console.error(error);
+        Alert.alert('مشكل كبير', 'يا ان نتك خربان ولا سيرفرنا فاقع', [{text: 'جي جي'}]);
       })
     }
     render() {
