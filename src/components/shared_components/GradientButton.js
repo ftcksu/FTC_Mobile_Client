@@ -13,9 +13,8 @@ import FTCStyledText from './FTCStyledText';
 export default class GradientButton extends Component {
   render() {
     return (
-      <LinearGradient colors={['#3986e0', '#6535bc']} start={[0.0, 0.5]} end={[1.0, 0.5]} style={[styles.outer, this.props.style]}  >
-
-        <TouchableOpacity style={styles.inner} onPress={this.props.onPress}>
+      <TouchableOpacity style={styles.outer} onPress={this.props.onPress}>
+      <LinearGradient colors={['#3986e0', '#6535bc']} start={[0.0, 0.5]} end={[1.0, 0.5]} style={[styles.inner, this.props.style]}  >
 
             <View style={styles.inner}>
 
@@ -23,10 +22,9 @@ export default class GradientButton extends Component {
               <Image style={styles.icon} source={this.props.icon} />
               
             </View>
-
-        </TouchableOpacity>
             
       </LinearGradient>
+      </TouchableOpacity>
     )
   }
 }
