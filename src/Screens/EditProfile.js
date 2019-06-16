@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, SafeAreaView, TouchableOpacity, Text, Image } from 'react-native'
+import { View, SafeAreaView, TouchableOpacity, TextInput, Image } from 'react-native'
 import { ImagePicker, Constants, Permissions } from 'expo'
 import { connectActionSheet, ActionSheetProvider } from '@expo/react-native-action-sheet';
 import FTCStyledText from '../components/shared_components/FTCStyledText';
@@ -8,7 +8,7 @@ import GradientButton from '../components/shared_components/GradientButton'
 import Images from '../../assets/images/'
 
 
-const { header } = TextStyles
+const { header, header2 } = TextStyles
 const { checkIcon } = Images
 
 const avatarPlaceholder = 'https://charlestonpourhouse.com/wp-content/uploads/2016/09/P_FUNK.jpg'
@@ -140,7 +140,33 @@ export class EditProfile extends Component {
     )
   }
 
+  renderChangePasswordInput = () => {
+    return (
+      <View style={{ width: '100%', marginTop: 15 }}>
+        <FTCStyledText style={header}>
+          {'تغيير كلمة السر'}
+        </FTCStyledText>
+        <TextInput
+          style={styles.passwordInput}
+          secureTextEntry={true}
+          placeholder={'كلمة السر القديمة'}
+        />
+        <TextInput
+          secureTextEntry={true}
+          style={styles.passwordInput}
+          placeholder={'كلمة السر الجديدة'}
+        />
+                <TextInput
+          secureTextEntry={true}
+          style={styles.passwordInput}
+          placeholder={'كلمة السر الجديدة مرة ثانية'}
+        />
+      </View>
+    )
+  }
+
   submit = () => {
+    // here do some input checks
     console.log(this.state)
   }
 
@@ -150,6 +176,7 @@ export class EditProfile extends Component {
         <View style={styles.container}>
           {this.renderHeader()}
           {this.renderProfileImageChange()}
+          {this.renderChangePasswordInput()}
           {this.renderSubmitButton()}
         </View>
       </SafeAreaView>
@@ -179,6 +206,14 @@ const styles = {
     width: '95%',
     height: 50,
     marginTop: 30,
+  },
+  passwordInput: {
+    paddingRight: 10,
+    paddingLeft: 10,
+    height: 30,
+    marginTop: 5,
+    backgroundColor: '#dcdcdc',
+    textAlign: 'right'
   }
 }
 
