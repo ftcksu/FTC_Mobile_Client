@@ -7,8 +7,8 @@ import { inputFieldStyle } from "../../../global/styles/inputFieldStyle"
     } = inputFieldStyle;
 export default class InputContainer extends Component {
   state = {
-    universityID: '',
-    password: ''
+    universityID: '436105865',
+    password: '12345'
   }
   render() {
     return (
@@ -17,6 +17,7 @@ export default class InputContainer extends Component {
         <View style={styles.inputContainer2} >
           <Input
             placeholder={'الرقم الجامعي'}
+            value="436105865"
             inputContainerStyle={inputContainerStyle}
             containerStyle={[containerStyle]}
             inputStyle={inputStyle}
@@ -25,6 +26,7 @@ export default class InputContainer extends Component {
           />
           <Input
             placeholder={'كلمة المرور'}
+            value="12345"
             secureTextEntry={true}
             inputContainerStyle={inputContainerStyle}
             containerStyle={[containerStyle]}
