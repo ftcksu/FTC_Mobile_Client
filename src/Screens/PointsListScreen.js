@@ -15,8 +15,10 @@ const {
 
 export class PointsListScreen extends Component {
 
+
   switchList = (type) => {
     type == 0 ? this.setState({ 'members': PointListWeekly }) : this.setState({ 'members': PointListTotal })
+    this.setState({listType : type})
   }
 
   handelCardPress = () => {
@@ -25,7 +27,8 @@ export class PointsListScreen extends Component {
 
   state = {
     search: '',
-    members: PointListTotal
+    members: PointListTotal,
+    listType: 1
   };
 
   updateSearch = search => {
@@ -60,7 +63,7 @@ export class PointsListScreen extends Component {
             value={search}
             inputStyle={{ textAlign: 'right' }}
           />
-          <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} handelPress={this.switchList} style={{ width: '80%', alignSelf: 'center' }} />
+          <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} selectedIndex={this.state.listType} handelPress={this.switchList} style={{ width: '80%', alignSelf: 'center' }} />
           <PointList style={styles.pointList} data={filteredList} />
         </ScrollView>
       </SafeAreaView>

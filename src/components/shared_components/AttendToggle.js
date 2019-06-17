@@ -11,7 +11,7 @@ export class AttendToggle extends Component {
     ]
     return (
       <ButtonGroup
-        onPress={(index) => this.props.updateState(index)}
+        onPress={this.props.handelPress}
         selectedIndex={this.props.selectedIndex}
         buttons={buttons}
         containerStyle={[styles.buttonContainerStyle, this.props.style]}
