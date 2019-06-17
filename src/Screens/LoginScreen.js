@@ -5,9 +5,10 @@ import Logo from '../components/local_components/Login/Logo'
 import ScreenBackground from '../components/shared_components/ScreenBackground'
 import LoginButton from '../components/shared_components/GradientButton'
 import { loginAttempt } from '../global/actions/ApiCalls' ;
-import { storeToken, getToken } from '../global/actions/LocalStorage' ;
+import { storeToken } from '../global/actions/LocalStorage' ;
 
 export default class Login extends Component {
+
   handelLoginRequest = () => {
     let universityID = this.refs.loginFormRef.state.universityID;
     let password = this.refs.loginFormRef.state.password;
@@ -16,6 +17,7 @@ export default class Login extends Component {
         if(response.ok){
           response.json().then(data => {
             storeToken(data.access_token);
+            this.props.onLogin()
           });
         }else{
           Alert.alert('تستهبل؟', 'يا رقمك السري او الجامعي غلط، شيك عليهم', [{text: 'يصير خير'}]);
@@ -33,7 +35,7 @@ export default class Login extends Component {
         <Logo style={styles.imageCont} />
         <KeyboardAvoidingView behavior="position" enabled style={{height:'50%',width:'100%'}}>
           <InputContainer ref="loginFormRef" style={{height:'100%',width:'100%'}}>
-          <LoginButton title={"تسجيل دخول"} onPress={this.handelLoginRequest} />
+            <LoginButton title={"تسجيل دخول"} onPress={this.handelLoginRequest} />
           </InputContainer>
         </KeyboardAvoidingView>
       </View>
