@@ -10,7 +10,7 @@ import {AsyncStorage} from 'react-native';
             console.log(error.message);
         }
     }
-    
+
     export async function getToken() {
     let token = '';
     try {
@@ -21,3 +21,13 @@ import {AsyncStorage} from 'react-native';
     }
     return token;
 }
+
+export async function deleteToken() {
+    try {
+        await AsyncStorage.removeItem(_tokenStorageKey);
+    } catch (error) {
+      console.log(error.message);
+    }
+    
+}
+
