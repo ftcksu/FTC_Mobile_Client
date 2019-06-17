@@ -16,9 +16,10 @@ export default class InputContainer extends Component {
         <View style={styles.inputContainer1}/>
         <View style={styles.inputContainer2} >
           <Input
+            keyboardType={'numeric'}
             placeholder={'الرقم الجامعي'}
             value="436105865"
-            inputContainerStyle={inputContainerStyle}
+            inputContainerStyle={[inputContainerStyle, {height: 50}]}
             containerStyle={[containerStyle]}
             inputStyle={inputStyle}
             onChangeText={(text) => this.setState({universityID: text})}
@@ -28,11 +29,10 @@ export default class InputContainer extends Component {
             placeholder={'كلمة المرور'}
             value="12345"
             secureTextEntry={true}
-            inputContainerStyle={inputContainerStyle}
+            inputContainerStyle={[inputContainerStyle, {height: 50}]}
             containerStyle={[containerStyle]}
             inputStyle={inputStyle}
             onChangeText={(text) => this.setState({password: text})}
-
           />
           {this.props.children}
         </View>
