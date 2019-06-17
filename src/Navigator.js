@@ -90,9 +90,6 @@ let Navigator = createBottomTabNavigator(
                 case 'Events': 
                   icon = Images.eventsIcon
                   break;
-                case 'Profile': 
-                  icon = Images.profileIcon
-                  break;
                 case 'PointList': 
                   icon = Images.membersIcon
                   break;
