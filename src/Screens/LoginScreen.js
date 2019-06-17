@@ -4,7 +4,8 @@ import InputContainer from '../components/local_components/Login/InputContainer'
 import Logo from '../components/local_components/Login/Logo'
 import ScreenBackground from '../components/shared_components/ScreenBackground'
 import LoginButton from '../components/shared_components/GradientButton'
-import {loginAttempt} from '../global/actions/ApiCalls' ;
+import { loginAttempt } from '../global/actions/ApiCalls' ;
+import { storeToken, getToken } from '../global/actions/LocalStorage' ;
 
 export default class Login extends Component {
   handelLoginRequest = () => {
@@ -14,8 +15,7 @@ export default class Login extends Component {
       .then(response => {
         if(response.ok){
           response.json().then(data => {
-            //save token 
-
+            storeToken(data.access_token);
           });
         }else{
           Alert.alert('تستهبل؟', 'يا رقمك السري او الجامعي غلط، شيك عليهم', [{text: 'يصير خير'}]);
