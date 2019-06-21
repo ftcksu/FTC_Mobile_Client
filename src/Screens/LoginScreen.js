@@ -9,23 +9,25 @@ import { storeToken } from '../global/actions/LocalStorage' ;
 
 export default class Login extends Component {
 
-  handelLoginRequest = () => {
+  handelLoginRequest = async () => {
     let universityID = this.refs.loginFormRef.state.universityID;
     let password = this.refs.loginFormRef.state.password;
     loginAttempt(universityID, password)
       .then(response => {
-        if(response.ok){
-          response.json().then(data => {
-            storeToken(data.access_token);
+
+        if(response.status == 200 ){
+            storeToken(response.data.access_token);
             this.props.onLogin()
-          });
+
         }else{
+          console.log("login failed: ", response);
           Alert.alert('تستهبل؟', 'يا رقمك السري او الجامعي غلط، شيك عليهم', [{text: 'يصير خير'}]);
-          
         }
       })
       .catch(error => {
         Alert.alert('مشكل كبير', 'يا ان نتك خربان ولا سيرفرنا فاقع', [{text: 'جي جي'}]);
+        console.log('handelLoginRequest: ', error);
+        
       })
     }
     render() {
