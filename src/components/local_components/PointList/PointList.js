@@ -17,19 +17,15 @@ export default class App extends React.Component {
             style={[styles.flatView,this.props.style]}
             data={this.props.data}
             contentContainerStyle={{ flexGrow: 0 }}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <TouchableOpacity onPress={this.props.handelOnCardPress} >
-
                 <UserPointCard
                   bio={item.bio}
-                  name={item.first_name+" "+item.last_name}
-                  imageURL={item.imageURL}
-                  position={item.position}
-                  points={item.points}/>
-
+                  name={item.user.first_name+" "+item.user.last_name}
+                  imageURL={item.user.profilephoto_full_link}
+                  position={index + 1 }
+                  points={item.user.points}/>
               </TouchableOpacity>
-              
-
             )}
         />
       </View>
