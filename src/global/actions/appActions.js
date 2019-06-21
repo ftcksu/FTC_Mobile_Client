@@ -1,25 +1,25 @@
 import { Font } from 'expo';
 import { FONT_LOADED } from './types';
 import { Linking } from 'react-native';
-import fonts from "../../../assets/fonts"
 const whatsappApiURL = "https://wa.me/"
 
-export function fontLoaded() {
-  return (dispatch) => {
-    Font.loadAsync({		
-      'Cairo-Bold': fonts.CairoBold,
-      'Cairo-SemiBold': fonts.CairoSemiBold,
-      'Cairo-Light': fonts.CairoLight,
-      'Cairo-Regular': fonts.CairoRegular,
-      'Cairo-Black': fonts.CairoBlack,
-      'Cairo-ExtraLight': fonts.CairoExtraLight,
-    })
-    .then(() => {
-      dispatch({ type: FONT_LOADED, payload: true });
-    });
-  };
-}
 
 export function goToWhatsapp(phoneNumber) {
     Linking.openURL(whatsappApiURL+phoneNumber);
   }
+
+export function pointListAdapter(list, type){
+  let newList = list.map(element => {
+    if(type == 1){
+      element.user.points = element.user.total_points
+    }
+    else{
+      element.user.points = element.user.weekly_points
+    }
+    return element
+  })
+  let sortedList = newList.sort(function(a, b) { return b.user.points - a.user.points; });
+
+  return sortedList
+
+}
