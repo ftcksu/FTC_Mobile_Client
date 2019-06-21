@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Image, View, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo';
+import { primaryColor, secondaryColor } from "../../global/Constants";
 import FTCStyledText from './FTCStyledText';
 
 // ==========
@@ -14,7 +15,7 @@ export default class GradientButton extends Component {
   render() {
     return (
       <TouchableOpacity style={styles.outer} onPress={this.props.onPress}>
-      <LinearGradient colors={['#3986e0', '#6535bc']} start={[0.0, 0.5]} end={[1.0, 0.5]} style={[styles.inner, this.props.style]}  >
+      <LinearGradient colors={[primaryColor, secondaryColor]} start={[0.0, 0.5]} end={[1.0, 0.5]} style={[styles.inner, this.props.style]}  >
 
             <View style={styles.inner}>
 

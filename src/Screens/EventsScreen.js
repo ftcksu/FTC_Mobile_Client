@@ -6,6 +6,8 @@ import InfoCardList from '../components/shared_components/InfoCardList';
 import content from '../dummy_data/InfoCardData.json';
 import Images from '../../assets/images'
 import { AddEvent } from './AddEvent'
+import { primaryColor } from "../global/Constants";
+
 
 export class EventsScreen extends Component {
 
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
         width: 60,  
         height: 60,   
         borderRadius: 60/2,            
-        backgroundColor: '#3986e0',                                    
+        backgroundColor: primaryColor,                                    
         position: 'absolute',                                          
         bottom: 0,                                                    
         right: 0,
