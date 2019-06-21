@@ -18,7 +18,7 @@ export default class App extends React.Component {
             data={this.props.data}
             contentContainerStyle={{ flexGrow: 0 }}
             renderItem={({ item, index }) => (
-              <TouchableOpacity onPress={this.props.handelOnCardPress} >
+              <TouchableOpacity onPress={this.props.onCardPress} >
                 <UserPointCard
                   bio={item.bio}
                   name={item.user.first_name+" "+item.user.last_name}

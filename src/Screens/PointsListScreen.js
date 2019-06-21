@@ -54,7 +54,7 @@ export class PointsListScreen extends Component {
   }
 
   handelCardPress = () => {
-    this.props.navigation.navigate();
+    this.props.navigation.navigate('UserProfile');
   }
 
   state = {
@@ -98,7 +98,7 @@ export class PointsListScreen extends Component {
             inputStyle={{ textAlign: 'right' }}
           />
           <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} selectedIndex={this.state.listType} handelPress={this.switchList} style={{ width: '80%', alignSelf: 'center' }} />
-          <PointList style={styles.pointList} data={filteredList} />
+          <PointList style={styles.pointList} data={filteredList} onCardPress = {this.handelCardPress} />
         </ScrollView>
       </SafeAreaView>
 
