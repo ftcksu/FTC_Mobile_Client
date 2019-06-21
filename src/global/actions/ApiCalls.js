@@ -11,7 +11,7 @@ export function loginAttempt(universityID, password) {
   return post('/auth/login', body)
 }
 
-  export function getLeaderboard() {
-    return get('/point/leaderboard');
-  }
+export function getLeaderboard() {
+  return get('/point/leaderboard');
+}
 
