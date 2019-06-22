@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Image, View, StyleSheet } from 'react-native'
-import ScreenBackground from '../components/shared_components/ScreenBackground'
-import FTCStyledText from '../components/shared_components/FTCStyledText'
+import { ScreenBackground,FTCStyledText } from '../components'
 import images from '../../assets/images';
 
-export default class SplashScreen extends Component {
+export class SplashScreen extends Component {
   render() {
     return (
       <View style={styles.container}>

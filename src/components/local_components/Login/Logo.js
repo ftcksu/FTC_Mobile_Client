@@ -3,7 +3,7 @@ import { Image, View, StyleSheet } from 'react-native'
 import FTCStyledText from '../../shared_components/FTCStyledText'
 import images from '../../../../assets/images';
 
-export default class Logo extends Component {
+export class Logo extends Component {
   render() {
     return (
       <View style={[styles.container,this.props.style]}>

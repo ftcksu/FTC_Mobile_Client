@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, SafeAreaView } from 'react-native';
-import InfoCardList from '../components/shared_components/InfoCardList';
+import { InfoCardList } from '../components';
 import content from '../dummy_data/InfoCardData.json';
 
 export class Home extends Component {

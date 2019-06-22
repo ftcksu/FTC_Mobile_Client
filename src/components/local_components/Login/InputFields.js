@@ -6,7 +6,7 @@ import { inputFieldStyle } from "../../../global/styles/inputFieldStyle"
       inputContainerStyle, containerStyle, inputStyle
     } = inputFieldStyle;
 
-export default class componentName extends Component {
+export class componentName extends Component {
   render() {
     return (
       <View>

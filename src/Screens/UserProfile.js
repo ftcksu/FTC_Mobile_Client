@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, ScrollView, Image } from 'react-native'
-import PointPerDayCard from "../../shared_components/PointPerDayCard";
-import ScreenBackground from "./..//MyProfile/ScreenBackground";
-import NameAndImage from '../../shared_components/NameAndImage';
+import { View, StyleSheet, FlatList, ScrollView } from 'react-native'
+import { PointPerDayCard, ScreenBackground, NameAndImage } from "../components";
 import ActionButton from 'react-native-circular-action-menu';
 import { FontAwesome } from '@expo/vector-icons';
+import * as _ from "lodash";
+import moment from "moment";
 
 
 
@@ -12,7 +12,31 @@ const SOCIALMEDIACIRCLESIZE = 45;
 const SOCIALMEDIAICONSIZE = 35
 
 
-export default class UserProfile extends Component {
+export class UserProfile extends Component {
+
+    state = {
+        user:this.props.navigation.state.params.user,
+        tasks: this.getGroupedByMonth(this.props.navigation.state.params.user.tasks)
+    }
+
+    _keyExtractor = (item, index) => item.id;
+
+    // helper function to get the month name from an item
+    monthName = (item) => {
+        console.log(item);
+    }
+    
+    // group items by month name and then get the name for each month
+    getGroupedByMonth(arr){
+        var groups = _.groupBy(arr, (item) => moment(item.date, 'YYYY-MM-DD').format('MMM'))
+        console.log('getGroupedByMonth: ',groups);
+        return groups;
+    }
+
+    componentDidMount(){
+
+        
+    }
 
     renderSocialMedia() {
         return(
@@ -56,10 +80,10 @@ export default class UserProfile extends Component {
             </View>
             <View pointerEvents={'none'}>
                 <FlatList
-                    data={["this.props.data","this.props.data","this.props.data","this.props.data","this.props.data","this.props.data"]}
+                    data={this.state.tasks.Jun}
                     contentContainerStyle={styles.flatListContentContainer}
                     renderItem={({ item }) => (
-                    <PointPerDayCard/>
+                    <PointPerDayCard tasks = {item} />
                     )}
                 />
             </View>

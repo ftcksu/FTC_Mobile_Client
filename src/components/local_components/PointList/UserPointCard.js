@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Image, StyleSheet, ImageBackground } from 'react-native'
-import FTCStyledText from './shared_components/FTCStyledText'
+import { FTCStyledText } from '../../shared_components'
+import images from "../../../../assets/images";
 
 /*
                             Props:
                   points, name, bio, imageURL, position
 */
-export default class UserPointCard extends React.Component {
+export class UserPointCard extends React.Component {
   render() {
     return( 
       <View>
@@ -29,7 +30,7 @@ export default class UserPointCard extends React.Component {
         </View>
 
         <ImageBackground style={styles.imagesContainer} imageStyle={styles.imagesContainer} source={{uri:this.props.imageURL }} >
-          <Image style={styles.circleImage} source={require('../../assets/images/crowns.png')} />
+          <Image style={styles.circleImage} source={images.crownIcon} />
         </ImageBackground>
 
         <View style={styles.positionContainer} >

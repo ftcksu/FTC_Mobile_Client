@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
-import FTCStyledText from './FTCStyledText'
+import { FTCStyledText } from "./";
 import ImageView from 'react-native-image-view';
 import Pulse from 'react-native-pulse';
 
 
-export default class NameAndImage extends Component {
+export class NameAndImage extends Component {
 
   constructor(props){
     super(props);

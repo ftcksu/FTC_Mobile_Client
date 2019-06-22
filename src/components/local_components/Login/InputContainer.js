@@ -5,24 +5,34 @@ import { inputFieldStyle } from "../../../global/styles/inputFieldStyle"
     const {
       inputContainerStyle, containerStyle, inputStyle
     } = inputFieldStyle;
-export default class InputContainer extends Component {
+export class InputContainer extends Component {
+  state = {
+    universityID: '436105865',
+    password: '12345'
+  }
   render() {
     return (
       <View style={this.props.style} >
         <View style={styles.inputContainer1}/>
-        <View style={styles.inputContainer2}>
+        <View style={styles.inputContainer2} >
           <Input
+            keyboardType={'numeric'}
             placeholder={'الرقم الجامعي'}
-            inputContainerStyle={inputContainerStyle}
+            value="436105865"
+            inputContainerStyle={[inputContainerStyle, {height: 50}]}
             containerStyle={[containerStyle]}
             inputStyle={inputStyle}
+            onChangeText={(text) => this.setState({universityID: text})}
+
           />
           <Input
             placeholder={'كلمة المرور'}
+            value="12345"
             secureTextEntry={true}
-            inputContainerStyle={inputContainerStyle}
+            inputContainerStyle={[inputContainerStyle, {height: 50}]}
             containerStyle={[containerStyle]}
             inputStyle={inputStyle}
+            onChangeText={(text) => this.setState({password: text})}
           />
           {this.props.children}
         </View>

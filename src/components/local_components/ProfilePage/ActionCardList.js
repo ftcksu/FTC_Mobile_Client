@@ -4,7 +4,7 @@ import FTCStyledText from '../../shared_components/FTCStyledText';
 import ActionCard  from './ActionCard';
 
 
-export default class ActionCardList extends React.Component {
+export class ActionCardList extends React.Component {
 
   render() {
     return (

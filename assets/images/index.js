@@ -14,7 +14,9 @@ const images = {
     logout: require('./logout.png'),
 
     roundAdd: require('./round-add-button.png'),
-    checkIcon: require('./check-icon.png')
+    checkIcon: require('./check-icon.png'),
+    crownIcon: require('./crowns.png')
+
 }
 
 export default images

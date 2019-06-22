@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { View, Image, TouchableOpacity } from 'react-native'
-import FTCStyledText from "../../shared_components/FTCStyledText";
+import { FTCStyledText, ParticipantsDetails } from "../../";
 import Modal from "react-native-modal/src/index";
-import ParticipantsDetails from "../../shared_components/ParticipantsDetails";
 
-export default class EventLeaderDetails extends Component {
+export class EventLeaderDetails extends Component {
   state = {
     isModalVisible: false,
   };
