@@ -25,6 +25,8 @@
     "react-native-pulse": "^1.0.7",
     "react-native-responsive-linechart": "^1.5.0",
     "react-native-super-grid": "^3.0.0",
+    "react-native-swipe-gestures": "^1.0.3",
+    "react-native-swipeable": "^0.6.0",
     "react-navigation": "^3.0.9",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
