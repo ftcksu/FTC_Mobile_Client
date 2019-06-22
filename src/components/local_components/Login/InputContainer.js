@@ -5,7 +5,7 @@ import { inputFieldStyle } from "../../../global/styles/inputFieldStyle"
     const {
       inputContainerStyle, containerStyle, inputStyle
     } = inputFieldStyle;
-export default class InputContainer extends Component {
+export class InputContainer extends Component {
   state = {
     universityID: '436105865',
     password: '12345'

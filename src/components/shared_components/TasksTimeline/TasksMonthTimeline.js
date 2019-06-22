@@ -1,24 +1,21 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
-import FTCStyledText from './FTCStyledText'
-import PointRecordCard from '../local_components/History/PointRecordCard'
+import FTCStyledText from '../'
 
-export default class componentName extends Component {
+export class TasksMonthTimeline extends Component {
   render() {
     return (
       <View style={styles.container} >
-
       <FlatList
             style={styles.flatView}
-            data={["this.props.data","this.props.data","this.props.data"]}
+            data={this.state.task}
             contentContainerStyle={{ flexGrow: 0 }}
             renderItem={({ item }) => (
-            <PointRecordCard style={styles.pointHistoryCard}  />
+            <PointRecordCard style={styles.pointHistoryCard} description = {item.description}  />
             )}/>
-
         <View style={styles.dateAndLineContainer} >
             <FTCStyledText style={styles.date} >
-                20 DEC
+                {this.state.task.date}
             </FTCStyledText>
             <View style={styles.whiteLine}  />
         </View>

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { goToWhatsapp } from "../../global/actions/appActions";
 
 
-export default class ParticipantsDetails extends Component {
+export class ParticipantsDetails extends Component {
   renderWhatsappButton(){
     return (
       <Button

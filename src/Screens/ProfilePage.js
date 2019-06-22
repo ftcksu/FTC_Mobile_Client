@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
-import FTCStyledText from '../components/shared_components/FTCStyledText';
-import InfoCardList from '../components/shared_components/InfoCardList';
+import { InfoCardList, ActionCardList , NameAndImage} from '../components';
 import content from '../dummy_data/InfoCardData.json';
-import ImageView from 'react-native-image-view';
 import UserData from '../dummy_data/UserProfile.json';
-import ActionCardList from '../components/local_components/ProfilePage/ActionCardList';
 import Images from '../../assets/images'
-import NameAndImage from '../components/shared_components/NameAndImage';
 
 
 const actionList = [

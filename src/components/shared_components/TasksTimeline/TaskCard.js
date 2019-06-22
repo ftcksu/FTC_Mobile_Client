@@ -1,20 +1,14 @@
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
-import FTCStyledText from '../../shared_components/FTCStyledText'
+import FTCStyledText from '../FTCStyledText'
 import { Icon } from 'react-native-elements/src/index';
 
-export default class PointRecordCard extends Component {
+export class TaskCard extends Component {
   render() {
     return (
       <View style={styles.container} >
-        <Icon
-            style={styles.icon}
-            name='ios-information-circle'
-            type='ionicon'
-            color='#fff'
-        />
 
-        <FTCStyledText style={styles.text} > {60+"+ نقطة"} </FTCStyledText>
+        <FTCStyledText style={styles.text} >{this.props.description}</FTCStyledText>
 
       </View>
     )

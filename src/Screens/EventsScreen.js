@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { 
     ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Image, View
  } from 'react-native';
-import InfoCardList from '../components/shared_components/InfoCardList';
+import { InfoCardList } from '../components';
 import content from '../dummy_data/InfoCardData.json';
 import Images from '../../assets/images'
-import { AddEvent } from './AddEvent'
 import { primaryColor } from "../global/Constants";
 
 

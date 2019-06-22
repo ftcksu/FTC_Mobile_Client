@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
-import ScreenBackground from '../components/shared_components/ScreenBackground'
-import NameAndImage from '../components/shared_components/NameAndImage'
-import TotalPoints from '../components/local_components/MyProfile/TotalPoints'
-import DoubleLineChart from '../components/local_components/MyProfile/DoubleLineChart'
+import { ScreenBackground, NameAndImage, TotalPoints, DoubleLineChart } from '../components'
 
 export class MyProfile extends Component {
   

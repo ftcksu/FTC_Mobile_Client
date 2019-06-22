@@ -13,7 +13,7 @@ import Images from '../../../../assets/images'
   cardTypesIcon, type=STRING either announcment, attend or organize
 */
 
-export default class ActionsCard extends React.Component {
+export class ActionsCard extends React.Component {
   render() {
     return (
       <View style={styles.container}>

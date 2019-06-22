@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
-import FTCSyteledText from '../components/shared_components/FTCStyledText'
-import { MaxParticipants } from '../components/local_components/AddEvent/MaxParticipants'
-import { InputFields } from '../components/local_components/AddEvent/InputFields'
-import { AttendToggle } from '../components/shared_components/AttendToggle'
-import { CurrentParticipants } from '../components/local_components/AddEvent/CurrentParticipants';
-import { NotifiCheck } from '../components/local_components/AddEvent/NotifiCheck'
-import { SubmitButton } from '../components/local_components/AddEvent/SubmitButton'
-import { AutocompleteEventParticipants } from '../components/local_components/AddEvent/AutocompleteEventParticipants'
+import { FTCSyteledText, MaxParticipants, InputFields, AttendToggle, CurrentParticipants, NotifiCheck, SubmitButton, AutocompleteEventParticipants } from '../components'
 import data from '../dummy_data/autocompleteData.json'
 
 /* Need some work on the naming. */

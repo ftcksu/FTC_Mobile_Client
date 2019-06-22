@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import FTCStyledText from '../../shared_components/FTCStyledText'
+import { FTCStyledText } from '../../'
 import Pulse from 'react-native-pulse';
 
 
-export default class TotalPoints extends Component {
+export class TotalPoints extends Component {
   render() {
     return (
       <View style={styles.TextContainer}>

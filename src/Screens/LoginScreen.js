@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, KeyboardAvoidingView, Alert } from 'react-native'
-import InputContainer from '../components/local_components/Login/InputContainer'
+import { InputContainer, ScreenBackground, GradientButton} from '../components'
 import Logo from '../components/local_components/Login/Logo'
-import ScreenBackground from '../components/shared_components/ScreenBackground'
-import LoginButton from '../components/shared_components/GradientButton'
 import { loginAttempt } from '../global/actions/ApiCalls' ;
 import { storeToken } from '../global/actions/LocalStorage' ;
 
@@ -37,7 +35,7 @@ export default class Login extends Component {
         <Logo style={styles.imageCont} />
         <KeyboardAvoidingView behavior="position" enabled style={{height:'50%',width:'100%'}}>
           <InputContainer ref="loginFormRef" style={{height:'100%',width:'100%'}}>
-            <LoginButton title={"تسجيل دخول"} onPress={this.handelLoginRequest} />
+            <GradientButton title={"تسجيل دخول"} onPress={this.handelLoginRequest} />
           </InputContainer>
         </KeyboardAvoidingView>
       </View>

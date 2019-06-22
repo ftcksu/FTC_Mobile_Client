@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import PointList from '../components/local_components/PointList/PointList';
 import { ScrollView, SafeAreaView, Alert, ActivityIndicator } from "react-native";
 import { SearchBar } from 'react-native-elements/src/index';
-import { AttendToggle } from "../components/shared_components/AttendToggle";
-import FTCStyledText from '../components/shared_components/FTCStyledText';
-import { TextStyles } from "../global/styles/TextStyles"
-import { getLeaderboard } from "../global/actions/ApiCalls";
-import { pointListAdapter } from "../global/actions/appActions";
-import { loadingStyle } from "../global/styles/Misc";
-import { primaryColor } from "../global/Constants";
+import { AttendToggle, FTCStyledText, PointList } from "../components";
+import { getLeaderboard, pointListAdapter, loadingStyle, primaryColor, TextStyles } from "../global";
 const {
   header
 } = TextStyles;
@@ -56,8 +50,9 @@ export class PointsListScreen extends Component {
     this.setState({listType : type})
   }
 
-  handelCardPress = () => {
-    this.props.navigation.navigate('UserProfile');
+  handelCardPress = (item) => {
+    // console.log('handelCardPress ',item);
+    this.props.navigation.navigate('UserProfile', {user: item});
   }
 
   state = {

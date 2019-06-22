@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, FlatList, ScrollView, Image, TouchableOpacity } from 'react-native'
-import PointPerDayCard from '../components/shared_components/PointPerDayCard'
-import ScreenBackground from '../components/shared_components/ScreenBackground'
-import FTCStyledText from '../components/shared_components/FTCStyledText'
+import { TasksMonthTimeline, ScreenBackground, FTCStyledText} from "../components";
 import Images from "../../assets/images";
 
 
@@ -38,7 +36,7 @@ export class History extends Component {
             data={["this.props.data","this.props.data","this.props.data","this.props.data","this.props.data","this.props.data"]}
             contentContainerStyle={styles.flatListContentContainer}
             renderItem={({ item }) => (
-            <PointPerDayCard/>
+            <TasksMonthTimeline/>
             )}
         />
         </View>

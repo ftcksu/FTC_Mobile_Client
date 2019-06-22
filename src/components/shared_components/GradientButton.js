@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Image, View, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo';
 import { primaryColor, secondaryColor } from "../../global/Constants";
-import FTCStyledText from './FTCStyledText';
+import {FTCStyledText} from './';
 
 // ==========
 // props: 
@@ -11,7 +11,7 @@ import FTCStyledText from './FTCStyledText';
 //    onPress
 // ==========
 
-export default class GradientButton extends Component {
+export class GradientButton extends Component {
   render() {
     return (
       <TouchableOpacity style={styles.outer} onPress={this.props.onPress}>

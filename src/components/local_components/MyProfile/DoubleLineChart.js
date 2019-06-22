@@ -54,7 +54,7 @@ const config1 = {
     backgroundColor: "transparent",
   };
 
-export default class DoubleLineChart extends Component {
+export class DoubleLineChart extends Component {
   render() {
     return (
       <View style={styles.container}>
