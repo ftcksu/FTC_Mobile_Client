@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PointList from '../components/local_components/PointList/PointList';
-import { ScrollView, SafeAreaView, Alert } from "react-native";
+import { ScrollView, SafeAreaView, Alert, ActivityIndicator } from "react-native";
 import { SearchBar } from 'react-native-elements/src/index';
 import { AttendToggle } from "../components/shared_components/AttendToggle";
 import FTCStyledText from '../components/shared_components/FTCStyledText';
 import { TextStyles } from "../global/styles/TextStyles"
 import { getLeaderboard } from "../global/actions/ApiCalls";
 import { pointListAdapter } from "../global/actions/appActions";
-
+import { loadingStyle } from "../global/styles/Misc";
+import { primaryColor } from "../global/Constants";
 const {
   header
 } = TextStyles;
@@ -22,6 +23,7 @@ export class PointsListScreen extends Component {
   }
 
   fetchLeaderboard = () => {
+    this.setState({isLoading:true})
     getLeaderboard().then(response => {
       console.log(response.status);
       if(response.status == 200){
@@ -30,10 +32,12 @@ export class PointsListScreen extends Component {
         Alert.alert('تستهبل؟', 'يا رقمك السري او الجامعي غلط، شيك عليهم', [{text: 'يصير خير'}]);
         
       }
+      this.setState({isLoading:false})
     })
     .catch(error => {
       Alert.alert('مشكل كبير', 'يا ان نتك خربان ولا سيرفرنا فاقع', [{text: 'جي جي'}]);
       console.log(error);
+      this.setState({isLoading:false})
     })
   }
 
@@ -60,7 +64,8 @@ export class PointsListScreen extends Component {
   state = {
     search: '',
     members: [],
-    listType: 1
+    listType: 1,
+    isLoading: false
   };
 
   updateSearch = search => {
@@ -83,7 +88,7 @@ export class PointsListScreen extends Component {
     filteredList = this.renderList(search)
     return (
       <SafeAreaView style={{ flex: 1 }}>
-
+        <ActivityIndicator style={loadingStyle} animating={this.state.isLoading} size="large" color={primaryColor} />
         <ScrollView style={styles.container} >
           <FTCStyledText style={header} > قائمة النقاط </FTCStyledText>
           <SearchBar
