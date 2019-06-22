@@ -114,7 +114,6 @@ export class EditProfile extends Component {
 
     let result = await ImagePicker.launchCameraAsync(options)
 
-    console.log(result)
 
     if (!result.cancelled) {
       this.setState({ image: result.uri })

@@ -25,7 +25,6 @@ export class PointsListScreen extends Component {
   fetchLeaderboard = () => {
     this.setState({isLoading:true})
     getLeaderboard().then(response => {
-      console.log(response.status);
       if(response.status == 200){
           this.sortList(response.data);
       }else{
@@ -73,9 +72,7 @@ export class PointsListScreen extends Component {
   };
 
   renderList(search) {
-    const { members } = this.state;
-    console.log('renderList ', members[0]);
-    
+    const { members } = this.state;    
     if (search === '') {
       return members;
     }

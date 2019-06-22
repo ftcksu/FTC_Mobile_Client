@@ -44,7 +44,6 @@ export default class FTC extends React.Component {
   _checkLogin = () => {
 
     getToken().then(token => {
-      console.log(token);
       
       this.setState({ isLoggedIn: token }); // if he's logged in, token will be a string, meaning (true) if not, it will be null, meaning (false)
     })

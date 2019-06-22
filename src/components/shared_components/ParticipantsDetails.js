@@ -26,8 +26,6 @@ export default class ParticipantsDetails extends Component {
     )
   }
   render() {
-    
-      console.log(this.props);
     return (
       <TouchableWithoutFeedback onPress={this.props.callback}>
         <View style={styles.container}>

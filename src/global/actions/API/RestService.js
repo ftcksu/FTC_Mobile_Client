@@ -15,7 +15,7 @@ import { getToken } from "../LocalStorage";
         const token = await getToken()
     
         if (!token) {
-          console.log(`A request hab been initiated with no token stored.`);
+          console.log(`A request have been initiated with no token stored.`);
         }
         console.log("_getHeaders: " + token);
         return {

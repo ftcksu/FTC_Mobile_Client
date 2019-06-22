@@ -72,7 +72,6 @@ export class ProfilePage extends Component {
   }
 
   handleSettingsPress = () => {
-    console.log('this is handler')
     this.props.navigation.navigate("EditProfilePage")
   }
 
