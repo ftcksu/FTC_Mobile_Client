@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Image, View, ScrollView, TouchableOpacity } from 'react-native'
-import ScreenBackground from "../components/shared_components/ScreenBackground";
-import FTCStyledText from "../components/shared_components/FTCStyledText";
-import { TextStyles } from "../global/styles/TextStyles"
+import { View, ScrollView } from 'react-native'
+// Commented by Basel 18/06/2019 - Putting the header in a seperate component for reusability.
+// import ScreenBackground from "../components/shared_components/ScreenBackground";
+// import FTCStyledText from "../components/shared_components/FTCStyledText";
+// import { TextStyles } from "../global/styles/TextStyles"
+import ScreenWithHeader from "../components/shared_components/ScreenWithHeader";
 import Images from "../../assets/images";
 import EventLeaderDetails from "../components/local_components/EventDetails/EventLeaderDetails";
 import Participants from "../components/local_components/EventDetails/Participants";
@@ -12,12 +14,24 @@ import GradientButton from "../components/shared_components/GradientButton";
 import data from "../dummy_data/autocompleteData.json";
 import { goToWhatsapp } from "../global/actions/appActions";
 
-    const {
-      header2, subtitle
-    } = TextStyles;
+    // const {
+    //   header2, subtitle
+    // } = TextStyles;
 
     
   export class EventDetailsScreen extends Component {
+
+    constructor(props) {
+      super(props);
+   
+      this.state = {
+         event: {
+           title: "فعالية كيف نشرب شاهي",
+           subtitle: "هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشهي الكويس والشاهي الخايس",
+           isRegisterd: 1
+         }
+      }
+   }
 
     renderWhatsappButton(){
       return (
@@ -38,21 +52,26 @@ import { goToWhatsapp } from "../global/actions/appActions";
           />
       )
     }
+
+   
     handelBackButtonPress = () =>{
       this.props.navigation.pop();
-    }
-    renderHeader(){
-      return(
-        <View style={styles.headerContainer} >
-          <TouchableOpacity style={styles.cancelIcon} onPress={this.handelBackButtonPress}>
-            <Image source={Images.cancel} style={styles.cancelIcon} />
-          </TouchableOpacity>
-          <FTCStyledText style={header2} > هاكاثون المستقبل النسخة الثانية</FTCStyledText>
-          <FTCStyledText style={[subtitle,{marginTop:15, width:'60%'}]} > تطوير حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة تدريس </FTCStyledText>
-          <Image source={Images.calenderIcon} style={styles.eventIcon} />
-        </View>
-      )
-    }
+    }    
+
+    // Commented by Basel 18/06/2019 - Putting the header in a seperate component for reusability.
+
+    // renderHeader(){
+    //   return(
+    //     <View style={styles.headerContainer} >
+    //       <TouchableOpacity style={styles.cancelIcon} onPress={this.handelBackButtonPress}>
+    //         <Image source={Images.cancel} style={styles.cancelIcon} />
+    //       </TouchableOpacity>
+    //       <FTCStyledText style={header2} > هاكاثون المستقبل النسخة الثانية</FTCStyledText>
+    //       <FTCStyledText style={[subtitle,{marginTop:15, width:'60%'}]} > تطوير حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة تدريس </FTCStyledText>
+    //       <Image source={Images.calenderIcon} style={styles.eventIcon} />
+    //     </View>
+    //   )
+    // }
 
     renderLeader(){
       leader = data.filter((item) => {
@@ -72,18 +91,42 @@ import { goToWhatsapp } from "../global/actions/appActions";
       );
     }
 
+    renderAppropriateButton() {
+      if(this.state.event.isRegisterd == 0){
+        return (
+          <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" onPress={this._handleAppropriateButton}/>
+        );
+      } 
+      return (
+
+          <GradientButton icon={Images.recordPoints} style={{alignSelf:'center',marginTop:15}} title="رصد أعمالي" onPress={this._handleAppropriateButton}/>
+
+      );
+    }
+
+    _handleAppropriateButton = () => {
+      if(this.state.event.isRegisterd == 0){
+        // Register the user in the backend HERE
+        // **********************************
+        this.handelBackButtonPress()
+      }
+      this.props.navigation.navigate("RegisterWork")
+    }
+
+
   render() {
     
     return (
       <ScrollView bounces={false}>
-        <ScreenBackground />
-        {this.renderHeader()}
+        <ScreenWithHeader title={this.state.event.title} subtitle={this.state.event.subtitle} showCalender={true} backFuction={this.handelBackButtonPress}>
         <View style={styles.content} >
           {this.renderLeader()}
           {this.renderParticipants()}
-          {this.renderWhatsappButton()}
-          <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" />
+          {this.state.event.isRegisterd == 1 ? this.renderWhatsappButton() : <View style={[styles.whatsappButton, {backgroundColor: 'white'}]}/> /* to take the same dimensions as the whatsapp button, and keep the bakcground as white */}
+        {this.renderAppropriateButton()}
+          
         </View>
+        </ScreenWithHeader>
       </ScrollView>
     )
   }

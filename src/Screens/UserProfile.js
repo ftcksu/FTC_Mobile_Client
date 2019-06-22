@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, ScrollView, Image } from 'react-native'
-import PointPerDayCard from "../../shared_components/PointPerDayCard";
+import { View, StyleSheet, FlatList, ScrollView } from 'react-native'
+import PointPerDayCard from "../components/shared_components/PointPerDayCard";
 import ScreenBackground from "./..//MyProfile/ScreenBackground";
-import NameAndImage from '../../shared_components/NameAndImage';
+import NameAndImage from '../components/shared_components/NameAndImage';
 import ActionButton from 'react-native-circular-action-menu';
 import { FontAwesome } from '@expo/vector-icons';
 

@@ -5,7 +5,7 @@ import Navigator from '../Navigator'
 import Login from './LoginScreen'
 import { AddEvent } from './AddEvent';
 import {UserProfile, SendNotification} from "./";
-
+import {RegisterWork} from "./RegisterWork";
 
 export default class FTC extends React.Component {
 
