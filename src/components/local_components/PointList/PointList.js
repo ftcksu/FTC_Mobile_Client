@@ -20,7 +20,7 @@ export default class App extends React.Component {
             renderItem={({ item, index }) => (
               <TouchableOpacity onPress={this.props.onCardPress} >
                 <UserPointCard
-                  bio={item.bio}
+                  bio={item.user.bio}
                   name={item.user.first_name+" "+item.user.last_name}
                   imageURL={item.user.profilephoto_full_link}
                   position={index + 1 }
