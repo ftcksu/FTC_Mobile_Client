@@ -8,14 +8,14 @@ export class TasksMonthTimeline extends Component {
       <View style={styles.container} >
       <FlatList
             style={styles.flatView}
-            data={this.state.task}
+            data={this.state.tasks}
             contentContainerStyle={{ flexGrow: 0 }}
             renderItem={({ item }) => (
             <PointRecordCard style={styles.pointHistoryCard} description = {item.description}  />
             )}/>
         <View style={styles.dateAndLineContainer} >
             <FTCStyledText style={styles.date} >
-                {this.state.task.date}
+                {this.state.date}
             </FTCStyledText>
             <View style={styles.whiteLine}  />
         </View>

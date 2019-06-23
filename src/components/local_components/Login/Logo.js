@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image, View, StyleSheet } from 'react-native'
-import FTCStyledText from '../../shared_components/FTCStyledText'
+import { FTCStyledText } from '../../'
 import images from '../../../../assets/images';
 
 export class Logo extends Component {

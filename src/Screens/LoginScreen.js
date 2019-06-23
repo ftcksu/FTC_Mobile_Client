@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, KeyboardAvoidingView, Alert } from 'react-native'
-import { InputContainer, ScreenBackground, GradientButton} from '../components'
-import Logo from '../components/local_components/Login/Logo'
+import { InputContainer, ScreenBackground, GradientButton, Logo } from '../components'
 import { loginAttempt } from '../global/actions/ApiCalls' ;
 import { storeToken } from '../global/actions/LocalStorage' ;
 
