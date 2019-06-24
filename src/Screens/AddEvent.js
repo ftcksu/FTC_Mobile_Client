@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, ScrollView } from 'react-native'
-import { FTCSyteledText, MaxParticipants, InputFields, AttendToggle, CurrentParticipants, NotifiCheck, SubmitButton, AutocompleteEventParticipants } from '../components'
+import { View, ScrollView } from 'react-native'
+import { FTCStyledText, MaxParticipants, InputFields, AttendToggle, CurrentParticipants, NotifiCheck, SubmitButton, AutocompleteEventParticipants } from '../components'
 import data from '../dummy_data/autocompleteData.json'
 
 /* Need some work on the naming. */
@@ -96,9 +96,9 @@ export class AddEvent extends Component {
 
   rednerHeader() {
     return (
-      <FTCSyteledText style={styles.headerText} >
+      <FTCStyledText style={styles.headerText} >
         {'إضافة مشروع'}
-      </FTCSyteledText>
+      </FTCStyledText>
     )
   }
 
@@ -155,7 +155,7 @@ export class AddEvent extends Component {
 
   renderSubmitButton() {
     return (
-      <SubmitButton submit={() => this.submitEvent()} />
+      <SubmitButton style={styles.submitButton} submit={() => this.submitEvent()} />
     )
   }
 
@@ -189,7 +189,7 @@ const styles = {
     flex: 1,
   },
   submitButton: {
-    flex: 1,
+    
   },
   notifiCheck: {
     flex: 1,

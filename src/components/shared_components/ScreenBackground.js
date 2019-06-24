@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Animated, Easing, View, Dimensions } from 'react-native'
-import { LinearGradient } from "expo";
+import { LinearGradient } from 'expo-linear-gradient'
 import { primaryColor, secondaryColor } from "../../global/Constants";
 
 export class ScreenBackground extends Component {
