@@ -1,25 +1,27 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
-import FTCStyledText from '../'
+import {FTCStyledText, TaskCard} from '../'
 
 export class TasksMonthTimeline extends Component {
   render() {
     return (
       <View style={styles.container} >
+        <View style={styles.dateAndLineContainer} >
+              <FTCStyledText style={styles.date} >
+                  {this.props.data.date}
+              </FTCStyledText>
+              <View style={styles.whiteLine}  />
+              {this.props.isLast ? <View style={styles.whiteCircle}/> : null }
+          </View>
       <FlatList
             style={styles.flatView}
-            data={this.state.tasks}
-            contentContainerStyle={{ flexGrow: 0 }}
+            data={this.props.data.tasks}
+            contentContainerStyle={{ flexGrow: 0, alignSelf: 'center' }}
             renderItem={({ item }) => (
-            <PointRecordCard style={styles.pointHistoryCard} description = {item.description}  />
-            )}/>
-        <View style={styles.dateAndLineContainer} >
-            <FTCStyledText style={styles.date} >
-                {this.state.date}
-            </FTCStyledText>
-            <View style={styles.whiteLine}  />
-        </View>
-
+            <TaskCard style={styles.pointHistoryCard} description = {item.description}  />
+              )}
+            />
+          
       </View>
     )
   }
@@ -27,13 +29,12 @@ export class TasksMonthTimeline extends Component {
 
 const styles = StyleSheet.create({
     container: {
-       alignItems:'flex-end',
-       justifyContent:"flex-end",
+      width:'76%', //magic DO NOT TOUCH
+       justifyContent:"flex-start",
        flexDirection:'row',
-        marginLeft:30
     },
     flatView:{
-        marginTop:30
+        marginTop:30,
     },
     dateAndLineContainer:{
         alignItems:'center',
@@ -47,6 +48,13 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor:'#fff'
     },
+    whiteCircle:{
+      width:10,
+      marginTop:-1,
+      height:10,
+      borderRadius:10,
+      backgroundColor:'#fff'
+  },
     pointHistoryCard:{
         width:"70%"
     },
