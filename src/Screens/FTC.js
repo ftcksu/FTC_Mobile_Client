@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, } from 'react-native';
-import { Font } from 'expo';
+import * as Font from 'expo-font'
 import Navigator from '../Navigator'
 import Login from './LoginScreen'
-import { AddEvent } from './AddEvent';
-import { UserProfile, SendNotification } from "./";
+import { AddEvent } from './';
+import { TasksTimeline } from "../components";
 import { getToken, deleteToken } from '../global/actions/LocalStorage'
 
 
