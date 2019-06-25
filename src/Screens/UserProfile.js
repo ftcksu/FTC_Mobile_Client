@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, ScrollView } from 'react-native'
-import { PointPerDayCard, ScreenBackground, NameAndImage } from "../components";
+import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import { TasksTimeline, ScreenBackground, NameAndImage } from "../components";
 import ActionButton from 'react-native-circular-action-menu';
 import { FontAwesome } from '@expo/vector-icons';
 import * as _ from "lodash";
 import moment from "moment";
+import { Dimensions } from "react-native";
 
+var width = Dimensions.get('window').width; //full width
+var height = Dimensions.get('window').height; //full height
 
 
 const SOCIALMEDIACIRCLESIZE = 45;
@@ -15,38 +18,17 @@ const SOCIALMEDIAICONSIZE = 35
 export class UserProfile extends Component {
 
     state = {
-        user:this.props.navigation.state.params.user,
-        tasks: this.getGroupedByMonth(this.props.navigation.state.params.user.tasks)
-    }
-
-    _keyExtractor = (item, index) => item.id;
-
-    // helper function to get the month name from an item
-    monthName = (item) => {
-        console.log(item);
-    }
-    
-    // group items by month name and then get the name for each month
-    getGroupedByMonth(arr){
-        var groups = _.groupBy(arr, (item) => moment(item.date, 'YYYY-MM-DD').format('MMM'))
-        console.log('getGroupedByMonth: ',groups);
-        return groups;
-    }
-
-    componentDidMount(){
-
-        
+        user:this.props.navigation.state.params.user.user,
+        tasks:this.props.navigation.state.params.user.tasks
     }
 
     renderSocialMedia() {
         return(
             <ActionButton
-                buttonColor="rgba(231,76,60,1)"
-                position='center'
-            >
+                buttonColor="rgba(231,76,60,1)">
                 <ActionButton.Item buttonColor='#FFFC00' title="Snapchat" size={SOCIALMEDIACIRCLESIZE}>
                     {/* <Image source={snapchat} style={{ height: 35, width: 35 }} tintColor={'white'} /> */}
-                    <FontAwesome name="snapchat-ghost" size={SOCIALMEDIAICONSIZE} color="white" />
+                    <FontAwesome name="snapchat" size={SOCIALMEDIACIRCLESIZE} />
                 </ActionButton.Item>
                 <ActionButton.Item buttonColor='#0077B5' title="LinkedIn" size={SOCIALMEDIACIRCLESIZE}>
                     <FontAwesome name="linkedin" size={SOCIALMEDIAICONSIZE} color="white" />
@@ -63,33 +45,23 @@ export class UserProfile extends Component {
             </ActionButton>
         )
     }
-  render() {
-    return (
-    <View>
-        <ScreenBackground />
-
-        <ScrollView>
-            <View style={styles.container}>
-                <View style={{flex: 0.4}} />
+    renderHeader = () => {
+        return (
+            <SafeAreaView style={styles.headerContainer}>
                 <View style={styles.userInfoContainer}>
-                    <NameAndImage src='https://i.imgur.com/I4bcBnY.jpg' name='على زق' description='يا نواف' style={styles.NameAndImage} imageStyle={styles.image} textStyle={styles.textStyle} showPulse={true}/>
+                    <NameAndImage src={ this.state.user.profilephoto_full_link } name={this.state.user.first_name +' '+ this.state.user.last_name} description={this.state.user.bio} style={styles.NameAndImage} imageStyle={styles.image} textStyle={styles.textStyle} showPulse={true}/>
                 </View>
                 <View style={styles.actionButton}>
                     {this.renderSocialMedia()}
                 </View>
-            </View>
-            <View pointerEvents={'none'}>
-                <FlatList
-                    data={this.state.tasks.Jun}
-                    contentContainerStyle={styles.flatListContentContainer}
-                    renderItem={({ item }) => (
-                    <PointPerDayCard tasks = {item} />
-                    )}
-                />
-            </View>
-            
-        </ScrollView>
-        
+            </SafeAreaView>
+        )
+    }
+  render() {
+    return (
+    <View style={styles.screenContainer} >
+        <ScreenBackground />
+        <TasksTimeline tasks = {this.state.tasks}  header = {this.renderHeader} />
     </View>
     )
   }
@@ -97,9 +69,12 @@ export class UserProfile extends Component {
 
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1, 
-        alignItems: 'center',
+    screenContainer:{
+        flex:1
+    },
+    headerContainer:{
+        width: width - 16, // 16 is margin, width is full width
+        alignSelf:'center'
     },
     NameAndImage: {
         flex: 1,
@@ -118,10 +93,11 @@ const styles = StyleSheet.create({
         borderWidth: 2
     },
     actionButton: {
-        flex: 1, 
-        alignItems: 'center',
-        marginRight: 20,
-        marginTop: 50,
+        padding:60,
+        // flex: 1, 
+        // alignItems: 'center',
+        // marginRight: 20,
+        // marginTop: 50,
     },
     flatListContentContainer:{ 
       flexGrow: 0,
