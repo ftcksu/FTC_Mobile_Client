@@ -1,15 +1,32 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, FlatList, ScrollView, Image, TouchableOpacity } from 'react-native'
-import { TasksMonthTimeline, ScreenBackground, FTCStyledText} from "../components";
+import { TasksMonthTimeline, ScreenBackground, FTCStyledText, TasksTimeline} from "../components";
 import Images from "../../assets/images";
 
-
+const tasks = [
+  {
+      "description": "لها أصوافاً كثيرة وأفعالاً مختلفة، وحركات متفقة ومضادة، وأنعم النظر في ذلك تصفح الأجسام كلها، لا.",
+      "date": "2019-06-23"
+  },
+  {
+      "description": "أسال انه قد انصرف عنه وتباعد من تلك الأشياء الآخر التي يكون له طول وعرض وعمق؛ وهذه المدركات كلها.",
+      "date": "2019-05-11"
+  },
+  {
+      "description": "اخفى قضباناً منه. فكان ذلك اعتراض على فعل الفاعل. وهذا الاعتراض مضاد لما يطلبه من القرب منه.",
+      "date": "2019-04-16"
+  },
+  {
+      "description": "هذه القوى تكون مدركة بالقوة وتكون مدركة بالفعل، وكل واحدة من هذه الثلاثة قد يقال له قلب ولكن لا.",
+      "date": "2019-06-22"
+  }
+]
 export class History extends Component {
   onCancelPress=()=>{
     this.props.navigation.pop()
   }
 
-  renderHeader(){
+  renderHeader = () => {
     return (
       <View style={styles.topContainer} >
           <View style={styles.emptyLeftView} />
@@ -20,30 +37,14 @@ export class History extends Component {
       </View>
     )
   }
+  
 
   render() {
     return (
-      <ScrollView>
+      <View style={{flex:1}} >
         <ScreenBackground/>
-
-        <View style={styles.container} >
-
-        {this.renderHeader()}
-
-        <View style={styles.flatView} >
-        <View style={styles.dateHighlighter} />
-        <FlatList
-            data={["this.props.data","this.props.data","this.props.data","this.props.data","this.props.data","this.props.data"]}
-            contentContainerStyle={styles.flatListContentContainer}
-            renderItem={({ item }) => (
-            <TasksMonthTimeline/>
-            )}
-        />
-        </View>
-
+        <TasksTimeline tasks={tasks} header = {this.renderHeader} />
       </View>
-      </ScrollView>
-
     )
   }
 }
