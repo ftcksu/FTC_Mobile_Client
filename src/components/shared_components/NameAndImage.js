@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import { FTCStyledText } from "./";
-import ImageView from 'react-native-image-view';
 import Pulse from 'react-native-pulse';
 
 
@@ -9,18 +8,6 @@ export class NameAndImage extends Component {
 
   constructor(props){
     super(props);
-
-    // Images has to be an array, because ImageView only takes arrays.
-    this.state = {
-      isImageViewVisible: false,
-      images: [
-        {
-          source: {
-            uri: this.props.src // https://i.imgur.com/I4bcBnY.jpg
-          }
-        }
-      ]
-  };
 
   renderImage = () => {
     return(
@@ -33,7 +20,7 @@ export class NameAndImage extends Component {
           >
           <View>
             {this.props.showPulse? <Pulse color='#ababab' numPulses={3} diameter={300} speed={20} duration={2000}/> : null}
-            <Image style={[styles.image, this.props.imageStyle]} source={ this.state.images[0].source}/>
+            <Image style={[styles.image, this.props.imageStyle]} source={{ uri: this.props.src }}/>
           </View>
         </TouchableWithoutFeedback>
     )
@@ -46,19 +33,10 @@ export class NameAndImage extends Component {
     return (
       <View style={[styles.container, this.props.style]} >
         {
-          renderImage()
+          renderImage() //TODO: imageview replacement
         }
-
-
-        <FTCStyledText style={[styles.name, this.props.textStyle]} >{this.props.name}</FTCStyledText>
-        <FTCStyledText style={[styles.description, this.props.textStyle]}>{this.props.description}</FTCStyledText>
-        <ImageView
-            glideAlways
-            animationType={'slide'}
-            images={this.state.images}
-            imageIndex={0}
-            isVisible={this.state.isImageViewVisible}
-            />
+        <FTCStyledText style={[styles.name, this.props.titleStyle]} >{this.props.name}</FTCStyledText>
+        <FTCStyledText style={[styles.description, this.props.descriptionStyle]}>{this.props.description}</FTCStyledText>
       </View>
     )
   }
@@ -76,15 +54,16 @@ const styles = StyleSheet.create({
         borderRadius: 60,
         },
     name:{
-        color:'#9e9e9e',
+        color: 'white',
         marginTop:15,
         fontFamily: 'Cairo-Bold',
         fontSize: 15
-    }, description: {
+    },
+    description: {
       fontFamily:"Cairo-Regular",
       fontSize: 12,
       textAlign: 'center',
-      color: '#9e9e9e'
+      color: 'white'
     },
   });
 
