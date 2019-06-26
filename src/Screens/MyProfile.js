@@ -1,11 +1,31 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { ScreenBackground, NameAndImage, TotalPoints, DoubleLineChart } from '../components'
+import { getLoggedInUserInfo } from '../global'
 
 export class MyProfile extends Component {
+
+  state = {
+    user :{
+      first_name:'',
+      last_name:'',
+      total_points:''
+    },
+    tasks:{}
+  }
+
+  componentDidMount(){
+    getLoggedInUserInfo().then((response) => {
+      this.setState({
+        user:response.data.user,
+        tasks:response.data.tasks,
+      })
+      console.log('getLoggedInUserInfo: ', response);
+    }).catch(error => console.log('error: ' ,error))
+  }
   
   onPress=()=>{
-    this.props.navigation.navigate("History")
+    this.props.navigation.navigate("History", {"tasks":this.state.tasks})
   }
   
   render() {
@@ -14,10 +34,10 @@ export class MyProfile extends Component {
         <ScreenBackground/>
         <View style={styles.container}  >
 
-          <NameAndImage src='https://i.imgur.com/I4bcBnY.jpg' name='ابو حاتم'/>
+          <NameAndImage src={this.state.user.profilephoto_full_link} name={this.state.user.first_name +' '+ this.state.user.last_name}/>
 
           <TouchableOpacity onPress={this.onPress} >
-            <TotalPoints/>
+            <TotalPoints points= {this.state.user.total_points} />
           </TouchableOpacity>
 
           <View style={styles.chart} >

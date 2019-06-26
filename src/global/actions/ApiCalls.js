@@ -15,3 +15,6 @@ export function getLeaderboard() {
   return get('/point/leaderboard');
 }
 
+export function getLoggedInUserInfo() {
+  return get('/auth/userInfo');
+}
