@@ -1,40 +1,26 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, ScrollView, Image, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, FlatList, SafeAreaView, Image, TouchableOpacity } from 'react-native'
 import { TasksMonthTimeline, ScreenBackground, FTCStyledText, TasksTimeline} from "../components";
 import Images from "../../assets/images";
 
-const tasks = [
-  {
-      "description": "لها أصوافاً كثيرة وأفعالاً مختلفة، وحركات متفقة ومضادة، وأنعم النظر في ذلك تصفح الأجسام كلها، لا.",
-      "date": "2019-06-23"
-  },
-  {
-      "description": "أسال انه قد انصرف عنه وتباعد من تلك الأشياء الآخر التي يكون له طول وعرض وعمق؛ وهذه المدركات كلها.",
-      "date": "2019-05-11"
-  },
-  {
-      "description": "اخفى قضباناً منه. فكان ذلك اعتراض على فعل الفاعل. وهذا الاعتراض مضاد لما يطلبه من القرب منه.",
-      "date": "2019-04-16"
-  },
-  {
-      "description": "هذه القوى تكون مدركة بالقوة وتكون مدركة بالفعل، وكل واحدة من هذه الثلاثة قد يقال له قلب ولكن لا.",
-      "date": "2019-06-22"
-  }
-]
 export class History extends Component {
+
+  state= {
+    tasks:this.props.navigation.state.params.tasks
+  }
   onCancelPress=()=>{
     this.props.navigation.pop()
   }
 
   renderHeader = () => {
     return (
-      <View style={styles.topContainer} >
+      <SafeAreaView style={styles.topContainer} >
           <View style={styles.emptyLeftView} />
-          <FTCStyledText style={styles.title} > تاريخ نقاطك </FTCStyledText>
+          <FTCStyledText style={styles.title} > تاريخ أعمالك </FTCStyledText>
           <TouchableOpacity onPress={this.onCancelPress}>
             <Image source={Images.cancel} style={styles.icon} />
           </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     )
   }
   
@@ -43,7 +29,7 @@ export class History extends Component {
     return (
       <View style={{flex:1}} >
         <ScreenBackground/>
-        <TasksTimeline tasks={tasks} header = {this.renderHeader} />
+        <TasksTimeline tasks={this.state.tasks} header = {this.renderHeader} />
       </View>
     )
   }
@@ -57,16 +43,19 @@ const styles = StyleSheet.create({
     marginTop:15
   },
   topContainer:{
-    marginTop:30, flexDirection: 'row', width: '100%', justifyContent: 'space-between' 
+     flexDirection: 'row', width: '100%', justifyContent: 'space-between' 
   },
   emptyLeftView:{
-    width:30
+    width:35,
+    marginLeft:10
   },
   title:{
+    flex:1,
     fontSize:20,
     fontFamily:'Cairo-Bold',
     color:'white',
-    alignSelf:"center"
+    textAlign:'center',
+
   },
   flatView:{
     paddingLeft:10,
