@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { View, FlatList } from 'react-native'
-import { TasksMonthTimeline } from "../../";
+import { TasksMonthTimeline, FTCStyledText } from "../../";
 import * as _ from "lodash";
-	import moment from "moment";
-
-console.disableYellowBox = true;
+import moment from "moment";
 export class TasksTimeline extends Component {
 
   state={
@@ -38,7 +36,7 @@ export class TasksTimeline extends Component {
   render() {
     const data = this.joinTasksByDate(this.state.tasks);
     return (
-          <View >
+          <View>
             <FlatList
                 ListHeaderComponent={this.props.header}
                 data={data}
@@ -51,4 +49,3 @@ export class TasksTimeline extends Component {
     )
   }
 }
-

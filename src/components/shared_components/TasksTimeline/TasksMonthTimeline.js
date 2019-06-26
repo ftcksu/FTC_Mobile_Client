@@ -46,14 +46,14 @@ const styles = StyleSheet.create({
     whiteLine:{
         width:5,
         flex:1,
-        backgroundColor:'#fff'
+        backgroundColor:'#fff',
     },
     whiteCircle:{
       width:10,
       marginTop:-1,
       height:10,
       borderRadius:10,
-      backgroundColor:'#fff'
+      backgroundColor:'#fff',
   },
     pointHistoryCard:{
         width:"70%"
