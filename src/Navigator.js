@@ -59,8 +59,8 @@ const pointsStack = createStackNavigator(
 
 const profileStack = createStackNavigator(
   {
-    EditProfilePage: EditProfile,
     ProfilePage: ProfilePage,
+    EditProfilePage: EditProfile,
   },
   {
     headerMode:'none'
