@@ -22,7 +22,7 @@ export const inputFieldStyle = {
     inputStyle: {
       fontFamily: 'Cairo-Bold',
       textAlign: 'right',
-      fontSize: 18,
+      fontSize: 14,
       color: '#868686'
     },
   }

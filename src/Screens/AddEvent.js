@@ -111,6 +111,7 @@ export class AddEvent extends Component {
     return (
       <View style={styles.inputSection}>
         <InputFields
+    
           updateState={(state) => this.updateState(state)}
           date={this.state.eventDate}
         />

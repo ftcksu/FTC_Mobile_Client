@@ -21,7 +21,6 @@ export class AttendToggle extends Component {
     ]
     return (
       <ButtonGroup
-      
         onPress={(index) => this.props.onPress(index)}
         selectedIndex={this.props.selectedIndex}
         buttons={buttons}
@@ -41,5 +40,6 @@ const styles = {
     width: '100%',
     borderRadius: 0,
     backgroundColor: '#eeeeee',
+    borderRadius:10
   }
 }

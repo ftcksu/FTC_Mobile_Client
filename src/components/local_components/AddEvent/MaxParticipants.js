@@ -122,8 +122,9 @@ const styles = {
     paddingRight: 15,
   },
   buttonStyle: {
-    width: '100%',
+    width: '105%',
     backgroundColor: '#eee',
+    alignSelf:'center',
     height: 40,
     justifyContent: 'center'
   },
