@@ -94,7 +94,7 @@ export class AddEvent extends Component {
   }
 
 
-  rednerHeader() {
+  renderHeader() {
     return (
       <FTCStyledText style={styles.headerText} >
         {'إضافة مشروع'}
@@ -122,10 +122,10 @@ export class AddEvent extends Component {
           // add participant
           updateState={(item) => this._handleAddingParticipant(item)}
         />
-        <CurrentParticipants
+        {this.state.participants.length ? <CurrentParticipants
           items={this.state.participants}
           updateState={(item) => this._handleRemovingParticipant(item)}
-        />
+        /> : null}
         {this.renderAttendToggle()}
         {this.renderNotifiCheck()}
         {this.renderSubmitButton()}
@@ -162,7 +162,7 @@ export class AddEvent extends Component {
   render() {
     return (
       <ScrollView style={styles.container} >
-        {this.rednerHeader()}
+        {this.renderHeader()}
         {this.renderInputSection()}
         {/* Sorry for the bad component! */}
       </ScrollView>
