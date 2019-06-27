@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, ScrollView, KeyboardAvoidingView } from 'react-native'
 import { FTCStyledText, MaxParticipants, InputFields, AttendToggle, CurrentParticipants, NotifiCheck, SubmitButton, AutocompleteEventParticipants } from '../components'
 import data from '../dummy_data/autocompleteData.json'
+import { SafeAreaView } from 'react-navigation';
 
 /* Need some work on the naming. */
 
@@ -171,11 +172,13 @@ export class AddEvent extends Component {
   render() {
     return (
       <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',}} behavior="height" enabled>
-        <ScrollView style={styles.container} >
-          {this.renderHeader()}
-          {this.renderInputSection()}
-          {/* Sorry for the bad component! */}
-        </ScrollView>
+          <ScrollView style={styles.container} >
+            <SafeAreaView>
+            {this.renderHeader()}
+            {this.renderInputSection()}
+            {/* Sorry for the bad component! */}
+          </SafeAreaView>
+          </ScrollView>
       </KeyboardAvoidingView>
       
     )
@@ -194,7 +197,6 @@ const styles = {
   headerText: {
     fontSize: 28,
     alignSelf: 'center',
-    marginTop: 30,
     marginBottom: 10,
     fontFamily: "Cairo-Bold",
   },
