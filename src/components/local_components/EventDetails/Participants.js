@@ -34,10 +34,10 @@ export class Participants extends Component {
         return(
         <View>
         <Modal
+            onBackdropPress={this._toggleModal}
             isVisible={this.state.isModalVisible}
-            useNativeDriver={true}
-           >
-            <ParticipantsDetails callback={this._toggleModal} personDetails={this.state.modalData} />
+            useNativeDriver={true}>
+            <ParticipantsDetails personDetails={this.state.modalData} />
         </Modal>
       </View>
         )
