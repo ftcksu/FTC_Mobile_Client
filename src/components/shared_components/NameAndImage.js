@@ -1,40 +1,43 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { FTCStyledText } from "./";
 import Pulse from 'react-native-pulse';
+import Modal from 'react-native-modal';
 
 
 export class NameAndImage extends Component {
 
-  constructor(props){
-    super(props);
-
-  renderImage = () => {
-    return(
-      <TouchableWithoutFeedback
-            onPress={() => {
-              this.setState({
-                isImageViewVisible: true,
-              });
-            }}
-          >
-          <View>
-            {this.props.showPulse? <Pulse color='#ababab' numPulses={3} diameter={300} speed={20} duration={2000}/> : null}
-            <Image style={[styles.image, this.props.imageStyle]} source={{ uri: this.props.src }}/>
-          </View>
-        </TouchableWithoutFeedback>
-    )
-
+  state={
+    isModalVisible: false
   }
   
-
+  renderImage = () => {
+    return(
+      <TouchableOpacity onPress = {()=> this.showModal(true)}>
+        {this.props.showPulse? <Pulse color='#ababab' numPulses={3} diameter={300} speed={20} duration={2000}/> : null}
+        <Image style={[styles.image, this.props.imageStyle]} source={{ uri: this.props.src }}/>
+      </TouchableOpacity>
+    )
   }
+
+  showModal = (bol) => {
+    this.setState({isModalVisible:bol})
+  }
+
+  renderImageModal = () =>{
+    return <Modal
+        isVisible={this.state.isModalVisible}
+        onBackdropPress={()=> this.showModal(false)}
+        useNativeDriver={true}>
+        <Image style={styles.imageFull} source={{ uri: this.props.src }}/>
+    </Modal>
+  }
+
   render() {
     return (
       <View style={[styles.container, this.props.style]} >
-        {
-          renderImage() //TODO: imageview replacement
-        }
+        {this.renderImageModal()}
+        {this.renderImage()}
         <FTCStyledText style={[styles.name, this.props.titleStyle]} >{this.props.name}</FTCStyledText>
         <FTCStyledText style={[styles.description, this.props.descriptionStyle]}>{this.props.description}</FTCStyledText>
       </View>
@@ -65,5 +68,9 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       color: 'white'
     },
+    imageFull:{
+      height:'70%',
+      borderRadius:20,
+    }
   });
 
