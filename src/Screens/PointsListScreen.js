@@ -12,7 +12,7 @@ let weeklyList,totalList = [];
 export class PointsListScreen extends Component {
 
 
-  componentWillMount(){
+  componentDidMount(){
     this.fetchLeaderboard(true);
   }
 
@@ -102,7 +102,7 @@ export class PointsListScreen extends Component {
             value={this.state.search}
             inputStyle={{ textAlign: 'right' }}
           />
-          <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} selectedIndex={this.state.listType} handelPress={this.switchList} style={{ width: '80%', alignSelf: 'center' }} />
+          <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} selectedIndex={this.state.listType} onPress={this.switchList} style={styles.listType} />
         </View>
     )
   }
@@ -110,8 +110,18 @@ export class PointsListScreen extends Component {
     const filteredList = this.renderList(this.state.search)
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <ActivityIndicator style={loadingStyle} animating={this.state.isLoading} size="large" color={primaryColor} />
-        <PointList refreshing={this.state.isRefreshing} onRefresh={this.refreshLeaderboard} header = {this.renderHeader} style={styles.pointList} data={filteredList} onCardPress = {this.handelCardPress} />
+        <ActivityIndicator style={loadingStyle}
+          animating={this.state.isLoading}
+          size="large"
+          color={primaryColor} />
+        
+        <PointList refreshing={this.state.isRefreshing}
+          onRefresh={this.refreshLeaderboard}
+          header = {this.renderHeader}
+          style={styles.pointList}
+          data={filteredList}
+          onCardPress = {this.handelCardPress} />
+
       </SafeAreaView>
 
     );
@@ -131,5 +141,9 @@ const styles = {
   },
   pointList: {
     marginTop: 15
+  },
+  listType:{
+    width: '80%',
+    alignSelf: 'center' 
   }
 }
