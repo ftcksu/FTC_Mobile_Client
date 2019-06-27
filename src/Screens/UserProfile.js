@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, SafeAreaView, Image, Text } from 'react-native'
+import { View, StyleSheet, SafeAreaView } from 'react-native'
 import { TasksTimeline, ScreenBackground, NameAndImage, SocialMediaList, FTCStyledText } from "../components";
 import { Dimensions } from "react-native";
-import { FlatList } from 'react-native-gesture-handler';
-import imageAssets from "../../assets/images";
-import { FontAwesome } from '@expo/vector-icons';
 
 var width = Dimensions.get('window').width; //full width
 
@@ -15,32 +12,6 @@ export class UserProfile extends Component {
         tasks:this.props.navigation.state.params.user.tasks
     }
 
-    renderSocialMedia() {
-        return(
-            // <ActionButton
-            //     buttonColor="rgba(231,76,60,1)">
-            //     <ActionButton.Item buttonColor='#FFFC00' title="Snapchat" size={SOCIALMEDIACIRCLESIZE}>
-            //         {/* <Image source={snapchat} style={{ height: 35, width: 35 }} tintColor={'white'} /> */}
-            //         <FontAwesome name="snapchat" size={SOCIALMEDIACIRCLESIZE} />
-            //     </ActionButton.Item>
-            //     <ActionButton.Item buttonColor='#0077B5' title="LinkedIn" size={SOCIALMEDIACIRCLESIZE}>
-            //         <FontAwesome name="linkedin" size={SOCIALMEDIAICONSIZE} color="white" />
-            //     </ActionButton.Item>
-            //     <ActionButton.Item buttonColor='#1DA1F2' title="Twitter" size={SOCIALMEDIACIRCLESIZE}>
-            //         <FontAwesome name="twitter" size={SOCIALMEDIAICONSIZE} color="#F5F8FA" />
-            //     </ActionButton.Item>
-            //     <ActionButton.Item buttonColor='#000000' title="Steam" size={SOCIALMEDIACIRCLESIZE}>
-            //         <FontAwesome name="steam" size={SOCIALMEDIAICONSIZE} color="white" />
-            //     </ActionButton.Item>
-            //     <ActionButton.Item buttonColor='#25D366' title="Whatsapp" size={SOCIALMEDIACIRCLESIZE}>
-            //         <FontAwesome name="whatsapp" size={SOCIALMEDIAICONSIZE} color="white" />
-            //     </ActionButton.Item>
-            // </ActionButton>
-            <View>
-                
-            </View>
-        )
-    }
     renderHeader = () => {
         return (
             <SafeAreaView style={styles.headerContainer}>
