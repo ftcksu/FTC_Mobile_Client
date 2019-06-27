@@ -24,7 +24,11 @@ const images = {
     linkedin: require('./linkedin.png'),
     snapchat: require('./snapchat.png'),
 
-
+    //user Tiers
+    'user_tier_1': require('./user_tier1.png'),
+    'user_tier_2': require('./user_tier2.png'),
+    'user_tier_3': require('./user_tier3.png'),
+    'user_tier_4': require('./user_tier4.png'),
 
 }
 
