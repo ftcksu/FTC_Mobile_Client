@@ -5,7 +5,9 @@ import {
 import { InfoCardList } from '../components';
 import content from '../dummy_data/InfoCardData.json';
 import Images from '../../assets/images'
-import { primaryColor } from "../global/Constants";
+import { primaryColor, secondaryColor } from "../global/Constants";
+import { LinearGradient } from 'expo-linear-gradient'
+
 
 
 export class EventsScreen extends Component {
@@ -60,13 +62,15 @@ export class EventsScreen extends Component {
     }
     renderAddEventButton(){
         return(
-            <TouchableOpacity onPress={this.handelAddEventPress} style={styles.buttonContainer} >
-                <Image
-                resizeMode={'center'}
-                source={Images.addIcon}
-                style={styles.floatingActionButtonContent}
-                />
-            </TouchableOpacity>
+            <LinearGradient colors={[primaryColor, secondaryColor]} style={styles.buttonContainer} >
+                <TouchableOpacity onPress={this.handelAddEventPress}  >
+                    <Image
+                    resizeMode={'center'}
+                    source={Images.addIcon}
+                    style={styles.floatingActionButtonContent}
+                    />
+                </TouchableOpacity>
+            </LinearGradient>
             
         );
     }
@@ -90,9 +94,10 @@ export class EventsScreen extends Component {
 const styles = StyleSheet.create({
     buttonContainer:{
         width: 60,  
-        height: 60,   
+        height: 60,
+        alignItems:'center',
+        justifyContent:'center',
         borderRadius: 60/2,            
-        backgroundColor: primaryColor,                                    
         position: 'absolute',                                          
         bottom: 0,                                                    
         right: 0,
@@ -100,9 +105,6 @@ const styles = StyleSheet.create({
         marginBottom:20
     },
     floatingActionButtonContent:{
-        // height:'40%',
-        // width:'40%'
-        // backgroundColor:'black'
         alignSelf: 'center'
     },
     container: {
