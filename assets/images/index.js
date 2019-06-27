@@ -15,7 +15,6 @@ const images = {
 
     roundAdd: require('./round-add-button.png'),
     checkIcon: require('./check-icon.png'),
-    crownIcon: require('./crowns.png'),
 
     //social media
     whatsapp: require('./whatsapp.png'),
@@ -29,6 +28,7 @@ const images = {
     'user_tier_2': require('./user_tier2.png'),
     'user_tier_3': require('./user_tier3.png'),
     'user_tier_4': require('./user_tier4.png'),
+    'user_tier_5': require('./user_tier5.png'),
 
 }
 
