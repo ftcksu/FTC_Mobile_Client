@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, KeyboardAvoidingView } from 'react-native'
 import { FTCStyledText, MaxParticipants, InputFields, AttendToggle, CurrentParticipants, NotifiCheck, SubmitButton, AutocompleteEventParticipants } from '../components'
 import data from '../dummy_data/autocompleteData.json'
 
@@ -117,15 +117,7 @@ export class AddEvent extends Component {
           maxPart={this.state.maxPart}
           updateState={(state) => this.updateState({ maxPart: state })}
         />
-        <AutocompleteEventParticipants
-          members={this.state.members}
-          // add participant
-          updateState={(item) => this._handleAddingParticipant(item)}
-        />
-        {this.state.participants.length ? <CurrentParticipants
-          items={this.state.participants}
-          updateState={(item) => this._handleRemovingParticipant(item)}
-        /> : null}
+        {this.renderManageParticipants()}
         {this.renderAttendToggle()}
         {this.renderNotifiCheck()}
         {this.renderSubmitButton()}
@@ -133,13 +125,30 @@ export class AddEvent extends Component {
     )
   }
 
+  renderManageParticipants(){
+    return (
+        <View>
+          <AutocompleteEventParticipants
+            members={this.state.members}
+            // add participant
+            updateState={(item) => this._handleAddingParticipant(item)}
+          />
+          {this.state.participants.length ? <CurrentParticipants
+            items={this.state.participants}
+            updateState={(item) => this._handleRemovingParticipant(item)}
+          /> : null}
+      </View>
+    )
+  }
+
   renderAttendToggle() {
     return (
       <AttendToggle
+        style={styles.attendToggle}
         firstButton={'التسجيل للحضور فقط'}
         secondButton={'نحتاج منظمين'}
         selectedIndex={this.state.attendOnly}
-        updateState={(state) => this.updateState({ attendOnly: state })}
+        onPress={(state) => this.updateState({ attendOnly: state })}
       />
     )
   }
@@ -161,19 +170,26 @@ export class AddEvent extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.container} >
-        {this.renderHeader()}
-        {this.renderInputSection()}
-        {/* Sorry for the bad component! */}
-      </ScrollView>
+      <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',}} behavior="height" enabled>
+        <ScrollView style={styles.container} >
+          {this.renderHeader()}
+          {this.renderInputSection()}
+          {/* Sorry for the bad component! */}
+        </ScrollView>
+      </KeyboardAvoidingView>
+      
     )
   }
 }
 
 const styles = {
   container: {
-    width: '90%',
+    flex:1,
+    width:'100%',
+    paddingRight:20,
+    paddingLeft:20,
     alignSelf: 'center',
+    // justifyContent:'space-around'
   },
   headerText: {
     fontSize: 28,
@@ -187,6 +203,7 @@ const styles = {
   },
   attendToggle: {
     flex: 1,
+    marginTop:8,
   },
   submitButton: {
     
