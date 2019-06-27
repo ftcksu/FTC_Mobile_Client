@@ -22,7 +22,7 @@ export class PointList extends React.Component {
                 <UserPointCard
                   bio={item.user.bio}
                   name={item.user.first_name+" "+item.user.last_name}
-                  imageURL={item.user.profilephoto_full_link}
+                  imageURL={item.user.profilephoto_b64}
                   position={index + 1 }
                   points={item.user.points}/>
               </TouchableOpacity>
