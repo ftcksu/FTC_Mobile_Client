@@ -16,7 +16,7 @@ export class TasksMonthTimeline extends Component {
       <FlatList
             style={styles.flatView}
             data={this.props.data.tasks}
-            contentContainerStyle={{ flexGrow: 0, alignSelf: 'center' }}
+            contentContainerStyle={styles.flatListContentContainer}
             renderItem={({ item }) => (
             <TaskCard style={styles.pointHistoryCard} description = {item.description}  />
               )}
@@ -38,6 +38,10 @@ const styles = StyleSheet.create({
     },
     flatView:{
         marginTop:30,
+    },
+    flatListContentContainer:{
+      flexGrow: 0,
+      alignSelf: 'center'
     },
     dateAndLineContainer:{
         alignItems:'center',
