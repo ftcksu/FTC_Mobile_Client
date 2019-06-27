@@ -20,7 +20,9 @@ export class GridItem extends Component {
         <View style={backgroundCover} />
         <TouchableOpacity
           onPress={() => this.props.removeItem(this.props.item)}>
-          <Icon name="md-close-circle-outline" style={closeIcon} />
+          <View style={closeIconContainer} >
+            <Icon name="md-close-circle-outline" style={closeIcon} />
+          </View>
           <Text style={textStyle} >
             {`${this.props.item.first_name} ${this.props.item.last_name}`}
           </Text>
@@ -47,28 +49,22 @@ const styles = {
     color: '#4173B0',
     fontSize: 11,
     margin: 5,
-    // backgroundColor: 'white',
     height: "100%",
     zIndex: 1
   },
   closeIcon: {
     color: 'red',
-    position: 'absolute',
-    top: 0,
-    right: 0,
   },
-  // still not satisfying!
   closeIconContainer: {
     position: 'absolute',
     right: 0,
     top: 0,
     backgroundColor: 'white',
-    width: 15,
-    height: 15,
+    width: 12,
+    height: 12,
+    alignItems:'center',
+    justifyContent:'center',
     borderRadius: 15 / 2,
-    borderWidth: 2,
-    borderColor: 'white',
-    paddingBottom: 10
   },
   backgroundCover: {
     backgroundColor: 'white',
