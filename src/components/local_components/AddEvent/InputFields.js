@@ -62,7 +62,7 @@ const styles = {
   inputContainerStyle: {
     marginBottom: 15,
     paddingRight: 15,
-    paddingLeft: -15,
+    // paddingLeft: -15,
     alignSelf: 'center',
     backgroundColor: '#eeeeee',
     borderBottomWidth: 0,
