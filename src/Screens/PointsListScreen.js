@@ -71,7 +71,7 @@ export class PointsListScreen extends Component {
     if (search === '') {
       return members;
     }
-    const tmp = members.filter((member) => (member.first_name + ' ' + member.last_name).includes(search));
+    const tmp = members.filter((member) => (member.user.first_name + ' ' + member.user.last_name).includes(search));
 
     return tmp;
   }
