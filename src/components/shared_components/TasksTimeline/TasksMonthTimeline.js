@@ -5,7 +5,7 @@ import {FTCStyledText, TaskCard} from '../'
 export class TasksMonthTimeline extends Component {
   render() {
     return (
-      <View style={styles.container} >
+      <View style={[styles.container, this.props.isLast ? styles.lastElement:null]} >
         <View style={styles.dateAndLineContainer} >
               <FTCStyledText style={styles.date} >
                   {this.props.data.date}
@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
       width:'76%', //magic DO NOT TOUCH
        justifyContent:"flex-start",
        flexDirection:'row',
+    },
+    lastElement:{
+      marginBottom:10
     },
     flatView:{
         marginTop:30,
