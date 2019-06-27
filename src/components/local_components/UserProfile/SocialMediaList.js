@@ -2,17 +2,35 @@ import React, { Component } from 'react'
 import { FlatList, View } from 'react-native'
 import { SocialMediaCard } from './SocialMediaCard'
 import ImageAssets from '../../../../assets/images'
+import _ from 'lodash'
 
 export class SocialMediaList extends Component {
+
+    
+    getUserSocialMediaAccounts(){ 
+         let accounts = this.props.accounts;
+        socialMediaPlatforms.forEach(socialNetwork => {
+            accounts.map( (account) => {
+                if(account.platform == socialNetwork.platform){
+                    account.icon = socialNetwork.icon
+                    account.style = socialNetwork.style
+                }
+                return accounts;
+            } )
+        });
+        return accounts;
+    }
+
+
     render() {
         return (
             <View style={[this.props.style, styles.container]}>
                 <FlatList
                     horizontal={true}
                     contentContainerStyle={styles.flatListContainer}
-                    data={socialMediaPlatforms}
+                    data={this.getUserSocialMediaAccounts()}
                     renderItem={({ item }) => (
-                        <SocialMediaCard iconStyle={[styles.icon, item.style]} icon ={item.icon}/>
+                        <SocialMediaCard platform = {item.platform} username= {item.username} iconStyle={[styles.icon, item.style]} icon ={item.icon}/>
                     )}
                 />
             </View>
@@ -47,28 +65,29 @@ const styles = {
 
 const socialMediaPlatforms=[
     {
-        name:'Snapchat',
-        icon:ImageAssets.snapchat
+        platform:'snapchat',
+        icon:ImageAssets.snapchat,
+
     },
     {
-        name:'LinkedIn',
+        platform:'linkedin',
         icon:ImageAssets.linkedin,
         style:styles.iconBackground
     },
     {
-        name:'Twitter',
+        platform:'twitter',
         icon:ImageAssets.twitter,
         style:styles.iconBackground
 
     },
     {
-        name:'Steam',
+        platform:'steam',
         icon:ImageAssets.steam,
         style:styles.iconBackground
 
     },
     {
-        name:'Whatsapp',
+        platform:'whatsapp',
         icon:ImageAssets.whatsapp,
     },
 ];

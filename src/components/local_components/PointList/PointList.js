@@ -27,6 +27,7 @@ export class PointList extends React.Component {
                   name={item.user.first_name+" "+item.user.last_name}
                   imageURL={item.user.profilephoto_b64}
                   position={index + 1 }
+                  totalUsers = {this.props.data.length}
                   points={item.user.points}/>
               </TouchableOpacity>
             )}

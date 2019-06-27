@@ -47,7 +47,7 @@ export class UserProfile extends Component {
                 <View style={styles.userInfoContainer}>
                     <NameAndImage src={ this.state.user.profilephoto_full_link } name={this.state.user.first_name +' '+ this.state.user.last_name} description={this.state.user.bio} style={styles.NameAndImage} imageStyle={styles.image} textStyle={styles.textStyle} showPulse={true}/>
                 </View>
-                <SocialMediaList/>
+                <SocialMediaList accounts ={this.state.user.socialmedia} />
                 <View style={styles.lineBreak} />
                 <FTCStyledText style={styles.title} >تاريخ أعمال {this.state.user.first_name}</FTCStyledText>
             </SafeAreaView>
