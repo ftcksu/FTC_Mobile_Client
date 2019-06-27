@@ -14,6 +14,9 @@ export class PointList extends React.Component {
         <View style={styles.container}>
 
         <FlatList
+            refreshing={this.props.refreshing}
+            onRefresh={this.props.onRefresh}
+            ListHeaderComponent={this.props.header}
             style={[styles.flatView,this.props.style]}
             data={this.props.data}
             contentContainerStyle={{ flexGrow: 0 }}
