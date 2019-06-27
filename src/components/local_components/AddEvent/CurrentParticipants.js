@@ -11,9 +11,7 @@ is added, max participant is then incrementd to 4.
 
 export class CurrentParticipants extends Component {
 
-  state = {
-    row: 1
-  }
+
 
   _removeItem = (item) => {
     // remove from currecntParticipants[] and add to memebers[]
@@ -21,7 +19,7 @@ export class CurrentParticipants extends Component {
     this.props.updateState(item);
   }
 
-  _renderItem = ({ item, rowIndex }) => {
+  _renderItem = ({ item }) => {
     return (
       <GridItem
         item={item}
@@ -35,7 +33,7 @@ export class CurrentParticipants extends Component {
       <FlatGrid
         fixed={true}
         items={this.props.items}
-        renderItem={(item, rowIndex) => this._renderItem(item, rowIndex)}
+        renderItem={(item) => this._renderItem(item)}
         style={styles.container}
       />
     )
@@ -48,5 +46,6 @@ const styles = {
     marginTop: 15,
     marginBottom: 15,
     backgroundColor: '#eeeeee',
+    alignItems:'flex-end'
   },
 }
