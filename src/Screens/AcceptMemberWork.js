@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
-import { Image, View, ScrollView, TouchableOpacity, Text, TouchableHighlight } from 'react-native'
+import { Image, View, TouchableOpacity } from 'react-native'
 import ScreenWithHeader from "../components/shared_components/ScreenWithHeader";
 import FTCStyledText from "../components/shared_components/FTCStyledText";
-import { TextStyles } from "../global/styles/TextStyles"
 import { Input } from 'react-native-elements/src/index'
 import { inputFieldStyle } from "../global/styles/inputFieldStyle"
-import GradientButton from "../components/shared_components/GradientButton";
 import images from './../../assets/images'
-import {KeyboardAwareFlatList} from 'react-native-keyboard-aware-scroll-view'
+import {KeyboardAwareScrollView, KeyboardAwareFlatList} from 'react-native-keyboard-aware-scroll-view'
 
   const {
     inputContainerStyle, inputStyle
   } = inputFieldStyle
 
+  const MAX_INPUT_LENGTH = 200
+
 export class AcceptMemberWork extends Component {
 
     constructor(props) {
         super(props);
+        this._handleTextChange = this._handleTextChange.bind(this);
 
         this.state = {
            users: [
@@ -28,13 +29,11 @@ export class AcceptMemberWork extends Component {
                        {
                            workId: 11,
                            description: 'ماذا افعل يا الهيماذا افعل يا الهيماذا افعل يا الهيماذا افعل يا الهيماذا افعل يا الهي',
-                           backgroundColor: '#fff',
-                           status: 'none'
+                           status: 'None'
                        }, {
-                        workId: 12,
-                        description: 'I 1 did this and that 2',
-                        backgroundColor: '#fff',
-                        status: 'none'
+                            workId: 12,
+                            description: 'I 1 did this and that 2',
+                            status: 'None'
                     }
                    ]
                }, {
@@ -45,13 +44,11 @@ export class AcceptMemberWork extends Component {
                     {
                         workId: 21,
                         description: 'I 2 did this and that 1',
-                        backgroundColor: '#fff',
-                        status: 'none'
+                        status: 'None'
                     }, {
-                     workId: 22,
-                     description: 'I 2 did this and that 2 woooohoooooooddsadas',
-                     backgroundColor: '#fff',
-                     status: 'none'
+                        workId: 22,
+                        description: 'I 2 did this and that 2 woooohoooooooddsadas',
+                        status: 'None'
                  }
                 ]
             }
@@ -65,109 +62,106 @@ export class AcceptMemberWork extends Component {
     } 
 
     _handleTextChange = (text, workIndex, userIndex) => {
-        temp = this.state.users;
-        temp[userIndex].work[workIndex] = text
+        temp = [...this.state.users];
+        temp[userIndex].work[workIndex].description = text;
         this.setState({
             users:temp
-        })
-        
+        });
     }
+
+    _handleWorkFeedback = (workIndex, userIndex, feedback) => {
+        temp = [...this.state.users];
+
+        currentStatus = temp[userIndex].work[workIndex].status
+        newStatus = 'None';
+        newColor = inputStyle.color;
+        
+        if (currentStatus == feedback) {
+            newStatus = 'None';
+            newColor = inputStyle.color;
+        }
+        else {
+            newStatus = feedback;
+            newColor = feedback == 'Accepted'? 'green': 'red';
+        }
+
+        temp[userIndex].work[workIndex].status = newStatus;
+        temp[userIndex].work[workIndex].statusColor = newColor;
+
+        this.setState({
+            users:temp
+        });
+
+    
+    }
+
 
     renderUsersInformation() {
 
         return(
             
             <KeyboardAwareFlatList
-            data={this.state.users}
-            contentContainerStyle={{ flexGrow: 0,alignItems:'flex-end', flex: 1 }}
-            renderItem={({ item: userItem, index: userIndex }) => (
-                <View>
-                    <View style={styles.userView}>
-                    <FTCStyledText style={styles.userName}>{userItem.name}</FTCStyledText>
-                    <Image
-                        source={{uri:userItem.image}}
-                        style={styles.userImage}
-                    />
-                    
-                    </View>
-                    <KeyboardAwareFlatList
-                    data={userItem.work}
-                    contentContainerStyle={{ flexGrow: 0,alignItems:'flex-end' }}
-                    renderItem={({ item: workItem, index: workIndex }) => (
-                        <View style={styles.workContainer}>
-                            <View style={styles.iconsContainer}>
-                                <Image source={images.checkIcon} style={styles.acceptWorkIcon}/>
-                                <Image source={images.cancel} style={styles.declineWorkIcon}/>
-                            </View>
-                            <Input
-                                value={workItem.description}
-                                inputContainerStyle={[inputContainerStyle, styles.workInput ]}
-                                inputStyle={inputStyle}
-                                multiline // For those who talk a lot
-                                onChangeText={(text) => this._handleTextChange(text, workIndex, userIndex)}
-                                
+                data={this.state.users}
+                contentContainerStyle={{ flexGrow: 0,alignItems:'flex-end', flex: 1 }}
+                renderItem={({ item: userItem, index: userIndex }) => (
+                    <View>
+                        <View style={styles.userView}>
+                            <FTCStyledText style={styles.userName}>{userItem.name}</FTCStyledText>
+                            <Image
+                                source={{uri:userItem.image}}
+                                style={styles.userImage}
                             />
-                            
-                        </View>
-                    
         
-                    )}
-                    />
-                </View>
+                        </View>
+
+                        <KeyboardAwareFlatList
+                            data={userItem.work}
+                            contentContainerStyle={{ flexGrow: 0, alignItems:'flex-end' }}
+                            renderItem={({ item: workItem, index: workIndex }) => (
+                                <View style={styles.workContainer}>
+                                    <View style={styles.iconsContainer}>
+                                        <TouchableOpacity style={styles.iconStyle} onPress={() => this._handleWorkFeedback(workIndex, userIndex, 'Accepted')}>
+                                            <Image source={images.checkIcon} style={[styles.iconStyle, {tintColor: workItem.status=='Declined'? inputStyle.color : 'green'}]}/>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.iconStyle} onPress={() => this._handleWorkFeedback(workIndex, userIndex, 'Declined')}>
+                                            <Image source={images.cancel} style={[styles.iconStyle, {tintColor: workItem.status=='Accepted'? inputStyle.color : 'red'}]}/>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <Input
+                                        value={workItem.description}
+                                        inputContainerStyle={[inputContainerStyle, styles.workInput ]}
+                                        inputStyle={inputStyle}
+                                        multiline // For those who talk a lot
+                                        onChangeText={(text) => this._handleTextChange(text, workIndex, userIndex)}
+                                        maxLength={MAX_INPUT_LENGTH}
+                                    />
+                                    
+                                </View>
+                            
+                
+                            )}
+                        />
+                    </View>
               
 
             )}
             />
         );
 
-        // Should use the regular flat list over the keyboard aware one.
-
-        // Need to use Flatlist inside a flat list, the user info will be the outer flatlist
-        // , and the user tasks will be the inner flat list, the inner flat list will be rendered using the SwipableText
-        // screen, then that item will be flagged as the output of the swipe, and the color of it will reflect that
-
-        // The leader should be able to edit the work of another user by editing it in an (AwesomeAlert?).
-        
-        // The swipeable text file should be triggered using the same function when pulled to the side as the 
-        // corosponding functionality. e.g. Pull to the left most should trigger accept fumction.
-
-        // Should double check the performance and the design with Nawif Alquaid after finishing!
-
-        /*
-        let usersInfo = this.state.users.map( (data) => {
-            return (
-                <View style={styles.userView}>
-                    <FTCStyledText style={styles.userName}>{data.name}</FTCStyledText>
-                    <Image
-                        source={{uri:data.image}}
-                        style={styles.userImage}
-                    />
-                </View>
-            )
-        });
-        return (
-
-            <View>
-                {usersInfo}
-            </View>
-        );
-        */
     }
 
     render() {
 
     
         return(
-            <ScrollView bounces={false}>
+            <KeyboardAwareScrollView bounces={false}>
                 <ScreenWithHeader title={"فعالية كيف نشرب شاهي"} subtitle={"هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشاهي الكويس والشاهي الخايس"} showCalender={false} backFuction={this._handelBackButtonPress}>
                     <View style={styles.content}>
                         {this.renderUsersInformation()}
-                        {/* <SwipeableText text={'hi'} canceFunction={null} acceptFuction={null} editFunction={null} backgroundColor={'white'} />
-                        <Text>dsad</Text> */}
                     </View>
                     
                 </ScreenWithHeader>
-            </ScrollView>
+            </KeyboardAwareScrollView>
 
         );
     }
@@ -206,18 +200,13 @@ const styles ={
         flex: 1, 
         alignItems: 'center', 
         flexDirection:'row', 
-        alignSelf: 'center'
+        alignSelf: 'center',
+        zIndex: 1
 
-    }, acceptWorkIcon: {
+    }, iconStyle: {
         width: 40,
         height: 40,
-        tintColor: 'green',
         margin: 5,
-
-    }, declineWorkIcon: {
-        width: 40,
-        height: 40,
-        tintColor: 'red',
-        margin: 5,
-    },
+        
+    }
   }
