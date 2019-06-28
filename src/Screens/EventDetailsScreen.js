@@ -28,7 +28,7 @@ import { goToWhatsapp } from "../global/actions/appActions";
          event: {
            title: "فعالية كيف نشرب شاهي",
            subtitle: "هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشهي الكويس والشاهي الخايس",
-           isRegisterd: 1
+           userStatus: 'Leader'
          }
       }
    }
@@ -92,7 +92,28 @@ import { goToWhatsapp } from "../global/actions/appActions";
     }
 
     renderAppropriateButton() {
-      if(this.state.event.isRegisterd == 0){
+
+      switch(this.state.event.userStatus){
+        case 'Lurker': {
+          // Register the user in the backend HERE
+          // **********************************
+          return (
+            <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" onPress={this._handleAppropriateButton}/>
+          );
+        }
+        case 'Registered': {
+          return (
+              <GradientButton icon={Images.recordPoints} style={{alignSelf:'center',marginTop:15}} title="رصد أعمالي" onPress={this._handleAppropriateButton}/>
+          );
+        }
+        case 'Leader': {
+          return (
+              <GradientButton icon={Images.recordPoints} style={{alignSelf:'center',marginTop:15}} title="رصد أعمال الفريق" onPress={this._handleAppropriateButton}/>
+          );
+        }
+      }
+
+      if(this.state.event.userStatus == 0){
         return (
           <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" onPress={this._handleAppropriateButton}/>
         );
@@ -105,12 +126,22 @@ import { goToWhatsapp } from "../global/actions/appActions";
     }
 
     _handleAppropriateButton = () => {
-      if(this.state.event.isRegisterd == 0){
-        // Register the user in the backend HERE
-        // **********************************
-        this.handelBackButtonPress()
+
+      switch(this.state.event.userStatus){
+        case 'Lurker': {
+          // Register the user in the backend HERE
+          // **********************************
+          this.handelBackButtonPress()
+          break;
+        }
+        case 'Registered': {
+          this.props.navigation.navigate("RegisterWork");
+          break;
+        }
+        case 'Leader': {
+          this.props.navigation.navigate("AcceptMemberWork")
+        }
       }
-      this.props.navigation.navigate("RegisterWork")
     }
 
 
@@ -122,7 +153,7 @@ import { goToWhatsapp } from "../global/actions/appActions";
         <View style={styles.content} >
           {this.renderLeader()}
           {this.renderParticipants()}
-          {this.state.event.isRegisterd == 1 ? this.renderWhatsappButton() : <View style={[styles.whatsappButton, {backgroundColor: 'white'}]}/> /* to take the same dimensions as the whatsapp button, and keep the bakcground as white */}
+          {this.state.event.userStatus == 1 ? this.renderWhatsappButton() : <View style={[styles.whatsappButton, {backgroundColor: 'white'}]}/> /* to take the same dimensions as the whatsapp button, and keep the bakcground as white */}
         {this.renderAppropriateButton()}
           
         </View>

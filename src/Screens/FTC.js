@@ -5,7 +5,6 @@ import Navigator from '../Navigator'
 import Login from './LoginScreen'
 import { AddEvent } from './AddEvent';
 import {UserProfile, SendNotification} from "./";
-import {AcceptMemberWork} from "./AcceptMemberWork";
 
 export default class FTC extends React.Component {
 
@@ -35,7 +34,7 @@ export default class FTC extends React.Component {
     return (
       <View style={styles.container}>
         {
-          this.state.fontHasLoaded ? <AcceptMemberWork /> : null
+          this.state.fontHasLoaded ? <Navigator /> : null
         }
       </View>
     );

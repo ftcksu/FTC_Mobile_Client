@@ -6,6 +6,8 @@ import { Input } from 'react-native-elements/src/index'
 import { inputFieldStyle } from "../global/styles/inputFieldStyle"
 import images from './../../assets/images'
 import {KeyboardAwareScrollView, KeyboardAwareFlatList} from 'react-native-keyboard-aware-scroll-view'
+import GradientButton from "../components/shared_components/GradientButton";
+
 
   const {
     inputContainerStyle, inputStyle
@@ -95,6 +97,11 @@ export class AcceptMemberWork extends Component {
     
     }
 
+    _handleSubmitButton() {
+        console.log(this.state.users);
+        this._handelBackButtonPress()
+    }
+
 
     renderUsersInformation() {
 
@@ -102,7 +109,7 @@ export class AcceptMemberWork extends Component {
             
             <KeyboardAwareFlatList
                 data={this.state.users}
-                contentContainerStyle={{ flexGrow: 0,alignItems:'flex-end', flex: 1 }}
+                contentContainerStyle={{ flexGrow: 0 }}
                 renderItem={({ item: userItem, index: userIndex }) => (
                     <View>
                         <View style={styles.userView}>
@@ -134,6 +141,7 @@ export class AcceptMemberWork extends Component {
                                         multiline // For those who talk a lot
                                         onChangeText={(text) => this._handleTextChange(text, workIndex, userIndex)}
                                         maxLength={MAX_INPUT_LENGTH}
+                                        scrollEnabled={false}
                                     />
                                     
                                 </View>
@@ -145,6 +153,13 @@ export class AcceptMemberWork extends Component {
               
 
             )}
+
+            ListFooterComponent={
+                <View style={styles.confirmWorkButtonContainer}>
+                    <GradientButton icon={images.recordPoints} title="رصد الأعمال" onPress={this._handleSubmitButton}/>
+                </View>
+            }
+            
             />
         );
 
@@ -208,5 +223,10 @@ const styles ={
         height: 40,
         margin: 5,
         
-    }
+    }, confirmWorkButtonContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20,
+        marginTop: 50,
+    }, 
   }
