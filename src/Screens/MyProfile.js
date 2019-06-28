@@ -40,15 +40,15 @@ export class MyProfile extends Component {
   }
 
   renderTotalPoints(){
-    return <TouchableOpacity style = {styles.totalPointsContainer} onPress={this.onPress} >
-            <TotalPoints points= {this.state.user.total_points} />
-    </TouchableOpacity>
+    return  <TouchableOpacity style = {styles.totalPointsContainer} onPress={this.onPress} >
+              <TotalPoints points= {this.state.user.total_points} />
+            </TouchableOpacity>
   } 
 
   renderChart(){
-    return <View style={styles.chart} >
-      <DoubleLineChart/>  
-    </View>
+    return  <View style={styles.chart} >
+              <DoubleLineChart/>  
+            </View>
   }
   
   render() {
