@@ -61,6 +61,7 @@ const profileStack = createStackNavigator(
   {
     ProfilePage: ProfilePage,
     EditProfilePage: EditProfile,
+    EventDetails:EventDetailsScreen
   },
   {
     headerMode:'none'
