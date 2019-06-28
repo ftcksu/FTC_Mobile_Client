@@ -22,7 +22,7 @@ const TabBarComponent = (props) => {
           // marginBottom: 10
         }}
       />
-      <BottomTabBar {...props} />
+      <BottomTabBar {...props}/>
     </View>
   )
 }
@@ -43,7 +43,7 @@ const eventStack = createStackNavigator(
     EventDetails:EventDetailsScreen
   },
   {
-    headerMode:'none'
+    headerMode:'none',
   }
 )
 
@@ -59,8 +59,9 @@ const pointsStack = createStackNavigator(
 
 const profileStack = createStackNavigator(
   {
-    EditProfilePage: EditProfile,
     ProfilePage: ProfilePage,
+    EditProfilePage: EditProfile,
+    EventDetails:EventDetailsScreen
   },
   {
     headerMode:'none'
@@ -72,9 +73,10 @@ let Navigator = createBottomTabNavigator(
     /* Screens */ 
     {
       Profile: profileStack,
+      PointList: pointsStack, 
       Events: eventStack,
-      PointList: pointsStack, //PointsListScreen
       Home: homeStack,
+
     },
 
         /* Configuration */
@@ -107,7 +109,7 @@ let Navigator = createBottomTabNavigator(
             return <TabIcon src={icon} size={30} isFocused={focused} />
         },
       }),
-
+      initialRouteName : 'Home',
       /* Magic, do not touch */
       tabBarComponent: TabBarComponent,
 
@@ -116,7 +118,6 @@ let Navigator = createBottomTabNavigator(
         style: { 
           height: 70,
           borderTopWidth: 0,
-          // paddingBottom: 15
         }
       }
     }

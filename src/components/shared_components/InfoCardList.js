@@ -8,7 +8,7 @@ export class InfoCardList extends React.Component {
   render() {
     return (
       <View style={[styles.container, this.props.style]}>
-        <FTCStyledText style={styles.listTitle} >
+        <FTCStyledText style={[styles.listTitle, this.props.titleStyle]} >
           {this.props.title}
         </FTCStyledText>
 

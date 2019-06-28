@@ -1,49 +1,36 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, ScrollView, Image, TouchableOpacity } from 'react-native'
-import { TasksMonthTimeline, ScreenBackground, FTCStyledText} from "../components";
+import { View, StyleSheet, FlatList, SafeAreaView, Image, TouchableOpacity } from 'react-native'
+import { TasksMonthTimeline, ScreenBackground, FTCStyledText, TasksTimeline} from "../components";
 import Images from "../../assets/images";
 
-
 export class History extends Component {
+
+  state= {
+    tasks:this.props.navigation.state.params.tasks
+  }
   onCancelPress=()=>{
     this.props.navigation.pop()
   }
 
-  renderHeader(){
+  renderHeader = () => {
     return (
-      <View style={styles.topContainer} >
+      <SafeAreaView style={styles.topContainer} >
           <View style={styles.emptyLeftView} />
-          <FTCStyledText style={styles.title} > تاريخ نقاطك </FTCStyledText>
+          <FTCStyledText style={styles.title} > تاريخ أعمالك </FTCStyledText>
           <TouchableOpacity onPress={this.onCancelPress}>
             <Image source={Images.cancel} style={styles.icon} />
           </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     )
   }
+  
 
   render() {
     return (
-      <ScrollView>
+      <View style={{flex:1}} >
         <ScreenBackground/>
-
-        <View style={styles.container} >
-
-        {this.renderHeader()}
-
-        <View style={styles.flatView} >
-        <View style={styles.dateHighlighter} />
-        <FlatList
-            data={["this.props.data","this.props.data","this.props.data","this.props.data","this.props.data","this.props.data"]}
-            contentContainerStyle={styles.flatListContentContainer}
-            renderItem={({ item }) => (
-            <TasksMonthTimeline/>
-            )}
-        />
-        </View>
-
+        <TasksTimeline tasks={this.state.tasks} header = {this.renderHeader} />
       </View>
-      </ScrollView>
-
     )
   }
 }
@@ -56,16 +43,19 @@ const styles = StyleSheet.create({
     marginTop:15
   },
   topContainer:{
-    marginTop:30, flexDirection: 'row', width: '100%', justifyContent: 'space-between' 
+     flexDirection: 'row', width: '100%', justifyContent: 'space-between' 
   },
   emptyLeftView:{
-    width:30
+    width:35,
+    marginLeft:10
   },
   title:{
+    flex:1,
     fontSize:20,
     fontFamily:'Cairo-Bold',
     color:'white',
-    alignSelf:"center"
+    textAlign:'center',
+
   },
   flatView:{
     paddingLeft:10,

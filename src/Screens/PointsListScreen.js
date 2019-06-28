@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, SafeAreaView, Alert, ActivityIndicator } from "react-native";
+import { ScrollView, SafeAreaView, Alert, ActivityIndicator, View } from "react-native";
 import { SearchBar } from 'react-native-elements/src/index';
 import { AttendToggle, FTCStyledText, PointList } from "../components";
 import { getLeaderboard, pointListAdapter, loadingStyle, primaryColor, TextStyles } from "../global";
@@ -12,12 +12,12 @@ let weeklyList,totalList = [];
 export class PointsListScreen extends Component {
 
 
-  componentWillMount(){
-    this.fetchLeaderboard();
+  componentDidMount(){
+    this.fetchLeaderboard(true);
   }
 
-  fetchLeaderboard = () => {
-    this.setState({isLoading:true})
+  fetchLeaderboard = async (initialFetch) => {
+    this.setState({isLoading:initialFetch})
     getLeaderboard().then(response => {
       if(response.status == 200){
           this.sortList(response.data);
@@ -31,6 +31,16 @@ export class PointsListScreen extends Component {
       Alert.alert('مشكل كبير', 'يا ان نتك خربان ولا سيرفرنا فاقع', [{text: 'جي جي'}]);
       console.log(error);
       this.setState({isLoading:false})
+    })
+  }
+
+  refreshLeaderboard = async () =>{
+    this.setState({
+      'isRefreshing' : true
+    })
+    await this.fetchLeaderboard(false)
+    this.setState({
+      'isRefreshing' : false
     })
   }
 
@@ -59,7 +69,8 @@ export class PointsListScreen extends Component {
     search: '',
     members: [],
     listType: 1,
-    isLoading: false
+    isLoading: false,
+    isRefreshing: false,
   };
 
   updateSearch = search => {
@@ -71,17 +82,14 @@ export class PointsListScreen extends Component {
     if (search === '') {
       return members;
     }
-    const tmp = members.filter((member) => (member.first_name + ' ' + member.last_name).includes(search));
+    const tmp = members.filter((member) => (member.user.first_name + ' ' + member.user.last_name).includes(search));
 
     return tmp;
   }
-  render() {
-    const { search } = this.state
-    filteredList = this.renderList(search)
+
+  renderHeader = () =>{
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <ActivityIndicator style={loadingStyle} animating={this.state.isLoading} size="large" color={primaryColor} />
-        <ScrollView style={styles.container} >
+      <View style={styles.container} >
           <FTCStyledText style={header} > قائمة النقاط </FTCStyledText>
           <SearchBar
             lightTheme={true}
@@ -91,12 +99,29 @@ export class PointsListScreen extends Component {
             inputContainerStyle={styles.SearchInputContainerStyle}
             placeholder="بحث عن الأعضاء"
             onChangeText={text => this.setState({ 'search': text })}
-            value={search}
+            value={this.state.search}
             inputStyle={{ textAlign: 'right' }}
           />
-          <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} selectedIndex={this.state.listType} handelPress={this.switchList} style={{ width: '80%', alignSelf: 'center' }} />
-          <PointList style={styles.pointList} data={filteredList} onCardPress = {this.handelCardPress} />
-        </ScrollView>
+          <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} selectedIndex={this.state.listType} onPress={this.switchList} style={styles.listType} />
+        </View>
+    )
+  }
+  render() {
+    const filteredList = this.renderList(this.state.search)
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <ActivityIndicator style={loadingStyle}
+          animating={this.state.isLoading}
+          size="large"
+          color={primaryColor} />
+        
+        <PointList refreshing={this.state.isRefreshing}
+          onRefresh={this.refreshLeaderboard}
+          header = {this.renderHeader}
+          style={styles.pointList}
+          data={filteredList}
+          onCardPress = {this.handelCardPress} />
+
       </SafeAreaView>
 
     );
@@ -116,5 +141,9 @@ const styles = {
   },
   pointList: {
     marginTop: 15
+  },
+  listType:{
+    width: '80%',
+    alignSelf: 'center' 
   }
 }

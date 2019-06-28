@@ -8,6 +8,28 @@ import images from "../../../../assets/images";
                   points, name, bio, imageURL, position
 */
 export class UserPointCard extends React.Component {
+
+  getTierImage = () => {
+    const numOfUsers = this.props.totalUsers
+    const position = this.props.position
+    
+    const numUsersInTopTier = 3;
+    if(position <= numUsersInTopTier)
+      return images.user_tier_1
+    if(position <= numOfUsers * 0.25)
+      return images.user_tier_2
+    if(position <= numOfUsers * 0.5)
+      return images.user_tier_3
+    if(position <= numOfUsers * 0.75)
+      return images.user_tier_4
+    else
+      return images.user_tier_5
+
+  }
+
+  state = {
+    icon: this.getTierImage()
+  }
   render() {
     return( 
       <View>
@@ -30,7 +52,7 @@ export class UserPointCard extends React.Component {
         </View>
 
         <ImageBackground style={styles.imagesContainer} imageStyle={styles.imagesContainer} source={{uri:this.props.imageURL }} >
-          <Image style={styles.circleImage} source={images.crownIcon} />
+          <Image style={styles.circleImage} source={this.state.icon} />
         </ImageBackground>
 
         <View style={styles.positionContainer} >

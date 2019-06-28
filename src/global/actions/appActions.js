@@ -1,11 +1,31 @@
-import { Font } from 'expo';
-import { FONT_LOADED } from './types';
 import { Linking } from 'react-native';
-const whatsappApiURL = "https://wa.me/"
 
+const whatsappApiURL = "https://wa.me/"
 
 export function goToWhatsapp(phoneNumber) {
     Linking.openURL(whatsappApiURL+phoneNumber);
+  }
+
+  export function goToSocialMedia(platform, userId) {
+    let baseUrl;
+    switch (platform) {
+      case 'whatsapp':
+        baseUrl=whatsappApiURL;
+        break;
+      case 'steam':
+        baseUrl= 'http://steamcommunity.com/search/users/#text=';
+        break;
+      case 'twitter':
+        baseUrl='https://twitter.com/';
+        break;
+      case 'linkedn':
+        baseUrl = 'https://www.linkedin.com/in/';
+        break;
+      case 'snapchat':
+        baseUrl = 'https://www.snapchat.com/add/';
+        break;        
+    }
+    Linking.openURL(baseUrl+userId);
   }
 
 export function pointListAdapter(list, type){
@@ -21,5 +41,5 @@ export function pointListAdapter(list, type){
   let sortedList = newList.sort(function(a, b) { return b.user.points - a.user.points; });
 
   return sortedList
-
 }
+

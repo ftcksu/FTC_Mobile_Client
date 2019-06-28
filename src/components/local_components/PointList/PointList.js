@@ -14,6 +14,9 @@ export class PointList extends React.Component {
         <View style={styles.container}>
 
         <FlatList
+            refreshing={this.props.refreshing}
+            onRefresh={this.props.onRefresh}
+            ListHeaderComponent={this.props.header}
             style={[styles.flatView,this.props.style]}
             data={this.props.data}
             contentContainerStyle={{ flexGrow: 0 }}
@@ -22,8 +25,9 @@ export class PointList extends React.Component {
                 <UserPointCard
                   bio={item.user.bio}
                   name={item.user.first_name+" "+item.user.last_name}
-                  imageURL={item.user.profilephoto_full_link}
+                  imageURL={item.user.profilephoto_b64}
                   position={index + 1 }
+                  totalUsers = {this.props.data.length}
                   points={item.user.points}/>
               </TouchableOpacity>
             )}

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, ScrollView } from 'react-native'
-import { FTCSyteledText, MaxParticipants, InputFields, AttendToggle, CurrentParticipants, NotifiCheck, SubmitButton, AutocompleteEventParticipants } from '../components'
+import { View, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { FTCStyledText, MaxParticipants, InputFields, AttendToggle, CurrentParticipants, NotifiCheck, SubmitButton, AutocompleteEventParticipants } from '../components'
 import data from '../dummy_data/autocompleteData.json'
+import { SafeAreaView } from 'react-navigation';
 
 /* Need some work on the naming. */
 
@@ -94,11 +95,11 @@ export class AddEvent extends Component {
   }
 
 
-  rednerHeader() {
+  renderHeader() {
     return (
-      <FTCSyteledText style={styles.headerText} >
+      <FTCStyledText style={styles.headerText} >
         {'إضافة مشروع'}
-      </FTCSyteledText>
+      </FTCStyledText>
     )
   }
 
@@ -110,6 +111,7 @@ export class AddEvent extends Component {
     return (
       <View style={styles.inputSection}>
         <InputFields
+    
           updateState={(state) => this.updateState(state)}
           date={this.state.eventDate}
         />
@@ -117,15 +119,7 @@ export class AddEvent extends Component {
           maxPart={this.state.maxPart}
           updateState={(state) => this.updateState({ maxPart: state })}
         />
-        <AutocompleteEventParticipants
-          members={this.state.members}
-          // add participant
-          updateState={(item) => this._handleAddingParticipant(item)}
-        />
-        <CurrentParticipants
-          items={this.state.participants}
-          updateState={(item) => this._handleRemovingParticipant(item)}
-        />
+        {this.renderManageParticipants()}
         {this.renderAttendToggle()}
         {this.renderNotifiCheck()}
         {this.renderSubmitButton()}
@@ -133,13 +127,30 @@ export class AddEvent extends Component {
     )
   }
 
+  renderManageParticipants(){
+    return (
+        <View>
+          <AutocompleteEventParticipants
+            members={this.state.members}
+            // add participant
+            updateState={(item) => this._handleAddingParticipant(item)}
+          />
+          {this.state.participants.length ? <CurrentParticipants
+            items={this.state.participants}
+            updateState={(item) => this._handleRemovingParticipant(item)}
+          /> : null}
+      </View>
+    )
+  }
+
   renderAttendToggle() {
     return (
       <AttendToggle
+        style={styles.attendToggle}
         firstButton={'التسجيل للحضور فقط'}
         secondButton={'نحتاج منظمين'}
         selectedIndex={this.state.attendOnly}
-        updateState={(state) => this.updateState({ attendOnly: state })}
+        onPress={(state) => this.updateState({ attendOnly: state })}
       />
     )
   }
@@ -155,30 +166,38 @@ export class AddEvent extends Component {
 
   renderSubmitButton() {
     return (
-      <SubmitButton submit={() => this.submitEvent()} />
+      <SubmitButton style={styles.submitButton} submit={() => this.submitEvent()} />
     )
   }
 
   render() {
     return (
-      <ScrollView style={styles.container} >
-        {this.rednerHeader()}
-        {this.renderInputSection()}
-        {/* Sorry for the bad component! */}
-      </ScrollView>
+      <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',}} behavior="height" enabled>
+          <ScrollView style={styles.container} >
+            <SafeAreaView>
+            {this.renderHeader()}
+            {this.renderInputSection()}
+            {/* Sorry for the bad component! */}
+          </SafeAreaView>
+          </ScrollView>
+      </KeyboardAvoidingView>
+      
     )
   }
 }
 
 const styles = {
   container: {
-    width: '90%',
+    flex:1,
+    width:'100%',
+    paddingRight:20,
+    paddingLeft:20,
     alignSelf: 'center',
+    // justifyContent:'space-around'
   },
   headerText: {
     fontSize: 28,
     alignSelf: 'center',
-    marginTop: 30,
     marginBottom: 10,
     fontFamily: "Cairo-Bold",
   },
@@ -187,9 +206,10 @@ const styles = {
   },
   attendToggle: {
     flex: 1,
+    marginTop:8,
   },
   submitButton: {
-    flex: 1,
+    
   },
   notifiCheck: {
     flex: 1,

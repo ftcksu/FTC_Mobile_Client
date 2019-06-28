@@ -16,9 +16,10 @@ export class EventLeaderDetails extends Component {
     return(
       <View>
       <Modal
+          onBackdropPress={this._toggleModal}
           isVisible={this.state.isModalVisible}
           useNativeDriver={true}>
-          <ParticipantsDetails callback={this._toggleModal} personDetails={this.props.eventLeader} />
+          <ParticipantsDetails personDetails={this.props.eventLeader} />
       </Modal>
     </View>
     )

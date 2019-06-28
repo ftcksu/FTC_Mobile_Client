@@ -5,4 +5,5 @@ export * from './MyProfile'
 export * from './Navigator'
 export * from './PointList'
 export * from './ProfilePage'
+export * from './UserProfile'
 

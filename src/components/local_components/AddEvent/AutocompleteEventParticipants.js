@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Cairo-Bold',
     backgroundColor: "#eeeeee",
-    width: "100%",
+    width: "105%",
+    alignSelf:'center'
   },
   autocompleteRow: {
     flexDirection: "column", alignItems: "flex-end", justifyContent: "flex-end",

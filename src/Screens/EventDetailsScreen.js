@@ -119,6 +119,7 @@ const styles ={
     backgroundColor:'#2ecc71',
     height:75,
     marginTop:15,
+    borderRadius:20
 
   },
   whatsappButtonTitle:{

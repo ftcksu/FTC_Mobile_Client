@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, FlatList, View } from 'react-native'
-import UserPointCard from './UserPointCard'
+import {UserPointCard} from './'
 
 
 const content = [

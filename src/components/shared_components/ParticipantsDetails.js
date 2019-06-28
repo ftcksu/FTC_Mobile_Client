@@ -6,6 +6,7 @@ import { goToWhatsapp } from "../../global/actions/appActions";
 
 
 export class ParticipantsDetails extends Component {
+  
   renderWhatsappButton(){
     return (
       <Button
@@ -27,13 +28,11 @@ export class ParticipantsDetails extends Component {
   }
   render() {
     return (
-      <TouchableWithoutFeedback onPress={this.props.callback}>
         <View style={styles.container}>
-        <Image style={styles.image} source={{uri:this.props.personDetails.image}} />
-        <Text style={styles.name} > {this.props.personDetails.first_name +" "+this.props.personDetails.last_name } </Text>
-        {this.renderWhatsappButton()}
+          <Image style={styles.image} source={{uri:this.props.personDetails.image}} />
+          <Text style={styles.name} > {this.props.personDetails.first_name +" "+this.props.personDetails.last_name } </Text>
+          {this.renderWhatsappButton()}
         </View>
-      </TouchableWithoutFeedback>
     )
   }
 }
@@ -61,7 +60,8 @@ const styles={
     height:75,
     width:'100%',
     marginTop:15,
-    alignContent:'center'
+    alignContent:'center',
+    borderRadius:20
     
 
   },
