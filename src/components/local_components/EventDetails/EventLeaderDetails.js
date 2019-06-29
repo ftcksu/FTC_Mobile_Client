@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { View, Image, TouchableOpacity } from 'react-native'
-import FTCStyledText from "../../shared_components/FTCStyledText";
+import { FTCStyledText, ParticipantsDetails } from "../../";
 import Modal from "react-native-modal/src/index";
-import ParticipantsDetails from "../../shared_components/ParticipantsDetails";
 
-export default class EventLeaderDetails extends Component {
+export class EventLeaderDetails extends Component {
   state = {
     isModalVisible: false,
   };
@@ -17,9 +16,10 @@ export default class EventLeaderDetails extends Component {
     return(
       <View>
       <Modal
+          onBackdropPress={this._toggleModal}
           isVisible={this.state.isModalVisible}
           useNativeDriver={true}>
-          <ParticipantsDetails callback={this._toggleModal} personDetails={this.props.eventLeader} />
+          <ParticipantsDetails personDetails={this.props.eventLeader} />
       </Modal>
     </View>
     )

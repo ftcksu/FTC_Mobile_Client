@@ -15,5 +15,10 @@ export const TextStyles = {
         fontSize:10,
         color:'white',
         textAlign:'center'
+    },
+    header3: {
+        fontFamily:'Cairo-Bold',
+        fontSize: 16,
+        textAlign: 'center'
     }
   }

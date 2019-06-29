@@ -18,26 +18,6 @@ export class Participants extends Component {
     const { query } = this.state;
     return (
       <View style={styles.container}>
-        {/* <Autocomplete
-        autoCorrect={false}
-        data={data2}
-        containerStyle={styles.autocompleteContainer}
-        placeholder={'Enter name: '}
-        defaultValue={query}
-        onChangeText={text => {
-          this.setState({query: text})
-          console.log(this.state.query)
-        }}
-        renderItem={item => (
-          <TouchableOpacity onPress={() => {
-            console.log(item.id)
-            }}>
-            <Text style={styles.itemText}>
-              {item.name}
-            </Text>
-          </TouchableOpacity>
-        )}
-      /> */}
         <Autocomplete
           autoCorrect={false}
           placeholder={'اكتب هنا المشاركين مبدئياً'}
@@ -46,7 +26,7 @@ export class Participants extends Component {
           containerStyle={styles.autocompleteContainer}
           onChangeText={text => this.setState({ query: text })}
           renderItem={data => (
-            <TouchableOpacity onPress={console.log(data.name)}>
+            <TouchableOpacity >
               <Text style={{ textAlign: 'right', marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10 }}>{data.name}</Text>
             </TouchableOpacity>
           )}

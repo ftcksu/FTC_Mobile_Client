@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, FlatList, View } from 'react-native'
-import { Font } from 'expo'
-import UserPointCard from './src/components/UserPointCard'
+import {UserPointCard} from './'
 
 
 const content = [
@@ -35,7 +34,7 @@ const content = [
     },
   ]
 
-export default class App extends React.Component {
+export class UsersPointCardList extends React.Component {
 
   render() {
     return (

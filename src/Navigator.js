@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { createBottomTabNavigator,createStackNavigator ,createAppContainer, BottomTabBar } from 'react-navigation';
-import { AddEvent, PointsListScreen, EventsScreen,MyProfile, History, EventDetailsScreen, ProfilePage } from './Screens'
+import { AddEvent, PointsListScreen, EventsScreen,MyProfile, History, EventDetailsScreen, ProfilePage, EditProfile, UserProfile } from './Screens'
 import { TabIcon } from './components/local_components/Navigator/TabIcon'
 import Images from '../assets/images'
 
@@ -22,7 +22,7 @@ const TabBarComponent = (props) => {
           // marginBottom: 10
         }}
       />
-      <BottomTabBar {...props} />
+      <BottomTabBar {...props}/>
     </View>
   )
 }
@@ -43,13 +43,14 @@ const eventStack = createStackNavigator(
     EventDetails:EventDetailsScreen
   },
   {
-    headerMode:'none'
+    headerMode:'none',
   }
 )
 
 const pointsStack = createStackNavigator(
   {
     PointList: PointsListScreen,
+    UserProfile: UserProfile
   },
   {
     headerMode:'none'
@@ -59,6 +60,8 @@ const pointsStack = createStackNavigator(
 const profileStack = createStackNavigator(
   {
     ProfilePage: ProfilePage,
+    EditProfilePage: EditProfile,
+    EventDetails:EventDetailsScreen
   },
   {
     headerMode:'none'
@@ -70,9 +73,10 @@ let Navigator = createBottomTabNavigator(
     /* Screens */ 
     {
       Profile: profileStack,
+      PointList: pointsStack, 
       Events: eventStack,
-      PointList: pointsStack, //PointsListScreen
       Home: homeStack,
+
     },
 
         /* Configuration */
@@ -105,7 +109,7 @@ let Navigator = createBottomTabNavigator(
             return <TabIcon src={icon} size={30} isFocused={focused} />
         },
       }),
-
+      initialRouteName : 'Home',
       /* Magic, do not touch */
       tabBarComponent: TabBarComponent,
 
@@ -114,7 +118,6 @@ let Navigator = createBottomTabNavigator(
         style: { 
           height: 70,
           borderTopWidth: 0,
-          // paddingBottom: 15
         }
       }
     }

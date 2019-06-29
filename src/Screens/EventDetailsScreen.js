@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import { Image, View, ScrollView, TouchableOpacity } from 'react-native'
-import ScreenBackground from "../components/shared_components/ScreenBackground";
-import FTCStyledText from "../components/shared_components/FTCStyledText";
-import { TextStyles } from "../global/styles/TextStyles"
+import { ScreenBackground, FTCStyledText, EventLeaderDetails, Participants, GradientButton } from "../components";
+
 import Images from "../../assets/images";
-import EventLeaderDetails from "../components/local_components/EventDetails/EventLeaderDetails";
-import Participants from "../components/local_components/EventDetails/Participants";
 import { Button } from 'react-native-elements/src/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import GradientButton from "../components/shared_components/GradientButton";
 import data from "../dummy_data/autocompleteData.json";
-import { goToWhatsapp } from "../global/actions/appActions";
+import { goToWhatsapp, TextStyles } from "../global";
 
     const {
       header2, subtitle
@@ -75,7 +71,7 @@ import { goToWhatsapp } from "../global/actions/appActions";
   render() {
     
     return (
-      <ScrollView  >
+      <ScrollView bounces={false}>
         <ScreenBackground />
         {this.renderHeader()}
         <View style={styles.content} >
@@ -123,6 +119,7 @@ const styles ={
     backgroundColor:'#2ecc71',
     height:75,
     marginTop:15,
+    borderRadius:20
 
   },
   whatsappButtonTitle:{

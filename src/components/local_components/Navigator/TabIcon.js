@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Image } from 'react-native'
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient'
+import { primaryColor, secondaryColor } from "../../../global/Constants";
 
 export const TabIcon = (props) => {
     const { size, src } = props
@@ -12,8 +13,8 @@ export const TabIcon = (props) => {
     return (
         props.isFocused ?
             <LinearGradient
-                colors={['#6535bc', '#3986e0']}
-                style={{ padding: 10, marginTop: 10, alignItems: 'center', borderRadius: 100, justifyContent: 'center' }}
+                colors={[primaryColor, secondaryColor]}
+                style={{ padding: 10, marginTop: 10, alignItems: 'center', borderRadius: 25, justifyContent: 'center' }}
             >
                 <Image style={[styles, { tintColor: '#fff' }]} source={src} />
             </LinearGradient>

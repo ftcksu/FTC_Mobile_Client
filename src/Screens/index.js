@@ -7,4 +7,6 @@ export * from './MyProfile'
 export * from './History'
 export * from './ProfilePage'
 export * from '../components/local_components/ProfilePage/SendNotification'
+export * from './EditProfile'
+export * from './UserProfile'
 
