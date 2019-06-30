@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { Image, View, TouchableOpacity } from 'react-native'
-import ScreenWithHeader from "../components/shared_components/ScreenWithHeader";
-import FTCStyledText from "../components/shared_components/FTCStyledText";
+import { ScreenWithHeader, FTCStyledText, GradientButton} from '../components'
 import { Input } from 'react-native-elements/src/index'
 import { inputFieldStyle } from "../global/styles/inputFieldStyle"
 import images from './../../assets/images'
 import {KeyboardAwareScrollView, KeyboardAwareFlatList} from 'react-native-keyboard-aware-scroll-view'
-import GradientButton from "../components/shared_components/GradientButton";
 
 
   const {

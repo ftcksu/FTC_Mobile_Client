@@ -15,7 +15,7 @@ const images = {
 
     roundAdd: require('./round-add-button.png'),
     checkIcon: require('./check-icon.png'),
-    edit: require('./edit.png')
+    edit: require('./edit.png'),
 
     //social media
     whatsapp: require('./whatsapp.png'),
