@@ -19,10 +19,10 @@ export class InfoCardList extends React.Component {
           renderItem={({ item }) => (
             <TouchableOpacity onPress={this.props.onPress}>
               <InfoCard
-              title={item.title}
-              subtitle={item.subTitle}
-              cardTypesIcon={item.type}
-              isBoss={item.isBoss}
+              title={item.name}
+              subtitle={item.description}
+              // cardTypesIcon={item.type}
+              isBoss={item.is_leader}
               />
             </TouchableOpacity>
           )}
