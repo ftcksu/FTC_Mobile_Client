@@ -18,3 +18,7 @@ export function getLeaderboard() {
 export function getLoggedInUserInfo() {
   return get('/auth/userInfo');
 }
+
+export function getEventList(){
+  return get('/event/all');
+}
