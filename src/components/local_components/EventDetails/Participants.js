@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Image, View, TouchableOpacity } from 'react-native'
 import { FlatGrid } from 'react-native-super-grid/index'
-import FTCStyledText from '../../shared_components/FTCStyledText.js';
+import { FTCStyledText, ParticipantsDetails } from '../../';
 import Modal from "react-native-modal/src/index";
-import ParticipantsDetails from "../../shared_components/ParticipantsDetails";
 
-export default class Participants extends Component {
+export class Participants extends Component {
   componentDidMount(){
     this.setState({participants:this.props.participants})
   }
@@ -35,10 +34,10 @@ export default class Participants extends Component {
         return(
         <View>
         <Modal
+            onBackdropPress={this._toggleModal}
             isVisible={this.state.isModalVisible}
-            useNativeDriver={true}
-           >
-            <ParticipantsDetails callback={this._toggleModal} personDetails={this.state.modalData} />
+            useNativeDriver={true}>
+            <ParticipantsDetails personDetails={this.state.modalData} />
         </Modal>
       </View>
         )

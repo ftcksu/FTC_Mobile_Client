@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import  FTCStyledText  from '../../shared_components/FTCStyledText';
+import  {FTCStyledText}  from '../../';
 import Images from '../../../../assets/images'
 
 
@@ -13,7 +13,7 @@ import Images from '../../../../assets/images'
   cardTypesIcon, type=STRING either announcment, attend or organize
 */
 
-export default class ActionsCard extends React.Component {
+export class ActionsCard extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
     elevation: 2.5,
+    borderRadius:10
   },
   cardImage: {
     width: 35, height: 35, alignSelf: 'center', margin: 10, marginRight: 30

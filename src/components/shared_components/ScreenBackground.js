@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Animated, Image, Easing, View, Dimensions } from 'react-native'
-import { LinearGradient } from "expo";
+import { Animated, Easing, View, Dimensions } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+import { primaryColor, secondaryColor } from "../../global/Constants";
 
-export default class ScreenBackground extends Component {
+export class ScreenBackground extends Component {
 
   constructor () {
     super()
@@ -39,8 +40,9 @@ export default class ScreenBackground extends Component {
     return (
       <View style={[{width: "100%",
       height: "100%", position: 'absolute', top:0,bottom:0},this.props.style]} >
-      <LinearGradient colors={['#3986e0', '#6535bc']}  style={{width: '100%', height: '100%'}} />
+      <LinearGradient colors={[primaryColor, secondaryColor]}  style={{width: '100%', height: '100%'}} />
         <Animated.Image
+        resizeMethod={'resize'}
         style={[{ 
         width: this.state.width + 2000,
         height: this.state.height + 1000,

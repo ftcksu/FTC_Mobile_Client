@@ -28,7 +28,7 @@ export class DatePicker extends Component {
   render() {
     const { dateChosen } = this.state
     return (
-      <View>
+      <View style={{alignItems:'center'}} >
         <TouchableOpacity style={styles.buttonStyle} onPress={() => this._showDateTimePicker()}>
           <Text style={dateChosen ? [styles.buttonText, {color: 'black'}]: styles.buttonText}>{this.props.date}</Text>
         </TouchableOpacity>
@@ -46,10 +46,10 @@ export class DatePicker extends Component {
 const styles = {
   buttonStyle: {
     marginBottom: 15,
-    width: '100%',
+    width: '105%',
     backgroundColor: '#eee',
     height: 40,
-    justifyContent: 'center'
+    // justifyContent: 'center',
   },
   buttonText: {
     fontFamily: 'Cairo-Bold',

@@ -1,19 +1,29 @@
 import React from 'react';
 import { StyleSheet, View, } from 'react-native';
-import { Font } from 'expo';
+import * as Font from 'expo-font'
 import Navigator from '../Navigator'
 import Login from './LoginScreen'
-import { AddEvent } from './AddEvent';
-import {UserProfile, SendNotification} from "./";
+import { AddEvent } from './';
+import { TasksTimeline } from "../components";
+import { getToken, deleteToken } from '../global/actions/LocalStorage'
 
 export default class FTC extends React.Component {
 
   state = {
     fontHasLoaded: false,
+    isLoggedIn: false
   }
 
   componentWillMount() {
     this._loadFont()
+    this._checkLogin()
+    // deleteToken().then(() => {
+    //   this.setState({ isLoggedIn: false });
+    // })
+  }
+
+  userLoggedIn = () => {
+    this.setState({isLoggedIn: true})
   }
 
   _loadFont = () => {
@@ -30,11 +40,21 @@ export default class FTC extends React.Component {
       })
   }
 
+  _checkLogin = () => {
+
+    getToken().then(token => {
+      
+      this.setState({ isLoggedIn: token }); // if he's logged in, token will be a string, meaning (true) if not, it will be null, meaning (false)
+    })
+  
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
         {
-          this.state.fontHasLoaded ? <Navigator /> : null
+          this.state.fontHasLoaded ? (this.state.isLoggedIn ? <Navigator/> : <Login onLogin={this.userLoggedIn} /> ) : null
         }
       </View>
     );

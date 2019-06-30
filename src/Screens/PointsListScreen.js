@@ -1,31 +1,76 @@
 import React, { Component } from 'react';
-import PointList from '../components/local_components/PointList/PointList';
-import { ScrollView, SafeAreaView } from "react-native";
-import PointListTotal from '../dummy_data/userDataPointTotal.json'
-import PointListWeekly from '../dummy_data/userDataPointWeekly.json'
+import { ScrollView, SafeAreaView, Alert, ActivityIndicator, View } from "react-native";
 import { SearchBar } from 'react-native-elements/src/index';
-import { AttendToggle } from "../components/shared_components/AttendToggle";
-import FTCStyledText from '../components/shared_components/FTCStyledText';
-import { TextStyles } from "../global/styles/TextStyles"
-
+import { AttendToggle, FTCStyledText, PointList } from "../components";
+import { getLeaderboard, pointListAdapter, loadingStyle, primaryColor, TextStyles } from "../global";
 const {
   header
 } = TextStyles;
 
+let weeklyList,totalList = [];
 
 export class PointsListScreen extends Component {
 
-  switchList = (type) => {
-    type == 0 ? this.setState({ 'members': PointListWeekly }) : this.setState({ 'members': PointListTotal })
+
+  componentDidMount(){
+    this.fetchLeaderboard(true);
   }
 
-  handelCardPress = () => {
-    this.props.navigation.navigate();
+  fetchLeaderboard = async (initialFetch) => {
+    this.setState({isLoading:initialFetch})
+    getLeaderboard().then(response => {
+      if(response.status == 200){
+          this.sortList(response.data);
+      }else{
+        Alert.alert('تستهبل؟', 'يا رقمك السري او الجامعي غلط، شيك عليهم', [{text: 'يصير خير'}]);
+        
+      }
+      this.setState({isLoading:false})
+    })
+    .catch(error => {
+      Alert.alert('مشكل كبير', 'يا ان نتك خربان ولا سيرفرنا فاقع', [{text: 'جي جي'}]);
+      console.log(error);
+      this.setState({isLoading:false})
+    })
+  }
+
+  refreshLeaderboard = async () =>{
+    this.setState({
+      'isRefreshing' : true
+    })
+    await this.fetchLeaderboard(false)
+    this.setState({
+      'isRefreshing' : false
+    })
+  }
+
+  sortList = (data) =>{
+    // used parser to copy the array and every object contained in it (Deep copy)
+    weeklyList = JSON.parse(JSON.stringify(data));
+    totalList = JSON.parse(JSON.stringify(data));
+
+    totalList = pointListAdapter(totalList, 1)
+    weeklyList = pointListAdapter(weeklyList, 0)
+
+    this.state.listType == 0 ? this.setState({ 'members': weeklyList }) : this.setState({ 'members': totalList })
+  }
+
+  switchList = (type) => {
+    type == 0 ? this.setState({ 'members': weeklyList }) : this.setState({ 'members': totalList })
+    this.setState({listType : type})
+  }
+
+  handelCardPress = (item) => {
+    // console.log('handelCardPress ',item);
+    this.props.navigation.navigate('UserProfile', {user: item});
   }
 
   state = {
     search: '',
-    members: PointListTotal
+    members: [],
+    listType: 1,
+    isLoading: false,
+    isRefreshing: false,
   };
 
   updateSearch = search => {
@@ -33,21 +78,18 @@ export class PointsListScreen extends Component {
   };
 
   renderList(search) {
-    const { members } = this.state;
+    const { members } = this.state;    
     if (search === '') {
       return members;
     }
-    const tmp = members.filter((member) => (member.first_name + ' ' + member.last_name).includes(search));
+    const tmp = members.filter((member) => (member.user.first_name + ' ' + member.user.last_name).includes(search));
 
     return tmp;
   }
-  render() {
-    const { search } = this.state
-    filteredList = this.renderList(search)
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
 
-        <ScrollView style={styles.container} >
+  renderHeader = () =>{
+    return (
+      <View style={styles.container} >
           <FTCStyledText style={header} > قائمة النقاط </FTCStyledText>
           <SearchBar
             lightTheme={true}
@@ -57,12 +99,29 @@ export class PointsListScreen extends Component {
             inputContainerStyle={styles.SearchInputContainerStyle}
             placeholder="بحث عن الأعضاء"
             onChangeText={text => this.setState({ 'search': text })}
-            value={search}
+            value={this.state.search}
             inputStyle={{ textAlign: 'right' }}
           />
-          <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} handelPress={this.switchList} style={{ width: '80%', alignSelf: 'center' }} />
-          <PointList style={styles.pointList} data={filteredList} />
-        </ScrollView>
+          <AttendToggle firstButton={'المجموع'} secondButton={'الاسبوعية'} selectedIndex={this.state.listType} onPress={this.switchList} style={styles.listType} />
+        </View>
+    )
+  }
+  render() {
+    const filteredList = this.renderList(this.state.search)
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <ActivityIndicator style={loadingStyle}
+          animating={this.state.isLoading}
+          size="large"
+          color={primaryColor} />
+        
+        <PointList refreshing={this.state.isRefreshing}
+          onRefresh={this.refreshLeaderboard}
+          header = {this.renderHeader}
+          style={styles.pointList}
+          data={filteredList}
+          onCardPress = {this.handelCardPress} />
+
       </SafeAreaView>
 
     );
@@ -82,5 +141,9 @@ const styles = {
   },
   pointList: {
     marginTop: 15
+  },
+  listType:{
+    width: '80%',
+    alignSelf: 'center' 
   }
 }
