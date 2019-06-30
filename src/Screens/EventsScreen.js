@@ -3,14 +3,30 @@ import {
     ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Image, View
  } from 'react-native';
 import { InfoCardList } from '../components';
-import content from '../dummy_data/InfoCardData.json';
 import Images from '../../assets/images'
-import { primaryColor, secondaryColor } from "../global/Constants";
+import { primaryColor, secondaryColor, getEventList } from "../global";
 import { LinearGradient } from 'expo-linear-gradient'
 
-
-
 export class EventsScreen extends Component {
+
+    state = {
+        available:[],
+        registered:[],
+        full:[],
+    }
+
+    fetchEvents = () =>{
+        getEventList().then(response =>{
+            if(response.status == 200){
+                this.setState(response.data)
+                console.log(this.state);
+            }
+        })
+    }
+
+    componentDidMount(){
+        this.fetchEvents();
+    }
 
     navigateToEventDetails = () =>{
         this.props.navigation.navigate("EventDetails")
@@ -20,7 +36,7 @@ export class EventsScreen extends Component {
             <InfoCardList
             onPress={this.navigateToEventDetails}
             title={'مشاريع متاحة'}
-            listOfData={content.data}
+            listOfData={this.state.available}
             hasLineSeparator={true}
             />
         );
@@ -31,18 +47,18 @@ export class EventsScreen extends Component {
             <InfoCardList
             onPress={this.navigateToEventDetails}
             title={'تم تسجيلك بها'}
-            listOfData={content.data}
+            listOfData={this.state.registered}
             hasLineSeparator={true}
             />
         );
     }
 
-    renderClosedProjects() {
+    renderFullProjects() {
         return (
             <InfoCardList
             onPress={this.navigateToEventDetails}
             title={'مشاريع مغلقة'}
-            listOfData={content.data}
+            listOfData={this.state.full}
             hasLineSeparator={false}
             />
         );
@@ -52,7 +68,7 @@ export class EventsScreen extends Component {
         <View>
             {this.renderAvailableProjects()}
             {this.renderRegisteredProjects()}
-            {this.renderClosedProjects()}
+            {this.renderFullProjects()}
         </View>    
         )
     }
@@ -84,9 +100,6 @@ export class EventsScreen extends Component {
                 {this.renderAddEventButton()}
             </SafeAreaView>
           
-        //   <View style={styles.container}>
-        //     <AddEvent />
-        //   </View>
         );
     }
 }
