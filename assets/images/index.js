@@ -2,7 +2,10 @@ const images = {
     homeIcon: require('./homeIcon.png'),
     profileIcon: require('./profileIcon.png'),
     membersIcon: require('./membersListIcon.png'),
+
+    microphone: require('./microphone.png'),
     eventsIcon: require('./eventsIcon.png'),
+    
     logo: require('./logo.png'),
     addIcon: require('./add.png'),
     calenderIcon: require('./calender.png'),
