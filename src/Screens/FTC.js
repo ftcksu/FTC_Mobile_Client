@@ -7,7 +7,6 @@ import { AddEvent } from './';
 import { TasksTimeline } from "../components";
 import { getToken, deleteToken } from '../global/actions/LocalStorage'
 
-
 export default class FTC extends React.Component {
 
   state = {

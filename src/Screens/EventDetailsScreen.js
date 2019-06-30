@@ -1,19 +1,25 @@
 import React, { Component } from 'react'
-import { Image, View, ScrollView, TouchableOpacity } from 'react-native'
-import { ScreenBackground, FTCStyledText, EventLeaderDetails, Participants, GradientButton } from "../components";
-
+import { View, ScrollView } from 'react-native'
+import { EventLeaderDetails, Participants, GradientButton, ScreenWithHeader } from "../components";
 import Images from "../../assets/images";
 import { Button } from 'react-native-elements/src/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import data from "../dummy_data/autocompleteData.json";
 import { goToWhatsapp, TextStyles } from "../global";
 
-    const {
-      header2, subtitle
-    } = TextStyles;
-
-    
   export class EventDetailsScreen extends Component {
+
+    constructor(props) {
+      super(props);
+   
+      this.state = {
+         event: {
+           title: "فعالية كيف نشرب شاهي",
+           subtitle: "هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشهي الكويس والشاهي الخايس",
+           userStatus: 'Leader'
+         }
+      }
+   }
 
     renderWhatsappButton(){
       return (
@@ -34,21 +40,26 @@ import { goToWhatsapp, TextStyles } from "../global";
           />
       )
     }
+
+   
     handelBackButtonPress = () =>{
       this.props.navigation.pop();
-    }
-    renderHeader(){
-      return(
-        <View style={styles.headerContainer} >
-          <TouchableOpacity style={styles.cancelIcon} onPress={this.handelBackButtonPress}>
-            <Image source={Images.cancel} style={styles.cancelIcon} />
-          </TouchableOpacity>
-          <FTCStyledText style={header2} > هاكاثون المستقبل النسخة الثانية</FTCStyledText>
-          <FTCStyledText style={[subtitle,{marginTop:15, width:'60%'}]} > تطوير حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة تدريس </FTCStyledText>
-          <Image source={Images.calenderIcon} style={styles.eventIcon} />
-        </View>
-      )
-    }
+    }    
+
+    // Commented by Basel 18/06/2019 - Putting the header in a seperate component for reusability.
+
+    // renderHeader(){
+    //   return(
+    //     <View style={styles.headerContainer} >
+    //       <TouchableOpacity style={styles.cancelIcon} onPress={this.handelBackButtonPress}>
+    //         <Image source={Images.cancel} style={styles.cancelIcon} />
+    //       </TouchableOpacity>
+    //       <FTCStyledText style={header2} > هاكاثون المستقبل النسخة الثانية</FTCStyledText>
+    //       <FTCStyledText style={[subtitle,{marginTop:15, width:'60%'}]} > تطوير حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة تدريس </FTCStyledText>
+    //       <Image source={Images.calenderIcon} style={styles.eventIcon} />
+    //     </View>
+    //   )
+    // }
 
     renderLeader(){
       leader = data.filter((item) => {
@@ -68,18 +79,73 @@ import { goToWhatsapp, TextStyles } from "../global";
       );
     }
 
+    renderAppropriateButton() {
+
+      switch(this.state.event.userStatus){
+        case 'Lurker': {
+          // Register the user in the backend HERE
+          // **********************************
+          return (
+            <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" onPress={this._handleAppropriateButton}/>
+          );
+        }
+        case 'Registered': {
+          return (
+              <GradientButton icon={Images.recordPoints} style={{alignSelf:'center',marginTop:15}} title="رصد أعمالي" onPress={this._handleAppropriateButton}/>
+          );
+        }
+        case 'Leader': {
+          return (
+              <GradientButton icon={Images.recordPoints} style={{alignSelf:'center',marginTop:15}} title="رصد أعمال الفريق" onPress={this._handleAppropriateButton}/>
+          );
+        }
+      }
+
+      if(this.state.event.userStatus == 0){
+        return (
+          <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" onPress={this._handleAppropriateButton}/>
+        );
+      } 
+      return (
+
+          <GradientButton icon={Images.recordPoints} style={{alignSelf:'center',marginTop:15}} title="رصد أعمالي" onPress={this._handleAppropriateButton}/>
+
+      );
+    }
+
+    _handleAppropriateButton = () => {
+
+      switch(this.state.event.userStatus){
+        case 'Lurker': {
+          // Register the user in the backend HERE
+          // **********************************
+          this.handelBackButtonPress()
+          break;
+        }
+        case 'Registered': {
+          this.props.navigation.navigate("RegisterWork");
+          break;
+        }
+        case 'Leader': {
+          this.props.navigation.navigate("AcceptMemberWork")
+        }
+      }
+    }
+
+
   render() {
     
     return (
       <ScrollView bounces={false}>
-        <ScreenBackground />
-        {this.renderHeader()}
+        <ScreenWithHeader title={this.state.event.title} subtitle={this.state.event.subtitle} showCalender={true} backFuction={this.handelBackButtonPress}>
         <View style={styles.content} >
           {this.renderLeader()}
           {this.renderParticipants()}
-          {this.renderWhatsappButton()}
-          <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" />
+          {this.state.event.userStatus == 1 ? this.renderWhatsappButton() : <View style={[styles.whatsappButton, {backgroundColor: 'white'}]}/> /* to take the same dimensions as the whatsapp button, and keep the bakcground as white */}
+        {this.renderAppropriateButton()}
+          
         </View>
+        </ScreenWithHeader>
       </ScrollView>
     )
   }
