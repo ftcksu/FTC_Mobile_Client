@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
+import images from '../../../assets/images'
 import  {FTCStyledText}  from './';
 
-const cardTypesIcon = [
-    require('../../../assets/images/microphone.png'),
-    require('../../../assets/images/microphone.png'),
-    require('../../../assets/images/microphone.png')
+const cardTypesIcon = [ //TODO: add appropriate icons
+  images.microphone,
+  images.microphone,
+  // images.eventsIcon
 ];
 
 const bossIcon = require('../../../assets/images/EventManegerIcon.png');
@@ -34,14 +35,14 @@ export class InfoCard extends React.Component {
           {this.props.title}
         </FTCStyledText>
       
-        <FTCStyledText style={styles.subTitle}>
+        <FTCStyledText numberOfLines={2} style={styles.subTitle}>
           {this.props.subtitle}
         </FTCStyledText>
       
         </View>
         <Image
           source={
-            this.props.cardTypesIcon == 'attend' ? cardTypesIcon[0] : cardTypesIcon[1]
+            this.props.cardTypesIcon == 'ORGANIZE' ? cardTypesIcon[0] : cardTypesIcon[1]
           }
           style={styles.cardImage}
         />
