@@ -73,7 +73,7 @@ export class EventsScreen extends Component {
         return (
             <InfoCardList
             onPress={this.navigateToEventDetails}
-            title={'مشاريع مغلقة'}
+            title={'مشاريع الممتلئة'}
             listOfData={this.state.full}
             hasLineSeparator={false}
             />
