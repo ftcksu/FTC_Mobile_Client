@@ -26,8 +26,10 @@ export class ScreenWithHeader extends React.Component {
             </TouchableOpacity>
             <FTCStyledText style={header2} >{this.props.title}</FTCStyledText>
             <FTCStyledText style={[subtitle,{margin:15}]} >{this.props.subtitle}</FTCStyledText>
-            {this.props.showCalender? <Image source={Images.calenderIcon} style={styles.eventIcon} /> : <View style={styles.eventIcon}/> /* To keed the header at the same size with or without the icon. for consistency reasons */}
-            
+            <View style={styles.bottomContainer} >
+              <Image style={styles.bottomIcon} source={this.props.bottomIcon} />
+              <FTCStyledText style={styles.bottomText} > {this.props.bottomText} </FTCStyledText>
+            </View>            
           </View>
         )
       }
@@ -56,10 +58,19 @@ export class ScreenWithHeader extends React.Component {
       flexGrow:1,
       justifyContent:'space-evenly',
     },
-    eventIcon:{
-      alignSelf:'flex-start',
-      height:35,
-      width:35
+    bottomContainer:{
+      flexDirection:'row',
+      justifyContent:'space-between',
+      width:'100%',
+      alignItems:'center'
+    },
+    bottomIcon:{
+      width: 30, height: 30, alignSelf: 'center', tintColor:'white'
+    },
+    bottomText:{
+      fontFamily:'Cairo-Bold',
+      fontSize:14,
+      color:'white'
     },
     cancelIcon: {
       alignSelf:'flex-end',
