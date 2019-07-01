@@ -4,11 +4,9 @@ import images from '../../../assets/images'
 import  {FTCStyledText}  from './';
 import { LinearGradient } from 'expo-linear-gradient'
 import { primaryColor, secondaryColor } from '../../global'
-const cardTypesIcon = [ //TODO: add appropriate icons
-  images.organize_1,
-  images.calenderIcon
-  // images.organize_2,
-  // images.organize_1,
+const cardTypesIcon = [ 
+  images.organize,
+  images.attend
 ];
 
 const bossIcon = require('../../../assets/images/EventManegerIcon.png');
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
     shadowOffset: { height: 0, width: 0 }
   },
   iconImage: {
-    width: 30, height: 30, alignSelf: 'center', tintColor:'white'
+      width: 30, height: 30, alignSelf: 'center', tintColor:'white'
   },
   textContainer: {
     flex: 1, justifyContent: 'flex-start', flexDirection: 'column', margin: 10
