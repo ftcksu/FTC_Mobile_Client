@@ -34,8 +34,8 @@ export class ScreenWithHeader extends React.Component {
 
     render() {
       return( 
-            <View>
-                <ScreenBackground />
+            <View style={styles.container} >
+                <ScreenBackground/>
                 {this.renderHeader()}
                 {this.props.children}
             </View>
@@ -45,6 +45,9 @@ export class ScreenWithHeader extends React.Component {
   }
 
   const styles ={
+    container:{
+      minHeight:'100%'
+    },
     headerContainer:{
       margin:20,
       marginTop:30,
