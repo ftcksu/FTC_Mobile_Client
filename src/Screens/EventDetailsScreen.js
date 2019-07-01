@@ -4,7 +4,7 @@ import { EventLeaderDetails, Participants, GradientButton, ScreenWithHeader } fr
 import Images from "../../assets/images";
 import { Button } from 'react-native-elements/src/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { goToWhatsapp, getEventDetails } from "../global";
+import { goToWhatsapp, getEventDetails, showErrorMessage } from "../global";
 
   export class EventDetailsScreen extends Component {
 
@@ -50,7 +50,9 @@ import { goToWhatsapp, getEventDetails } from "../global";
     getEventDetails(this.state.event.id).then( response =>{
       if(response.status == 200)
         this.setState(response.data);
-    }).catch( error => console.log(error))
+    }).catch( error =>{
+        showErrorMessage(this.props.navigation)
+    })
    }
 
     renderWhatsappButton(){
