@@ -86,10 +86,9 @@ import { goToWhatsapp, getEventDetails } from "../global";
     }
 
     renderParticipants(){
-      console.log(this.state.users);
-      return(
-        <Participants data={this.state.users} />
-      );
+        return(
+          <Participants data={this.state.users} />
+        );
     }
 
     renderAppropriateButton() {
@@ -138,7 +137,7 @@ import { goToWhatsapp, getEventDetails } from "../global";
   render() {
     
     return (
-      <ScrollView bounces={false}>
+      <ScrollView style={{flex:1}} bounces={false}>
         <ScreenWithHeader title={this.state.event.name} subtitle={this.state.event.description} showCalender={true} backFuction={this.handelBackButtonPress}>
         <View style={styles.content} >
           {this.renderLeader()}

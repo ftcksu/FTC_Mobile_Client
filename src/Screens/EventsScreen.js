@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { 
-    ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Image, View
- } from 'react-native';
+    ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Image, View, RefreshControl} from 'react-native';
 import { InfoCardList } from '../components';
 import Images from '../../assets/images'
 import { primaryColor, secondaryColor, getEventList } from "../global";
@@ -13,6 +12,7 @@ export class EventsScreen extends Component {
         available:[],
         registered:[],
         full:[],
+        refreshing:false,
     }
 
     fetchEvents = () =>{
@@ -25,6 +25,12 @@ export class EventsScreen extends Component {
                 })
             }
         })
+    }
+
+    _onRefresh = async () =>{
+        this.setState({refreshing:true})
+        await this.fetchEvents()
+        this.setState({refreshing:false})
     }
 
 
@@ -110,7 +116,13 @@ export class EventsScreen extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
-                <ScrollView>
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this._onRefresh}
+                        />}
+                    >
                     {this.renderEventList()}
                 </ScrollView> 
                 {this.renderAddEventButton()}
