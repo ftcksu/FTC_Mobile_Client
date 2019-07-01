@@ -22,3 +22,7 @@ export function getLoggedInUserInfo() {
 export function getEventList(){
   return get('/event/all');
 }
+
+export function getEventDetails(id){
+  return get('/event/'+id);
+}

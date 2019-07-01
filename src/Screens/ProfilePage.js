@@ -66,7 +66,6 @@ export class ProfilePage extends Component {
   }
 
   renderProfileEvents() {
-    console.log('renderProfileEvents: ',this.state.user );
     return (
       <View >
         {this.state.user.is_admin ? this.renderAdminActions() : null}

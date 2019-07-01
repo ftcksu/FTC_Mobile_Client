@@ -96,7 +96,6 @@ export class AcceptMemberWork extends Component {
     }
 
     _handleSubmitButton() {
-        console.log(this.state.users);
         this._handelBackButtonPress()
     }
 

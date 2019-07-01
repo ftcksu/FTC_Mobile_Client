@@ -19,7 +19,6 @@ export class EventsScreen extends Component {
         getEventList().then(response =>{
             if(response.status == 200){
                 this.setState(response.data)
-                console.log(this.state);
             }
         })
     }
@@ -28,8 +27,8 @@ export class EventsScreen extends Component {
         this.fetchEvents();
     }
 
-    navigateToEventDetails = () =>{
-        this.props.navigation.navigate("EventDetails")
+    navigateToEventDetails = (id) =>{
+        this.props.navigation.navigate("EventDetails", {"id":id})
     }
     renderAvailableProjects() {
         return (

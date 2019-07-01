@@ -5,7 +5,7 @@ import Images from "../../assets/images";
 import { Button } from 'react-native-elements/src/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import data from "../dummy_data/autocompleteData.json";
-import { goToWhatsapp, TextStyles } from "../global";
+import { goToWhatsapp, getEventDetails } from "../global";
 
   export class EventDetailsScreen extends Component {
 
@@ -14,11 +14,42 @@ import { goToWhatsapp, TextStyles } from "../global";
    
       this.state = {
          event: {
-           title: "فعالية كيف نشرب شاهي",
-           subtitle: "هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشهي الكويس والشاهي الخايس",
-           userStatus: 'Leader'
-         }
+           id:props.navigation.state.params.id,
+           "name": "",
+           "whatsapp_link": "",
+           "is_leader": false,
+           "description": "",
+           "user_limit": '',
+           "date": "1",
+           "status": "",
+           "type": ""
+         },
+         "leader": {
+          "first_name": "",
+          "last_name": "",
+          "phone": "",
+          "profilephoto_full_link": "",
+          "profilephoto_b64": "",
+      },
+      "users":[
+        {
+          "first_name": "",
+          "last_name": "",
+          "phone": "",
+        }
+      ]
       }
+   }
+
+   componentDidMount(){
+    this.fetchEventDetails();
+   }
+
+   fetchEventDetails = () =>{
+    getEventDetails(this.state.event.id).then( response =>{
+      if(response.status == 200)
+        this.setState(response.data);
+    }).catch( error => console.log(error))
    }
 
     renderWhatsappButton(){
@@ -46,27 +77,9 @@ import { goToWhatsapp, TextStyles } from "../global";
       this.props.navigation.pop();
     }    
 
-    // Commented by Basel 18/06/2019 - Putting the header in a seperate component for reusability.
-
-    // renderHeader(){
-    //   return(
-    //     <View style={styles.headerContainer} >
-    //       <TouchableOpacity style={styles.cancelIcon} onPress={this.handelBackButtonPress}>
-    //         <Image source={Images.cancel} style={styles.cancelIcon} />
-    //       </TouchableOpacity>
-    //       <FTCStyledText style={header2} > هاكاثون المستقبل النسخة الثانية</FTCStyledText>
-    //       <FTCStyledText style={[subtitle,{marginTop:15, width:'60%'}]} > تطوير حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة تدريس </FTCStyledText>
-    //       <Image source={Images.calenderIcon} style={styles.eventIcon} />
-    //     </View>
-    //   )
-    // }
-
     renderLeader(){
-      leader = data.filter((item) => {
-        return item.isLeader === 1
-      })
       return(
-        <EventLeaderDetails style={{margin:15}} eventLeader={data[0]} />
+        <EventLeaderDetails style={{margin:15}} eventLeader={this.state.leader} />
       );
     }
 
@@ -137,7 +150,7 @@ import { goToWhatsapp, TextStyles } from "../global";
     
     return (
       <ScrollView bounces={false}>
-        <ScreenWithHeader title={this.state.event.title} subtitle={this.state.event.subtitle} showCalender={true} backFuction={this.handelBackButtonPress}>
+        <ScreenWithHeader title={this.state.event.name} subtitle={this.state.event.description} showCalender={true} backFuction={this.handelBackButtonPress}>
         <View style={styles.content} >
           {this.renderLeader()}
           {this.renderParticipants()}

@@ -17,7 +17,6 @@ import { getToken } from "../LocalStorage";
         if (!token) {
           console.log(`A request have been initiated with no token stored.`);
         }
-        console.log("_getHeaders: " + token);
         return {
             'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
