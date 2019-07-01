@@ -17,7 +17,7 @@ export class InfoCardList extends React.Component {
           data={this.props.listOfData}
           contentContainerStyle={{ flexGrow: 0 }}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => this.props.onPress(item.id)}>
+            <TouchableOpacity onPress={() => this.props.onPress(item)}>
               <InfoCard
               title={item.name}
               subtitle={item.description}
