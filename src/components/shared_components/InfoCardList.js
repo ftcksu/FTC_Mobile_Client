@@ -5,9 +5,7 @@ import { FTCStyledText, InfoCard } from './';
 
 export class InfoCardList extends React.Component {
 
-  renderEmptyListComponent = () =>(
-    <FTCStyledText style={styles.emptyViewText} > مافيه شيء حالياً </FTCStyledText>
-  )
+
 
   render() {
     return (
@@ -18,7 +16,7 @@ export class InfoCardList extends React.Component {
 
         <FlatList
           style={styles.flatView}
-          ListEmptyComponent={this.renderEmptyListComponent}
+          ListEmptyComponent={this.props.renderEmptyListComponent}
           data={this.props.listOfData}
           contentContainerStyle={{ flexGrow: 0 }}
           renderItem={({ item }) => (
@@ -59,11 +57,5 @@ const styles = StyleSheet.create({
   },
   flatView: {
     flexGrow: 0
-  },
-  emptyViewText: {
-    fontFamily:'Cairo-Bold',
-    fontSize:15,
-    margin:10,
-    alignSelf:'center'
   }
 });
