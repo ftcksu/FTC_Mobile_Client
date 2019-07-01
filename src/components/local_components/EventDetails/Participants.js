@@ -62,7 +62,6 @@ export class Participants extends Component {
           items={this.state.participants}
           style={styles.gridView}
           staticDimension={75*4 + 10*5} // 75 is the itemDimension multiplied by the number of items per row, plus the spacing between then, which is by default 10 
-          // spacing={0}
           renderItem={({ item }) => (
             <View>
                 <TouchableOpacity onPress={() =>{
@@ -92,7 +91,6 @@ const styles = {
         alignItems:'center'
     },
     gridView: {
-      marginTop: 20,
       flex: 1,
       flexDirection:'row'
     },
