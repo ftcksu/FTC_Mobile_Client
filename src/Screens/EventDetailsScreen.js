@@ -12,6 +12,7 @@ import { goToWhatsapp, getEventDetails } from "../global";
       super(props);
    
       this.state = {
+        user_status:props.navigation.state.params.user_status,
          event: {
            id:props.navigation.state.params.id,
            "name": "",
@@ -53,9 +54,10 @@ import { goToWhatsapp, getEventDetails } from "../global";
    }
 
     renderWhatsappButton(){
+      if(this.state.user_status == 'Registered'  || this.state.user_status == 'Leader' && this.state.event.whatsapp_link)
       return (
         <Button
-        onPress={() => goToWhatsapp('966568484248')} //TODO: fix the hard coded number  
+        onPress={() => goToWhatsapp(this.state.event.whatsapp_link)} //TODO: fix the hard coded number  
           icon={
             <Icon
               style={styles.buttonIcon}
@@ -92,7 +94,7 @@ import { goToWhatsapp, getEventDetails } from "../global";
 
     renderAppropriateButton() {
 
-      switch(this.state.event.userStatus){
+      switch(this.state.user_status){
         case 'Lurker': {
           // Register the user in the backend HERE
           // **********************************
@@ -111,17 +113,6 @@ import { goToWhatsapp, getEventDetails } from "../global";
           );
         }
       }
-
-      if(this.state.event.userStatus == 0){
-        return (
-          <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" onPress={this._handleAppropriateButton}/>
-        );
-      } 
-      return (
-
-          <GradientButton icon={Images.recordPoints} style={{alignSelf:'center',marginTop:15}} title="رصد أعمالي" onPress={this._handleAppropriateButton}/>
-
-      );
     }
 
     _handleAppropriateButton = () => {
@@ -152,9 +143,8 @@ import { goToWhatsapp, getEventDetails } from "../global";
         <View style={styles.content} >
           {this.renderLeader()}
           {this.renderParticipants()}
-          {this.state.event.userStatus == 1 ? this.renderWhatsappButton() : <View style={[styles.whatsappButton, {backgroundColor: 'white'}]}/> /* to take the same dimensions as the whatsapp button, and keep the bakcground as white */}
-        {this.renderAppropriateButton()}
-          
+          {this.renderWhatsappButton()}
+          {this.renderAppropriateButton()}
         </View>
         </ScreenWithHeader>
       </ScrollView>
@@ -193,8 +183,10 @@ const styles ={
     right:10
   },
   whatsappButton:{
+    alignSelf:'center',
     backgroundColor:'#2ecc71',
-    height:75,
+    height:60,
+    width: "75%",
     marginTop:15,
     borderRadius:20
 
