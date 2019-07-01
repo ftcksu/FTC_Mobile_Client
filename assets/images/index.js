@@ -34,6 +34,11 @@ const images = {
     'user_tier_4': require('./user_tier4.png'),
     'user_tier_5': require('./user_tier5.png'),
 
+    'organize_1': require('./organize-1.png'),
+    'organize_2': require('./organize-2.png'),
+    'organize_3': require('./organize-3.png'),
+
+
 }
 
 export default images
