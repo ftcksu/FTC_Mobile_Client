@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Image, View, ScrollView, TouchableOpacity } from 'react-native'
-import ScreenWithHeader from "../components/shared_components/ScreenWithHeader";
-import FTCStyledText from "../components/shared_components/FTCStyledText";
 import { TextStyles } from "../global/styles/TextStyles"
 import { Input } from 'react-native-elements/src/index'
 import { inputFieldStyle } from "../global/styles/inputFieldStyle"
-import GradientButton from "../components/shared_components/GradientButton";
+import { GradientButton, FTCStyledText, ScreenWithHeader } from '../components'
 import Images from "../../assets/images";
 
 
@@ -89,7 +87,7 @@ export class RegisterWork extends Component {
 
         return(
             <ScrollView bounces={false}>
-                <ScreenWithHeader title={"فعالية كيف نشرب شاهي"} subtitle={"هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشاهي الكويس والشاهي الخايس"} showCalender={false} backFuction={this._handelBackButtonPress}>
+                <ScreenWithHeader title={"فعالية كيف نشرب شاهي"} subtitle={"هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشاهي الكويس والشاهي الخايس"} backFuction={this._handelBackButtonPress}>
                     <View style={styles.content} >
                         <FTCStyledText style={[header, styles.title]}>ماذا فعلت يا غلام</FTCStyledText>
                         {this.renderWorkTextInput()}

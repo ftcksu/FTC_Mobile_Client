@@ -167,7 +167,7 @@ export class AcceptMemberWork extends Component {
     
         return(
             <KeyboardAwareScrollView bounces={false}>
-                <ScreenWithHeader title={"فعالية كيف نشرب شاهي"} subtitle={"هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشاهي الكويس والشاهي الخايس"} showCalender={false} backFuction={this._handelBackButtonPress}>
+                <ScreenWithHeader title={"فعالية كيف نشرب شاهي"} subtitle={"هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشاهي الكويس والشاهي الخايس"} backFuction={this._handelBackButtonPress}>
                     <View style={styles.content}>
                         {this.renderUsersInformation()}
                     </View>
