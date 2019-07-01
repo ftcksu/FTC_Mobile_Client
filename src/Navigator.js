@@ -41,8 +41,8 @@ const eventStack = createStackNavigator(
     Events: EventsScreen,
     AddEvent: AddEvent,
     EventDetails:EventDetailsScreen,
-    RegisterWork: RegisterWork,
-    AcceptMemberWork: AcceptMemberWork
+    RegisterWork:RegisterWork,
+    AcceptMemberWork:AcceptMemberWork,
 
   },
   {
@@ -64,7 +64,7 @@ const profileStack = createStackNavigator(
   {
     ProfilePage: ProfilePage,
     EditProfilePage: EditProfile,
-    EventDetails:EventDetailsScreen
+    EventDetails:EventDetailsScreen,
   },
   {
     headerMode:'none'
