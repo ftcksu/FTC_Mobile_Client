@@ -50,6 +50,7 @@ export class ScreenWithHeader extends React.Component {
       marginTop:30,
       alignItems:'center',
       flex:1,
+      flexGrow:1,
       justifyContent:'space-evenly',
     },
     eventIcon:{
