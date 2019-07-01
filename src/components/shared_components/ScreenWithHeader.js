@@ -25,7 +25,7 @@ export class ScreenWithHeader extends React.Component {
               <Image source={Images.cancel} style={styles.cancelIcon} />
             </TouchableOpacity>
             <FTCStyledText style={header2} >{this.props.title}</FTCStyledText>
-            <FTCStyledText style={[subtitle,{marginTop:15, width:'60%'}]} >{this.props.subtitle}</FTCStyledText>
+            <FTCStyledText style={[subtitle,{margin:15}]} >{this.props.subtitle}</FTCStyledText>
             {this.props.showCalender? <Image source={Images.calenderIcon} style={styles.eventIcon} /> : <View style={styles.eventIcon}/> /* To keed the header at the same size with or without the icon. for consistency reasons */}
             
           </View>
