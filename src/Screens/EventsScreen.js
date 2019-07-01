@@ -18,17 +18,34 @@ export class EventsScreen extends Component {
     fetchEvents = () =>{
         getEventList().then(response =>{
             if(response.status == 200){
-                this.setState(response.data)
+                this.setState({
+                    'available':this.fillEventUserStatus('Lurker' ,response.data.available),
+                    'registered':this.fillEventUserStatus('Registered', response.data.registered),
+                    'full':this.fillEventUserStatus('Full', response.data.full),
+                })
             }
         })
+    }
+
+
+    fillEventUserStatus(status, events){
+        return events.map( (item)=>{
+            console.log(item);
+            if( status == 'Registered' && item.is_leader){
+                item.user_status = 'Leader'
+            }else
+                item.user_status = status
+            return item
+        } )
+        
     }
 
     componentDidMount(){
         this.fetchEvents();
     }
 
-    navigateToEventDetails = (id) =>{
-        this.props.navigation.navigate("EventDetails", {"id":id})
+    navigateToEventDetails = (event) =>{
+        this.props.navigation.navigate("EventDetails", {"id":event.id, "user_status" : event.user_status} )
     }
     renderAvailableProjects() {
         return (
