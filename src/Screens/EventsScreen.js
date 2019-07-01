@@ -46,7 +46,6 @@ export class EventsScreen extends Component {
                 item.user_status = status
             return item
         } )
-        
     }
 
     componentDidMount(){
@@ -100,7 +99,7 @@ export class EventsScreen extends Component {
     }
     renderEventList(){
         return(
-        <View>
+        <View style={{minHeight:'100%', justifyContent:'space-between'}} >
             {this.renderAvailableProjects()}
             {this.renderRegisteredProjects()}
             {this.renderFullProjects()}
