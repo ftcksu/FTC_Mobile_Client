@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { 
     ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Image, View, RefreshControl} from 'react-native';
-import { InfoCardList } from '../components';
+import { InfoCardList, FTCStyledText } from '../components';
 import Images from '../../assets/images'
 import { primaryColor, secondaryColor, getEventList } from "../global";
 import { LinearGradient } from 'expo-linear-gradient'
@@ -13,6 +13,7 @@ export class EventsScreen extends Component {
         registered:[],
         full:[],
         refreshing:false,
+        didLoad:false
     }
 
     fetchEvents = () =>{
@@ -24,6 +25,8 @@ export class EventsScreen extends Component {
                     'full':this.fillEventUserStatus('Full', response.data.full),
                 })
             }
+
+            this.setState({didLoad:true})
         })
     }
 
@@ -50,12 +53,20 @@ export class EventsScreen extends Component {
         this.fetchEvents();
     }
 
+    renderEmptyListComponent = () =>{
+        if(this.state.didLoad)
+            return <FTCStyledText style={styles.emptyViewText} > مافيه شيء حالياً </FTCStyledText>
+        else
+            return null;
+    }
+
     navigateToEventDetails = (event) =>{
         this.props.navigation.navigate("EventDetails", {"id":event.id, "user_status" : event.user_status} )
     }
     renderAvailableProjects() {
         return (
             <InfoCardList
+            renderEmptyListComponent={this.renderEmptyListComponent}
             onPress={this.navigateToEventDetails}
             title={'مشاريع متاحة'}
             listOfData={this.state.available}
@@ -67,6 +78,7 @@ export class EventsScreen extends Component {
     renderRegisteredProjects() {
         return (
             <InfoCardList
+            renderEmptyListComponent={this.renderEmptyListComponent}
             onPress={this.navigateToEventDetails}
             title={'تم تسجيلك بها'}
             listOfData={this.state.registered}
@@ -78,6 +90,7 @@ export class EventsScreen extends Component {
     renderFullProjects() {
         return (
             <InfoCardList
+            renderEmptyListComponent={this.renderEmptyListComponent}
             onPress={this.navigateToEventDetails}
             title={'مشاريع الممتلئة'}
             listOfData={this.state.full}
@@ -153,5 +166,11 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'stretch',
-    }
+    },
+  emptyViewText: {
+    fontFamily:'Cairo-Bold',
+    fontSize:15,
+    margin:10,
+    alignSelf:'center'
+  }
   });
