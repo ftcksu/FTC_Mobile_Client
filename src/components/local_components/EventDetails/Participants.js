@@ -20,6 +20,12 @@ export class Participants extends Component {
         });
       }
     }
+
+    renderListEmptyComponent = () =>{
+      return (
+        <FTCStyledText style={styles.emptyViewText} >محد مشارك للحين</FTCStyledText>
+      )
+    }
     
     renderItem(item){
       console.log('renderItem: ',item);
@@ -49,12 +55,9 @@ export class Participants extends Component {
     _toggleModal = () =>{
       this.setState({ isModalVisible: !this.state.isModalVisible });
     }
-  render() {
 
-    return (
-      <View style={styles.gridContainer}>
-      <FTCStyledText style={styles.title} > الأعضاء المشاركين </FTCStyledText>
-        <FlatGrid
+    renderGrid(){
+      return <FlatGrid
           itemDimension={75}
           items={this.state.participants}
           style={styles.gridView}
@@ -71,6 +74,13 @@ export class Participants extends Component {
             </View>
           )}
         />
+    }
+  render() {
+
+    return (
+      <View style={styles.gridContainer}>
+      <FTCStyledText style={styles.title} > الأعضاء المشاركين </FTCStyledText>
+        {this.state.participants.length ? this.renderGrid() : this.renderListEmptyComponent()}
         {this.renderModal()}
       </View>
     )
@@ -96,4 +106,9 @@ const styles = {
         height: 75,
         borderRadius: 75/2,
     },
+    emptyViewText:{
+      fontFamily:'Cairo-Bold',
+      fontSize:15,
+      margin:10
+  },
 }
