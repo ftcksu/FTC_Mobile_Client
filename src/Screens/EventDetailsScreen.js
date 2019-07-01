@@ -4,7 +4,6 @@ import { EventLeaderDetails, Participants, GradientButton, ScreenWithHeader } fr
 import Images from "../../assets/images";
 import { Button } from 'react-native-elements/src/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import data from "../dummy_data/autocompleteData.json";
 import { goToWhatsapp, getEventDetails } from "../global";
 
   export class EventDetailsScreen extends Component {
@@ -46,6 +45,7 @@ import { goToWhatsapp, getEventDetails } from "../global";
    }
 
    fetchEventDetails = () =>{
+     console.log('event id: ',this.state.event.id);
     getEventDetails(this.state.event.id).then( response =>{
       if(response.status == 200)
         this.setState(response.data);
@@ -84,11 +84,9 @@ import { goToWhatsapp, getEventDetails } from "../global";
     }
 
     renderParticipants(){
-      participants = data.filter((item) => {
-        return item.isLeader === 0
-      })
+      console.log(this.state.users);
       return(
-        <Participants participants={participants} />
+        <Participants data={this.state.users} />
       );
     }
 
