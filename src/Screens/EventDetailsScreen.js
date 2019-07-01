@@ -5,6 +5,7 @@ import Images from "../../assets/images";
 import { Button } from 'react-native-elements/src/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { goToWhatsapp, getEventDetails, showErrorMessage } from "../global";
+import moment from "moment";
 
   export class EventDetailsScreen extends Component {
 
@@ -118,7 +119,7 @@ import { goToWhatsapp, getEventDetails, showErrorMessage } from "../global";
 
     _handleAppropriateButton = () => {
 
-      switch(this.state.event.userStatus){
+      switch(this.state.user_status){
         case 'Lurker': {
           // Register the user in the backend HERE
           // **********************************
@@ -140,7 +141,11 @@ import { goToWhatsapp, getEventDetails, showErrorMessage } from "../global";
     
     return (
       <ScrollView style={{flex:1}} bounces={false}>
-        <ScreenWithHeader title={this.state.event.name} subtitle={this.state.event.description} showCalender={true} backFuction={this.handelBackButtonPress}>
+        <ScreenWithHeader title={this.state.event.name} 
+        subtitle={this.state.event.description}
+         bottomIcon={this.state.event.type == 'ORGANIZE' ? Images.organize : Images.attend}
+         bottomText={moment(this.state.event.date, 'YYYY-MM-DD').format('MMM DD')}
+         backFuction={this.handelBackButtonPress}>
         <View style={styles.content} >
           {this.renderLeader()}
           {this.renderParticipants()}
