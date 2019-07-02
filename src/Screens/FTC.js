@@ -1,41 +1,38 @@
-import React from 'react';
-import { StyleSheet, View, } from 'react-native';
-import { Font } from 'expo';
-import Navigator from '../Navigator'
-import Login from './LoginScreen'
-import { AddEvent } from './AddEvent';
-import {UserProfile, SendNotification} from "./";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Font } from "expo";
+import Navigator from "../Navigator";
+import Login from "./LoginScreen";
+import { AddEvent } from "./AddEvent";
+import { UserProfile, SendNotification } from "./";
+import { RegisterPoints } from "./RegisterPoints";
 
 export default class FTC extends React.Component {
-
   state = {
-    fontHasLoaded: false,
-  }
+    fontHasLoaded: false
+  };
 
   componentWillMount() {
-    this._loadFont()
+    this._loadFont();
   }
 
   _loadFont = () => {
     Font.loadAsync({
-      'Cairo-Bold': require('../../assets/fonts/Cairo-Bold.ttf'),
-      'Cairo-SemiBold': require('../../assets/fonts/Cairo-SemiBold.ttf'),
-      'Cairo-Light': require('../../assets/fonts/Cairo-Light.ttf'),
-      'Cairo-Regular': require('../../assets/fonts/Cairo-Regular.ttf'),
-      'Cairo-Black': require('../../assets/fonts/Cairo-Black.ttf'),
-      'Cairo-ExtraLight': require('../../assets/fonts/Cairo-ExtraLight.ttf'),
-    })
-      .then(() => {
-        this.setState({ fontHasLoaded: true })
-      })
-  }
+      "Cairo-Bold": require("../../assets/fonts/Cairo-Bold.ttf"),
+      "Cairo-SemiBold": require("../../assets/fonts/Cairo-SemiBold.ttf"),
+      "Cairo-Light": require("../../assets/fonts/Cairo-Light.ttf"),
+      "Cairo-Regular": require("../../assets/fonts/Cairo-Regular.ttf"),
+      "Cairo-Black": require("../../assets/fonts/Cairo-Black.ttf"),
+      "Cairo-ExtraLight": require("../../assets/fonts/Cairo-ExtraLight.ttf")
+    }).then(() => {
+      this.setState({ fontHasLoaded: true });
+    });
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        {
-          this.state.fontHasLoaded ? <Navigator /> : null
-        }
+        {this.state.fontHasLoaded ? <RegisterPoints /> : null}
       </View>
     );
   }
@@ -43,8 +40,8 @@ export default class FTC extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    flex: 1,
+    flexDirection: "column",
+    flex: 1
     // marginTop:30
   }
 });
