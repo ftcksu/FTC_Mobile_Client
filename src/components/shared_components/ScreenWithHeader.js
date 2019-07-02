@@ -25,17 +25,19 @@ export class ScreenWithHeader extends React.Component {
               <Image source={Images.cancel} style={styles.cancelIcon} />
             </TouchableOpacity>
             <FTCStyledText style={header2} >{this.props.title}</FTCStyledText>
-            <FTCStyledText style={[subtitle,{marginTop:15, width:'60%'}]} >{this.props.subtitle}</FTCStyledText>
-            {this.props.showCalender? <Image source={Images.calenderIcon} style={styles.eventIcon} /> : <View style={styles.eventIcon}/> /* To keed the header at the same size with or without the icon. for consistency reasons */}
-            
+            <FTCStyledText style={[subtitle,{margin:15}]} >{this.props.subtitle}</FTCStyledText>
+            <View style={styles.bottomContainer} >
+              <Image style={styles.bottomIcon} source={this.props.bottomIcon} />
+              <FTCStyledText style={styles.bottomText} > {this.props.bottomText} </FTCStyledText>
+            </View>            
           </View>
         )
       }
 
     render() {
       return( 
-            <View>
-                <ScreenBackground />
+            <View style={styles.container} >
+                <ScreenBackground/>
                 {this.renderHeader()}
                 {this.props.children}
             </View>
@@ -45,17 +47,30 @@ export class ScreenWithHeader extends React.Component {
   }
 
   const styles ={
+    container:{
+      minHeight:'100%'
+    },
     headerContainer:{
       margin:20,
       marginTop:30,
       alignItems:'center',
       flex:1,
+      flexGrow:1,
       justifyContent:'space-evenly',
     },
-    eventIcon:{
-      alignSelf:'flex-start',
-      height:35,
-      width:35
+    bottomContainer:{
+      flexDirection:'row',
+      justifyContent:'space-between',
+      width:'100%',
+      alignItems:'center'
+    },
+    bottomIcon:{
+      width: 30, height: 30, alignSelf: 'center', tintColor:'white'
+    },
+    bottomText:{
+      fontFamily:'Cairo-Bold',
+      fontSize:14,
+      color:'white'
     },
     cancelIcon: {
       alignSelf:'flex-end',

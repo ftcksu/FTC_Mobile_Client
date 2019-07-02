@@ -1,17 +1,8 @@
 import React, { Component } from 'react'
 import { View, ScrollView, KeyboardAvoidingView } from 'react-native'
 import { FTCStyledText, MaxParticipants, InputFields, AttendToggle, CurrentParticipants, NotifiCheck, SubmitButton, AutocompleteEventParticipants } from '../components'
-import data from '../dummy_data/autocompleteData.json'
+import { getAllUsers } from '../global'
 import { SafeAreaView } from 'react-navigation';
-
-/* Need some work on the naming. */
-
-const items = [
-  { id: 1, first_name:'عبدالمحسن', last_name:'العنزي' },
-  { id: 2, first_name:'باسل', last_name:'العبدلي' },
-  { id: 3, first_name:'نواف', last_name:'الكعيد' },
-  { id: 4, first_name:'عبدالاله', last_name:'النمي' }
-]
 
 export class AddEvent extends Component {
 
@@ -34,7 +25,7 @@ export class AddEvent extends Component {
 
   // add item to CurrentParticipants[], remove item from members[]
   // and adjust number of max participants as participants are added
-  _handleAddingParticipant = (item) => {
+  _handleAddingParticipant = (addedUser) => {
     const { maxPart, participants } = this.state
     // if participants.length > maxPart => maxPart = length(participants)
     max = maxPart
@@ -43,10 +34,13 @@ export class AddEvent extends Component {
       max = participants.length + 1
     }
 
-    let filteredArray = this.state.members.filter(i => i.id !== item.id)
+    let filteredArray = this.state.members.filter((user) =>{
+        if(addedUser.id != user.id)
+          return user
+    } )
 
     this.setState({
-      participants: [...participants, item],
+      participants: [...participants, addedUser],
       maxPart: max,
       members: filteredArray,
     })
@@ -62,9 +56,14 @@ export class AddEvent extends Component {
   }
 
   _getInfo = () => {
-    this.setState({
-      participants: items, // connect to endpoint
-      members: data,       // also connect to endpoint
+    getAllUsers().then(response => {
+      if(response.status == 200 ){
+        this.setState({
+          participants: [], // connect to endpoint
+          members: response.data,       // also connect to endpoint
+          
+        })
+      }
     })
   }
 
@@ -111,7 +110,6 @@ export class AddEvent extends Component {
     return (
       <View style={styles.inputSection}>
         <InputFields
-    
           updateState={(state) => this.updateState(state)}
           date={this.state.eventDate}
         />
@@ -129,10 +127,9 @@ export class AddEvent extends Component {
 
   renderManageParticipants(){
     return (
-        <View>
+        <View style={{zIndex:1}} >
           <AutocompleteEventParticipants
             members={this.state.members}
-            // add participant
             updateState={(item) => this._handleAddingParticipant(item)}
           />
           {this.state.participants.length ? <CurrentParticipants
@@ -173,7 +170,7 @@ export class AddEvent extends Component {
   render() {
     return (
       <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',}} behavior="height" enabled>
-          <ScrollView style={styles.container} >
+          <ScrollView  style={styles.container} >
             <SafeAreaView>
             {this.renderHeader()}
             {this.renderInputSection()}

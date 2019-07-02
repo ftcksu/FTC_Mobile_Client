@@ -2,10 +2,12 @@ const images = {
     homeIcon: require('./homeIcon.png'),
     profileIcon: require('./profileIcon.png'),
     membersIcon: require('./membersListIcon.png'),
+
+    microphone: require('./microphone.png'),
     eventsIcon: require('./eventsIcon.png'),
+    
     logo: require('./logo.png'),
     addIcon: require('./add.png'),
-    calenderIcon: require('./calender.png'),
     cancel: require('./cancel.png'),
     handShake: require('./hand-shake.png'),
     settings: require('./settings.png'),
@@ -30,6 +32,11 @@ const images = {
     'user_tier_3': require('./user_tier3.png'),
     'user_tier_4': require('./user_tier4.png'),
     'user_tier_5': require('./user_tier5.png'),
+
+    'organize': require('./organize-1.png'),
+    'attend': require('./calender.png'),
+
+
 
 }
 

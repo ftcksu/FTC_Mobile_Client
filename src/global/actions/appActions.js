@@ -1,4 +1,5 @@
-import { Linking } from 'react-native';
+import { Linking, Alert } from 'react-native';
+
 
 const whatsappApiURL = "https://wa.me/"
 
@@ -41,5 +42,20 @@ export function pointListAdapter(list, type){
   let sortedList = newList.sort(function(a, b) { return b.user.points - a.user.points; });
 
   return sortedList
+}
+
+export function showErrorMessage(navigator){
+    if(navigator != null ){
+      Alert.alert(
+        'مشكل كبير',
+        'يا ان نتك خربان ولا سيرفرنا فاقع',
+        [{text: 'جي جي' , onPress:() => navigator.pop() }]
+        );
+    }else
+    Alert.alert(
+      'مشكل',
+      'والله مدري وش صار بس فيه مشكله، شيك على نتك يا باشا',
+      [{text: 'جي جي'}]
+      );
 }
 

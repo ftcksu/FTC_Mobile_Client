@@ -5,6 +5,8 @@ import { FTCStyledText, InfoCard } from './';
 
 export class InfoCardList extends React.Component {
 
+
+
   render() {
     return (
       <View style={[styles.container, this.props.style]}>
@@ -14,15 +16,16 @@ export class InfoCardList extends React.Component {
 
         <FlatList
           style={styles.flatView}
+          ListEmptyComponent={this.props.renderEmptyListComponent}
           data={this.props.listOfData}
           contentContainerStyle={{ flexGrow: 0 }}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={this.props.onPress}>
+            <TouchableOpacity onPress={() => this.props.onPress(item)}>
               <InfoCard
-              title={item.title}
-              subtitle={item.subTitle}
+              title={item.name}
+              subtitle={item.description}
               cardTypesIcon={item.type}
-              isBoss={item.isBoss}
+              isBoss={item.is_leader}
               />
             </TouchableOpacity>
           )}

@@ -17,7 +17,6 @@ import { getToken } from "../LocalStorage";
         if (!token) {
           console.log(`A request have been initiated with no token stored.`);
         }
-        console.log("_getHeaders: " + token);
         return {
             'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
@@ -25,7 +24,7 @@ import { getToken } from "../LocalStorage";
     }
     _getAxiosInstance = async () => {
         return axios.create({
-            baseURL: "http://192.168.43.27:8000/api",
+            baseURL: "http://192.168.100.126:8000/api",
             responseType: "json",
             headers: await this._getHeaders()
           });

@@ -4,8 +4,8 @@ import { EventLeaderDetails, Participants, GradientButton, ScreenWithHeader } fr
 import Images from "../../assets/images";
 import { Button } from 'react-native-elements/src/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import data from "../dummy_data/autocompleteData.json";
-import { goToWhatsapp, TextStyles } from "../global";
+import { goToWhatsapp, getEventDetails, showErrorMessage } from "../global";
+import moment from "moment";
 
   export class EventDetailsScreen extends Component {
 
@@ -13,18 +13,54 @@ import { goToWhatsapp, TextStyles } from "../global";
       super(props);
    
       this.state = {
+        user_status:props.navigation.state.params.user_status,
          event: {
-           title: "فعالية كيف نشرب شاهي",
-           subtitle: "هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشهي الكويس والشاهي الخايس",
-           userStatus: 'Leader'
-         }
+           id:props.navigation.state.params.id,
+           "name": "",
+           "whatsapp_link": "",
+           "is_leader": false,
+           "description": "",
+           "user_limit": '',
+           "date": "1",
+           "status": "",
+           "type": ""
+         },
+         "leader": {
+          "first_name": "",
+          "last_name": "",
+          "phone": "",
+          "profilephoto_full_link": "",
+          "profilephoto_b64": "",
+      },
+      "users":[
+        {
+          "first_name": "",
+          "last_name": "",
+          "phone": "",
+        }
+      ]
       }
    }
 
+   componentDidMount(){
+    this.fetchEventDetails();
+   }
+
+   fetchEventDetails = () =>{
+     console.log('event id: ',this.state.event.id);
+    getEventDetails(this.state.event.id).then( response =>{
+      if(response.status == 200)
+        this.setState(response.data);
+    }).catch( error =>{
+        showErrorMessage(this.props.navigation)
+    })
+   }
+
     renderWhatsappButton(){
+      if(this.state.user_status == 'Registered'  || this.state.user_status == 'Leader' && this.state.event.whatsapp_link)
       return (
         <Button
-        onPress={() => goToWhatsapp('966568484248')} //TODO: fix the hard coded number  
+        onPress={() => goToWhatsapp(this.state.event.whatsapp_link)} //TODO: fix the hard coded number  
           icon={
             <Icon
               style={styles.buttonIcon}
@@ -46,42 +82,21 @@ import { goToWhatsapp, TextStyles } from "../global";
       this.props.navigation.pop();
     }    
 
-    // Commented by Basel 18/06/2019 - Putting the header in a seperate component for reusability.
-
-    // renderHeader(){
-    //   return(
-    //     <View style={styles.headerContainer} >
-    //       <TouchableOpacity style={styles.cancelIcon} onPress={this.handelBackButtonPress}>
-    //         <Image source={Images.cancel} style={styles.cancelIcon} />
-    //       </TouchableOpacity>
-    //       <FTCStyledText style={header2} > هاكاثون المستقبل النسخة الثانية</FTCStyledText>
-    //       <FTCStyledText style={[subtitle,{marginTop:15, width:'60%'}]} > تطوير حلول تقنية تساعد الملتحقين بالجامعة من طلاب وأعضاء هيئة تدريس </FTCStyledText>
-    //       <Image source={Images.calenderIcon} style={styles.eventIcon} />
-    //     </View>
-    //   )
-    // }
-
     renderLeader(){
-      leader = data.filter((item) => {
-        return item.isLeader === 1
-      })
       return(
-        <EventLeaderDetails style={{margin:15}} eventLeader={data[0]} />
+        <EventLeaderDetails style={{margin:15}} eventLeader={this.state.leader} />
       );
     }
 
     renderParticipants(){
-      participants = data.filter((item) => {
-        return item.isLeader === 0
-      })
-      return(
-        <Participants participants={participants} />
-      );
+        return(
+          <Participants data={this.state.users} />
+        );
     }
 
     renderAppropriateButton() {
 
-      switch(this.state.event.userStatus){
+      switch(this.state.user_status){
         case 'Lurker': {
           // Register the user in the backend HERE
           // **********************************
@@ -100,22 +115,11 @@ import { goToWhatsapp, TextStyles } from "../global";
           );
         }
       }
-
-      if(this.state.event.userStatus == 0){
-        return (
-          <GradientButton icon={Images.handShake} style={{alignSelf:'center',marginTop:15}} title="شارك بالتنظيم" onPress={this._handleAppropriateButton}/>
-        );
-      } 
-      return (
-
-          <GradientButton icon={Images.recordPoints} style={{alignSelf:'center',marginTop:15}} title="رصد أعمالي" onPress={this._handleAppropriateButton}/>
-
-      );
     }
 
     _handleAppropriateButton = () => {
 
-      switch(this.state.event.userStatus){
+      switch(this.state.user_status){
         case 'Lurker': {
           // Register the user in the backend HERE
           // **********************************
@@ -136,14 +140,17 @@ import { goToWhatsapp, TextStyles } from "../global";
   render() {
     
     return (
-      <ScrollView bounces={false}>
-        <ScreenWithHeader title={this.state.event.title} subtitle={this.state.event.subtitle} showCalender={true} backFuction={this.handelBackButtonPress}>
+      <ScrollView style={{flex:1}} bounces={false}>
+        <ScreenWithHeader title={this.state.event.name} 
+        subtitle={this.state.event.description}
+         bottomIcon={this.state.event.type == 'ORGANIZE' ? Images.organize : Images.attend}
+         bottomText={moment(this.state.event.date, 'YYYY-MM-DD').format('MMM DD')}
+         backFuction={this.handelBackButtonPress}>
         <View style={styles.content} >
           {this.renderLeader()}
           {this.renderParticipants()}
-          {this.state.event.userStatus == 1 ? this.renderWhatsappButton() : <View style={[styles.whatsappButton, {backgroundColor: 'white'}]}/> /* to take the same dimensions as the whatsapp button, and keep the bakcground as white */}
-        {this.renderAppropriateButton()}
-          
+          {this.renderWhatsappButton()}
+          {this.renderAppropriateButton()}
         </View>
         </ScreenWithHeader>
       </ScrollView>
@@ -182,8 +189,10 @@ const styles ={
     right:10
   },
   whatsappButton:{
+    alignSelf:'center',
     backgroundColor:'#2ecc71',
-    height:75,
+    height:60,
+    width: "75%",
     marginTop:15,
     borderRadius:20
 
