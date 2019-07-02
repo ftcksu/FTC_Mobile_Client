@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, FlatList, View, TouchableOpacity } from 'react-native';
-import FTCStyledText from '../../shared_components/FTCStyledText';
-import ActionCard  from './ActionCard';
+import {FTCStyledText, ActionsCard} from '../../';
 
 
-export default class ActionCardList extends React.Component {
+export class ActionCardList extends React.Component {
 
   render() {
     return (
@@ -19,7 +18,7 @@ export default class ActionCardList extends React.Component {
           contentContainerStyle={{ flexGrow: 0 }}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={this.props.onPress}>
-              <ActionCard
+              <ActionsCard
               title={item.title}
               cardTypesIcon={item.type}
               />

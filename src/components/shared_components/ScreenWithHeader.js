@@ -1,8 +1,7 @@
 
 import React from 'react';
 import { Image, View, TouchableOpacity } from 'react-native'
-import ScreenBackground from "./ScreenBackground";
-import FTCStyledText from "./FTCStyledText";
+import { FTCStyledText, ScreenBackground } from '../'
 import { TextStyles } from "../../global/styles/TextStyles"
 import Images from "../../../assets/images";
 
@@ -12,7 +11,7 @@ const {
   } = TextStyles;
 
 
-export default class ScreenWithHeader extends React.Component {
+export class ScreenWithHeader extends React.Component {
   
     
     handelBackButtonPress = () =>{

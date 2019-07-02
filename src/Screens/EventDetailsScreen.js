@@ -1,24 +1,12 @@
 import React, { Component } from 'react'
 import { View, ScrollView } from 'react-native'
-// Commented by Basel 18/06/2019 - Putting the header in a seperate component for reusability.
-// import ScreenBackground from "../components/shared_components/ScreenBackground";
-// import FTCStyledText from "../components/shared_components/FTCStyledText";
-// import { TextStyles } from "../global/styles/TextStyles"
-import ScreenWithHeader from "../components/shared_components/ScreenWithHeader";
+import { EventLeaderDetails, Participants, GradientButton, ScreenWithHeader } from "../components";
 import Images from "../../assets/images";
-import EventLeaderDetails from "../components/local_components/EventDetails/EventLeaderDetails";
-import Participants from "../components/local_components/EventDetails/Participants";
 import { Button } from 'react-native-elements/src/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import GradientButton from "../components/shared_components/GradientButton";
 import data from "../dummy_data/autocompleteData.json";
-import { goToWhatsapp } from "../global/actions/appActions";
+import { goToWhatsapp, TextStyles } from "../global";
 
-    // const {
-    //   header2, subtitle
-    // } = TextStyles;
-
-    
   export class EventDetailsScreen extends Component {
 
     constructor(props) {
@@ -197,6 +185,7 @@ const styles ={
     backgroundColor:'#2ecc71',
     height:75,
     marginTop:15,
+    borderRadius:20
 
   },
   whatsappButtonTitle:{

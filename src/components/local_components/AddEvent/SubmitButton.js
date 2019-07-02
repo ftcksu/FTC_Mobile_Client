@@ -1,6 +1,6 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
-import GradientButton from '../../shared_components/GradientButton'
+import { GradientButton } from '../../'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Images from '../../../../assets/images'
 
@@ -21,11 +21,9 @@ const icon = () => {
 }
 
 export const SubmitButton = (props) => {
-  const { containerStyle, textStyle, buttonStyle } = styles
   return (
     <GradientButton
       title={'أظف المشروع'}
-      style={{ width: '100%', height: 50 }}
       icon={Images.roundAdd}
       onPress={() => props.submit()}
     />

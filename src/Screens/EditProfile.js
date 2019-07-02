@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { View, SafeAreaView, TouchableOpacity, TextInput, Image } from 'react-native'
 import { ImagePicker, Constants, Permissions } from 'expo'
 import { connectActionSheet, ActionSheetProvider } from '@expo/react-native-action-sheet';
-import FTCStyledText from '../components/shared_components/FTCStyledText';
+import { FTCStyledText,  GradientButton} from "../components";
 import { TextStyles } from '../global/styles/TextStyles'
-import GradientButton from '../components/shared_components/GradientButton'
 import Images from '../../assets/images/'
 
 
@@ -114,7 +113,6 @@ export class EditProfile extends Component {
 
     let result = await ImagePicker.launchCameraAsync(options)
 
-    console.log(result)
 
     if (!result.cancelled) {
       this.setState({ image: result.uri })

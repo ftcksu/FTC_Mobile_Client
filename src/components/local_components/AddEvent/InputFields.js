@@ -38,7 +38,7 @@ export class InputFields extends Component {
           onChangeText={t => this.props.updateState({ whatsAppLink: t })}
           textContentType={'URL'}
         />
-        <DatePicker 
+        <DatePicker
           date={this.props.date}
           updateState={d => this.props.updateState({ eventDate: d })} // I don't want to think I'm tired!
         />
@@ -62,7 +62,7 @@ const styles = {
   inputContainerStyle: {
     marginBottom: 15,
     paddingRight: 15,
-    paddingLeft: -15,
+    // paddingLeft: -15,
     alignSelf: 'center',
     backgroundColor: '#eeeeee',
     borderBottomWidth: 0,

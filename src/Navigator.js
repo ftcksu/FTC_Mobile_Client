@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { createBottomTabNavigator,createStackNavigator ,createAppContainer, BottomTabBar } from 'react-navigation';
-import { AddEvent, PointsListScreen, EventsScreen,MyProfile, History, EventDetailsScreen, ProfilePage, EditProfile, RegisterWork, AcceptMemberWork } from './Screens'
+import { AddEvent, PointsListScreen, EventsScreen,MyProfile, History, EventDetailsScreen, ProfilePage, EditProfile, UserProfile, RegisterWork, AcceptMemberWork } from './Screens'
 import { TabIcon } from './components/local_components/Navigator/TabIcon'
 import Images from '../assets/images'
 
@@ -22,7 +22,7 @@ const TabBarComponent = (props) => {
           // marginBottom: 10
         }}
       />
-      <BottomTabBar {...props} />
+      <BottomTabBar {...props}/>
     </View>
   )
 }
@@ -46,13 +46,14 @@ const eventStack = createStackNavigator(
 
   },
   {
-    headerMode:'none'
+    headerMode:'none',
   }
 )
 
 const pointsStack = createStackNavigator(
   {
     PointList: PointsListScreen,
+    UserProfile: UserProfile
   },
   {
     headerMode:'none'
@@ -61,8 +62,9 @@ const pointsStack = createStackNavigator(
 
 const profileStack = createStackNavigator(
   {
-    EditProfilePage: EditProfile,
     ProfilePage: ProfilePage,
+    EditProfilePage: EditProfile,
+    EventDetails:EventDetailsScreen
   },
   {
     headerMode:'none'
@@ -74,9 +76,10 @@ let Navigator = createBottomTabNavigator(
     /* Screens */ 
     {
       Profile: profileStack,
+      PointList: pointsStack, 
       Events: eventStack,
-      PointList: pointsStack, //PointsListScreen
       Home: homeStack,
+
     },
 
         /* Configuration */
@@ -106,7 +109,7 @@ let Navigator = createBottomTabNavigator(
             return <TabIcon src={icon} size={30} isFocused={focused} />
         },
       }),
-
+      initialRouteName : 'Home',
       /* Magic, do not touch */
       tabBarComponent: TabBarComponent,
 
@@ -115,7 +118,6 @@ let Navigator = createBottomTabNavigator(
         style: { 
           height: 70,
           borderTopWidth: 0,
-          // paddingBottom: 15
         }
       }
     }

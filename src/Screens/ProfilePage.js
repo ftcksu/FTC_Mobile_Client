@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
-import FTCStyledText from '../components/shared_components/FTCStyledText';
-import InfoCardList from '../components/shared_components/InfoCardList';
+import { InfoCardList, ActionCardList , NameAndImage} from '../components';
+import { getLoggedInUserInfo } from '../global'
 import content from '../dummy_data/InfoCardData.json';
-import ImageView from 'react-native-image-view';
-import UserData from '../dummy_data/UserProfile.json';
-import ActionCardList from '../components/local_components/ProfilePage/ActionCardList';
+
 import Images from '../../assets/images'
-import NameAndImage from '../components/shared_components/NameAndImage';
 
 
 const actionList = [
@@ -27,16 +24,27 @@ export class ProfilePage extends Component {
     super();
     this.state = {
       isImageViewVisible: false,
-      user: UserData,
+      user: {},
     };
+  }
+
+  componentDidMount(){
+    getLoggedInUserInfo().then((response)=>{
+      this.setState({
+        user:response.data.user
+      })
+      // console.log(response.data.user);
+    })
   }
 
   renderProfileInformation() {
     return (
       <NameAndImage
-        src='https://i.imgur.com/I4bcBnY.jpg'
-        name='فك ديس'
-        description='ديس از ستووووبيد'
+        src={this.state.user.profilephoto_full_link}
+        name={this.state.user.first_name + ' ' + this.state.user.last_name}
+        titleStyle={{color:'black'}}
+        description={this.state.user.bio}
+        descriptionStyle={{color:'black'}}
         style={{ marginTop: 30 }}
       />
     );
@@ -58,21 +66,24 @@ export class ProfilePage extends Component {
   }
 
   renderProfileEvents() {
+    console.log('renderProfileEvents: ',this.state.user );
     return (
-      <View>
-        {this.state.user.isAdmin ? this.renderAdminActions() : null}
+      <View >
+        {this.state.user.is_admin ? this.renderAdminActions() : null}
         <InfoCardList
+          style={{backgroundColor:'black'}}
+          title={'المشاريع المشارك فيها'}
           listOfData={content.data}
           onPress={this.navigateToEventDetails}
           hasLineSeparator={false}
           style={styles.InfoCardList}
+          titleStyle={{fontSize:18}}
         />
       </View>
     );
   }
 
   handleSettingsPress = () => {
-    console.log('this is handler')
     this.props.navigation.navigate("EditProfilePage")
   }
 
@@ -89,8 +100,8 @@ export class ProfilePage extends Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView>
+      <SafeAreaView>
+        <ScrollView style={{ paddingRight:16, marginLeft:16 }} >
           {this.renderSettingsIcon()}
           {this.renderProfileInformation()}
           {this.renderProfileEvents()}
@@ -135,7 +146,7 @@ const styles = StyleSheet.create({
   },
   InfoCardList: {
     paddingTop: 0,
-    marginTop: -15,
+    // marginTop: -15,
   },
   settingsIcon: {
     position: 'absolute',
