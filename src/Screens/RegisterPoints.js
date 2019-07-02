@@ -4,12 +4,11 @@ import {
   KeyboardAwareScrollView,
   KeyboardAwareFlatList
 } from "react-native-keyboard-aware-scroll-view";
-import GradientButton from "../components/shared_components/GradientButton";
+
+import { GradientButton, FTCStyledText, ScreenWithHeader } from "../components";
 import images from "./../../assets/images";
-import FTCStyledText from "../components/shared_components/FTCStyledText";
 import { Input } from "react-native-elements/src/index";
-import { inputFieldStyle } from "../global/styles/inputFieldStyle";
-import ScreenWithHeader from "../components/shared_components/ScreenWithHeader";
+import { inputFieldStyle } from "../global";
 
 const { inputContainerStyle, inputStyle } = inputFieldStyle;
 

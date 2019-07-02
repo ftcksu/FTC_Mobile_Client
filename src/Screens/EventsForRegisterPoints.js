@@ -1,11 +1,22 @@
 import React, { Component } from "react";
-import { ScrollView, SafeAreaView, StyleSheet } from "react-native";
-import InfoCardList from "../components/shared_components/InfoCardList";
+import {
+  ScrollView,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  Image
+} from "react-native";
+import { InfoCardList } from "../components";
 import content from "../dummy_data/InfoCardData.json";
+import Images from "../../assets/images";
 
 export class EventsForRegisterPoints extends Component {
   navigateToEventDetails = () => {
     this.props.navigation.navigate("RegisterPoints");
+  };
+
+  _handelBackButtonPress = () => {
+    this.props.navigation.pop();
   };
 
   renderRegisteredProjects() {
@@ -21,6 +32,12 @@ export class EventsForRegisterPoints extends Component {
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
+        <TouchableOpacity
+          style={styles.cancelIcon}
+          onPress={this._handelBackButtonPress}
+        >
+          <Image source={Images.cancel} style={styles.cancelIcon} />
+        </TouchableOpacity>
         <ScrollView>{this.renderRegisteredProjects()}</ScrollView>
       </SafeAreaView>
     );
@@ -40,9 +57,6 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   floatingActionButtonContent: {
-    // height:'40%',
-    // width:'40%'
-    // backgroundColor:'black'
     alignSelf: "center"
   },
   container: {
@@ -50,5 +64,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "stretch"
+  },
+  cancelIcon: {
+    alignSelf: "flex-end",
+    height: 35,
+    width: 35,
+    tintColor: "black",
+    marginRight: 10
   }
 });
