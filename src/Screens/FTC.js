@@ -6,6 +6,7 @@ import Login from "./LoginScreen";
 import { AddEvent } from "./AddEvent";
 import { UserProfile, SendNotification } from "./";
 import { RegisterPoints } from "./RegisterPoints";
+import { EventsForRegisterPoints } from "./EventsForRegisterPoints";
 
 export default class FTC extends React.Component {
   state = {
@@ -32,7 +33,7 @@ export default class FTC extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.state.fontHasLoaded ? <RegisterPoints /> : null}
+        {this.state.fontHasLoaded ? <EventsForRegisterPoints /> : null}
       </View>
     );
   }
