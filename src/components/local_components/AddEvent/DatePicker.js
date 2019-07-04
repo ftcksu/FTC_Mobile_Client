@@ -6,7 +6,6 @@ import moment from 'moment'
 export class DatePicker extends Component {
   state = {
     isDateTimePickerVisible: false,
-    date: Date(),
     dateChosen: false,
   }
 
@@ -15,8 +14,7 @@ export class DatePicker extends Component {
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   _handleDatePicked = (date) => {
-    this.setState({date:  date})
-    // this.props.updateState(`${day}/${month + 1}/${year}`)
+    this.props.onDateSelection(date)
     this._hideDateTimePicker();
   };
 
@@ -24,13 +22,13 @@ export class DatePicker extends Component {
     return (
       <View style={styles.buttonStyle} >
         <TouchableOpacity style={styles.buttonStyle} onPress={() => this._showDateTimePicker()}>
-          <FTCStyledText style={styles.buttonText} > {moment(this.state.date).format('MMMM DD')}</FTCStyledText>
+          <FTCStyledText style={styles.buttonText} > {moment(this.props.value).format('MMMM DD')}</FTCStyledText>
         </TouchableOpacity>
         <DateTimePicker
           isVisible={this.state.isDateTimePickerVisible}
           onConfirm={this._handleDatePicked}
           onCancel={this._hideDateTimePicker}
-          minimumDate={new Date(1546722000000)} // 2019-01-06
+          minimumDate={new Date()} // 2019-01-06
         />
       </View>
     )
