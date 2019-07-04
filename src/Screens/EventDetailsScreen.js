@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, Alert } from 'react-native'
 import { EventLeaderDetails, Participants, GradientButton, ScreenWithHeader } from "../components";
 import Images from "../../assets/images";
 import { Button } from 'react-native-elements/src/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { goToWhatsapp, getEventDetails, showErrorMessage } from "../global";
+import { goToWhatsapp, getEventDetails, showNetworkErrorMessage, enrollInEvent } from "../global";
 import moment from "moment";
 
   export class EventDetailsScreen extends Component {
@@ -52,8 +52,23 @@ import moment from "moment";
       if(response.status == 200)
         this.setState(response.data);
     }).catch( error =>{
-        showErrorMessage(this.props.navigation)
+      showNetworkErrorMessage(this.props.navigation)
     })
+   }
+
+   enrollInEvent = () => {
+    enrollInEvent(this.state.event.id).then(response =>{
+      if(response.status == 200){
+        Alert.alert(
+          'كفو',
+          'ابشرك يا الطيب سجلناك الله الله بالشغل',
+          [{text: 'ابشر بها' , onPress:() => this.handelBackButtonPress() }]
+          );
+        return true
+      }else
+      showNetworkErrorMessage();
+
+    }).catch(error => showNetworkErrorMessage())
    }
 
     renderWhatsappButton(){
@@ -121,9 +136,7 @@ import moment from "moment";
 
       switch(this.state.user_status){
         case 'Lurker': {
-          // Register the user in the backend HERE
-          // **********************************
-          this.handelBackButtonPress()
+          this.enrollInEvent();
           break;
         }
         case 'Registered': {
@@ -145,7 +158,7 @@ import moment from "moment";
         subtitle={this.state.event.description}
          bottomIcon={this.state.event.type == 'ORGANIZE' ? Images.organize : Images.attend}
          bottomText={moment(this.state.event.date, 'YYYY-MM-DD').format('MMM DD')}
-         backFuction={this.handelBackButtonPress}>
+         onPressBack={this.handelBackButtonPress}>
         <View style={styles.content} >
           {this.renderLeader()}
           {this.renderParticipants()}
@@ -163,7 +176,7 @@ const styles ={
     marginTop:30,
     alignItems:'center',
     flex:1,
-    justifyContent:'space-evenly'
+    justifyContent:'space-evenly',
   },
   eventIcon:{
     alignSelf:'flex-start',

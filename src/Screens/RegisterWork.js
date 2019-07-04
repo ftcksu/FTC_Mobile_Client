@@ -87,7 +87,7 @@ export class RegisterWork extends Component {
 
         return(
             <ScrollView bounces={false}>
-                <ScreenWithHeader title={"فعالية كيف نشرب شاهي"} subtitle={"هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشاهي الكويس والشاهي الخايس"} backFuction={this._handelBackButtonPress}>
+                <ScreenWithHeader title={"فعالية كيف نشرب شاهي"} subtitle={"هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشاهي الكويس والشاهي الخايس"} onPressBack={this._handelBackButtonPress}>
                     <View style={styles.content} >
                         <FTCStyledText style={[header, styles.title]}>ماذا فعلت يا غلام</FTCStyledText>
                         {this.renderWorkTextInput()}

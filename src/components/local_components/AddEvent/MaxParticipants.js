@@ -12,6 +12,7 @@ export class MaxParticipants extends Component {
 
   _renderNumOfParti = () => {
     let list = []
+    list.push({ label: ``, key: null, value: null })
     for (i = 1; i <= 60; i++) {
       list.push({ label: `${i}`, key: i, value: i })
     }
@@ -30,9 +31,12 @@ export class MaxParticipants extends Component {
     })
   }
 
-  _handleChangeValue = (value) => {
-    this.props.updateState(value)
-    this.setState({ changed: true })
+  _handleChangeValue = (value, index) => {
+    if(index){
+      this.props.updateState(value)
+      this.setState({ changed: true })
+    }else
+      this.props.updateState(1)    
   }
 
   _rendrPicker = () => {
@@ -40,7 +44,7 @@ export class MaxParticipants extends Component {
       <Picker
         style={{ height: '100%', width: '100%', margin: 10 }}
         selectedValue={this.props.maxPart}
-        onValueChange={(value, index) => this._handleChangeValue(value)}
+        onValueChange={(value, index) => this._handleChangeValue(value, index)}
       >
         {this._renderPickerItems()}
       </Picker>
@@ -75,10 +79,10 @@ export class MaxParticipants extends Component {
 
   _renderTextInButton = () => {
     const placeholder = 'الحد الأعلى للمشاركين'
-    const { changed} = this.state
+    const { changed } = this.state
     const { buttonTextStyle, changedTextStyle } = styles
     return (
-      changed
+      changed || this.props.maxPart
       ? <Text style={changedTextStyle} >{this.props.maxPart}</Text>
       : <Text style={buttonTextStyle} >{placeholder}</Text>
     )

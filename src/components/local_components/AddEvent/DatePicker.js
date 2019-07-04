@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker/src/index'
-import FTCStyledText from '../../shared_components/FTCStyledText'
-
+import { FTCStyledText } from '../../'
+import moment from 'moment'
 export class DatePicker extends Component {
   state = {
     isDateTimePickerVisible: false,
-    date: 'تاريخ المشروع',
+    date: Date(),
     dateChosen: false,
   }
 
@@ -15,22 +15,16 @@ export class DatePicker extends Component {
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   _handleDatePicked = (date) => {
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    this.props.updateState(`${day}/${month + 1}/${year}`)
-    this.setState({ 
-      dateChosen: true,
-     });
+    this.setState({date:  date})
+    // this.props.updateState(`${day}/${month + 1}/${year}`)
     this._hideDateTimePicker();
   };
 
   render() {
-    const { dateChosen } = this.state
     return (
-      <View style={{alignItems:'center'}} >
+      <View style={styles.buttonStyle} >
         <TouchableOpacity style={styles.buttonStyle} onPress={() => this._showDateTimePicker()}>
-          <Text style={dateChosen ? [styles.buttonText, {color: 'black'}]: styles.buttonText}>{this.props.date}</Text>
+          <FTCStyledText style={styles.buttonText} > {moment(this.state.date).format('MMMM DD')}</FTCStyledText>
         </TouchableOpacity>
         <DateTimePicker
           isVisible={this.state.isDateTimePickerVisible}
@@ -45,17 +39,16 @@ export class DatePicker extends Component {
 
 const styles = {
   buttonStyle: {
-    marginBottom: 15,
-    width: '105%',
-    backgroundColor: '#eee',
-    height: 40,
-    // justifyContent: 'center',
+    flex:1,
+    flexDirection:'row',
+    height:40,
+    justifyContent:'flex-end'
   },
   buttonText: {
     fontFamily: 'Cairo-Bold',
     fontSize: 14,
     textAlign: 'right',
-    color: '#bababf',
+    alignSelf:'center',
     paddingRight: 10,
   }
 }

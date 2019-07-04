@@ -1,51 +1,44 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import Autocomplete from 'react-native-autocomplete-input';
-import { Input } from 'react-native-elements'
+import { FlatList } from 'react-native-gesture-handler';
+import { InputWithTitle } from '../../'
 
 export class AutocompleteEventParticipants extends Component {
   renderInput = () =>{
     return (
-      <Input
-        placeholder={this.props.placeholder}
-        inputStyle={styles.inputStyle}
-        containerStyle={styles.containerStyle}
-        value={this.state.query}
-        onChangeText={text => this.setState({ query: text })}
-        inputContainerStyle={{borderBottomWidth: 0}}
+      <InputWithTitle 
+        title ={"اسماء المشاركين مبدئياً"}
+        placeholder={'اختياري'}
+        onChangeText={(text) =>this.setState({ query: text })}
+        value ={this.state.query}
       />
     )
   }
 
   state = {
-    query: ''
+    query: '',
   }
 
   render() {
     const { query } = this.state;
     const filteredMembers = this.renderNames(query);
+    // console.log(filteredMembers);
     return (
-      <View containerStyle={styles.container} >
+      <View containerStyle={[styles.container, this.props.containerStyle]} >
         {this.renderInput()}
-        {filteredMembers.map(user => renderRow(user))}
+        <FlatList
+            data={filteredMembers}
+            contentContainerStyle={{ flexGrow: 0, height: 90 *  filteredMembers.length }}
+            renderItem={({ item, index }) => (
+              this.renderRow(item)
+            )}
+          />
+      { this.props.scroll }
       </View>
-      // <Autocomplete
-      //   containerStyle={styles.container}
-      //   inputContainerStyle={{borderBottomWidth: 0}}
-      //   renderTextInput={ this.renderInput}
-      //   autoCorrect={false}
-      //   listContainerStyle={{height: 70 *  filteredMembers.length}}
-      //   data={filteredMembers}
-      //   defaultValue={query}
-      //   renderItem={(item) => (
-      //     this.renderRow(item)
-      //   )}
-      // />
     )
   }
 
   renderRow(item) {
-    this.props.scroll()
     return (
       <TouchableOpacity style={styles.autocompleteRow} onPress={() => this.onNamePress(item)} >
         <View style={styles.rowImageAndTextContainer} >
@@ -64,6 +57,7 @@ export class AutocompleteEventParticipants extends Component {
       return [];
     }
     const { users, enrolledUsers,  } = this.props
+    console.log(users);
     const enrolledUsersIDs = enrolledUsers.map(user => {
       return user.id
     }) 
@@ -85,6 +79,7 @@ export class AutocompleteEventParticipants extends Component {
 const styles = StyleSheet.create({
   container: {
     flex:1,
+    backgroundColor:'black'
 
   },
   inputContainerStyle:{
@@ -122,5 +117,7 @@ const styles = StyleSheet.create({
   },
   containerStyle:{
     alignSelf: 'center',
+    flex:1,
+    flexDirection: "row",
   },
 });

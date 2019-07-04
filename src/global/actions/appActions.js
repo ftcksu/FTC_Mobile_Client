@@ -44,7 +44,7 @@ export function pointListAdapter(list, type){
   return sortedList
 }
 
-export function showErrorMessage(navigator){
+export function showNetworkErrorMessage(navigator){
     if(navigator != null ){
       Alert.alert(
         'مشكل كبير',
@@ -58,4 +58,14 @@ export function showErrorMessage(navigator){
       [{text: 'جي جي'}]
       );
 }
+
+export function showErrorMessage(title ='مشكل', body){
+    Alert.alert(
+      title,
+      body,
+      [{text: 'جي جي'}]
+      );
+}
+
+
 

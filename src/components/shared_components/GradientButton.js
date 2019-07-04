@@ -14,7 +14,7 @@ import {FTCStyledText} from './';
 export class GradientButton extends Component {
   render() {
     return (
-      <TouchableOpacity style={styles.outer} onPress={this.props.onPress}>
+      <TouchableOpacity style={[styles.outer, this.props.style]} onPress={this.props.onPress}>
       <LinearGradient colors={[primaryColor, secondaryColor]} style={[styles.inner, this.props.style]}  >
 
             <View style={styles.innerView}>

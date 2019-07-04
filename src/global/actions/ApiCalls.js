@@ -1,4 +1,4 @@
-import { get, post } from "./API/RestService";
+import { get, post, put } from "./API/RestService";
 
 
 export function loginAttempt(universityID, password) {
@@ -25,4 +25,12 @@ export function getEventList(){
 
 export function getEventDetails(id){
   return get('/event/'+id);
+}
+
+export function enrollInEvent(event_id) {
+  return put('/event/enroll/'+event_id)
+}
+
+export function getAllUsers(){
+  return get('/user/all');
 }

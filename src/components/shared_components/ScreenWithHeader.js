@@ -1,9 +1,11 @@
 
 import React from 'react';
-import { Image, View, TouchableOpacity } from 'react-native'
+import { Image, View, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { FTCStyledText, ScreenBackground } from '../'
 import { TextStyles } from "../../global/styles/TextStyles"
 import Images from "../../../assets/images";
+import { SafeAreaView } from 'react-navigation';
+
 
 
 const {
@@ -15,44 +17,65 @@ export class ScreenWithHeader extends React.Component {
   
     
     handelBackButtonPress = () =>{
-        this.props.backFuction();
+        this.props.onPressBack();
       }
 
     renderHeader(){
         return(
-          <View style={styles.headerContainer} >
-            <TouchableOpacity style={styles.cancelIcon} onPress={this.handelBackButtonPress}>
-              <Image source={Images.cancel} style={styles.cancelIcon} />
-            </TouchableOpacity>
-            <FTCStyledText style={header2} >{this.props.title}</FTCStyledText>
-            <FTCStyledText style={[subtitle,{margin:15}]} >{this.props.subtitle}</FTCStyledText>
-            <View style={styles.bottomContainer} >
-              <Image style={styles.bottomIcon} source={this.props.bottomIcon} />
-              <FTCStyledText style={styles.bottomText} > {this.props.bottomText} </FTCStyledText>
-            </View>            
+          <View style={[styles.headerContainer]} >
+            <ScreenBackground/>
+            {/* <SafeAreaView> */}
+              <TouchableOpacity style={styles.cancelIcon} onPress={this.handelBackButtonPress}>
+                <Image source={Images.cancel} style={styles.cancelIcon} />
+              </TouchableOpacity>
+              <FTCStyledText style={[header2, this.props.titleStyle]} >{this.props.title}</FTCStyledText>
+              <FTCStyledText style={[subtitle,{margin:15}]} >{this.props.subtitle}</FTCStyledText>
+              <View style={styles.bottomContainer} >
+                <Image style={styles.bottomIcon} source={this.props.bottomIcon} />
+                <FTCStyledText style={styles.bottomText} > {this.props.bottomText} </FTCStyledText>
+              </View>
+            {/* </SafeAreaView> */}
           </View>
         )
       }
 
-    render() {
-      return( 
-            <View style={styles.container} >
-                <ScreenBackground/>
-                {this.renderHeader()}
-                {this.props.children}
-            </View>
+      renderWithScrollView(){
+        return(
+          <KeyboardAvoidingView  style={{ flex: 3, flexGrow:2}} behavior={"padding"} >
+          <ScrollView bounces={false} style={styles.container}>
+              {this.renderHeader()}
+              {this.props.children}
+          </ScrollView>
+          </KeyboardAvoidingView>
+        );
+      }
 
-      );
+      renderWithoutScrollView(){
+        return( 
+          <View style={styles.container} >
+              <ScreenBackground/>
+              {this.renderHeader()}
+              {this.props.children}
+          </View>
+        );
+      }
+
+    render() {
+      if(this.props.hasScrollView){
+        return this.renderWithScrollView()
+      }else
+        return this.renderWithoutScrollView()
     }
   }
 
   const styles ={
     container:{
-      minHeight:'100%'
+      minHeight:'100%',
+      backgroundColor:'white'
     },
     headerContainer:{
-      margin:20,
-      marginTop:30,
+      // margin:20,
+      // marginTop:30,
       alignItems:'center',
       flex:1,
       flexGrow:1,
@@ -75,7 +98,9 @@ export class ScreenWithHeader extends React.Component {
     cancelIcon: {
       alignSelf:'flex-end',
       height:35,
-      width:35
+      width:35,
+      marginTop:15,
+      marginRight:8
     },
     content: {
       backgroundColor:'white',
