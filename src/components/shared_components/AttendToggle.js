@@ -5,7 +5,7 @@ import { ButtonGroup } from 'react-native-elements/src/index'
 export class AttendToggle extends Component {
 
   state = {
-    selectedIndex:0
+    selectedIndex:1
   }
 
   _handelPress = (index) => {
@@ -21,10 +21,10 @@ export class AttendToggle extends Component {
     ]
     return (
       <ButtonGroup
-        onPress={(index) => this.props.onPress(index)}
-        selectedIndex={this.props.selectedIndex}
+        onPress={(index) => this._handelPress(index)}
+        selectedIndex={this.state.selectedIndex}
         buttons={buttons}
-        containerStyle={[styles.buttonContainerStyle, this.props.style]}
+        containerStyle={[styles.buttonContainerStyle, this.props.containerStyle]}
       />
     )
   }
@@ -37,7 +37,6 @@ const styles = {
   },
   buttonContainerStyle: {
     alignSelf: 'center',
-    width: '100%',
     borderRadius: 0,
     backgroundColor: '#eeeeee',
     borderRadius:10

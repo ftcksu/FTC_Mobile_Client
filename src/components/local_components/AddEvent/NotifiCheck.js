@@ -9,13 +9,13 @@ export class NotifiCheck extends Component {
     const { containerStyle, textStyle } = styles
     return (
       <TouchableOpacity
-      onPress={() => this.props.updateState(!this.props.sendNotification)}>
+      onPress={this.props.onCheck}>
         <CheckBox
           right
           title='تبى ترسل تنبيه لكل الأعضاء؟'
           iconRight
           checkedColor='#868686'
-          checked={this.props.sendNotification}
+          checked={this.props.checked}
           fontFamily={'Cairo-Bold'}
           containerStyle={containerStyle}
           />

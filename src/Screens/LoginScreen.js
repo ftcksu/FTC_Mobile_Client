@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, KeyboardAvoidingView, Alert } from 'react-native'
 import { InputContainer, ScreenBackground, GradientButton, Logo } from '../components'
-import { loginAttempt, storeToken, showErrorMessage } from '../global' ;
+import { loginAttempt, storeToken, showNetworkErrorMessage } from '../global' ;
 
 
 export default class Login extends Component {
@@ -22,7 +22,7 @@ export default class Login extends Component {
         }
       })
       .catch(error => {
-        showErrorMessage()
+        showNetworkErrorMessage()
       })
     }
     render() {

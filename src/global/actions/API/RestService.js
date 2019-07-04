@@ -11,6 +11,11 @@ export async function post(url, body) {
   return axiosInst.post(url, body);
 }
 
+export async function put(url, body) {
+  const axiosInst = await this._getAxiosInstance();
+  return axiosInst.put(url, body);
+}
+
 _getHeaders = async () => {
   const token = await getToken();
 
@@ -24,7 +29,7 @@ _getHeaders = async () => {
 };
 _getAxiosInstance = async () => {
   return axios.create({
-    baseURL: "https://ftcksu.com/v2/api",
+    baseURL: "https://www.ftcksu.com/v2/api",
     responseType: "json",
     headers: await this._getHeaders()
   });
