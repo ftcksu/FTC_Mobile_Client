@@ -75,6 +75,10 @@ export class ProfilePage extends Component {
     this.props.navigation.navigate("EventsForRegisterPoints");
   };
 
+  navigateToEditProfile = () => {
+    this.props.navigation.navigate("EditProfile");
+  };
+
   renderProfileEvents() {
     return (
       <View>
@@ -92,14 +96,10 @@ export class ProfilePage extends Component {
     );
   }
 
-  handleSettingsPress = () => {
-    this.props.navigation.navigate("EditProfilePage");
-  };
-
   renderSettingsIcon = () => {
     return (
       <TouchableOpacity
-        onPress={this.handleSettingsPress}
+        onPress={this.navigateToEditProfile}
         style={styles.settingsButton}
       >
         <Image source={Images.settings} style={styles.settingsIcon} />
