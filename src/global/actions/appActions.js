@@ -59,11 +59,11 @@ export function showNetworkErrorMessage(navigator){
       );
 }
 
-export function showErrorMessage(title ='مشكل', body){
+export function showMessage(title ='مشكل', body, buttonText='جي جي'){
     Alert.alert(
       title,
       body,
-      [{text: 'جي جي'}]
+      [{text: buttonText}]
       );
 }
 
