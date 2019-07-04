@@ -49,7 +49,7 @@ export default class FTC extends React.Component {
       <View style={styles.container}>
         {this.state.fontHasLoaded ? (
           this.state.isLoggedIn ? (
-            <EditProfile />
+            <Navigator />
           ) : (
             <Login onLogin={this.userLoggedIn} />
           )

@@ -109,14 +109,14 @@ export class ProfilePage extends Component {
 
   render() {
     return (
-      <SafeAreaView>
+      <View style={{ margin: 20 }}>
+        {this.renderSettingsIcon()}
+
         <ScrollView style={{ paddingRight: 16, marginLeft: 16 }}>
-          {this.renderSettingsIcon()}
           {this.renderProfileInformation()}
           {this.renderProfileEvents()}
         </ScrollView>
-        {this.renderSettingsIcon()}
-      </SafeAreaView>
+      </View>
     );
   }
 }
@@ -158,13 +158,17 @@ const styles = StyleSheet.create({
     // marginTop: -15,
   },
   settingsIcon: {
-    position: "absolute",
-    top: 30,
-    right: 20,
     width: 25,
     height: 25
   },
   settingsButton: {
-    zIndex: 1 // to make it clickable
+    position: "absolute",
+    top: 30,
+    right: 20,
+    width: 50,
+    height: 50,
+    zIndex: 2,
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
