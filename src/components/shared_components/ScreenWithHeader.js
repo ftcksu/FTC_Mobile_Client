@@ -41,8 +41,8 @@ export class ScreenWithHeader extends React.Component {
 
       renderWithScrollView(){
         return(
-          <KeyboardAvoidingView  style={{ flex: 3, flexGrow:2}} behavior={"padding"} >
-          <ScrollView bounces={false} style={styles.container}>
+          <KeyboardAvoidingView  style={{ flex: 3, flexGrow:2, minHeight:'100%', backgroundColor:'white'}} behavior={"padding"} >
+          <ScrollView bounces={false} style={[styles.container, this.props.scrollViewStyle]}>
               {this.renderHeader()}
               {this.props.children}
           </ScrollView>
