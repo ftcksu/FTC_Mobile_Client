@@ -68,6 +68,7 @@ const styles = {
     backgroundColor: "#eeeeee",
     flex: 1,
     flexDirection: "row",
-    margin: 8
+    margin: 8,
+    borderRadius: 10
   }
 };

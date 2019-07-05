@@ -9,22 +9,63 @@ import {
 import { ImagePicker, Permissions, Constants } from "expo";
 import { TextStyles } from "./../global/styles/TextStyles";
 import Images from "./../../assets/images";
+import { getLoggedInUserInfo } from "../global";
 
 const { header2, header3 } = TextStyles;
 
 export class EditProfile extends Component {
-  state = {
-    image:
-      "https://charlestonpourhouse.com/wp-content/uploads/2016/09/P_FUNK.jpg",
-    newPassword: "",
-    newPasswordConfirmation: "",
-    snapchatAccount: "",
-    twitterAccount: "",
-    steamAccount: "",
-    whatsappAccount: ""
-  };
+  constructor() {
+    super();
+    this.state = {
+      user: {
+        profilephoto_full_link: "",
+        newPassword: "",
+        newPasswordConfirmation: ""
+      },
+      snapchatAccount: "",
+      twitterAccount: "",
+      steamAccount: "",
+      whatsappAccount: ""
+    };
+  }
+
   componentDidMount() {
-    this.getPermissionAsync();
+    getLoggedInUserInfo()
+      .then(response => {
+        this.setState({
+          user: response.data.user
+        });
+
+        response.data.user.socialmedia.forEach(element => {
+          switch (element.platform) {
+            case "snapchat": {
+              this.setState({
+                snapchatAccount: element.username
+              });
+              break;
+            }
+            case "twitter": {
+              this.setState({
+                twitterAccount: element.username
+              });
+              break;
+            }
+            case "steam": {
+              this.setState({
+                steamAccount: element.username
+              });
+              break;
+            }
+            case "whatsapp": {
+              this.setState({
+                whatsappAccount: element.username
+              });
+              break;
+            }
+          }
+        });
+      })
+      .catch(error => console.log("error: ", error));
   }
 
   getPermissionAsync = async () => {
@@ -37,6 +78,7 @@ export class EditProfile extends Component {
   };
 
   _pickImage = async () => {
+    await this.getPermissionAsync();
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -61,7 +103,7 @@ export class EditProfile extends Component {
           style={styles.imageContainer}
         >
           <Image
-            source={{ uri: this.state.image }}
+            source={{ uri: this.state.user.profilephoto_full_link }}
             style={styles.profileImage}
           />
           <Image source={Images.camera} style={styles.editIcon} />
@@ -80,11 +122,13 @@ export class EditProfile extends Component {
           title={"حسابك في سناب"}
           placeholder={"سنابك يا حيلو"}
           onChangeText={text => this.setState({ snapchatAccount: text })}
+          value={this.state.snapchatAccount}
         />
         <InputWithTitle
           title={"حسابك في تويتر"}
           placeholder={"تسو تسو"}
           onChangeText={text => this.setState({ twitterAccount: text })}
+          value={this.state.twitterAccount}
         />
         <InputWithTitle
           title={"حسابك في ستيم"}
