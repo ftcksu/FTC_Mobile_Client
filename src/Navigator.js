@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { createBottomTabNavigator,createStackNavigator ,createAppContainer, BottomTabBar } from 'react-navigation';
-import { AddEvent, PointsListScreen, EventsScreen,MyProfile, History, EventDetailsScreen, ProfilePage, EditProfile, UserProfile, RegisterWork, AcceptMemberWork } from './Screens'
+import { EventForm, PointsListScreen, EventsScreen,MyProfile, History, EventDetailsScreen, ProfilePage, EditProfile, UserProfile, RegisterWork, AcceptMemberWork } from './Screens'
 import { TabIcon } from './components/local_components/Navigator/TabIcon'
 import Images from '../assets/images'
 
@@ -39,7 +39,7 @@ const homeStack = createStackNavigator(
 const eventStack = createStackNavigator(
   {
     Events: EventsScreen,
-    AddEvent: AddEvent,
+    AddEvent: EventForm,
     EventDetails:EventDetailsScreen,
     RegisterWork:RegisterWork,
     AcceptMemberWork:AcceptMemberWork,

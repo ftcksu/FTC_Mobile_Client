@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, ScrollView, KeyboardAvoidingView} from 'react-native'
 import { ScreenWithHeader, InputWithTitle, DatePicker, AutocompleteEventParticipants, CurrentParticipants, GradientButton, AttendToggle, NotifiCheck } from '../components'
 import { getAllUsers, showNetworkErrorMessage, showMessage, addEvent } from '../global'
-export class AddEvent extends Component {
+export class EventForm extends Component {
 
   componentDidMount() {
   this.fetchUsers()
