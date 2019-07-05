@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
-import { View, ScrollView, KeyboardAvoidingView} from 'react-native'
-import { ScreenWithHeader, InputWithTitle, DatePicker, AutocompleteEventParticipants, CurrentParticipants, GradientButton, AttendToggle, NotifiCheck } from '../components'
+import { View} from 'react-native'
+import { ScreenWithHeader, InputWithTitle, DatePicker, AutocompleteEventParticipants, CurrentParticipants, GradientButton, AttendToggle, NotifiCheck, FloatingActionButton } from '../components'
 import { getAllUsers, showNetworkErrorMessage, showMessage, addEvent } from '../global'
+import images from '../../assets/images';
+
 export class EventForm extends Component {
 
   componentDidMount() {
   this.fetchUsers()
+  if(this.props.navigation && this.props.navigation.state.params){ // means that user should see edit event not add
+    this.setState(this.props.navigation.state.params.event)
+    this.setState({registered_users:this.props.navigation.state.params.users})
+    this.setState({user_limit:this.props.navigation.state.params.event.user_limit+""}) //casting from int to string
+  }
 }
+
+
   state = {
     'users':[],
     'name':'',
@@ -48,16 +57,31 @@ export class EventForm extends Component {
 
   onSubmit = () => {
     if(this.validateUserInput()){
-      addEvent(this.state).then(response => {
-        console.log(response);
-        if(response.status == 201){
-          showMessage('كفووو', 'ابشرك اضفنا مشروعك عاد الله الله بالشغل السنع', 'ابشر طال عمرك')
-        }else{
-          showNetworkErrorMessage();
-          console.log(response);
-        }
-      }).catch(error => {showNetworkErrorMessage(); console.log(error);})
+      if(this.state.id){
+        this.patchEvent();
+      }else
+        this.addEvent()
     }
+  }
+
+  addEvent = () =>{
+    addEvent(this.state).then(response => {
+      console.log(response);
+      if(response.status == 201){
+        showMessage('كفووو', 'ابشرك اضفنا مشروعك عاد الله الله بالشغل السنع', 'ابشر طال عمرك')
+      }else{
+        showNetworkErrorMessage();
+        console.log(response);
+      }
+    }).catch(error => {showNetworkErrorMessage(); console.log(error);})
+  }
+
+  patchEvent = () =>{
+
+  }
+
+  deleteEvent = () =>{
+    
   }
 
   validateUserInput(){
@@ -96,25 +120,37 @@ export class EventForm extends Component {
   handelNotifyPress = () =>{
     this.setState({notify:!this.state.notify})
   }
+  handelEventDelete = () =>{
+    
+  }
 
   render() {
+    const title = (this.state.id ? "عدل على مشروعك" : "اضف مشروعك")
+    const autocompleteTitle = (this.state.id ? "اضف مشاركين" : "اسماء المشاركين مبدئياً")
     return (
-      <ScreenWithHeader onPressBack={this.handelBackButtonPress} titleStyle={styles.headerTitle} hasScrollView={true}  title={'اضف مشروعك'} >
-        <View style={styles.container} >
-          <InputWithTitle containerStyle={styles.inputContainer} value={this.state.name}  onChangeText={(text => this.setState({name:text}))} title={'اسم المشروع'} placeholder={'اجباري'} />
-          <InputWithTitle containerStyle={styles.inputContainer} value={this.state.description} onChangeText={(text => this.setState({description:text}))} title={'وصف المشروع'} placeholder={'اجباري'} />
-          <InputWithTitle containerStyle={styles.inputContainer} value={this.state.whatsapp_link} onChangeText={(text => this.setState({whatsapp_link:text}))} title={'رابط قروب الواتس اب'} placeholder={'اختياري'} />
-          <InputWithTitle containerStyle={styles.inputContainer} title={'تاريخ المشروع'}>
-            <DatePicker value={this.state.date} onDateSelection={(date) => this.setState({date:date})} /> 
-          </InputWithTitle>
-          <InputWithTitle containerStyle={styles.inputContainer} keyboardType={'decimal-pad'} onChangeText={(text => this.setState({user_limit:text}))} value={this.state.user_limit} title={'الحد الأعلى للمشاركين'} placeholder={'اجباري، لا تحسب نفسك'} />
-          <AutocompleteEventParticipants containerStyle={styles.inputContainer} users={this.state.users} onEnrollUser={this.onEnrollUser} enrolledUsers={this.state.registered_users} />
-          <CurrentParticipants containerStyle={styles.inputContainer} onRemovedEnrolledUser={this.onRemovedEnrolledUser} enrolledUsers={this.state.registered_users} />
-          <AttendToggle containerStyle={styles.inputContainer} firstButton={'التسجيل للحضور فقط'} secondButton={'نحتاج منظمين'} onPress={this.onTypeEventChange} />
-          <NotifiCheck checked={this.state.notify} onCheck={this.handelNotifyPress} />
-          <GradientButton onPress={this.onSubmit} style={styles.submitButton} title={'أرسل'} />
-        </View>
-      </ScreenWithHeader>
+      <View style={{flex:1}} >
+        <ScreenWithHeader onPressBack={this.handelBackButtonPress} titleStyle={styles.headerTitle} hasScrollView={true}  title={title} >
+          <View style={styles.container} >
+            <InputWithTitle containerStyle={styles.inputContainer} value={this.state.name}  onChangeText={(text => this.setState({name:text}))} title={'اسم المشروع'} placeholder={'اجباري'} />
+            <InputWithTitle containerStyle={styles.inputContainer} value={this.state.description} onChangeText={(text => this.setState({description:text}))} title={'وصف المشروع'} placeholder={'اجباري'} />
+            <InputWithTitle containerStyle={styles.inputContainer} value={this.state.whatsapp_link} onChangeText={(text => this.setState({whatsapp_link:text}))} title={'رابط قروب الواتس اب'} placeholder={'اختياري'} />
+            <InputWithTitle containerStyle={styles.inputContainer} title={'تاريخ المشروع'}>
+              <DatePicker value={this.state.date} onDateSelection={(date) => this.setState({date:date})} /> 
+            </InputWithTitle>
+            <InputWithTitle value={this.state.user_limit} containerStyle={styles.inputContainer} keyboardType={'decimal-pad'} onChangeText={(text => this.setState({user_limit:text}))} value={this.state.user_limit} title={'الحد الأعلى للمشاركين'} placeholder={'اجباري، لا تحسب نفسك'} />
+            <AutocompleteEventParticipants title = {autocompleteTitle} containerStyle={styles.inputContainer} users={this.state.users} onEnrollUser={this.onEnrollUser} enrolledUsers={this.state.registered_users} />
+            <CurrentParticipants containerStyle={styles.inputContainer} onRemovedEnrolledUser={this.onRemovedEnrolledUser} enrolledUsers={this.state.registered_users} />
+            { !this.state.id ? ( // if there isn't id then this is add event
+              <View>
+                <AttendToggle containerStyle={styles.inputContainer} firstButton={'التسجيل للحضور فقط'} secondButton={'نحتاج منظمين'} onPress={this.onTypeEventChange} />
+                <NotifiCheck checked={this.state.notify} onCheck={this.handelNotifyPress} />
+              </View>
+            ) : null}
+            <GradientButton onPress={this.onSubmit} style={styles.submitButton} title={'أرسل'} />
+          </View>
+        </ScreenWithHeader>
+        {this.state.id ? <FloatingActionButton onPress={this.handelEventDelete} colors={['#b30000','#ff4d4d']} icon={images.garbage} /> : null}
+      </View>
     )
   }
 }
@@ -134,6 +170,6 @@ styles = {
     marginTop:10
   },
   submitButton:{
-    margin:10
+    marginTop:10
   }
 }
