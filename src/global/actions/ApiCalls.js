@@ -34,3 +34,9 @@ export function enrollInEvent(event_id) {
 export function getAllUsers(){
   return get('/user/all');
 }
+
+export function addEvent(body){
+  return post('/event/create', JSON.stringify(body));
+}
+
+

@@ -46,7 +46,7 @@ export class CurrentParticipants extends Component {
 const styles = {
   container: {
     flex:1,
-    // flexDirection: 'row-reverse', // (?) applied to only first row
+    flexDirection: 'row-reverse', // (?) applied to only first row
     margin: 15,
     marginBottom: 15,
     backgroundColor: '#eeeeee',
