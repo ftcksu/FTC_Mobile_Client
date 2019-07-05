@@ -39,7 +39,7 @@ const homeStack = createStackNavigator(
 const eventStack = createStackNavigator(
   {
     Events: EventsScreen,
-    AddEvent: EventForm,
+    EventForm: EventForm,
     EventDetails:EventDetailsScreen,
     RegisterWork:RegisterWork,
     AcceptMemberWork:AcceptMemberWork,
