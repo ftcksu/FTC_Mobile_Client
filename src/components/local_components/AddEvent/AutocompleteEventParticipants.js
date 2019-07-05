@@ -7,7 +7,7 @@ export class AutocompleteEventParticipants extends Component {
   renderInput = () =>{
     return (
       <InputWithTitle 
-        title ={"اسماء المشاركين مبدئياً"}
+        title ={this.props.title}
         placeholder={'اختياري'}
         onChangeText={(text) =>this.setState({ query: text })}
         value ={this.state.query}
