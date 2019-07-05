@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Alert } from 'react-native'
+import { View, ScrollView, Alert, TouchableOpacity, Image } from 'react-native'
 import { EventLeaderDetails, Participants, GradientButton, ScreenWithHeader } from "../components";
 import Images from "../../assets/images";
 import { Button } from 'react-native-elements/src/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { goToWhatsapp, getEventDetails, showNetworkErrorMessage, enrollInEvent } from "../global";
+import { goToWhatsapp, getEventDetails, showNetworkErrorMessage, enrollInEvent, primaryColor, secondaryColor } from "../global";
 import moment from "moment";
+import { LinearGradient } from 'expo-linear-gradient'
+
 
   export class EventDetailsScreen extends Component {
 
@@ -149,12 +151,31 @@ import moment from "moment";
       }
     }
 
+    renderEditEventButton(){
+      return(
+          <LinearGradient colors={[primaryColor, secondaryColor]} style={styles.buttonContainer} >
+              <TouchableOpacity onPress={this.handelEditEventPress}  >
+                  <Image
+                  resizeMode={'center'}
+                  source={Images.settings}
+                  style={styles.floatingActionButtonContent}
+                  />
+              </TouchableOpacity>
+          </LinearGradient>
+          
+      );
+  }
+
+  handelOnEditEventPress = () =>{
+    
+  }
+
 
   render() {
     
     return (
-      <ScrollView style={{flex:1}} bounces={false}>
-        <ScreenWithHeader title={this.state.event.name} 
+      <View style={{flex:1}}>
+        <ScreenWithHeader hasScrollView={true} scrollViewStyle={{flex:1}} title={this.state.event.name} 
         subtitle={this.state.event.description}
          bottomIcon={this.state.event.type == 'ORGANIZE' ? Images.organize : Images.attend}
          bottomText={moment(this.state.event.date, 'YYYY-MM-DD').format('MMM DD')}
@@ -166,7 +187,9 @@ import moment from "moment";
           {this.renderAppropriateButton()}
         </View>
         </ScreenWithHeader>
-      </ScrollView>
+        {this.state.user_status == 'Leader' ? this.renderEditEventButton():null}
+
+      </View>
     )
   }
 }
@@ -212,6 +235,23 @@ const styles ={
   },
   whatsappButtonTitle:{
     fontFamily:'Cairo-Bold'
-  }
+  },
+  buttonContainer:{
+    width: 60,  
+    height: 60,
+    alignItems:'center',
+    justifyContent:'center',
+    borderRadius: 60/2,            
+    position: 'absolute',                                          
+    bottom: 0,                                                    
+    right: 0,
+    marginRight:20,
+    marginBottom:20,
+    zIndex:2
+},
+floatingActionButtonContent:{
+    alignSelf: 'center',
+    tintColor:'white'
+},
   
 }
