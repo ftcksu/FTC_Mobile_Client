@@ -14,6 +14,8 @@ const images = {
     sendNotification: require('./sendNotification.png'),
     recordPoints: require('./recordPoints.png'),
     logout: require('./logout.png'),
+    garbage: require('./garbage.png'),
+
 
     roundAdd: require('./round-add-button.png'),
     checkIcon: require('./check-icon.png'),
