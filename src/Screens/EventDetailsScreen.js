@@ -162,11 +162,11 @@ import { LinearGradient } from 'expo-linear-gradient'
                   />
               </TouchableOpacity>
           </LinearGradient>
-          
       );
   }
 
-  handelOnEditEventPress = () =>{
+  handelEditEventPress = () =>{
+    this.props.navigation.navigate("EventForm",{event:this.state.event, users:this.state.users})
     
   }
 
