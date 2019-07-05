@@ -88,7 +88,7 @@ export class ScreenWithHeader extends React.Component {
       alignItems:'center'
     },
     bottomIcon:{
-      width: 30, height: 30, alignSelf: 'center', tintColor:'white'
+      width: 30, height: 30, alignSelf: 'center', tintColor:'white', margin:8
     },
     bottomText:{
       fontFamily:'Cairo-Bold',
