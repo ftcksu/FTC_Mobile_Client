@@ -6,7 +6,6 @@ import Login from './LoginScreen'
 import { getToken, deleteToken } from '../global/actions/LocalStorage'
 
 export default class FTC extends React.Component {
-
   state = {
     fontHasLoaded: false,
     isLoggedIn: false
@@ -26,17 +25,16 @@ export default class FTC extends React.Component {
 
   _loadFont = () => {
     Font.loadAsync({
-      'Cairo-Bold': require('../../assets/fonts/Cairo-Bold.ttf'),
-      'Cairo-SemiBold': require('../../assets/fonts/Cairo-SemiBold.ttf'),
-      'Cairo-Light': require('../../assets/fonts/Cairo-Light.ttf'),
-      'Cairo-Regular': require('../../assets/fonts/Cairo-Regular.ttf'),
-      'Cairo-Black': require('../../assets/fonts/Cairo-Black.ttf'),
-      'Cairo-ExtraLight': require('../../assets/fonts/Cairo-ExtraLight.ttf'),
-    })
-      .then(() => {
-        this.setState({ fontHasLoaded: true })
-      })
-  }
+      "Cairo-Bold": require("../../assets/fonts/Cairo-Bold.ttf"),
+      "Cairo-SemiBold": require("../../assets/fonts/Cairo-SemiBold.ttf"),
+      "Cairo-Light": require("../../assets/fonts/Cairo-Light.ttf"),
+      "Cairo-Regular": require("../../assets/fonts/Cairo-Regular.ttf"),
+      "Cairo-Black": require("../../assets/fonts/Cairo-Black.ttf"),
+      "Cairo-ExtraLight": require("../../assets/fonts/Cairo-ExtraLight.ttf")
+    }).then(() => {
+      this.setState({ fontHasLoaded: true });
+    });
+  };
 
   _checkLogin = () => {
 
@@ -61,8 +59,8 @@ export default class FTC extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    flex: 1,
+    flexDirection: "column",
+    flex: 1
     // marginTop:30
   }
 });

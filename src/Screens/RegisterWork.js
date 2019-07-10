@@ -5,6 +5,7 @@ import { Input } from 'react-native-elements/src/index'
 import { inputFieldStyle } from "../global/styles/inputFieldStyle"
 import { GradientButton, FTCStyledText, ScreenWithHeader } from '../components'
 import Images from "../../assets/images";
+import {KeyboardAwareFlatList} from 'react-native-keyboard-aware-scroll-view'
 
 
 const {
@@ -56,29 +57,54 @@ export class RegisterWork extends Component {
         console.log(this.state.data);
         this._handelBackButtonPress()
     }
- 
-    renderWorkTextInput() {
 
-        let addedInputs = this.state.data.map( (data, index) => {
-            return (
-                <Input
-                    placeholder={'تقشير بصل'}
-                    inputContainerStyle={inputContainerStyle}
-                    containerStyle={[containerStyle]}
-                    inputStyle={inputStyle}
-                    onChangeText={(text) => this._handleTextChange(text, index)}
-                    key={index}
-                />
-            )
-        });
-    
-        return (
-            <View style={styles.inputsContainer}>
-                {addedInputs}
+    renderHeader() {
+        return(
+            <FTCStyledText style={[header, styles.title]}>ماذا فعلت يا غلام</FTCStyledText>
+        );
+    }
+
+    renderFooter() {
+        return(
+            <View>
                 <TouchableOpacity style={styles.addMoreButtonContainer} onPress={this._handleAddButton}>
                     <Image source={Images.roundAdd} style={styles.addIcon} />
                 </TouchableOpacity>
+                <View style={styles.confirmWorkButtonContainer}>
+                    <GradientButton icon={Images.recordPoints} title="رصد الأعمال" onPress={this._handleSubmitButton}/>
+                </View>
             </View>
+        );
+    }
+ 
+
+    renderWorkTextInput() {
+    
+        return (
+            <View>
+
+                <KeyboardAwareFlatList
+                    data={this.state.data}
+                    contentContainerStyle={{ flexGrow: 0 }}
+                    ListHeaderComponent={this.renderHeader()}
+                    renderItem={({ item, index }) => (
+                            <Input
+                                placeholder={'تقشير بصل'}
+                                inputContainerStyle={inputContainerStyle}
+                                containerStyle={[containerStyle]}
+                                inputStyle={inputStyle}
+                                onChangeText={(text) => this._handleTextChange(text, index)}
+                                key={index}
+                            />    
+
+                    )}
+                    ListFooterComponent={
+                        this.renderFooter()
+                    }
+                />
+
+            </View>
+            
         );
     }
 
@@ -89,11 +115,8 @@ export class RegisterWork extends Component {
             <ScrollView bounces={false}>
                 <ScreenWithHeader title={"فعالية كيف نشرب شاهي"} subtitle={"هذه الفعالية تحدف إلى تثقيف عبدالاله ونواف عن ما هو الشاهي الكويس والشاهي الخايس"} onPressBack={this._handelBackButtonPress}>
                     <View style={styles.content} >
-                        <FTCStyledText style={[header, styles.title]}>ماذا فعلت يا غلام</FTCStyledText>
                         {this.renderWorkTextInput()}
-                        <View style={styles.confirmWorkButtonContainer}>
-                            <GradientButton icon={Images.recordPoints} title="رصد الأعمال" onPress={this._handleSubmitButton}/>
-                        </View>
+                        
                     </View>
                 </ScreenWithHeader>
             </ScrollView>
@@ -110,9 +133,8 @@ const styles ={
     },
     title: {
         marginTop: 20,
+        marginBottom: 40,
 
-    },inputsContainer: {
-        marginTop: 50,
     }, addMoreButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',

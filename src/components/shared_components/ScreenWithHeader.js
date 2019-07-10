@@ -1,17 +1,13 @@
-
 import React from 'react';
 import { Image, View, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { FTCStyledText, ScreenBackground } from '../'
 import { TextStyles } from "../../global/styles/TextStyles"
+
 import Images from "../../../assets/images";
 import { SafeAreaView } from 'react-navigation';
 
 
-
-const {
-    header2, subtitle
-  } = TextStyles;
-
+const { header2, subtitle } = TextStyles;
 
 export class ScreenWithHeader extends React.Component {
   
@@ -67,6 +63,7 @@ export class ScreenWithHeader extends React.Component {
         return this.renderWithoutScrollView()
     }
   }
+}
 
   const styles ={
     container:{
