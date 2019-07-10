@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View} from 'react-native'
+import { View, Alert } from 'react-native'
 import { ScreenWithHeader, InputWithTitle, DatePicker, AutocompleteEventParticipants, CurrentParticipants, GradientButton, AttendToggle, NotifiCheck, FloatingActionButton } from '../components'
 import { getAllUsers, showNetworkErrorMessage, showMessage, addEvent } from '../global'
 import images from '../../assets/images';
@@ -81,7 +81,7 @@ export class EventForm extends Component {
   }
 
   deleteEvent = () =>{
-    
+
   }
 
   validateUserInput(){
@@ -121,7 +121,18 @@ export class EventForm extends Component {
     this.setState({notify:!this.state.notify})
   }
   handelEventDelete = () =>{
-    
+        Alert.alert(
+      'انهاء المشروع',
+      'هل انت متأكد انك تبي تنهي المشروع؟ (ترى مايمديك تكنسله بعد ماتنهيه)',
+      [
+        {text: 'ايه يخوي ماعليك', onPress:this.handelEventDelete},
+        {
+          text: 'لا هونا',
+          style: 'cancel',
+        },
+      ],
+      {cancelable: false},
+    );
   }
 
   render() {
