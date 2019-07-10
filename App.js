@@ -8,9 +8,7 @@ export default class App extends React.Component {
   render() {
     return (
       // wrap this component with <SafeAreaView> ?
-      <ActionSheetProvider>
         <FTC/>
-      </ActionSheetProvider>
     );
   }
 }

@@ -10,6 +10,23 @@ import { getToken } from "../LocalStorage";
         const axiosInst = await this._getAxiosInstance()
         return axiosInst.post(url, body);
     }
+
+    export async function put(url, body){
+        const axiosInst = await this._getAxiosInstance()
+        return axiosInst.put(url, body);
+    }
+
+    export async function patch(url, body){
+        const axiosInst = await this._getAxiosInstance()
+        return axiosInst.patch(url, body);
+    }
+
+    export async function remove(url){ // delete is reserved work in js, so i place a remove
+        const axiosInst = await this._getAxiosInstance()
+        return axiosInst.delete(url);
+    }
+
+
     
     _getHeaders = async () => {
         const token = await getToken()
@@ -17,7 +34,6 @@ import { getToken } from "../LocalStorage";
         if (!token) {
           console.log(`A request have been initiated with no token stored.`);
         }
-        console.log("_getHeaders: " + token);
         return {
             'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
@@ -25,7 +41,7 @@ import { getToken } from "../LocalStorage";
     }
     _getAxiosInstance = async () => {
         return axios.create({
-            baseURL: "http://192.168.100.126:8000/api",
+            baseURL: "https://www.ftcksu.com/v2/api",
             responseType: "json",
             headers: await this._getHeaders()
           });

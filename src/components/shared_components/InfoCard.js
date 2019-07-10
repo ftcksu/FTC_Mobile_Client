@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
+import images from '../../../assets/images'
 import  {FTCStyledText}  from './';
-
-const cardTypesIcon = [
-    require('../../../assets/images/microphone.png'),
-    require('../../../assets/images/microphone.png'),
-    require('../../../assets/images/microphone.png')
+import { LinearGradient } from 'expo-linear-gradient'
+import { primaryColor, secondaryColor } from '../../global'
+const cardTypesIcon = [ 
+  images.organize,
+  images.attend
 ];
 
 const bossIcon = require('../../../assets/images/EventManegerIcon.png');
@@ -18,6 +19,17 @@ const bossIcon = require('../../../assets/images/EventManegerIcon.png');
 */
 
 export class InfoCard extends React.Component {
+
+  renderIcon = () =>(
+    <LinearGradient style={styles.gradientIconContainer} colors={[primaryColor, secondaryColor]} >
+      <Image
+          source={
+            this.props.cardTypesIcon == 'ORGANIZE' ? cardTypesIcon[0] : cardTypesIcon[1]
+          }
+          style={styles.iconImage}
+        />
+    </LinearGradient>
+  )
   render() {
     return (
       <View style={[styles.container,this.props.style]}>
@@ -34,17 +46,11 @@ export class InfoCard extends React.Component {
           {this.props.title}
         </FTCStyledText>
       
-        <FTCStyledText style={styles.subTitle}>
+        <FTCStyledText numberOfLines={2} style={styles.subTitle}>
           {this.props.subtitle}
         </FTCStyledText>
-      
         </View>
-        <Image
-          source={
-            this.props.cardTypesIcon == 'attend' ? cardTypesIcon[0] : cardTypesIcon[1]
-          }
-          style={styles.cardImage}
-        />
+        {this.renderIcon()}
       </View>
     );
   }
@@ -56,6 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#eeeeee',
     flexDirection: 'row',
     alignContent: 'flex-end',
+    alignItems:'center',
     margin: 15,
     borderRadius: 15,
     elevation: 2.5,
@@ -63,8 +70,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowOffset: { height: 0, width: 0 }
   },
-  cardImage: {
-    width: 60, height: 60, alignSelf: 'center', margin: 10, marginStart: 20 
+  iconImage: {
+      width: 30, height: 30, alignSelf: 'center', tintColor:'white'
   },
   textContainer: {
     flex: 1, justifyContent: 'flex-start', flexDirection: 'column', margin: 10
@@ -89,5 +96,12 @@ const styles = StyleSheet.create({
     marginBottom: 7,
     width: 15,
     height: 22,
+  },
+  gradientIconContainer: {
+    width: 60,
+    height: 60,
+    borderRadius:60/2,
+    justifyContent:'center',
+    marginRight:10
   }
 });

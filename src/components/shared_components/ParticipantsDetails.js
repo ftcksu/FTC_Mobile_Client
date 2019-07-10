@@ -10,7 +10,7 @@ export class ParticipantsDetails extends Component {
   renderWhatsappButton(){
     return (
       <Button
-        onPress={() => goToWhatsapp('966568484248')} //TODO: fix the hard coded number  
+        onPress={() => goToWhatsapp(this.props.data.phone)} //TODO: fix the hard coded number  
         icon={
           <Icon
             style={styles.buttonIcon}
@@ -29,8 +29,8 @@ export class ParticipantsDetails extends Component {
   render() {
     return (
         <View style={styles.container}>
-          <Image style={styles.image} source={{uri:this.props.personDetails.image}} />
-          <Text style={styles.name} > {this.props.personDetails.first_name +" "+this.props.personDetails.last_name } </Text>
+          <Image style={styles.image} source={{uri:this.props.data.profilephoto_full_link}} />
+          <Text style={styles.name} > {this.props.data.first_name +" "+this.props.data.last_name } </Text>
           {this.renderWhatsappButton()}
         </View>
     )

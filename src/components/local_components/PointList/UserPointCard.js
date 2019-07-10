@@ -45,7 +45,7 @@ export class UserPointCard extends React.Component {
             {this.props.name}
           </FTCStyledText>
 
-          <FTCStyledText style={styles.bio}>
+          <FTCStyledText numberOfLines={2} style={styles.bio}>
             {this.props.bio}
           </FTCStyledText>
 
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
       marginBottom: 5,
       textAlign:'right',
       fontFamily:"Cairo-Regular",
-      fontSize:12 
+      fontSize:12,
     },
     points:{
       color:"#4a67d2",

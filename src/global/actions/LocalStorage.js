@@ -5,7 +5,6 @@ import {AsyncStorage} from 'react-native';
     export async function storeToken(token) {
         try {
             await AsyncStorage.setItem(_tokenStorageKey, token)
-            console.log("token saved");
         } catch (error) {
             console.log(error.message);
         }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, KeyboardAvoidingView, Alert } from 'react-native'
 import { InputContainer, ScreenBackground, GradientButton, Logo } from '../components'
-import { loginAttempt } from '../global/actions/ApiCalls' ;
-import { storeToken } from '../global/actions/LocalStorage' ;
+import { loginAttempt, storeToken, showNetworkErrorMessage } from '../global' ;
+
 
 export default class Login extends Component {
 
@@ -22,9 +22,7 @@ export default class Login extends Component {
         }
       })
       .catch(error => {
-        Alert.alert('مشكل كبير', 'يا ان نتك خربان ولا سيرفرنا فاقع', [{text: 'جي جي'}]);
-        console.log('handelLoginRequest: ', error);
-        
+        showNetworkErrorMessage()
       })
     }
     render() {

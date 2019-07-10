@@ -7,3 +7,7 @@ export * from './NameAndImage'
 export * from './ParticipantsDetails'
 export * from './ScreenBackground'
 export * from './TasksTimeline'
+export * from './ScreenWithHeader'
+export * from './InputWithTitle'
+export * from './FloatingActionButton'
+

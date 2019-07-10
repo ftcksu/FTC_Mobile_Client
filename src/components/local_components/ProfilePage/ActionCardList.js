@@ -1,14 +1,12 @@
-import React from 'react';
-import { StyleSheet, FlatList, View, TouchableOpacity } from 'react-native';
-import {FTCStyledText, ActionsCard} from '../../';
-
+import React from "react";
+import { StyleSheet, FlatList, View, TouchableOpacity } from "react-native";
+import { FTCStyledText, ActionsCard } from "../../";
 
 export class ActionCardList extends React.Component {
-
   render() {
     return (
       <View style={styles.container}>
-        <FTCStyledText style={styles.listTitle} >
+        <FTCStyledText style={styles.listTitle}>
           {this.props.title}
         </FTCStyledText>
 
@@ -17,14 +15,9 @@ export class ActionCardList extends React.Component {
           data={this.props.listOfData}
           contentContainerStyle={{ flexGrow: 0 }}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={this.props.onPress}>
-              <ActionsCard
-              title={item.title}
-              cardTypesIcon={item.type}
-              />
+            <TouchableOpacity onPress={item.onPress}>
+              <ActionsCard title={item.title} cardTypesIcon={item.type} />
             </TouchableOpacity>
-              
-          
           )}
         />
         {this.props.hasLineSeparator ? <View style={styles.lineBreak} /> : null}
@@ -35,19 +28,19 @@ export class ActionCardList extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    flexDirection: 'column',
+    justifyContent: "center",
+    flexDirection: "column"
   },
   listTitle: {
-    fontFamily: 'Cairo-Bold',
-    textAlign: 'center',
-    fontSize: 23,
+    fontFamily: "Cairo-Bold",
+    textAlign: "center",
+    fontSize: 23
   },
   lineBreak: {
-    alignSelf: 'center',
-    width: '80%',
+    alignSelf: "center",
+    width: "80%",
     height: 5,
-    backgroundColor: '#eeeeee',
+    backgroundColor: "#eeeeee"
   },
   flatView: {
     flexGrow: 0

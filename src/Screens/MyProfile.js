@@ -52,7 +52,6 @@ export class MyProfile extends Component {
   }
   
   render() {
-    console.log(this.state.user);
     return (
       <View>
         <ScreenBackground/>

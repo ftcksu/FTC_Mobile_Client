@@ -1,51 +1,71 @@
-import React from 'react'
-import { View } from 'react-native'
-import { createBottomTabNavigator,createStackNavigator ,createAppContainer, BottomTabBar } from 'react-navigation';
-import { AddEvent, PointsListScreen, EventsScreen,MyProfile, History, EventDetailsScreen, ProfilePage, EditProfile, UserProfile } from './Screens'
-import { TabIcon } from './components/local_components/Navigator/TabIcon'
-import Images from '../assets/images'
 
-
-
-
+import React from "react";
+import { View } from "react-native";
+import {
+  createBottomTabNavigator,
+  createStackNavigator,
+  createAppContainer,
+  BottomTabBar
+} from "react-navigation";
+import {
+  EventForm,
+  PointsListScreen,
+  EventsScreen,
+  MyProfile,
+  History,
+  EventDetailsScreen,
+  ProfilePage,
+  EditProfile,
+  UserProfile,
+  RegisterWork,
+  AcceptMemberWork,
+  EventsForRegisterPoints,
+  RegisterPoints
+} from "./Screens";
+import { TabIcon } from "./components/local_components/Navigator/TabIcon";
+import Images from "../assets/images";
 
 /* Custom TabBar To Add TopBorder */
-const TabBarComponent = (props) => {
+const TabBarComponent = props => {
   return (
     <View>
-      <View style={{ 
+      <View
+        style={{
           height: 4,
-          width: '80%',
-          backgroundColor: '#eee',
-          alignSelf: 'center',
-          marginTop: 10,
+          width: "80%",
+          backgroundColor: "#eee",
+          alignSelf: "center",
+          marginTop: 10
           // marginBottom: 10
         }}
       />
-      <BottomTabBar {...props}/>
+      <BottomTabBar {...props} />
     </View>
-  )
-}
+  );
+};
 
 const homeStack = createStackNavigator(
   {
     Home: MyProfile,
-    History: History,
+    History: History
   },
   {
-    headerMode:'none'
+    headerMode: "none"
   }
-)
+);
 const eventStack = createStackNavigator(
   {
     Events: EventsScreen,
-    AddEvent: AddEvent,
-    EventDetails:EventDetailsScreen
+    EventForm: EventForm,
+    EventDetails:EventDetailsScreen,
+    RegisterWork:RegisterWork,
+    AcceptMemberWork:AcceptMemberWork,
+
   },
   {
-    headerMode:'none',
+    headerMode: "none"
   }
-)
+);
 
 const pointsStack = createStackNavigator(
   {
@@ -53,74 +73,72 @@ const pointsStack = createStackNavigator(
     UserProfile: UserProfile
   },
   {
-    headerMode:'none'
+    headerMode: "none"
   }
-)
+);
 
 const profileStack = createStackNavigator(
   {
     ProfilePage: ProfilePage,
     EditProfilePage: EditProfile,
-    EventDetails:EventDetailsScreen
+    EventDetails: EventDetailsScreen,
+    EventsForRegisterPoints: EventsForRegisterPoints,
+    RegisterPoints: RegisterPoints
   },
   {
-    headerMode:'none'
+    headerMode: "none"
   }
-)
+);
 
 /* Main Tab Navigator */
 let Navigator = createBottomTabNavigator(
-    /* Screens */ 
-    {
-      Profile: profileStack,
-      PointList: pointsStack, 
-      Events: eventStack,
-      Home: homeStack,
+  /* Screens */
 
-    },
+  {
+    Profile: profileStack,
+    PointList: pointsStack,
+    Events: eventStack,
+    Home: homeStack
+  },
 
-        /* Configuration */
-    /* Warning: DO NOT PANIC */
-    {
-      defaultNavigationOptions: ({ navigation }) => ({
-        tabBarIcon: ({ focused }) => {
-            const { routeName } = navigation.state
-            let icon;
+  /* Configuration */
+  /* Warning: DO NOT PANIC */
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused }) => {
+        const { routeName } = navigation.state;
+        let icon;
 
-            switch (routeName) {
-                case 'Home': 
-                  icon = Images.homeIcon
-                  break;
-                case 'Events': 
-                  icon = Images.eventsIcon
-                  break;
-                case 'Profile': 
-                  icon = Images.profileIcon
-                  break;
-                case 'PointList': 
-                  icon = Images.membersIcon
-                  break;
-                case 'Profile': 
-                  icon = Images.profileIcon
-                  break;
-
-            }
-
-            return <TabIcon src={icon} size={30} isFocused={focused} />
-        },
-      }),
-      initialRouteName : 'Home',
-      /* Magic, do not touch */
-      tabBarComponent: TabBarComponent,
-
-      tabBarOptions: {
-        showLabel: false,
-        style: { 
-          height: 70,
-          borderTopWidth: 0,
+        switch (routeName) {
+          case "Home":
+            icon = Images.homeIcon;
+            break;
+          case "Events":
+            icon = Images.eventsIcon;
+            break;
+          case "PointList":
+            icon = Images.membersIcon;
+            break;
+          case "Profile":
+            icon = Images.profileIcon;
+            break;
         }
+
+        return <TabIcon src={icon} size={30} isFocused={focused} />;
+      }
+    }),
+    initialRouteName: "Home",
+    /* Magic, do not touch */
+    tabBarComponent: TabBarComponent,
+
+    tabBarOptions: {
+      showLabel: false,
+      style: {
+        height: 70,
+        borderTopWidth: 0
       }
     }
-  )
- 
-export default Navigator = createAppContainer(Navigator)
+  }
+);
+
+export default (Navigator = createAppContainer(Navigator));

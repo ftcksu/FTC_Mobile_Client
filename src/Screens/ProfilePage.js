@@ -1,50 +1,56 @@
-import React, { Component } from 'react';
-import { View, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
-import { InfoCardList, ActionCardList , NameAndImage} from '../components';
-import { getLoggedInUserInfo } from '../global'
-import content from '../dummy_data/InfoCardData.json';
+import React, { Component } from "react";
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView
+} from "react-native";
+import { InfoCardList, ActionCardList, NameAndImage } from "../components";
+import { getLoggedInUserInfo } from "../global";
+import content from "../dummy_data/InfoCardData.json";
 
-import Images from '../../assets/images'
-
-
-const actionList = [
-  {
-    'title': 'رصد النقاط',
-    'type': 'recordPoints'
-  },
-  {
-    'title': 'إرسال التنبيهات',
-    'type': 'sendNotification'
-  },
-]
+import Images from "../../assets/images";
 
 export class ProfilePage extends Component {
-
   constructor() {
     super();
     this.state = {
       isImageViewVisible: false,
       user: {},
+      actionList: [
+        {
+          title: "رصد النقاط",
+          type: "recordPoints",
+          onPress: this.navigateToEventsForRegisterWork
+        },
+        {
+          title: "إرسال التنبيهات",
+          type: "sendNotification",
+          onPress: this.navigateToEventsForRegisterWork // Todo: create screen for notifications
+        }
+      ]
     };
   }
 
-  componentDidMount(){
-    getLoggedInUserInfo().then((response)=>{
+  componentDidMount() {
+    getLoggedInUserInfo().then(response => {
       this.setState({
-        user:response.data.user
-      })
+        user: response.data.user
+      });
       // console.log(response.data.user);
-    })
+    });
   }
 
   renderProfileInformation() {
     return (
       <NameAndImage
         src={this.state.user.profilephoto_full_link}
-        name={this.state.user.first_name + ' ' + this.state.user.last_name}
-        titleStyle={{color:'black'}}
+        name={this.state.user.first_name + " " + this.state.user.last_name}
+        titleStyle={{ color: "black" }}
         description={this.state.user.bio}
-        descriptionStyle={{color:'black'}}
+        descriptionStyle={{ color: "black" }}
         style={{ marginTop: 30 }}
       />
     );
@@ -54,7 +60,7 @@ export class ProfilePage extends Component {
     return (
       <View>
         <ActionCardList
-          listOfData={actionList}
+          listOfData={this.state.actionList}
           hasLineSeparator={true}
         />
       </View>
@@ -62,46 +68,49 @@ export class ProfilePage extends Component {
   }
 
   navigateToEventDetails = () => {
-    this.props.navigation.navigate("EventDetails")
-  }
+    this.props.navigation.navigate("EventDetails");
+  };
+
+  navigateToEventsForRegisterWork = () => {
+    this.props.navigation.navigate("EventsForRegisterPoints");
+  };
 
   renderProfileEvents() {
-    console.log('renderProfileEvents: ',this.state.user );
     return (
-      <View >
+      <View>
         {this.state.user.is_admin ? this.renderAdminActions() : null}
         <InfoCardList
-          style={{backgroundColor:'black'}}
-          title={'المشاريع المشارك فيها'}
+          style={{ backgroundColor: "black" }}
+          title={"المشاريع المشارك فيها"}
           listOfData={content.data}
           onPress={this.navigateToEventDetails}
           hasLineSeparator={false}
           style={styles.InfoCardList}
-          titleStyle={{fontSize:18}}
+          titleStyle={{ fontSize: 18 }}
         />
       </View>
     );
   }
 
   handleSettingsPress = () => {
-    this.props.navigation.navigate("EditProfilePage")
-  }
+    this.props.navigation.navigate("EditProfilePage");
+  };
 
   renderSettingsIcon = () => {
     return (
-      <TouchableOpacity onPress={this.handleSettingsPress} style={styles.settingsButton}>
-        <Image
-          source={Images.settings}
-          style={styles.settingsIcon}
-        />
+      <TouchableOpacity
+        onPress={this.handleSettingsPress}
+        style={styles.settingsButton}
+      >
+        <Image source={Images.settings} style={styles.settingsIcon} />
       </TouchableOpacity>
     );
-  }
+  };
 
   render() {
     return (
       <SafeAreaView>
-        <ScrollView style={{ paddingRight:16, marginLeft:16 }} >
+        <ScrollView style={{ paddingRight: 16, marginLeft: 16 }}>
           {this.renderSettingsIcon()}
           {this.renderProfileInformation()}
           {this.renderProfileEvents()}
@@ -122,40 +131,40 @@ const styles = StyleSheet.create({
     height: 128,
     width: 128,
     borderRadius: 64,
-    marginLeft: 100,
+    marginLeft: 100
   },
   profileImage: {
     height: 128,
     width: 128,
     borderRadius: 64
-  }, 
+  },
   name: {
     color: "#333333",
     textAlign: "center",
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontFamily: "Cairo-Bold",
     fontSize: 17,
     marginTop: 10,
     marginLeft: 10
-  }, 
+  },
   description: {
     fontFamily: "Cairo-Regular",
     fontSize: 12,
-    textAlign: 'center',
-    color: '#9e9e9e'
+    textAlign: "center",
+    color: "#9e9e9e"
   },
   InfoCardList: {
-    paddingTop: 0,
+    paddingTop: 0
     // marginTop: -15,
   },
   settingsIcon: {
-    position: 'absolute',
+    position: "absolute",
     top: 30,
     right: 20,
     width: 25,
-    height: 25,
+    height: 25
   },
   settingsButton: {
-    zIndex: 1, // to make it clickable
+    zIndex: 1 // to make it clickable
   }
 });
