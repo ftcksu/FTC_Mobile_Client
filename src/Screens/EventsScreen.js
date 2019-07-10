@@ -108,7 +108,7 @@ export class EventsScreen extends Component {
     }
 
     handelAddEventPress = () =>{
-        this.props.navigation.navigate("AddEvent");
+        this.props.navigation.navigate("EventForm");
     }
     renderAddEventButton(){
         return(

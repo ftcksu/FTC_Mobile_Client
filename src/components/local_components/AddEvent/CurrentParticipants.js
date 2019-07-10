@@ -16,7 +16,7 @@ export class CurrentParticipants extends Component {
   _removeItem = (item) => {
     // remove from currecntParticipants[] and add to memebers[]
     // let filteredArray = this.props.items.filter(i => i.id !== item.id)
-    this.props.updateState(item);
+    this.props.onRemovedEnrolledUser(item);
   }
 
   _renderItem = ({ item }) => {
@@ -30,22 +30,26 @@ export class CurrentParticipants extends Component {
 
   render() {
     return (
+      this.props.enrolledUsers.length ? 
       <FlatGrid
         fixed={true}
-        items={this.props.items}
+        items={this.props.enrolledUsers}
         renderItem={(item) => this._renderItem(item)}
-        style={styles.container}
+        style={[styles.container, this.props.containerStyle]}
       />
+      :
+      null
     )
   }
 }
 
 const styles = {
   container: {
-    // flexDirection: 'row-reverse', // (?) applied to only first row
-    marginTop: 15,
+    flex:1,
+    flexDirection: 'row-reverse', // (?) applied to only first row
+    margin: 15,
     marginBottom: 15,
     backgroundColor: '#eeeeee',
-    alignItems:'flex-end'
+    // alignItems:'flex-end',
   },
 }

@@ -1,15 +1,42 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, SafeAreaView } from 'react-native'
+import { View, StyleSheet, SafeAreaView, ActivityIndicator, Dimensions } from 'react-native'
 import { TasksTimeline, ScreenBackground, NameAndImage, SocialMediaList, FTCStyledText } from "../components";
-import { Dimensions } from "react-native";
-
+import { getUserDetails, loadingStyle, showNetworkErrorMessage, primaryColor } from '../global'
 var width = Dimensions.get('window').width; //full width
 
 export class UserProfile extends Component {
 
     state = {
-        user:this.props.navigation.state.params.user.user,
-        tasks:this.props.navigation.state.params.user.tasks
+        user:{
+            "id":'',
+            "first_name": "",
+            "last_name": "",
+            "student_id": '',
+            "phone": "",
+            "bio": "",
+            "profilephoto_full_link": "",
+            'profilephoto_b64':'',
+            total_points:'',
+            weekly_points:'',
+            socialmedia:[]
+        },
+        tasks:{},
+        isLoading:true
+    }
+
+    componentDidMount(){
+        const user_id = this.props.navigation.state.params.id
+        this.setState({isLoading:true})
+        getUserDetails(user_id).then(response => {
+            if(response.status == 200){
+                this.setState(response.data)
+                console.log(this.state)
+            }
+                
+            else
+                showNetworkErrorMessage(this.props.navigation);
+            this.setState({isLoading:false});
+        }).catch(error => {console.log(error); showNetworkErrorMessage(this.props.navigation) })
     }
 
     renderHeader = () => {
@@ -28,7 +55,12 @@ export class UserProfile extends Component {
     return (
     <View style={styles.screenContainer} >
         <ScreenBackground />
-        <TasksTimeline tasks = {this.state.tasks}  header = {this.renderHeader} />
+        <ActivityIndicator
+            style={loadingStyle}
+            animating={this.state.isLoading}
+            size="large"
+            color={primaryColor} />
+        {!this.state.isLoading ? <TasksTimeline tasks = {this.state.tasks}  header = {this.renderHeader} /> : null}
     </View>
     )
   }

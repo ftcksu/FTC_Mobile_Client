@@ -1,5 +1,6 @@
+
 export * from "./EventsScreen";
-export * from "./AddEvent";
+export * from "./EventForm";
 export * from "./EventDetailsScreen";
 export * from "./Home";
 export * from "./PointsListScreen";

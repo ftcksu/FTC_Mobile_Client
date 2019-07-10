@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TextInput } from 'react-native'
+import { View } from 'react-native'
 import { FTCStyledText } from '../'
 import { Input } from 'react-native-elements'
 
@@ -7,12 +7,14 @@ export class InputWithTitle extends Component {
 
     renderDefaultComponent(){
         return ( 
-            <Input
-                    placeholder={this.props.placeholder}
-                    inputStyle={styles.inputStyle}
-                    containerStyle={styles.containerStyle}
-                    inputContainerStyle={{borderBottomWidth: 0}}
-                />
+        <Input
+            {...this.props}
+            placeholder={this.props.placeholder}
+            inputStyle={styles.inputStyle}
+            containerStyle={styles.containerStyle}
+            inputContainerStyle={{borderBottomWidth: 0}}
+            onChangeText={text => this.props.onChangeText(text)}
+        />
         )
     }
 
@@ -21,7 +23,7 @@ export class InputWithTitle extends Component {
 
     
         return (
-            <View style={styles.container}  >
+            <View style={[styles.container, this.props.containerStyle]}  >
                 <FTCStyledText style={styles.title}> {this.props.title} </FTCStyledText>
                 <View style={styles.inputContainerStyle} >
                     { this.props.children

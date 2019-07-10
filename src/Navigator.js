@@ -1,3 +1,4 @@
+
 import React from "react";
 import { View } from "react-native";
 import {
@@ -7,7 +8,7 @@ import {
   BottomTabBar
 } from "react-navigation";
 import {
-  AddEvent,
+  EventForm,
   PointsListScreen,
   EventsScreen,
   MyProfile,
@@ -55,10 +56,11 @@ const homeStack = createStackNavigator(
 const eventStack = createStackNavigator(
   {
     Events: EventsScreen,
-    AddEvent: AddEvent,
-    EventDetails: EventDetailsScreen,
-    RegisterWork: RegisterWork,
-    AcceptMemberWork: AcceptMemberWork
+    EventForm: EventForm,
+    EventDetails:EventDetailsScreen,
+    RegisterWork:RegisterWork,
+    AcceptMemberWork:AcceptMemberWork,
+
   },
   {
     headerMode: "none"

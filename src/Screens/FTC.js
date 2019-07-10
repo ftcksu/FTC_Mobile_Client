@@ -3,8 +3,6 @@ import { StyleSheet, View, } from 'react-native';
 import * as Font from 'expo-font'
 import Navigator from '../Navigator'
 import Login from './LoginScreen'
-import { AddEvent } from './';
-import { TasksTimeline } from "../components";
 import { getToken, deleteToken } from '../global/actions/LocalStorage'
 
 export default class FTC extends React.Component {
