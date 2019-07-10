@@ -23,12 +23,12 @@ export class PointList extends React.Component {
             renderItem={({ item, index }) => (
               <TouchableOpacity onPress={() => this.props.onCardPress(item)} >
                 <UserPointCard
-                  bio={item.user.bio}
-                  name={item.user.first_name+" "+item.user.last_name}
-                  imageURL={item.user.profilephoto_b64}
+                  bio={item.bio}
+                  name={item.first_name+" "+item.last_name}
+                  imageURL={item.profilephoto_b64}
                   position={index + 1 }
                   totalUsers = {this.props.data.length}
-                  points={item.user.points}/>
+                  points={item.points}/>
               </TouchableOpacity>
             )}
         />

@@ -3,8 +3,6 @@ import { StyleSheet, View, } from 'react-native';
 import * as Font from 'expo-font'
 import Navigator from '../Navigator'
 import Login from './LoginScreen'
-import { EventForm } from './';
-import { TasksTimeline } from "../components";
 import { getToken, deleteToken } from '../global/actions/LocalStorage'
 
 export default class FTC extends React.Component {
@@ -17,9 +15,9 @@ export default class FTC extends React.Component {
   componentWillMount() {
     this._loadFont()
     this._checkLogin()
-    deleteToken().then(() => {
-      this.setState({ isLoggedIn: false });
-    })
+    // deleteToken().then(() => {
+    //   this.setState({ isLoggedIn: false });
+    // })
   }
 
   userLoggedIn = () => {

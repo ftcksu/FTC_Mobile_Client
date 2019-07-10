@@ -35,6 +35,10 @@ export function getAllUsers(){
   return get('/user/all');
 }
 
+export function getUserDetails(id) {
+  return get('/task/user/'+id)
+}
+
 export function addEvent(body){
   this.deleteEventUnWantedData(body);
   return post('/event/create', JSON.stringify(body));
