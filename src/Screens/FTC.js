@@ -17,9 +17,9 @@ export default class FTC extends React.Component {
   componentWillMount() {
     this._loadFont()
     this._checkLogin()
-    // deleteToken().then(() => {
-    //   this.setState({ isLoggedIn: false });
-    // })
+    deleteToken().then(() => {
+      this.setState({ isLoggedIn: false });
+    })
   }
 
   userLoggedIn = () => {

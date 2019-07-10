@@ -1,4 +1,4 @@
-import { get, post, put } from "./API/RestService";
+import { get, post, put, patch, remove } from "./API/RestService";
 
 
 export function loginAttempt(universityID, password) {
@@ -36,7 +36,22 @@ export function getAllUsers(){
 }
 
 export function addEvent(body){
+  this.deleteEventUnWantedData(body);
   return post('/event/create', JSON.stringify(body));
 }
 
+export function patchEvent(body){
+  this.deleteEventUnWantedData(body);
+  console.log(body);
+  return patch('/event/edit', JSON.stringify(body));
+}
+
+export function removeEvent(id){
+  return remove('/event/archive/'+id)
+}
+
+deleteEventUnWantedData = (body) =>{
+  body.registered_users = body.registered_users.map(user => user.id) // we only need the id of the users, makes the request lighter
+  delete body.users // we don't need users
+}
 

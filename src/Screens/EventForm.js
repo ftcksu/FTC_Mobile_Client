@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Alert } from 'react-native'
 import { ScreenWithHeader, InputWithTitle, DatePicker, AutocompleteEventParticipants, CurrentParticipants, GradientButton, AttendToggle, NotifiCheck, FloatingActionButton } from '../components'
-import { getAllUsers, showNetworkErrorMessage, showMessage, addEvent } from '../global'
+import { getAllUsers, showNetworkErrorMessage, showMessage, addEvent, patchEvent, removeEvent } from '../global'
 import images from '../../assets/images';
 
 export class EventForm extends Component {
@@ -77,11 +77,26 @@ export class EventForm extends Component {
   }
 
   patchEvent = () =>{
+    patchEvent(this.state).then(response => {
+      if(response.status == 200){
+        showMessage('تم', 'عدلنا مشروعك يا الطيب الله الله بالشغل بس', 'ابشر بها', this.props.navigation)
+      }else{
+        showNetworkErrorMessage();
+        console.log(response);
+      }
+    }).catch(error => {showNetworkErrorMessage(); console.log(error);})
 
   }
 
   deleteEvent = () =>{
-
+    removeEvent(this.state.id).then(response => {
+      if(response.status == 200){
+        console.log(response);
+        showMessage('تم', 'طيرنا مشروعك، اتمنى انك مبسوط',undefined, this.props.navigation)
+      }else{
+        showNetworkErrorMessage();
+      }
+    }).catch(error => {showNetworkErrorMessage(); console.log(error);})
   }
 
   validateUserInput(){
@@ -125,7 +140,7 @@ export class EventForm extends Component {
       'انهاء المشروع',
       'هل انت متأكد انك تبي تنهي المشروع؟ (ترى مايمديك تكنسله بعد ماتنهيه)',
       [
-        {text: 'ايه يخوي ماعليك', onPress:this.handelEventDelete},
+        {text: 'ايه يخوي ماعليك', onPress:this.deleteEvent},
         {
           text: 'لا هونا',
           style: 'cancel',
@@ -143,7 +158,7 @@ export class EventForm extends Component {
         <ScreenWithHeader onPressBack={this.handelBackButtonPress} titleStyle={styles.headerTitle} hasScrollView={true}  title={title} >
           <View style={styles.container} >
             <InputWithTitle containerStyle={styles.inputContainer} value={this.state.name}  onChangeText={(text => this.setState({name:text}))} title={'اسم المشروع'} placeholder={'اجباري'} />
-            <InputWithTitle containerStyle={styles.inputContainer} value={this.state.description} onChangeText={(text => this.setState({description:text}))} title={'وصف المشروع'} placeholder={'اجباري'} />
+            <InputWithTitle multiline={true} containerStyle={styles.inputContainer} value={this.state.description} onChangeText={(text => this.setState({description:text}))} title={'وصف المشروع'} placeholder={'اجباري'} />
             <InputWithTitle containerStyle={styles.inputContainer} value={this.state.whatsapp_link} onChangeText={(text => this.setState({whatsapp_link:text}))} title={'رابط قروب الواتس اب'} placeholder={'اختياري'} />
             <InputWithTitle containerStyle={styles.inputContainer} title={'تاريخ المشروع'}>
               <DatePicker value={this.state.date} onDateSelection={(date) => this.setState({date:date})} /> 

@@ -16,6 +16,16 @@ import { getToken } from "../LocalStorage";
         return axiosInst.put(url, body);
     }
 
+    export async function patch(url, body){
+        const axiosInst = await this._getAxiosInstance()
+        return axiosInst.patch(url, body);
+    }
+
+    export async function remove(url){ // delete is reserved work in js, so i place a remove
+        const axiosInst = await this._getAxiosInstance()
+        return axiosInst.delete(url);
+    }
+
 
     
     _getHeaders = async () => {
