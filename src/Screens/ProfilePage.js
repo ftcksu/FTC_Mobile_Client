@@ -76,7 +76,7 @@ export class ProfilePage extends Component {
   };
 
   navigateToEditProfile = () => {
-    this.props.navigation.navigate("EditProfile");
+    this.props.navigation.navigate("EditProfile", { user: this.state.user });
   };
 
   renderProfileEvents() {

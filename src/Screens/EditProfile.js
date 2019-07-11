@@ -9,70 +9,51 @@ import {
 import { ImagePicker, Permissions, Constants } from "expo";
 import { TextStyles } from "./../global/styles/TextStyles";
 import Images from "./../../assets/images";
-import { getLoggedInUserInfo } from "../global";
+import { showMessage } from "../global";
 
 const { header2, header3 } = TextStyles;
 
 export class EditProfile extends Component {
-  constructor() {
-    super();
+  componentDidMount() {
+    this.props.navigation.state.params.user.socialmedia.forEach(account => {
+      switch (account.platform) {
+        case "snapchat":
+          this.setState({ snapchatAccount: account.username });
+          break;
+        case "twitter":
+          this.setState({ twitterAccount: account.username });
+          break;
+        case "steam":
+          this.setState({ steamAccount: account.username });
+          break;
+        case "whatsapp":
+          this.setState({ whatsappAccount: account.username });
+          break;
+        default:
+          break;
+      }
+    });
+  }
+
+  constructor(props) {
+    super(props);
     this.state = {
-      user: {
-        profilephoto_full_link: "",
-        newPassword: "",
-        newPasswordConfirmation: ""
-      },
+      user: props.navigation.state.params.user,
+      newImage: "",
       snapchatAccount: "",
       twitterAccount: "",
       steamAccount: "",
-      whatsappAccount: ""
+      whatsappAccount: "",
+      newPassword: "",
+      newPasswordConfirmation: ""
     };
-  }
-
-  componentDidMount() {
-    getLoggedInUserInfo()
-      .then(response => {
-        this.setState({
-          user: response.data.user
-        });
-
-        response.data.user.socialmedia.forEach(element => {
-          switch (element.platform) {
-            case "snapchat": {
-              this.setState({
-                snapchatAccount: element.username
-              });
-              break;
-            }
-            case "twitter": {
-              this.setState({
-                twitterAccount: element.username
-              });
-              break;
-            }
-            case "steam": {
-              this.setState({
-                steamAccount: element.username
-              });
-              break;
-            }
-            case "whatsapp": {
-              this.setState({
-                whatsappAccount: element.username
-              });
-              break;
-            }
-          }
-        });
-      })
-      .catch(error => console.log("error: ", error));
   }
 
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== "granted") {
-        alert("Sorry, we need camera roll permissions to make this work!");
+        alert("اسمحلنا طال عمرك علشان نغير الصورة");
       }
     }
   };
@@ -86,15 +67,99 @@ export class EditProfile extends Component {
     });
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.setState({ newImage: result.uri });
+
+      alert("سوف يتم قبول الصورة قبل اعتمادها");
     }
   };
 
-  handelBackButtonPress = () => {
+  validateUserInput() {
+    const { newPassword, newPasswordConfirmation } = this.state;
+
+    const changedPassword =
+      (newPassword.length > 0) | (newPasswordConfirmation.length > 0);
+
+    if (!changedPassword) {
+      return true;
+    }
+
+    const passwordConfirmed = newPassword == newPasswordConfirmation;
+
+    const passwordLength =
+      (newPassword.length >= 8) & (newPassword.length <= 40);
+
+    let errorMessage = "";
+    if (!passwordConfirmed) {
+      errorMessage = errorMessage + "\n" + "*الباسوورد غير متطابق";
+    }
+    if (!passwordLength) {
+      errorMessage = errorMessage + "\n" + "*الباسوورد يجب ان يكون بين 8 و40";
+    }
+    if (errorMessage.length) {
+      showMessage(undefined, errorMessage, "ابشر طال عمرك");
+      return false;
+    }
+    return true;
+  }
+
+  handleBackButtonPress = () => {
+    this.props.navigation.pop();
+  };
+
+  handleConfirmButton = () => {
+    if (!this.validateUserInput()) {
+      return;
+    }
+
+    let socialMedia = [
+      {
+        platform: "snapchat",
+        username: this.state.snapchatAccount
+      },
+      {
+        platform: "twitter",
+        username: this.state.twitterAccount
+      },
+      {
+        platform: "steam",
+        username: this.state.steamAccount
+      },
+      {
+        platform: "whatsapp",
+        username: this.state.whatsappAccount
+      }
+    ];
+
+    userImage =
+      this.state.newImage == ""
+        ? this.state.user.profilephoto_full_link
+        : this.state.newImage;
+
+    let userOutput = {};
+
+    if (this.state.newPassword != "") {
+      userOutput = {
+        img: userImage,
+        password: this.state.newPassword,
+        socialmedia: socialMedia
+      };
+    } else {
+      userOutput = {
+        img: userImage,
+        socialmedia: socialMedia
+      };
+    }
+
+    console.log(userOutput);
+
     this.props.navigation.pop();
   };
 
   renderHeaderImage() {
+    let profileImage =
+      this.state.newImage == ""
+        ? this.state.user.profilephoto_full_link
+        : this.state.newImage;
     return (
       <View>
         <FTCStyledText style={header2}>تغيير الصورة</FTCStyledText>
@@ -102,10 +167,7 @@ export class EditProfile extends Component {
           onPress={this._pickImage}
           style={styles.imageContainer}
         >
-          <Image
-            source={{ uri: this.state.user.profilephoto_full_link }}
-            style={styles.profileImage}
-          />
+          <Image source={{ uri: profileImage }} style={styles.profileImage} />
           <Image source={Images.camera} style={styles.editIcon} />
         </TouchableOpacity>
       </View>
@@ -125,10 +187,10 @@ export class EditProfile extends Component {
           value={this.state.snapchatAccount}
         />
         <InputWithTitle
+          value={this.state.twitterAccount}
           title={"حسابك في تويتر"}
           placeholder={"تسو تسو"}
           onChangeText={text => this.setState({ twitterAccount: text })}
-          value={this.state.twitterAccount}
         />
         <InputWithTitle
           title={"حسابك في ستيم"}
@@ -177,7 +239,7 @@ export class EditProfile extends Component {
         <GradientButton
           title={"حفظ التغيرات"}
           icon={Images.checkIcon}
-          onPress={this.handelBackButtonPress}
+          onPress={this.handleConfirmButton}
           style={styles.submitButton}
         />
       </View>
@@ -187,7 +249,7 @@ export class EditProfile extends Component {
   render() {
     return (
       <ScreenWithHeader
-        onPressBack={this.handelBackButtonPress}
+        onPressBack={this.handleBackButtonPress}
         hasScrollView={true}
         renderHeaderComponent={this.renderHeaderImage()}
       >
