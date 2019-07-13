@@ -1,257 +1,304 @@
-import React, { Component } from 'react'
-import { View, SafeAreaView, TouchableOpacity, TextInput, Image } from 'react-native'
-import { ImagePicker, Constants, Permissions } from 'expo'
-import { connectActionSheet, ActionSheetProvider } from '@expo/react-native-action-sheet';
-import { FTCStyledText,  GradientButton} from "../components";
-import { TextStyles } from '../global/styles/TextStyles'
-import Images from '../../assets/images/'
+import React, { Component } from "react";
+import { View, Image, TouchableOpacity } from "react-native";
+import {
+  ScreenWithHeader,
+  InputWithTitle,
+  FTCStyledText,
+  GradientButton
+} from "./../components";
+import { ImagePicker, Permissions, Constants } from "expo";
+import { TextStyles } from "./../global/styles/TextStyles";
+import Images from "./../../assets/images";
+import { showMessage } from "../global";
 
+const { header2, header3 } = TextStyles;
 
-const { header, header3 } = TextStyles
-const { checkIcon } = Images
-
-const avatarPlaceholder = 'https://charlestonpourhouse.com/wp-content/uploads/2016/09/P_FUNK.jpg'
-
-@connectActionSheet
 export class EditProfile extends Component {
-
-  state = {
-    image: null, // 'https://i.imgur.com/YKIZP3C.jpg'
-    snap: '',
-    twitter: '',
-    steam: '',
-    whatsapp: '',
-  }
-
   componentDidMount() {
-    this.setState({ image: avatarPlaceholder })
-  }
-
-  renderHeader = () => {
-    return (
-      <FTCStyledText style={header}>تعديل الملف الشخصي</FTCStyledText>
-    )
-  }
-
-  // permission requested on choice click, 1: camera, 2: album
-  getPermissionAsync = async (choice) => {
-    if (choice === 1) {
-      if (Constants.platform.ios) {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA);
-        if (status !== 'granted') {
-          alert('Sorry, we need camera permissions to make this work!');
-        }
-      }
-    } else {
-      if (Constants.platform.ios) {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
-        }
-      }
-    }
-  }
-
-  renderImage = () => {
-    if (this.state.image != null) {
-      return (
-        <Image
-          style={styles.imageStyle}
-          source={{ uri: this.state.image }}
-        />
-      )
-    }
-    else {
-      return (
-        <Image
-          style={styles.imageStyle}
-          source={{ uri: avatarPlaceholder }}
-        />
-      )
-    }
-  }
-
-  renderProfileImageChange = () => {
-    return (
-      <View style={{ width: '100%', alignItems: 'center' }} >
-        <FTCStyledText style={header3}>
-          {'تغيير صورة العرظ'}
-        </FTCStyledText>
-        <TouchableOpacity
-          onPress={this.cameraOrAlbumChoice}
-        >
-          {this.renderImage()}
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
-  cameraOrAlbumChoice = () => {
-    const options = ['Take Photo...', 'Choose From Library...', 'Cancel'];
-    const cancelButtonIndex = 2;
-    this.props.showActionSheetWithOptions({
-      options,
-      cancelButtonIndex,
-    }, (buttonIndex) => {
-      if (buttonIndex === 0) {
-        this._takeImage();
-      } else if (buttonIndex === 1) {
-        this._pickImage();
+    this.props.navigation.state.params.user.socialmedia.forEach(account => {
+      switch (account.platform) {
+        case "snapchat":
+          this.setState({ snapchatAccount: account.username });
+          break;
+        case "twitter":
+          this.setState({ twitterAccount: account.username });
+          break;
+        case "steam":
+          this.setState({ steamAccount: account.username });
+          break;
+        case "whatsapp":
+          this.setState({ whatsappAccount: account.username });
+          break;
+        default:
+          break;
       }
     });
   }
 
-  // take photo with camera
-  _takeImage = async () => {
-    await this.getPermissionAsync(1)
-
-    options = {
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      // here you can set quality compression if you want
-    }
-
-    let result = await ImagePicker.launchCameraAsync(options)
-
-
-    if (!result.cancelled) {
-      this.setState({ image: result.uri })
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: props.navigation.state.params.user,
+      newImage: "",
+      snapchatAccount: "",
+      twitterAccount: "",
+      steamAccount: "",
+      whatsappAccount: "",
+      newPassword: "",
+      newPasswordConfirmation: ""
+    };
   }
 
-  // pick image from photo album
+  getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== "granted") {
+        alert("اسمحلنا طال عمرك علشان نغير الصورة");
+      }
+    }
+  };
+
   _pickImage = async () => {
-    await this.getPermissionAsync(2)
-
-    options = {
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    await this.getPermissionAsync();
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      // here you can set quality compression if you want
-    }
-
-    let result = await ImagePicker.launchImageLibraryAsync(options)
+      aspect: [4, 3]
+    });
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.setState({ newImage: result.uri });
+
+      alert("سوف يتم قبول الصورة قبل اعتمادها");
     }
+  };
+
+  validateUserInput() {
+    const { newPassword, newPasswordConfirmation } = this.state;
+
+    const changedPassword =
+      (newPassword.length > 0) | (newPasswordConfirmation.length > 0);
+
+    if (!changedPassword) {
+      return true;
+    }
+
+    const passwordConfirmed = newPassword == newPasswordConfirmation;
+
+    const passwordLength =
+      (newPassword.length >= 8) & (newPassword.length <= 40);
+
+    let errorMessage = "";
+    if (!passwordConfirmed) {
+      errorMessage = errorMessage + "\n" + "*الباسوورد غير متطابق";
+    }
+    if (!passwordLength) {
+      errorMessage = errorMessage + "\n" + "*الباسوورد يجب ان يكون بين 8 و40";
+    }
+    if (errorMessage.length) {
+      showMessage(undefined, errorMessage, "ابشر طال عمرك");
+      return false;
+    }
+    return true;
   }
 
-  renderChangetextInputStyle = () => {
+  handleBackButtonPress = () => {
+    this.props.navigation.pop();
+  };
+
+  handleConfirmButton = () => {
+    if (!this.validateUserInput()) {
+      return;
+    }
+
+    let socialMedia = [
+      {
+        platform: "snapchat",
+        username: this.state.snapchatAccount
+      },
+      {
+        platform: "twitter",
+        username: this.state.twitterAccount
+      },
+      {
+        platform: "steam",
+        username: this.state.steamAccount
+      },
+      {
+        platform: "whatsapp",
+        username: this.state.whatsappAccount
+      }
+    ];
+
+    userImage =
+      this.state.newImage == ""
+        ? this.state.user.profilephoto_full_link
+        : this.state.newImage;
+
+    let userOutput = {};
+
+    if (this.state.newPassword != "") {
+      userOutput = {
+        img: userImage,
+        password: this.state.newPassword,
+        socialmedia: socialMedia
+      };
+    } else {
+      userOutput = {
+        img: userImage,
+        socialmedia: socialMedia
+      };
+    }
+
+    console.log(userOutput);
+
+    this.props.navigation.pop();
+  };
+
+  renderHeaderImage() {
+    let profileImage =
+      this.state.newImage == ""
+        ? this.state.user.profilephoto_full_link
+        : this.state.newImage;
     return (
-      <View style={{ width: '100%', marginTop: 15 }}>
-        <FTCStyledText style={header3}>
-          {'تغيير كلمة السر'}
+      <View>
+        <FTCStyledText style={header2}>تغيير الصورة</FTCStyledText>
+        <TouchableOpacity
+          onPress={this._pickImage}
+          style={styles.imageContainer}
+        >
+          <Image source={{ uri: profileImage }} style={styles.profileImage} />
+          <Image source={Images.camera} style={styles.editIcon} />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  renderSocialMediaAccounts() {
+    return (
+      <View>
+        <FTCStyledText style={[header3, { marginTop: 15 }]}>
+          حسابات مواقع التواصل الاجتماعي
         </FTCStyledText>
-        <TextInput
-          style={styles.textInputStyle}
-          secureTextEntry={true}
-          placeholder={'كلمة السر القديمة'}
+        <InputWithTitle
+          title={"حسابك في سناب"}
+          placeholder={"سنابك يا حيلو"}
+          onChangeText={text => this.setState({ snapchatAccount: text })}
+          value={this.state.snapchatAccount}
         />
-        <TextInput
-          secureTextEntry={true}
-          style={styles.textInputStyle}
-          placeholder={'كلمة السر الجديدة'}
+        <InputWithTitle
+          value={this.state.twitterAccount}
+          title={"حسابك في تويتر"}
+          placeholder={"تسو تسو"}
+          onChangeText={text => this.setState({ twitterAccount: text })}
         />
-        <TextInput
+        <InputWithTitle
+          title={"حسابك في ستيم"}
+          placeholder={"تلعب قيم؟"}
+          onChangeText={text => this.setState({ steamAccount: text })}
+        />
+        <InputWithTitle
+          title={"واتس"}
+          placeholder={"مارك زوكربيرج يشوفك وانت نايم"}
+          onChangeText={text => this.setState({ whatsappAccount: text })}
+        />
+        <View style={styles.lineBreak} />
+      </View>
+    );
+  }
+
+  renderPasswordSection() {
+    return (
+      <View>
+        <FTCStyledText style={[header3, { marginTop: 15 }]}>
+          تغيير كلمة المرور
+        </FTCStyledText>
+
+        <InputWithTitle
+          title={"كلمة المرور الجديدة"}
+          placeholder={"يا رب ما تنساني"}
           secureTextEntry={true}
-          style={styles.textInputStyle}
-          placeholder={'كلمة السر الجديدة مرة ثانية'}
+          onChangeText={text => this.setState({ newPassword: text })}
+        />
+        <InputWithTitle
+          title={"كلمة المرور الجديدة مرة أخرى"}
+          placeholder={"يا رب ما تنساني مرة أخرى"}
+          secureTextEntry={true}
+          onChangeText={text =>
+            this.setState({ newPasswordConfirmation: text })
+          }
+        />
+        <View style={styles.lineBreak} />
+      </View>
+    );
+  }
+
+  renderSubmitButton() {
+    return (
+      <View>
+        <GradientButton
+          title={"حفظ التغيرات"}
+          icon={Images.checkIcon}
+          onPress={this.handleConfirmButton}
+          style={styles.submitButton}
         />
       </View>
-    )
-  }
-
-  renderSocialNetworksFields = () => {
-    return (
-      <View style={{ width: '100%', marginTop: 15 }}>
-        <FTCStyledText style={header3}>
-          {'سوشل ميديا'}
-        </FTCStyledText>
-        <TextInput
-          style={styles.textInputStyle}
-          placeholder={'ستيم'}
-          onChangeText={(text) => this.setState({ steam: `https://steam.com/${text}`})}
-        />
-        <TextInput
-          style={styles.textInputStyle}
-          placeholder={'سناب'}
-          onChangeText={(text) => this.setState({ snap: `https://snap.com/add/${text}`})}
-        />
-        <TextInput
-          style={styles.textInputStyle}
-          placeholder={'تويتر'}
-          onChangeText={(text) => this.setState({ twitter: `https://twitter.com/${text}`})}
-        />
-        <TextInput
-          style={styles.textInputStyle}
-          placeholder={'واتس اب'}
-          onChangeText={(text) => this.setState({ whatsapp: text })}
-        />
-      </View>
-    )
-  }
-
-  renderSubmitButton = () => {
-    return (
-      <GradientButton
-        style={styles.submitButton}
-        title={'submit changes'}
-        onPress={() => this.submit()}
-        icon={checkIcon}
-      />
-    )
-  }
-
-  submit = () => {
-    // here do some input checks
-    console.log(this.state)
+    );
   }
 
   render() {
     return (
-      <SafeAreaView>
+      <ScreenWithHeader
+        onPressBack={this.handleBackButtonPress}
+        hasScrollView={true}
+        renderHeaderComponent={this.renderHeaderImage()}
+      >
         <View style={styles.container}>
-          {this.renderHeader()}
-          {this.renderProfileImageChange()}
-          {this.renderChangetextInputStyle()}
-          {this.renderSocialNetworksFields()}
+          {this.renderSocialMediaAccounts()}
+          {this.renderPasswordSection()}
           {this.renderSubmitButton()}
         </View>
-      </SafeAreaView>
-    )
+      </ScreenWithHeader>
+    );
   }
 }
 
 const styles = {
-  container: {
-    alignItems: 'center',
-    justifyConter: 'center',
+  container: { flex: 1, backgroundColor: "white" },
+  changeImageText: {
+    alignSelf: "center"
   },
-  button: {
-    width: 40,
-    height: 20,
-    backgroundColor: '#333333',
-    marginTop: 30,
-    alignSelf: 'center',
-  },
-  imageStyle: {
+  imageContainer: {
     height: 150,
     width: 150,
     borderRadius: 150 / 2,
     marginTop: 15,
+    marginBottom: 50
+  },
+  profileImage: {
+    height: 150,
+    width: 150,
+    borderRadius: 150 / 2,
+    marginTop: 15,
+    marginBottom: 50
+  },
+  editIcon: {
+    position: "absolute",
+    right: 5,
+    bottom: 5,
+    tintColor: "white",
+    height: 25,
+    width: 25
+  },
+  lineBreak: {
+    alignSelf: "center",
+    width: "80%",
+    height: 5,
+    backgroundColor: "#eeeeee",
+    marginTop: 20
   },
   submitButton: {
-    width: '95%',
-    height: 50,
-    marginTop: 30,
-  },
-  textInputStyle: {
-    paddingRight: 10,
-    paddingLeft: 10,
-    height: 35,
-    marginTop: 5,
-    backgroundColor: '#dcdcdc',
-    textAlign: 'right'
+    marginTop: 20,
+    marginBottom: 30
   }
-}
-
+};

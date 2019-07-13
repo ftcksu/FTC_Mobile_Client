@@ -80,7 +80,7 @@ const pointsStack = createStackNavigator(
 const profileStack = createStackNavigator(
   {
     ProfilePage: ProfilePage,
-    EditProfilePage: EditProfile,
+    EditProfile: EditProfile,
     EventDetails: EventDetailsScreen,
     EventsForRegisterPoints: EventsForRegisterPoints,
     RegisterPoints: RegisterPoints
