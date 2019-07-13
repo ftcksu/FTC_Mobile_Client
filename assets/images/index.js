@@ -15,6 +15,7 @@ const images = {
   recordPoints: require("./recordPoints.png"),
   logout: require("./logout.png"),
   garbage: require("./garbage.png"),
+  camera: require("./photo-camera.png"),
 
   roundAdd: require("./round-add-button.png"),
   checkIcon: require("./check-icon.png"),
