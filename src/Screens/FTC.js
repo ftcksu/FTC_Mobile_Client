@@ -4,7 +4,7 @@ import * as Font from "expo-font";
 import Navigator from "../Navigator";
 import Login from "./LoginScreen";
 import { getToken, deleteToken } from "../global/actions/LocalStorage";
-
+import { SendNotification } from "./SendNotification";
 export default class FTC extends React.Component {
   state = {
     fontHasLoaded: false,
