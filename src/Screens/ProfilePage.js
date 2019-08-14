@@ -28,7 +28,7 @@ export class ProfilePage extends Component {
         {
           title: "إرسال التنبيهات",
           type: "sendNotification",
-          onPress: this.navigateToEventsForRegisterWork // Todo: create screen for notifications
+          onPress: this.navigateToSendNotificaiton
         }
       ]
     };
@@ -73,6 +73,10 @@ export class ProfilePage extends Component {
 
   navigateToEventsForRegisterWork = () => {
     this.props.navigation.navigate("EventsForRegisterPoints");
+  };
+
+  navigateToSendNotificaiton = () => {
+    this.props.navigation.navigate("SendNotification");
   };
 
   navigateToEditProfile = () => {

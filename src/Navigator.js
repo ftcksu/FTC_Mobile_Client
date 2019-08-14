@@ -1,4 +1,3 @@
-
 import React from "react";
 import { View } from "react-native";
 import {
@@ -20,7 +19,8 @@ import {
   RegisterWork,
   AcceptMemberWork,
   EventsForRegisterPoints,
-  RegisterPoints
+  RegisterPoints,
+  SendNotification
 } from "./Screens";
 import { TabIcon } from "./components/local_components/Navigator/TabIcon";
 import Images from "../assets/images";
@@ -57,10 +57,9 @@ const eventStack = createStackNavigator(
   {
     Events: EventsScreen,
     EventForm: EventForm,
-    EventDetails:EventDetailsScreen,
-    RegisterWork:RegisterWork,
-    AcceptMemberWork:AcceptMemberWork,
-
+    EventDetails: EventDetailsScreen,
+    RegisterWork: RegisterWork,
+    AcceptMemberWork: AcceptMemberWork
   },
   {
     headerMode: "none"
@@ -83,7 +82,8 @@ const profileStack = createStackNavigator(
     EditProfile: EditProfile,
     EventDetails: EventDetailsScreen,
     EventsForRegisterPoints: EventsForRegisterPoints,
-    RegisterPoints: RegisterPoints
+    RegisterPoints: RegisterPoints,
+    SendNotification: SendNotification
   },
   {
     headerMode: "none"
