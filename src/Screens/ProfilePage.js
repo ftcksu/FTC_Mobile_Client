@@ -8,8 +8,7 @@ import {
   SafeAreaView
 } from "react-native";
 import { InfoCardList, ActionCardList, NameAndImage } from "../components";
-import { getLoggedInUserInfo } from "../global";
-import content from "../dummy_data/InfoCardData.json";
+import { getLoggedInUserInfo, getMyEvent } from "../global";
 
 import Images from "../../assets/images";
 
@@ -18,7 +17,14 @@ export class ProfilePage extends Component {
     super();
     this.state = {
       isImageViewVisible: false,
-      user: {},
+      user: {
+        first_name:"",
+        last_name:"",
+        profilephoto_full_link:"",
+        bio:"",
+        is_admin:0,
+      },
+      events:{},
       actionList: [
         {
           title: "رصد النقاط",
@@ -34,13 +40,18 @@ export class ProfilePage extends Component {
     };
   }
 
+
   componentDidMount() {
     getLoggedInUserInfo().then(response => {
       this.setState({
         user: response.data.user
       });
-      // console.log(response.data.user);
     });
+    getMyEvent().then(response => {
+      this.setState({
+        events: response.data
+      });
+    })
   }
 
   renderProfileInformation() {
@@ -82,7 +93,7 @@ export class ProfilePage extends Component {
         <InfoCardList
           style={{ backgroundColor: "black" }}
           title={"المشاريع المشارك فيها"}
-          listOfData={content.data}
+          listOfData={this.state.events}
           onPress={this.navigateToEventDetails}
           hasLineSeparator={false}
           style={styles.InfoCardList}

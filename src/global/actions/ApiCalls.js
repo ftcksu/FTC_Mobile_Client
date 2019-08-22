@@ -39,10 +39,16 @@ export function getUserDetails(id) {
   return get('/task/user/'+id)
 }
 
+export function getMyEvent(){
+  return get('/event/user');
+}
+
 export function addEvent(body){
   this.deleteEventUnWantedData(body);
   return post('/event/create', JSON.stringify(body));
 }
+
+
 
 export function patchEvent(body){
   this.deleteEventUnWantedData(body);

@@ -63,7 +63,7 @@ export class ScreenWithHeader extends React.Component {
         return this.renderWithoutScrollView()
     }
   }
-}
+
 
   const styles ={
     container:{
