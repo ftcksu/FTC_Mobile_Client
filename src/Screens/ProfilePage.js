@@ -34,7 +34,7 @@ export class ProfilePage extends Component {
         {
           title: "إرسال التنبيهات",
           type: "sendNotification",
-          onPress: this.navigateToEventsForRegisterWork // Todo: create screen for notifications
+          onPress: this.navigateToSendNotificaiton
         }
       ]
     };
@@ -86,6 +86,14 @@ export class ProfilePage extends Component {
     this.props.navigation.navigate("EventsForRegisterPoints");
   };
 
+  navigateToSendNotificaiton = () => {
+    this.props.navigation.navigate("SendNotification");
+  };
+
+  navigateToEditProfile = () => {
+    this.props.navigation.navigate("EditProfile", { user: this.state.user });
+  };
+
   renderProfileEvents() {
     return (
       <View>
@@ -103,14 +111,10 @@ export class ProfilePage extends Component {
     );
   }
 
-  handleSettingsPress = () => {
-    this.props.navigation.navigate("EditProfilePage");
-  };
-
   renderSettingsIcon = () => {
     return (
       <TouchableOpacity
-        onPress={this.handleSettingsPress}
+        onPress={this.navigateToEditProfile}
         style={styles.settingsButton}
       >
         <Image source={Images.settings} style={styles.settingsIcon} />
@@ -120,14 +124,14 @@ export class ProfilePage extends Component {
 
   render() {
     return (
-      <SafeAreaView>
+      <View style={{ margin: 20 }}>
+        {this.renderSettingsIcon()}
+
         <ScrollView style={{ paddingRight: 16, marginLeft: 16 }}>
-          {this.renderSettingsIcon()}
           {this.renderProfileInformation()}
           {this.renderProfileEvents()}
         </ScrollView>
-        {this.renderSettingsIcon()}
-      </SafeAreaView>
+      </View>
     );
   }
 }
@@ -169,13 +173,17 @@ const styles = StyleSheet.create({
     // marginTop: -15,
   },
   settingsIcon: {
-    position: "absolute",
-    top: 30,
-    right: 20,
     width: 25,
     height: 25
   },
   settingsButton: {
-    zIndex: 1 // to make it clickable
+    position: "absolute",
+    top: 30,
+    right: 20,
+    width: 50,
+    height: 50,
+    zIndex: 2,
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
